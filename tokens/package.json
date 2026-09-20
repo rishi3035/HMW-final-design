@@ -1,0 +1,10 @@
+﻿{
+  "name": "@hmw/tokens",
+  "version": "1.0.0",
+  "description": "Design tokens for HackMyWebsite",
+  "main": "dist/tokens.ts",
+  "style": "dist/variables.css",
+  "scripts": {
+    "build": "node build.js"
+  }
+}

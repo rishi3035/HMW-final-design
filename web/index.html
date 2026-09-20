@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hack My Website | Automated Security Scanner</title>
+    
+    <!-- Google Fonts: Google Sans & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CDN for instant live preview -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["'Google Sans'", "Poppins", "sans-serif"],
+              "google-sans": ["'Google Sans'", "sans-serif"],
+              poppins: ["Poppins", "sans-serif"]
+            },
+            colors: {
+              brand: {
+                primary: "#10B981",
+                hover: "#34D399",
+                glow: "rgba(16, 185, 129, 0.25)"
+              }
+            }
+          }
+        }
+      };
+    </script>
+    <link rel="stylesheet" href="../tokens/dist/variables.css" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      
+      *, *::before, *::after {
+        font-family: 'Google Sans', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+      
+      body {
+        background-color: #06080F;
+        color: #F8FAFC;
+        font-family: 'Google Sans', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      code, pre, .font-mono {
+        font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace !important;
+      }
+    </style>
+  </head>
+  <body class="bg-[#06080F] text-slate-100 antialiased selection:bg-emerald-500 selection:text-neutral-950 min-h-screen font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
