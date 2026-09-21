@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Globe,
   ArrowDown,
@@ -13,18 +13,71 @@ import {
   Bug,
   CheckCircle2,
 } from "lucide-react";
+import { TreeChart, TreeNode } from "./ui/tree-chart";
+
+const securityTreeData: TreeNode = {
+  name: "Your App",
+  children: [
+    {
+      name: "HMW Core",
+      children: [
+        {
+          name: "DAST",
+          children: [{ name: "OWASP ZAP" }, { name: "Active Spider" }],
+        },
+        {
+          name: "CVE",
+          children: [{ name: "Nuclei v3" }, { name: "5k+ Feeds" }],
+        },
+        {
+          name: "SAST",
+          children: [{ name: "Semgrep" }, { name: "AST Rules" }],
+        },
+        {
+          name: "Surface",
+          children: [{ name: "Playwright" }, { name: "DOM Crawler" }],
+        },
+        {
+          name: "Synthesis",
+          children: [
+            { name: "Normalization" },
+            { name: "AI Risk Engine" },
+            { name: "0–100 Score" },
+            { name: "Verified Retest" },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 export const MultiEngineSecurityArchitecture: React.FC = () => {
+  const [viewMode, setViewMode] = useState<"pipeline" | "tree">("pipeline");
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [chartWidth, setChartWidth] = useState(1150);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const update = () => {
+      if (el.clientWidth > 100) setChartWidth(el.clientWidth - 48);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [viewMode]);
+
   return (
     <section
       aria-label="Multi-Engine Security Architecture"
       style={{ height: "100vh" }}
-      className="relative w-full h-screen min-h-[100vh] flex flex-col justify-center overflow-hidden text-left border-t border-emerald-800/40 py-4 sm:py-6"
+      className="relative w-full h-screen min-h-[100vh] flex flex-col justify-center overflow-hidden text-left bg-[#06080F] border-t border-slate-800/80 py-4 sm:py-6"
     >
-      {/* Ambient glowing atmosphere matching reference */}
-      <div className="pointer-events-none absolute -top-20 -left-20 w-[600px] h-[600px] rounded-full bg-[#1daf7e]/25 blur-[120px]" />
-      <div className="pointer-events-none absolute top-1/2 -left-32 -translate-y-1/2 w-[700px] h-[550px] rounded-full bg-[#168863]/30 blur-[130px]" />
-      <div className="pointer-events-none absolute bottom-10 right-10 w-[500px] h-[350px] rounded-full bg-[#044430]/40 blur-[100px]" />
+      {/* Sovereign Hero Ambient Lighting (#10B981, #34D399, #059669, #022C22) */}
+      <div className="pointer-events-none absolute -top-24 left-1/4 w-[650px] h-[450px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.12),transparent_70%)] blur-[90px]" />
+      <div className="pointer-events-none absolute bottom-4 right-1/4 w-[550px] h-[380px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(52,211,153,0.08),transparent_70%)] blur-[100px]" />
+      <div className="pointer-events-none absolute top-1/2 -left-24 w-[400px] h-[400px] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(2,44,34,0.4),transparent_70%)] blur-[110px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col justify-center space-y-4 sm:space-y-6 my-auto">
         {/* Header Block — Clean without removed badge */}
@@ -33,26 +86,76 @@ export const MultiEngineSecurityArchitecture: React.FC = () => {
             Multiple Security Engines. One Unified Risk View.
           </h2>
 
-          <p className="text-xs sm:text-sm text-emerald-200/90 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl mx-auto">
             HackMyWebsite combines complementary security technologies, normalizes their findings, and turns technical output into one prioritized security workflow.
           </p>
         </div>
 
-        {/* Technical Architecture Diagram — Horizontal Execution Pipeline */}
-        <div className="w-full max-w-7xl mx-auto rounded-3xl bg-[#030806]/85 backdrop-blur-xl border border-emerald-500/25 p-4 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(22,136,99,0.15)] space-y-3 sm:space-y-4 relative overflow-hidden shrink-0">
-          {/* Diagram Header Banner */}
-          <div className="flex items-center justify-between border-b border-emerald-900/60 pb-3">
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-300">
-              <span className="size-2 rounded-full bg-emerald-400" />
-              <span className="text-white font-semibold">DATA FLOW DIAGRAM</span>
+        {/* Technical Architecture Diagram */}
+        <div
+          ref={containerRef}
+          className="w-full max-w-7xl mx-auto rounded-3xl bg-[#080C14]/90 backdrop-blur-xl border border-slate-800 hover:border-emerald-500/30 transition-colors p-4 sm:p-6 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(16,185,129,0.08)] space-y-3 sm:space-y-4 relative overflow-hidden shrink-0"
+        >
+          {/* Diagram Header Banner with View Mode Selector */}
+          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400">
+              <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-white font-semibold">DATA FLOW ARCHITECTURE</span>
             </div>
-            <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950/70 border border-emerald-700/60 px-2.5 py-0.5 rounded">
-              Horizontal Execution Pipeline • Target to Verified Remediation →
-            </span>
+
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline text-[10px] font-mono text-slate-400">
+                View:
+              </span>
+              <div className="inline-flex rounded-lg bg-slate-900 border border-slate-800 p-0.5 text-[10px] font-mono">
+                <button
+                  type="button"
+                  onClick={() => setViewMode("pipeline")}
+                  className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+                    viewMode === "pipeline"
+                      ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40 shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  8-Stage Pipeline
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode("tree")}
+                  className={`px-2.5 py-1 rounded-md transition-all cursor-pointer ${
+                    viewMode === "tree"
+                      ? "bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40 shadow-sm"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  Interactive Tree Chart
+                </button>
+              </div>
+            </div>
           </div>
 
-          {/* HORIZONTAL FLOW CONTAINER */}
-          <div className="overflow-x-auto pb-2 pt-1 -mx-2 px-2 scrollbar-thin">
+          {/* Conditional View Rendering */}
+          {viewMode === "tree" ? (
+            <div className="w-full h-[230px] flex items-center justify-center overflow-x-auto overflow-y-hidden rounded-xl bg-[#06080F] border border-slate-800/80 p-2">
+              <TreeChart
+                width={Math.max(chartWidth, 960)}
+                height={220}
+                margin={{ top: 20, left: 60, right: 60, bottom: 20 }}
+                layout="cartesian"
+                orientation="horizontal"
+                linkType="diagonal"
+                stepPercent={0.5}
+                treeData={securityTreeData}
+                backgroundColor="#06080F"
+                linkColor="#10B981"
+                nodeBorderColor="#34D399"
+                rootNodeFill="#059669"
+                parentTextColor="#FFFFFF"
+                leafTextColor="#34D399"
+              />
+            </div>
+          ) : (
+            <div className="overflow-x-auto pb-2 pt-1 -mx-2 px-2 scrollbar-thin">
             <div className="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-2.5 xl:gap-2 min-w-full xl:min-w-[1300px]">
               {/* STAGE 1: YOUR APPLICATION */}
               <div className="w-full xl:w-[155px] shrink-0 p-3 rounded-xl bg-slate-900/90 border border-slate-700/80 shadow-md flex flex-col justify-between text-left h-[225px]">
@@ -387,6 +490,7 @@ export const MultiEngineSecurityArchitecture: React.FC = () => {
               </div>
             </div>
           </div>
+        )}
         </div>
       </div>
     </section>
