@@ -243,14 +243,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
       {/* Centered Content Container */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col justify-between h-full relative z-10 w-full">
         {/* Clean, Visible Section Header */}
-        <div className="text-center space-y-2.5 max-w-3xl mx-auto pt-2 shrink-0">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-slate-300 backdrop-blur-md shadow-sm">
-            <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white font-medium">APPLICATION SECURITY ARCHITECTURE</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-emerald-400 font-mono font-bold">MULTI-ENGINE SYNTHESIS</span>
-          </div>
-
+        <div className="text-center space-y-2 max-w-3xl mx-auto pt-2 shrink-0">
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-tight">
             Five Proven Engines. One Sovereign Core.
           </h2>

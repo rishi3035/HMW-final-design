@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
-import { SecurityBadge } from "../../design-system/src/SecurityBadge";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
+import { CoreSecurityWorkflow } from "./components/CoreSecurityWorkflow";
+import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
+import { GitHubSecurityGate } from "./components/GitHubSecurityGate";
+import { WhiteLabelReporting } from "./components/WhiteLabelReporting";
+import { SolutionsWhoItsFor } from "./components/SolutionsWhoItsFor";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import {
   ShieldCheck,
@@ -118,91 +122,92 @@ export const RedesignedHmwPage: React.FC = () => {
         speed={1.0}
         grain={0.25}
         height="100vh"
-        className="relative overflow-hidden border-b border-slate-800/80 h-screen min-h-[100vh] flex flex-col justify-center pt-16 md:pt-20"
+        className="relative overflow-hidden border-b border-slate-800/80 h-screen min-h-[100vh]"
       >
-        {/* Centered High-Impact Enterprise Hero */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 sm:space-y-7 relative z-10 my-auto">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-slate-300 backdrop-blur-md shadow-lg shadow-emerald-500/10">
-            <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-white font-medium">APPLICATION SECURITY PLATFORM</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-emerald-400 font-mono font-bold">DAST + SAST + GITHUB GATE</span>
-          </div>
+        <div className="flex h-full w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+          {/* Centered High-Impact Enterprise Hero — shifted lower than the middle */}
+          <div className="max-w-5xl w-full text-center space-y-6 sm:space-y-7 relative z-10 translate-y-8 sm:translate-y-12 md:translate-y-16">
+            {/* Primary Headline - One Uniform Solid Color Throughout */}
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.12] max-w-4xl mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+              Detect Security Risk Before<br className="hidden sm:inline" /> It Reaches Production.
+            </h1>
 
-          {/* Primary Headline - One Uniform Solid Color Throughout */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.12] max-w-4xl mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
-            Detect Security Risk Before<br className="hidden sm:inline" /> It Reaches Production.
-          </h1>
-
-          {/* Supporting Text - Concise 1-2 Line Scope */}
-          <div className="max-w-3xl mx-auto space-y-2">
-            <p className="text-base sm:text-lg text-slate-200 font-semibold leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              Continuous application security engineered for enterprise platforms, development agencies, SaaS companies, and mission-critical web applications.
-            </p>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              Multi-engine testing across all your web apps, APIs, and cloud assets. Score risk 0–100 and automate security gates before release.
-            </p>
-          </div>
-
-          {/* Interactive URL Scanner Input Bar with Professional Enterprise Button */}
-          <div className="max-w-2xl mx-auto p-2 rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
-            <div className="flex items-center gap-2.5 px-3 py-2 w-full text-left">
-              <span className="text-slate-500 font-mono text-xs">https://</span>
-              <input
-                type="text"
-                value={scanUrl.replace(/^https?:\/\//, "")}
-                onChange={(e) => setScanUrl(e.target.value)}
-                placeholder="app.your-startup.com"
-                className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-slate-500"
-              />
+            {/* Supporting Text - Concise 1-2 Line Scope */}
+            <div className="max-w-3xl mx-auto">
+              <p className="text-base sm:text-lg text-slate-200 font-semibold leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+                Continuous application security engineered for enterprise platforms, development agencies, SaaS companies, and mission-critical web applications.
+              </p>
             </div>
-            <button
-              type="button"
-              className="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm border border-slate-700 hover:border-slate-600 transition-all cursor-pointer shrink-0 shadow-sm"
-            >
-              Start Free Security Scan
-            </button>
-          </div>
 
-          {/* Core Security Architecture Microcopy */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
-            {[
-              "Enterprise Platforms",
-              "Agencies & Dev Partners",
-              "DAST Runtime",
-              "SAST Code Logic",
-              "Vulnerability Detection",
-              "GitHub Security Gate",
-              "0–100 Risk Scoring"
-            ].map((tech, idx) => (
-              <span
-                key={idx}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black border border-slate-800 text-xs font-mono font-medium text-slate-300 shadow-sm"
+            {/* Interactive URL Scanner Input Bar with Professional Enterprise Button */}
+            <div className="max-w-2xl mx-auto p-2 rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
+              <div className="flex items-center gap-2.5 px-3 py-2 w-full text-left">
+                <span className="text-slate-500 font-mono text-xs">https://</span>
+                <input
+                  type="text"
+                  value={scanUrl.replace(/^https?:\/\//, "")}
+                  onChange={(e) => setScanUrl(e.target.value)}
+                  placeholder="app.your-startup.com"
+                  className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-slate-500"
+                />
+              </div>
+              <button
+                type="button"
+                className="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm border border-slate-700 hover:border-slate-600 transition-all cursor-pointer shrink-0 shadow-sm"
               >
-                <span className="size-1.5 rounded-full bg-emerald-400" />
-                {tech}
-              </span>
-            ))}
-          </div>
+                Start Free Security Scan
+              </button>
+            </div>
 
-          {/* Trust Highlights */}
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-300 font-medium drop-shadow">
-            <span className="flex items-center gap-1.5"><Zap className="size-3.5 text-emerald-400" /> 3–8 Min Pipeline</span>
-            <span className="flex items-center gap-1.5"><ShieldCheck className="size-3.5 text-emerald-400" /> 100% Non-Destructive</span>
-            <span className="flex items-center gap-1.5"><FileText className="size-3.5 text-emerald-400" /> Executive PDF Report</span>
-            <span className="flex items-center gap-1.5"><Sparkles className="size-3.5 text-emerald-400" /> 1-Click Cursor Prompts</span>
-          </div>
+            {/* Core Security Architecture Microcopy */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+              {[
+                "Enterprise Platforms",
+                "Agencies & Dev Partners",
+                "DAST Runtime",
+                "SAST Code Logic",
+                "Vulnerability Detection",
+                "GitHub Security Gate",
+                "0–100 Risk Scoring"
+              ].map((tech, idx) => (
+                <span
+                  key={idx}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black border border-slate-800 text-xs font-mono font-medium text-slate-300 shadow-sm"
+                >
+                  <span className="size-1.5 rounded-full bg-emerald-400" />
+                  {tech}
+                </span>
+              ))}
+            </div>
 
-          {/* Live Security Badge Preview */}
-          <div className="pt-2 flex justify-center">
-            <SecurityBadge score={92} domain="app.verified-domain.com" />
+            {/* Trust Highlights */}
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-300 font-medium drop-shadow">
+              <span className="flex items-center gap-1.5"><Zap className="size-3.5 text-emerald-400" /> 3–8 Min Pipeline</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck className="size-3.5 text-emerald-400" /> 100% Non-Destructive</span>
+              <span className="flex items-center gap-1.5"><FileText className="size-3.5 text-emerald-400" /> Executive PDF Report</span>
+              <span className="flex items-center gap-1.5"><Sparkles className="size-3.5 text-emerald-400" /> 1-Click Cursor Prompts</span>
+            </div>
           </div>
         </div>
       </Velaris>
 
       {/* SECTION 3 — SECURITY TECHNOLOGY ANIMATED BEAM INTEGRATION (100vh) */}
       <SecurityTechnologyBeam />
+
+      {/* SECTION 4 — CORE SECURITY WORKFLOW */}
+      <CoreSecurityWorkflow />
+
+      {/* SECTION 5 — MULTI-ENGINE SECURITY ARCHITECTURE */}
+      <MultiEngineSecurityArchitecture />
+
+      {/* SECTION 7 — GITHUB SECURITY GATE / DEVSECOPS */}
+      <GitHubSecurityGate />
+
+      {/* SECTION 8 — WHITE-LABEL SECURITY REPORTING */}
+      <WhiteLabelReporting />
+
+      {/* SECTION 9 — SOLUTIONS / WHO IT'S FOR */}
+      <SolutionsWhoItsFor />
 
       {/* Footer */}
       <footer className="py-12 border-t border-slate-800 text-xs text-slate-500 bg-[#04060A]">
