@@ -3,6 +3,7 @@ import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
 import { CoreSecurityWorkflow } from "./components/CoreSecurityWorkflow";
 import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
+import { DataFlowOrbitSection } from "./components/DataFlowOrbitSection";
 import { GitHubSecurityGate } from "./components/GitHubSecurityGate";
 import { WhiteLabelReporting } from "./components/WhiteLabelReporting";
 import { SolutionsWhoItsFor } from "./components/SolutionsWhoItsFor";
@@ -199,6 +200,9 @@ export const RedesignedHmwPage: React.FC = () => {
 
       {/* SECTION 5 — MULTI-ENGINE SECURITY ARCHITECTURE */}
       <MultiEngineSecurityArchitecture />
+
+      {/* SECTION 6 — DATA FLOW ORBIT ARCHITECTURE */}
+      <DataFlowOrbitSection />
 
       {/* SECTION 7 — GITHUB SECURITY GATE / DEVSECOPS */}
       <GitHubSecurityGate />
