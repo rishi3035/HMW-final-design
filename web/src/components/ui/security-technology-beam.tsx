@@ -76,31 +76,9 @@ const PODS: Record<string, PodData> = {
       </svg>
     ),
   },
-  playwright: {
-    id: "playwright",
-    number: "04",
-    name: "Playwright",
-    category: "SURFACE DISCOVERY",
-    headline: "Autonomous Application Route Crawler",
-    telemetry: "Headless browser spider autonomously indexes client-side SPAs, hidden authenticated portals, dialog modals, and micro-routes prior to scanning.",
-    metric: "38/38 Routes Mapped",
-    badge: "HEADLESS SPIDER",
-    color: "#14B8A6",
-    accentBg: "rgba(20, 184, 166, 0.15)",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" className="size-4 sm:size-5 text-teal-400" stroke="currentColor" strokeWidth="2">
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-        <circle cx="6" cy="7" r="1.3" fill="currentColor" />
-        <circle cx="10" cy="7" r="1.3" fill="currentColor" />
-        <path d="M6 11h12" />
-      </svg>
-    ),
-  },
   github: {
     id: "github",
-    number: "05",
+    number: "04",
     name: "GitHub Gate",
     category: "CI/CD SECURITY",
     headline: "Continuous DevSecOps Deployment Gate",
@@ -121,7 +99,7 @@ const PODS: Record<string, PodData> = {
   },
   bashcraft: {
     id: "bashcraft",
-    number: "06",
+    number: "05",
     name: "BashCraft",
     category: "AI REMEDIATION",
     headline: "1-Click CLI & IDE Code Fix Prompts",
@@ -224,9 +202,8 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
   const div2Ref = useRef<HTMLDivElement>(null); // Nuclei (Mid Left)
   const div3Ref = useRef<HTMLDivElement>(null); // Semgrep (Bottom Left)
   const div4Ref = useRef<HTMLDivElement>(null); // HMW Core (Center)
-  const div5Ref = useRef<HTMLDivElement>(null); // Playwright (Top Right)
-  const div6Ref = useRef<HTMLDivElement>(null); // GitHub (Mid Right)
-  const div7Ref = useRef<HTMLDivElement>(null); // BashCraft (Bottom Right)
+  const div5Ref = useRef<HTMLDivElement>(null); // GitHub Gate (Top Right)
+  const div6Ref = useRef<HTMLDivElement>(null); // BashCraft (Bottom Right)
 
   const [hoveredPodId, setHoveredPodId] = useState<string | null>(null);
   const [hoveredCenter, setHoveredCenter] = useState<boolean>(false);
@@ -259,7 +236,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
           className="relative flex flex-1 items-center justify-center overflow-visible w-full py-2 my-auto"
         >
           <div className="flex size-full max-h-[380px] sm:max-h-[420px] max-w-5xl flex-col items-stretch justify-between relative z-10">
-            {/* ROW 1: OWASP ZAP (Left) & Playwright (Right) */}
+            {/* ROW 1: OWASP ZAP (Left) & GitHub Gate (Right) */}
             <div className="flex flex-row items-center justify-between px-2 sm:px-10 md:px-14">
               {/* Pod 1: OWASP ZAP */}
               <div
@@ -294,17 +271,17 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                 {hoveredPodId === "zap" && <PodHoverCard pod={PODS.zap} align="left" />}
               </div>
 
-              {/* Pod 4: Playwright */}
+              {/* Pod 4: GitHub Gate */}
               <div
                 className="relative select-none"
-                onMouseEnter={() => setHoveredPodId("playwright")}
+                onMouseEnter={() => setHoveredPodId("github")}
                 onMouseLeave={() => setHoveredPodId(null)}
               >
                 <div
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group flex-row-reverse text-right",
-                    hoveredPodId === "playwright"
-                      ? "bg-slate-900 border-teal-400 shadow-md scale-105"
+                    hoveredPodId === "github"
+                      ? "bg-slate-900 border-sky-400 shadow-md scale-105"
                       : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
                   )}
                 >
@@ -312,23 +289,23 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                     ref={div5Ref}
                     className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
                   >
-                    {PODS.playwright.icon}
+                    {PODS.github.icon}
                   </div>
                   <div className="hidden sm:flex flex-col text-right pl-1.5">
                     <div className="flex items-center justify-end gap-1.5">
-                      <span className="text-xs font-bold text-white">{PODS.playwright.name}</span>
-                      <span className="text-[11px] font-mono text-teal-400 font-bold">{PODS.playwright.number}</span>
+                      <span className="text-xs font-bold text-white">{PODS.github.name}</span>
+                      <span className="text-[11px] font-mono text-sky-400 font-bold">{PODS.github.number}</span>
                     </div>
-                    <span className="text-[9px] text-slate-400 font-mono">{PODS.playwright.metric}</span>
+                    <span className="text-[9px] text-slate-400 font-mono">{PODS.github.metric}</span>
                   </div>
                 </div>
 
                 {/* Hover Telemetry Card - Opposite direction (outward to right) */}
-                {hoveredPodId === "playwright" && <PodHoverCard pod={PODS.playwright} align="right" />}
+                {hoveredPodId === "github" && <PodHoverCard pod={PODS.github} align="right" />}
               </div>
             </div>
 
-            {/* ROW 2: Nuclei (Left), HMW Core (Center), GitHub Gate (Right) */}
+            {/* ROW 2: Nuclei (Left), HMW Core (Center), Spacer Balancer (Right) */}
             <div className="flex flex-row items-center justify-between px-2 sm:px-10 md:px-14">
               {/* Pod 2: Nuclei */}
               <div
@@ -391,38 +368,8 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                 {hoveredCenter && <HmwHoverCard />}
               </div>
 
-              {/* Pod 5: GitHub Gate */}
-              <div
-                className="relative select-none"
-                onMouseEnter={() => setHoveredPodId("github")}
-                onMouseLeave={() => setHoveredPodId(null)}
-              >
-                <div
-                  className={cn(
-                    "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group flex-row-reverse text-right",
-                    hoveredPodId === "github"
-                      ? "bg-slate-900 border-sky-400 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
-                  )}
-                >
-                  <div
-                    ref={div6Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
-                  >
-                    {PODS.github.icon}
-                  </div>
-                  <div className="hidden sm:flex flex-col text-right pl-1.5">
-                    <div className="flex items-center justify-end gap-1.5">
-                      <span className="text-xs font-bold text-white">{PODS.github.name}</span>
-                      <span className="text-[11px] font-mono text-sky-400 font-bold">{PODS.github.number}</span>
-                    </div>
-                    <span className="text-[9px] text-slate-400 font-mono">{PODS.github.metric}</span>
-                  </div>
-                </div>
-
-                {/* Hover Telemetry Card - Opposite direction (outward to right) */}
-                {hoveredPodId === "github" && <PodHoverCard pod={PODS.github} align="right" />}
-              </div>
+              {/* Invisible Balancer Spacer to keep HMW Core dead center horizontally */}
+              <div className="w-[44px] sm:w-[155px] invisible pointer-events-none select-none" aria-hidden="true" />
             </div>
 
             {/* ROW 3: Semgrep (Left) & BashCraft (Right) */}
@@ -460,7 +407,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                 {hoveredPodId === "semgrep" && <PodHoverCard pod={PODS.semgrep} align="left" />}
               </div>
 
-              {/* Pod 6: BashCraft */}
+              {/* Pod 5: BashCraft */}
               <div
                 className="relative select-none"
                 onMouseEnter={() => setHoveredPodId("bashcraft")}
@@ -475,7 +422,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   )}
                 >
                   <div
-                    ref={div7Ref}
+                    ref={div6Ref}
                     className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.bashcraft.icon}
@@ -495,7 +442,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             </div>
           </div>
 
-          {/* Animated Laser Beams: Clean, Sleek Connections */}
+          {/* Animated Laser Beams: 5 Beams for 5 Engines */}
           <AnimatedBeam
             containerRef={containerRef}
             fromRef={div1Ref}
@@ -541,18 +488,6 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             curvature={-70}
             endYOffset={-10}
             reverse
-            gradientStartColor="#14B8A6"
-            gradientStopColor="#10B981"
-            pathColor="#1e293b"
-            pathWidth={hoveredPodId === "playwright" ? 3 : 1.75}
-            pathOpacity={hoveredPodId === "playwright" ? 0.95 : 0.4}
-            duration={hoveredPodId === "playwright" ? 2.4 : 3.8}
-          />
-          <AnimatedBeam
-            containerRef={containerRef}
-            fromRef={div6Ref}
-            toRef={div4Ref}
-            reverse
             gradientStartColor="#38BDF8"
             gradientStopColor="#10B981"
             pathColor="#1e293b"
@@ -562,7 +497,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
           />
           <AnimatedBeam
             containerRef={containerRef}
-            fromRef={div7Ref}
+            fromRef={div6Ref}
             toRef={div4Ref}
             curvature={70}
             endYOffset={10}

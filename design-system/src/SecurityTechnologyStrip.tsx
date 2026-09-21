@@ -69,29 +69,6 @@ export const SECURITY_TECHNOLOGIES: SecurityTechnologyItem[] = [
     )
   },
   {
-    id: "playwright",
-    name: "Playwright",
-    role: "Application Surface Discovery",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        className="size-4 text-teal-400"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-        <circle cx="6" cy="7" r="1" fill="currentColor" />
-        <circle cx="10" cy="7" r="1" fill="currentColor" />
-        <path d="M6 11h12" />
-      </svg>
-    )
-  },
-  {
     id: "github",
     name: "GitHub",
     role: "Developer Security Workflow",
