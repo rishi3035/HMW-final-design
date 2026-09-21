@@ -15,45 +15,55 @@ import {
 
 export const MultiEngineSecurityArchitecture: React.FC = () => {
   return (
-    <section className="relative py-24 sm:py-32 bg-[#04060A] border-t border-slate-800/80 overflow-hidden text-left">
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] bg-[radial-gradient(ellipse_at_center,rgba(16,185,129,0.06),transparent_70%)]" />
-      <div className="pointer-events-none absolute bottom-10 right-10 w-[500px] h-[350px] bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.04),transparent_70%)]" />
+    <section
+      className="relative py-24 sm:py-32 overflow-hidden text-left border-t border-emerald-800/40"
+      style={{
+        background: `
+          radial-gradient(ellipse 65% 75% at 12% 45%, rgba(29, 175, 126, 0.75) 0%, rgba(22, 139, 101, 0.45) 30%, rgba(6, 78, 55, 0.15) 60%, transparent 80%),
+          radial-gradient(ellipse 80% 60% at 85% 85%, rgba(4, 68, 48, 0.4) 0%, transparent 60%),
+          linear-gradient(110deg, #0e5e44 0%, #074733 28%, #032b1e 60%, #011810 100%)
+        `,
+      }}
+    >
+      {/* Ambient glowing atmosphere matching reference */}
+      <div className="pointer-events-none absolute -top-20 -left-20 w-[600px] h-[600px] rounded-full bg-[#1daf7e]/25 blur-[120px]" />
+      <div className="pointer-events-none absolute top-1/2 -left-32 -translate-y-1/2 w-[700px] h-[550px] rounded-full bg-[#168863]/30 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-10 right-10 w-[500px] h-[350px] rounded-full bg-[#044430]/40 blur-[100px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-16">
         {/* Header Block */}
         <div className="space-y-4 max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400 font-mono uppercase tracking-wider backdrop-blur-md shadow-sm">
-            <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-black/40 border border-emerald-400/40 text-xs font-semibold text-emerald-200 font-mono uppercase tracking-wider backdrop-blur-md shadow-sm">
+            <span className="size-2 rounded-full bg-emerald-300 animate-pulse" />
             <span>MULTI-ENGINE SECURITY</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-[1.15]">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-[1.15] drop-shadow-sm">
             Multiple Security Engines. One Unified Risk View.
           </h2>
 
-          <div className="space-y-2 pt-2 text-slate-300 max-w-2xl mx-auto">
-            <p className="text-base sm:text-lg leading-relaxed text-slate-200">
+          <div className="space-y-2 pt-2 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg leading-relaxed text-emerald-100 font-medium drop-shadow-sm">
               No single scanner provides complete application visibility.
             </p>
-            <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+            <p className="text-sm sm:text-base text-emerald-200/85 leading-relaxed">
               HackMyWebsite combines complementary security technologies, normalizes their findings, and turns technical output into one prioritized security workflow.
             </p>
           </div>
         </div>
 
         {/* Technical Architecture Diagram */}
-        <div className="max-w-3xl mx-auto rounded-3xl bg-[#080C14] border border-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 relative overflow-hidden">
-            {/* Diagram Header Banner */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-              <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-                <span className="size-2 rounded-full bg-emerald-400" />
-                <span className="text-slate-200 font-semibold">DATA FLOW DIAGRAM</span>
-              </div>
-              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/50 border border-emerald-800/50 px-2 py-0.5 rounded">
-                Inputs → Platform → Unified View
-              </span>
+        <div className="max-w-3xl mx-auto rounded-3xl bg-[#030806]/85 backdrop-blur-xl border border-emerald-500/25 p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_40px_rgba(22,136,99,0.15)] space-y-6 relative overflow-hidden">
+          {/* Diagram Header Banner */}
+          <div className="flex items-center justify-between border-b border-emerald-900/60 pb-4">
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-300">
+              <span className="size-2 rounded-full bg-emerald-400" />
+              <span className="text-white font-semibold">DATA FLOW DIAGRAM</span>
             </div>
+            <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950/70 border border-emerald-700/60 px-2 py-0.5 rounded">
+              Inputs → Platform → Unified View
+            </span>
+          </div>
 
             {/* FLOW CONTAINER */}
             <div className="flex flex-col items-center space-y-3 relative py-2">
