@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
-import { CoreSecurityWorkflow } from "./components/CoreSecurityWorkflow";
 import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
-import { DataFlowOrbitSection } from "./components/DataFlowOrbitSection";
-import { GitHubSecurityGate } from "./components/GitHubSecurityGate";
-import { WhiteLabelReporting } from "./components/WhiteLabelReporting";
-import { SolutionsWhoItsFor } from "./components/SolutionsWhoItsFor";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import {
   ShieldCheck,
@@ -195,23 +190,8 @@ export const RedesignedHmwPage: React.FC = () => {
       {/* SECTION 3 — SECURITY TECHNOLOGY ANIMATED BEAM INTEGRATION (100vh) */}
       <SecurityTechnologyBeam />
 
-      {/* SECTION 4 — CORE SECURITY WORKFLOW */}
-      <CoreSecurityWorkflow />
-
-      {/* SECTION 5 — MULTI-ENGINE SECURITY ARCHITECTURE */}
+      {/* DATA FLOW ARCHITECTURE / MULTI-ENGINE SECURITY */}
       <MultiEngineSecurityArchitecture />
-
-      {/* SECTION 6 — DATA FLOW ORBIT ARCHITECTURE */}
-      <DataFlowOrbitSection />
-
-      {/* SECTION 7 — GITHUB SECURITY GATE / DEVSECOPS */}
-      <GitHubSecurityGate />
-
-      {/* SECTION 8 — WHITE-LABEL SECURITY REPORTING */}
-      <WhiteLabelReporting />
-
-      {/* SECTION 9 — SOLUTIONS / WHO IT'S FOR */}
-      <SolutionsWhoItsFor />
 
       {/* Footer */}
       <footer className="py-12 border-t border-slate-800 text-xs text-slate-500 bg-[#04060A]">
