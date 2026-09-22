@@ -19,21 +19,21 @@ export const EnterpriseFooter: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-black text-slate-400 border-t border-neutral-900 pt-16 sm:pt-20 pb-12 text-xs font-sans relative overflow-hidden">
+    <footer className="w-full h-screen min-h-[100vh] lg:h-screen lg:max-h-screen flex flex-col justify-between bg-black text-slate-400 border-t border-neutral-800 py-6 sm:py-8 lg:py-10 text-xs font-sans relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-36 bg-gradient-to-t from-emerald-500/5 to-transparent blur-2xl -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between h-full w-full relative z-10">
         {/* Top Header Block: Logo, Statement & Compact Actions */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-12 border-b border-neutral-800">
-          <div className="space-y-2 text-left">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 sm:pb-8 border-b border-neutral-800 shrink-0">
+          <div className="space-y-1.5 text-left">
             <HmwLogo size="sm" showSubtitle={false} />
-            <p className="text-sm text-slate-300 font-medium">
+            <p className="text-xs sm:text-sm text-slate-300 font-medium">
               Continuous application security for modern teams.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
             <a
               href="#top"
               onClick={handleScrollToTop}
@@ -47,7 +47,7 @@ export const EnterpriseFooter: React.FC = () => {
               onClick={() => {
                 window.location.href = "mailto:security@hackmywebsite.io?subject=Enterprise%20Demo%20Request";
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-black border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-900 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-white bg-black border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-900 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>Book Enterprise Demo</span>
               <ArrowRight className="size-3.5 text-emerald-400" />
@@ -56,13 +56,13 @@ export const EnterpriseFooter: React.FC = () => {
         </div>
 
         {/* 4-Column Navigation Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10 text-left flex-1 my-auto py-4 sm:py-6 items-start">
           {/* Column 1: Product */}
-          <div className="space-y-3.5">
+          <div className="space-y-2.5">
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
               Product
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               <li>
                 <a href="/" className="hover:text-white transition-colors">
                   Platform
@@ -88,11 +88,11 @@ export const EnterpriseFooter: React.FC = () => {
           </div>
 
           {/* Column 2: Solutions */}
-          <div className="space-y-3.5">
+          <div className="space-y-2.5">
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
               Solutions
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               <li>
                 <a href="/#solutions" className="hover:text-white transition-colors">
                   Enterprise
@@ -117,11 +117,11 @@ export const EnterpriseFooter: React.FC = () => {
           </div>
 
           {/* Column 3: Resources */}
-          <div className="space-y-3.5">
+          <div className="space-y-2.5">
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
               Resources
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               <li>
                 <a href="/docs" className="hover:text-white transition-colors">
                   Documentation
@@ -146,11 +146,11 @@ export const EnterpriseFooter: React.FC = () => {
           </div>
 
           {/* Column 4: Company */}
-          <div className="space-y-3.5">
+          <div className="space-y-2.5">
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
               Company
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-2">
               <li>
                 <a href="/about" className="hover:text-white transition-colors">
                   About
@@ -174,7 +174,7 @@ export const EnterpriseFooter: React.FC = () => {
         </div>
 
         {/* Bottom Bar: Copyright, System Telemetry & Statutory Credentials */}
-        <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px] font-mono">
+        <div className="pt-4 sm:pt-6 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px] font-mono shrink-0">
           <div className="flex flex-wrap items-center gap-2 text-left">
             <span>© 2026 HackMyWebsite.</span>
             <span className="hidden sm:inline text-slate-700">•</span>
@@ -182,7 +182,7 @@ export const EnterpriseFooter: React.FC = () => {
           </div>
 
           {/* Understated Security Status Telemetry */}
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-[10px]">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black border border-neutral-800 text-[10px]">
             <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-slate-300">All Systems Operational</span>
             <span className="text-slate-600">|</span>
@@ -203,7 +203,7 @@ export const EnterpriseFooter: React.FC = () => {
               Security
             </a>
 
-            <div className="flex items-center gap-3 pl-2 border-l border-slate-800 text-slate-400">
+            <div className="flex items-center gap-3 pl-2 border-l border-neutral-800 text-slate-400">
               <a
                 href="https://github.com"
                 target="_blank"

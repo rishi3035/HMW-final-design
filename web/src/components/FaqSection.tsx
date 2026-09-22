@@ -92,118 +92,128 @@ export const FaqSection: React.FC = () => {
     setOpenId((prev) => (prev === id ? null : id));
   };
 
+  const col1 = FAQS.slice(0, 5);
+  const col2 = FAQS.slice(5, 10);
+
+  const renderFaqItem = (faq: FaqItem, index: number) => {
+    const isOpen = openId === faq.id;
+    const itemNum = String(index + 1).padStart(2, "0");
+
+    return (
+      <div
+        key={faq.id}
+        className={cn(
+          "rounded-xl bg-black border transition-colors duration-200 overflow-hidden",
+          isOpen ? "border-emerald-500/40 bg-neutral-950" : "border-neutral-800 hover:border-neutral-700"
+        )}
+      >
+        <button
+          type="button"
+          onClick={() => toggleFaq(faq.id)}
+          aria-expanded={isOpen}
+          className="w-full py-2 sm:py-2.5 px-3 sm:px-3.5 flex items-center justify-between text-left gap-3 cursor-pointer focus:outline-none group"
+        >
+          <div className="flex items-center gap-2.5 flex-1 min-w-0">
+            <span className="font-mono text-[11px] font-bold text-slate-500 group-hover:text-emerald-400 transition-colors shrink-0">
+              {itemNum}
+            </span>
+
+            <span
+              className={cn(
+                "text-xs sm:text-[13px] font-semibold transition-colors duration-150 truncate",
+                isOpen
+                  ? "text-white"
+                  : "text-slate-200 group-hover:text-white"
+              )}
+            >
+              {faq.question}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="hidden sm:inline-block text-[9px] font-mono px-1.5 py-0.2 rounded bg-black text-neutral-400 border border-neutral-800 group-hover:border-neutral-700">
+              {faq.category}
+            </span>
+
+            <div
+              className={cn(
+                "size-5 rounded flex items-center justify-center border transition-all duration-200",
+                isOpen
+                  ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 rotate-180"
+                  : "bg-black border-neutral-800 text-neutral-400 group-hover:text-white group-hover:border-neutral-700"
+              )}
+            >
+              <ChevronDown className="size-3" />
+            </div>
+          </div>
+        </button>
+
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <motion.div
+              key={`content-${faq.id}`}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="overflow-hidden"
+            >
+              <div className="px-3 sm:px-3.5 pb-2.5 pt-1 text-[11px] sm:text-xs text-slate-300 leading-relaxed font-sans border-t border-neutral-800/80 mt-0.5 pl-7 sm:pl-8">
+                <p>{faq.answer}</p>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
   return (
     <section
       id="faq"
       aria-label="Section 5 — Frequently Asked Questions"
-      className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
+      className="relative w-full h-screen min-h-[100vh] lg:h-screen lg:max-h-screen flex flex-col justify-between bg-black text-slate-100 py-4 sm:py-6 lg:py-6 border-b border-neutral-800 overflow-hidden"
     >
       {/* Subtle ambient lighting */}
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-emerald-950/15 blur-[140px] -z-10" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-between h-full w-full">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-semibold tracking-wider uppercase shadow-inner">
+        <div className="text-center space-y-1 sm:space-y-1.5 mb-2 sm:mb-3 shrink-0">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] font-semibold tracking-wider uppercase shadow-inner">
             <HelpCircle className="size-3 text-emerald-400" />
             <span>SECTION 05 // FAQ</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[1.15]">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
             Questions Before You Scan?
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-400 leading-relaxed font-sans max-w-xl mx-auto">
+          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans max-w-xl mx-auto">
             Everything you need to know before connecting your application to HackMyWebsite.
           </p>
         </div>
 
-        {/* Minimal Accordion List */}
-        <div className="rounded-3xl bg-black border border-neutral-800 divide-y divide-neutral-800 p-2 sm:p-4 shadow-2xl backdrop-blur-xl">
-          {FAQS.map((faq, index) => {
-            const isOpen = openId === faq.id;
-            const itemNum = String(index + 1).padStart(2, "0");
-
-            return (
-              <div
-                key={faq.id}
-                className={cn(
-                  "transition-colors duration-200 rounded-2xl",
-                  isOpen ? "bg-neutral-950" : "hover:bg-neutral-950/60"
-                )}
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleFaq(faq.id)}
-                  aria-expanded={isOpen}
-                  className="w-full py-4 sm:py-5 px-4 sm:px-6 flex items-center justify-between text-left gap-4 cursor-pointer focus:outline-none group"
-                >
-                  <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
-                    <span className="font-mono text-xs font-bold text-slate-500 group-hover:text-emerald-400 transition-colors shrink-0">
-                      {itemNum}
-                    </span>
-
-                    <span
-                      className={cn(
-                        "text-sm sm:text-base font-semibold transition-colors duration-150",
-                        isOpen
-                          ? "text-white"
-                          : "text-slate-200 group-hover:text-white"
-                      )}
-                    >
-                      {faq.question}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-black text-neutral-400 border border-neutral-800 group-hover:border-neutral-700">
-                      {faq.category}
-                    </span>
-
-                    <div
-                      className={cn(
-                        "size-7 rounded-lg flex items-center justify-center border transition-all duration-200",
-                        isOpen
-                          ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 rotate-180"
-                          : "bg-black border-neutral-800 text-neutral-400 group-hover:text-white group-hover:border-neutral-700"
-                      )}
-                    >
-                      <ChevronDown className="size-4" />
-                    </div>
-                  </div>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key={`content-${faq.id}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.22, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-4 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans border-t border-slate-800/40 mt-1 pl-11 sm:pl-14">
-                        <p>{faq.answer}</p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
+        {/* 2-Column Accordion List */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3 flex-1 my-auto min-h-0 items-start w-full">
+          <div className="space-y-2">
+            {col1.map((faq, index) => renderFaqItem(faq, index))}
+          </div>
+          <div className="space-y-2">
+            {col2.map((faq, index) => renderFaqItem(faq, index + 5))}
+          </div>
         </div>
 
         {/* Objection-Free Trust Reassurance */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-mono text-center">
+        <div className="mt-2 shrink-0 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-400 font-mono text-center pb-1">
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="size-3.5 text-emerald-400" /> Zero Credit Card Required
           </span>
-          <span className="text-slate-700">•</span>
+          <span className="text-slate-700 hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="size-3.5 text-emerald-400" /> Non-Destructive Scanning
           </span>
-          <span className="text-slate-700">•</span>
+          <span className="text-slate-700 hidden sm:inline">•</span>
           <span className="flex items-center gap-1.5">
             <ShieldCheck className="size-3.5 text-emerald-400" /> Instant Results in 3–8 Min
           </span>
