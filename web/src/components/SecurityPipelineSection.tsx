@@ -192,25 +192,16 @@ export const SecurityPipelineSection: React.FC = () => {
       aria-label="Section 3 — How It Works: Continuous Security Pipeline"
       className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
     >
-      {/* Static Hero-Referenced Green & Black Color Aura (No Motion) */}
+      {/* Hero Wallpaper Background (Static Green & Black Wallpaper) */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
-        {/* Pure black base */}
         <div className="absolute inset-0 bg-black" />
-
-        {/* Hero Green Palette: #022C22, #059669, #10B981, #34D399 static auras */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(16,185,129,0.18),rgba(5,150,105,0.08)_40%,rgba(2,44,34,0.04)_70%,transparent_100%)] blur-2xl" />
-        <div className="absolute top-1/4 left-8 w-96 h-96 rounded-full bg-[#022C22]/35 blur-[140px]" />
-        <div className="absolute bottom-1/4 right-8 w-96 h-96 rounded-full bg-[#10B981]/12 blur-[140px]" />
-
-        {/* Subtle Attack Surface Diagram Texture overlay */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 mix-blend-screen"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
           style={{
-            backgroundImage: `url('/attack-surface-bg.png')`,
+            backgroundImage: `url('/hero-wallpaper-bg.png')`,
           }}
         />
-
-        {/* Vignette Gradients for seamless dark transition to pure black */}
+        {/* Soft edge vignettes to blend seamlessly into adjacent pure-black borders */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
       </div>
 
