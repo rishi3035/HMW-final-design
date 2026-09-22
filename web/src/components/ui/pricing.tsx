@@ -174,24 +174,33 @@ export function PricingSection({
   return (
     <PricingContext.Provider value={{ isMonthly, setIsMonthly }}>
       <div
-        id="pricing"
-        aria-label="Transparent Pricing Plans"
-        className="relative w-full h-screen min-h-[100vh] lg:h-screen lg:max-h-screen flex flex-col justify-between bg-black py-4 sm:py-6 lg:py-6 border-t border-neutral-800 overflow-hidden"
+        className="relative w-full bg-black py-20 sm:py-24 border-t border-neutral-800 overflow-hidden"
       >
-        <AmbientStarfield />
-        <div className="relative z-10 container mx-auto px-4 md:px-6 flex flex-col justify-between h-full w-full max-w-6xl">
-          <div className="max-w-3xl mx-auto text-center space-y-1 sm:space-y-1.5 mb-2 sm:mb-3 shrink-0">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white leading-tight">
+        {/* Static Hero-Referenced Green & Black Color Aura (No Motion) */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+          {/* Pure black base */}
+          <div className="absolute inset-0 bg-black" />
+
+          {/* Hero Green Palette: #022C22, #059669, #10B981, #34D399 static auras */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(16,185,129,0.18),rgba(5,150,105,0.08)_40%,rgba(2,44,34,0.04)_70%,transparent_100%)] blur-2xl" />
+          <div className="absolute top-1/4 left-8 w-96 h-96 rounded-full bg-[#022C22]/35 blur-[140px]" />
+          <div className="absolute bottom-1/4 right-8 w-96 h-96 rounded-full bg-[#10B981]/12 blur-[140px]" />
+
+          {/* Vignette Gradients for seamless dark transition to pure black */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 md:px-6">
+          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
+            <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-white">
               {title}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
+            <p className="text-slate-400 text-lg whitespace-pre-line">
               {description}
             </p>
           </div>
-          <div className="mb-2 sm:mb-3 shrink-0">
-            <PricingToggle />
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 items-stretch gap-4 lg:gap-6 flex-1 my-auto min-h-0">
+          <PricingToggle />
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 items-start gap-8">
             {plans.map((plan, index) => (
               <PricingCard key={index} plan={plan} index={index} />
             ))}
@@ -262,7 +271,7 @@ function PricingToggle() {
           ref={monthlyBtnRef}
           onClick={() => handleToggle(true)}
           className={cn(
-            "relative z-10 rounded-full px-3.5 sm:px-5 py-1.5 text-xs sm:text-sm font-medium transition-colors",
+            "relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm font-medium transition-colors",
             isMonthly
               ? "text-primary-foreground"
               : "text-muted-foreground hover:text-foreground",
@@ -274,7 +283,7 @@ function PricingToggle() {
           ref={annualBtnRef}
           onClick={() => handleToggle(false)}
           className={cn(
-            "relative z-10 rounded-full px-3.5 sm:px-5 py-1.5 text-xs sm:text-sm font-medium transition-colors",
+            "relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm font-medium transition-colors",
             !isMonthly
               ? "text-primary-foreground"
               : "text-muted-foreground hover:text-foreground",
@@ -303,89 +312,87 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
 
   return (
     <motion.div
-      initial={{ y: 30, opacity: 0 }}
+      initial={{ y: 50, opacity: 0 }}
       whileInView={{
-        y: 0,
+        y: plan.isPopular && isDesktop ? -20 : 0,
         opacity: 1,
       }}
       viewport={{ once: true }}
       transition={{
-        duration: 0.5,
+        duration: 0.6,
         type: "spring",
         stiffness: 100,
         damping: 20,
-        delay: index * 0.12,
+        delay: index * 0.15,
       }}
       className={cn(
-        "rounded-2xl p-4 sm:p-5 flex flex-col justify-between relative bg-black backdrop-blur-sm h-full",
+        "rounded-2xl p-8 flex flex-col relative bg-black backdrop-blur-sm",
         plan.isPopular
           ? "border-2 border-primary shadow-xl shadow-emerald-500/15"
           : "border border-neutral-800 hover:border-neutral-700",
       )}
     >
       {plan.isPopular && (
-        <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 z-20">
-          <div className="bg-primary py-1 px-3 rounded-full flex items-center gap-1 shadow-md">
-            <LucideStar className="text-primary-foreground h-3.5 w-3.5 fill-current" />
-            <span className="text-primary-foreground text-xs font-semibold">
+        <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+          <div className="bg-primary py-1.5 px-4 rounded-full flex items-center gap-1.5 shadow-md">
+            <LucideStar className="text-primary-foreground h-4 w-4 fill-current" />
+            <span className="text-primary-foreground text-sm font-semibold">
               Most Popular
             </span>
           </div>
         </div>
       )}
-      <div className="flex-1 flex flex-col text-center justify-between">
-        <div>
-          <h3 className="text-base sm:text-lg font-bold text-foreground">{plan.name}</h3>
-          <p className="mt-1 text-xs text-muted-foreground line-clamp-1">
-            {plan.description}
-          </p>
-          <div className="mt-3 flex items-baseline justify-center gap-x-1">
-            <span className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-              <NumberFlow
-                value={
-                  isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)
-                }
-                format={{
-                  style: "currency",
-                  currency: "USD",
-                  minimumFractionDigits: 0,
-                }}
-                className="font-variant-numeric: tabular-nums"
-              />
-            </span>
-            <span className="text-xs font-semibold tracking-wide text-muted-foreground">
-              / {plan.period}
-            </span>
-          </div>
-          <p className="text-[10px] text-muted-foreground mt-0.5">
-            {isMonthly ? "Billed Monthly" : "Billed Annually"}
-          </p>
+      <div className="flex-1 flex flex-col text-center">
+        <h3 className="text-xl font-semibold text-foreground">{plan.name}</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          {plan.description}
+        </p>
+        <div className="mt-6 flex items-baseline justify-center gap-x-1">
+          <span className="text-5xl font-bold tracking-tight text-foreground">
+            <NumberFlow
+              value={
+                isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)
+              }
+              format={{
+                style: "currency",
+                currency: "USD",
+                minimumFractionDigits: 0,
+              }}
+              className="font-variant-numeric: tabular-nums"
+            />
+          </span>
+          <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
+            / {plan.period}
+          </span>
         </div>
+        <p className="text-xs text-muted-foreground mt-2">
+          {isMonthly ? "Billed Monthly" : "Billed Annually"}
+        </p>
 
         <ul
           role="list"
-          className="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2 text-xs leading-snug text-left text-muted-foreground py-1"
+          className="mt-8 space-y-3 text-sm leading-6 text-left text-muted-foreground"
         >
           {plan.features.map((feature) => (
-            <li key={feature} className="flex items-center gap-x-2">
+            <li key={feature} className="flex gap-x-3">
               <Check
-                className="h-3.5 w-3.5 flex-none text-primary"
+                className="h-6 w-5 flex-none text-primary"
                 aria-hidden="true"
               />
-              <span className="truncate">{feature}</span>
+              {feature}
             </li>
           ))}
         </ul>
 
-        <div className="mt-3 sm:mt-4 pt-1 shrink-0">
+        <div className="mt-auto pt-8">
           <a
             href={plan.href}
             className={cn(
               buttonVariants({
                 variant: plan.isPopular ? "default" : "outline",
-                size: "default",
+                size: "lg",
               }),
-              "w-full cursor-pointer h-9 text-xs sm:text-sm font-semibold rounded-xl",
+              "w-full cursor-pointer",
             )}
           >
             {plan.buttonText}

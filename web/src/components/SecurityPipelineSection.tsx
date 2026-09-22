@@ -190,50 +190,50 @@ export const SecurityPipelineSection: React.FC = () => {
     <section
       id="how-it-works"
       aria-label="Section 3 — How It Works: Continuous Security Pipeline"
-      className="relative w-full h-screen min-h-[100vh] lg:h-screen lg:max-h-screen flex flex-col justify-between bg-black text-slate-100 py-4 sm:py-6 lg:py-8 border-b border-neutral-800 overflow-hidden"
+      className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
     >
-      {/* User-Provided Background Image Aura */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-screen -z-10"
-        style={{
-          backgroundImage: `url('/attack-surface-bg.png')`,
-        }}
-      />
-      {/* Vignette Gradients for seamless dark transition */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black via-transparent to-black -z-10" />
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-emerald-500/10 via-cyan-500/5 to-transparent blur-3xl -z-10" />
-      <div className="pointer-events-none absolute bottom-10 left-10 w-96 h-96 rounded-full bg-emerald-950/20 blur-[130px] -z-10" />
-      <div className="pointer-events-none absolute bottom-10 right-10 w-96 h-96 rounded-full bg-cyan-950/20 blur-[130px] -z-10" />
+      {/* Static Hero-Referenced Green & Black Color Aura (No Motion) */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        {/* Pure black base */}
+        <div className="absolute inset-0 bg-black" />
 
-      {/* Subtle background circuit grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035] -z-10"
-        style={{
-          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
-          backgroundSize: "40px 40px",
-        }}
-      />
+        {/* Hero Green Palette: #022C22, #059669, #10B981, #34D399 static auras */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[520px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(16,185,129,0.18),rgba(5,150,105,0.08)_40%,rgba(2,44,34,0.04)_70%,transparent_100%)] blur-2xl" />
+        <div className="absolute top-1/4 left-8 w-96 h-96 rounded-full bg-[#022C22]/35 blur-[140px]" />
+        <div className="absolute bottom-1/4 right-8 w-96 h-96 rounded-full bg-[#10B981]/12 blur-[140px]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col justify-between h-full w-full">
+        {/* Subtle Attack Surface Diagram Texture overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 mix-blend-screen"
+          style={{
+            backgroundImage: `url('/attack-surface-bg.png')`,
+          }}
+        />
+
+        {/* Vignette Gradients for seamless dark transition to pure black */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center space-y-1 sm:space-y-1.5 max-w-3xl mx-auto mb-2 sm:mb-3 shrink-0">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+        <div className="text-center space-y-4 max-w-3xl mx-auto mb-16 sm:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[1.15]">
             From Attack Surface to Actionable Security.
           </h2>
 
-          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-sans max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-400 leading-relaxed font-sans max-w-2xl mx-auto">
             One continuous security pipeline that discovers, analyzes, validates, and prioritizes vulnerabilities before they become production incidents.
           </p>
         </div>
 
         {/* PIPELINE INFRASTRUCTURE CONTAINER */}
         <div
-          className="relative w-full rounded-2xl sm:rounded-3xl bg-black/90 border border-neutral-800 p-3.5 sm:p-5 lg:p-5 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl flex-1 flex flex-col justify-between my-auto"
+          className="relative w-full rounded-3xl bg-black/90 border border-neutral-800 p-5 sm:p-8 lg:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           {/* Top Telemetry Header Bar */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pb-2.5 sm:pb-3 border-b border-neutral-800 shrink-0">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-6 sm:pb-8 border-b border-neutral-800">
             <div className="flex items-center gap-2.5">
               <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
               <span className="text-xs font-mono font-bold uppercase tracking-wider text-white">
@@ -346,10 +346,10 @@ export const SecurityPipelineSection: React.FC = () => {
                   key={stage.step}
                   onMouseEnter={() => setActiveStage(idx)}
                   className={cn(
-                    "group relative rounded-xl p-2.5 sm:p-3 flex flex-col justify-between transition-all duration-300 cursor-pointer text-left h-full min-h-[210px] lg:min-h-[230px]",
+                    "group relative rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300 cursor-pointer text-left h-full min-h-[340px]",
                     isActive
-                      ? "bg-black border shadow-2xl scale-[1.02] z-20"
-                      : "bg-black hover:bg-neutral-950 border border-neutral-800 hover:border-neutral-700"
+                      ? "bg-[#0A1020] border shadow-2xl scale-[1.02] z-20"
+                      : "bg-[#070B14]/90 hover:bg-[#090F1C] border border-slate-800/80 hover:border-slate-700/80"
                   )}
                   style={{
                     borderColor: isActive ? stage.accentBorder : undefined,
@@ -361,7 +361,7 @@ export const SecurityPipelineSection: React.FC = () => {
                   {/* Active Top Beacon */}
                   {isActive && (
                     <div
-                      className="absolute -top-px left-4 right-4 h-[2px] rounded-full"
+                      className="absolute -top-px left-6 right-6 h-[2px] rounded-full"
                       style={{
                         background: `linear-gradient(90deg, transparent, ${stage.accentColor}, transparent)`,
                       }}
@@ -369,21 +369,21 @@ export const SecurityPipelineSection: React.FC = () => {
                   )}
 
                   {/* Stage Header Section */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-2.5">
                     {/* Top Row: Icon + Step Badge */}
                     <div className="flex items-center justify-between">
                       <div
-                        className="size-7 rounded-lg flex items-center justify-center transition-colors"
+                        className="size-8 rounded-xl flex items-center justify-center transition-colors"
                         style={{
                           backgroundColor: stage.accentBg,
                           color: stage.accentColor,
                         }}
                       >
-                        <Icon className="size-3.5" />
+                        <Icon className="size-4" />
                       </div>
 
                       <span
-                        className="font-mono text-[9.5px] font-bold px-1.5 py-0.5 rounded border transition-colors"
+                        className="font-mono text-[10px] font-bold px-2 py-0.5 rounded border transition-colors"
                         style={{
                           color: stage.accentColor,
                           backgroundColor: stage.accentBg,
@@ -396,7 +396,7 @@ export const SecurityPipelineSection: React.FC = () => {
 
                     {/* Stage Name */}
                     <div>
-                      <h3 className="text-xs sm:text-sm font-bold text-white tracking-tight flex items-center gap-1">
+                      <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
                         {stage.name}
                         {isActive && (
                           <span
@@ -406,7 +406,7 @@ export const SecurityPipelineSection: React.FC = () => {
                         )}
                       </h3>
                       <p
-                        className="font-mono text-[10px] font-semibold tracking-wide line-clamp-1 mt-0.5"
+                        className="font-mono text-[10.5px] font-semibold tracking-wide line-clamp-1 mt-0.5"
                         style={{ color: stage.accentColor }}
                       >
                         {stage.tagline}
@@ -414,15 +414,15 @@ export const SecurityPipelineSection: React.FC = () => {
                     </div>
 
                     {/* Short Technical Description */}
-                    <p className="text-[10.5px] text-slate-400 leading-snug font-sans line-clamp-2">
+                    <p className="text-[11.5px] text-slate-400 leading-relaxed font-sans line-clamp-3">
                       {stage.description}
                     </p>
                   </div>
 
                   {/* Technical Telemetry HUD Box */}
-                  <div className="mt-2 pt-2 border-t border-neutral-800 space-y-1.5">
-                    <div className="flex items-center justify-between text-[9px] font-mono uppercase tracking-wider text-slate-400">
-                      <span>Telemetry</span>
+                  <div className="mt-4 pt-3 border-t border-slate-800/90 space-y-2">
+                    <div className="flex items-center justify-between text-[9.5px] font-mono uppercase tracking-wider text-slate-400">
+                      <span>Telemetry Feed</span>
                       <span
                         className="font-semibold"
                         style={{ color: stage.accentColor }}
@@ -432,7 +432,7 @@ export const SecurityPipelineSection: React.FC = () => {
                     </div>
 
                     {/* Structured Key-Values */}
-                    <div className="space-y-1 bg-black rounded-lg p-1.5 border border-neutral-800 font-mono text-[9px]">
+                    <div className="space-y-1.5 bg-slate-950/80 rounded-xl p-2.5 border border-slate-800/80 font-mono text-[10px]">
                       {stage.telemetryItems.map((item, iIdx) => (
                         <div
                           key={iIdx}
@@ -457,8 +457,8 @@ export const SecurityPipelineSection: React.FC = () => {
                     </div>
 
                     {/* Status Pill */}
-                    <div className="pt-0.5 flex items-center justify-between">
-                      <span className="text-[8.5px] font-mono text-slate-400 uppercase">
+                    <div className="pt-1 flex items-center justify-between">
+                      <span className="text-[9px] font-mono text-slate-400 uppercase">
                         {stage.telemetryLabel}
                       </span>
                       <span className="size-1.5 rounded-full bg-emerald-400" />
@@ -470,9 +470,9 @@ export const SecurityPipelineSection: React.FC = () => {
           </div>
 
           {/* LOWER PIPELINE TELEMETRY STREAM & ACTION CONSOLE */}
-          <div className="mt-2 sm:mt-3 pt-2.5 sm:pt-3 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-3 shrink-0">
+          <div className="mt-8 sm:mt-10 pt-6 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Left: Continuous Process Flow Ticker */}
-            <div className="flex items-center gap-2.5 w-full md:w-auto overflow-hidden">
+            <div className="flex items-center gap-3 w-full md:w-auto overflow-hidden">
               <div className="size-8 rounded-xl bg-black border border-neutral-800 flex items-center justify-center text-emerald-400 shrink-0">
                 <Zap className="size-4" />
               </div>
@@ -524,22 +524,22 @@ export const SecurityPipelineSection: React.FC = () => {
         </div>
 
         {/* Pipeline Architecture Highlights Guarantee */}
-        <div className="mt-2 sm:mt-2.5 grid grid-cols-2 md:grid-cols-4 gap-2 text-center shrink-0">
-          <div className="p-2 rounded-lg bg-black border border-neutral-800 text-left">
-            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider block">Scan Duration</span>
-            <span className="text-xs sm:text-sm font-mono font-bold text-white">3–8 Min Execution</span>
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Scan Duration</span>
+            <span className="text-sm font-mono font-bold text-white">3–8 Min Execution</span>
           </div>
-          <div className="p-2 rounded-lg bg-black border border-neutral-800 text-left">
-            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider block">Accuracy Rate</span>
-            <span className="text-xs sm:text-sm font-mono font-bold text-emerald-400">99.2% Verified Proof</span>
+          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Accuracy Rate</span>
+            <span className="text-sm font-mono font-bold text-emerald-400">99.2% Verified Proof</span>
           </div>
-          <div className="p-2 rounded-lg bg-black border border-neutral-800 text-left">
-            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider block">Runtime Safety</span>
-            <span className="text-xs sm:text-sm font-mono font-bold text-cyan-400">100% Non-Destructive</span>
+          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Runtime Safety</span>
+            <span className="text-sm font-mono font-bold text-cyan-400">100% Non-Destructive</span>
           </div>
-          <div className="p-2 rounded-lg bg-black border border-neutral-800 text-left">
-            <span className="text-[9px] font-mono text-slate-400 uppercase tracking-wider block">Fix Workflow</span>
-            <span className="text-xs sm:text-sm font-mono font-bold text-white">1-Click Cursor IDE Diffs</span>
+          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Fix Workflow</span>
+            <span className="text-sm font-mono font-bold text-white">1-Click Cursor IDE Diffs</span>
           </div>
         </div>
       </div>

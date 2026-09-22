@@ -237,7 +237,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
       aria-label="Security Technology Synthesis Architecture"
       style={{ height: "100vh" }}
       className={cn(
-        "w-full h-screen min-h-[100vh] lg:h-screen lg:max-h-screen flex flex-col justify-between bg-black border-b border-neutral-800 pt-16 sm:pt-20 pb-4 sm:pb-6 relative overflow-hidden",
+        "w-full h-screen min-h-[100vh] flex flex-col justify-between bg-black border-b border-slate-800/80 pt-20 sm:pt-24 pb-8 sm:pb-12 relative overflow-hidden",
         className,
       )}
     >

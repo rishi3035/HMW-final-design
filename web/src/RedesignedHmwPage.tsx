@@ -3,7 +3,7 @@ import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
 import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
 import { SecurityScoreSection } from "./components/SecurityScoreSection";
-import PricingSectionDemo from "@/components/ui/pricing-demo";
+import PricingSectionDemo from "@/components/ui/demo";
 import { FaqSection } from "./components/FaqSection";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
@@ -124,23 +124,23 @@ export const RedesignedHmwPage: React.FC = () => {
         height="100vh"
         className="relative overflow-hidden border-b border-neutral-800 h-screen min-h-[100vh]"
       >
-        <div className="flex h-full w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 pb-8">
-          {/* Centered High-Impact Enterprise Hero */}
-          <div className="max-w-5xl w-full text-center space-y-4 sm:space-y-5 lg:space-y-6 relative z-10">
+        <div className="flex h-full w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-10">
+          {/* Centered High-Impact Enterprise Hero — shifted lower than the middle */}
+          <div className="max-w-5xl w-full text-center space-y-6 sm:space-y-7 relative z-10 translate-y-8 sm:translate-y-12 md:translate-y-16">
             {/* Primary Headline - One Uniform Solid Color Throughout */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.12] max-w-4xl mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.12] max-w-4xl mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
               Detect Security Risk Before<br className="hidden sm:inline" /> It Reaches Production.
             </h1>
 
             {/* Supporting Text - Concise 1-2 Line Scope */}
             <div className="max-w-3xl mx-auto">
-              <p className="text-sm sm:text-base lg:text-lg text-slate-200 font-semibold leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              <p className="text-base sm:text-lg text-slate-200 font-semibold leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Continuous application security engineered for enterprise platforms, development agencies, SaaS companies, and mission-critical web applications.
               </p>
             </div>
 
             {/* Interactive URL Scanner Input Bar with Professional Enterprise Button */}
-            <div className="max-w-2xl mx-auto p-1.5 sm:p-2 rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
+            <div className="max-w-2xl mx-auto p-2 rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
               <div className="flex items-center gap-2.5 px-3 py-2 w-full text-left">
                 <span className="text-neutral-500 font-mono text-xs">https://</span>
                 <input
@@ -160,7 +160,7 @@ export const RedesignedHmwPage: React.FC = () => {
             </div>
 
             {/* Core Security Architecture Microcopy */}
-            <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 pt-1">
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
               {[
                 "Enterprise Platforms",
                 "Agencies & Dev Partners",
@@ -172,7 +172,7 @@ export const RedesignedHmwPage: React.FC = () => {
               ].map((tech, idx) => (
                 <span
                   key={idx}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black border border-neutral-800 text-[11px] sm:text-xs font-mono font-medium text-slate-300 shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black border border-slate-800 text-xs font-mono font-medium text-slate-300 shadow-sm"
                 >
                   <span className="size-1.5 rounded-full bg-emerald-400" />
                   {tech}
@@ -181,7 +181,7 @@ export const RedesignedHmwPage: React.FC = () => {
             </div>
 
             {/* Trust Highlights */}
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 pt-1 text-xs text-slate-300 font-medium drop-shadow">
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-2 text-xs text-slate-300 font-medium drop-shadow">
               <span className="flex items-center gap-1.5"><Zap className="size-3.5 text-emerald-400" /> 3–8 Min Pipeline</span>
               <span className="flex items-center gap-1.5"><ShieldCheck className="size-3.5 text-emerald-400" /> 100% Non-Destructive</span>
               <span className="flex items-center gap-1.5"><FileText className="size-3.5 text-emerald-400" /> Executive PDF Report</span>
@@ -200,8 +200,10 @@ export const RedesignedHmwPage: React.FC = () => {
       {/* SECTION 5 — SECURITY READINESS SCORE & REVOLUTIONARY DOMAIN SIMULATOR */}
       <SecurityScoreSection />
 
-      {/* SECTION 5 — PRICING */}
-      <PricingSectionDemo />
+      {/* SECTION 6 — PRICING */}
+      <section id="pricing" aria-label="Transparent Pricing Plans" className="bg-black">
+        <PricingSectionDemo />
+      </section>
 
       {/* SECTION 6 — FAQ */}
       <FaqSection />
