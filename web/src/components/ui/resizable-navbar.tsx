@@ -363,14 +363,23 @@ export const MobileNavToggle = ({
   );
 };
 
-export const NavbarLogo = ({ visible: propVisible }: { visible?: boolean }) => {
+export const NavbarLogo = ({
+  visible: propVisible,
+  href = "/",
+  onClick,
+}: {
+  visible?: boolean;
+  href?: string;
+  onClick?: (e: React.MouseEvent) => void;
+}) => {
   const context = React.useContext(NavbarContext);
   const isScrolled = propVisible ?? context.visible;
 
   return (
     <a
-      href="#"
-      className="relative z-20 flex items-center gap-2 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200"
+      href={href}
+      onClick={onClick}
+      className="relative z-20 flex items-center gap-2 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200 cursor-pointer"
     >
       <HmwLogo size="sm" showText={!isScrolled} />
     </a>

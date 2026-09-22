@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
-import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import {
   ShieldCheck,
@@ -22,12 +21,12 @@ import {
 } from "@/components/ui/resizable-navbar";
 
 const enterpriseNavItems: NavItemConfig[] = [
-  { name: "Platform", link: "#platform" },
-  { name: "Solutions", link: "#solutions" },
-  { name: "How It Works", link: "#how-it-works" },
-  { name: "Security", link: "#security" },
-  { name: "Resources", link: "#resources" },
-  { name: "Pricing", link: "#pricing" },
+  { name: "Platform", link: "/" },
+  { name: "Solutions", link: "/#solutions" },
+  { name: "How It Works", link: "/how-it-works" },
+  { name: "Security", link: "/#security" },
+  { name: "Resources", link: "/#resources" },
+  { name: "Pricing", link: "/#pricing" },
 ];
 
 export const RedesignedHmwPage: React.FC = () => {
@@ -189,9 +188,6 @@ export const RedesignedHmwPage: React.FC = () => {
 
       {/* SECTION 3 — SECURITY TECHNOLOGY ANIMATED BEAM INTEGRATION (100vh) */}
       <SecurityTechnologyBeam />
-
-      {/* DATA FLOW ARCHITECTURE / MULTI-ENGINE SECURITY */}
-      <MultiEngineSecurityArchitecture />
 
       {/* Footer */}
       <footer className="py-12 border-t border-slate-800 text-xs text-slate-500 bg-[#04060A]">
