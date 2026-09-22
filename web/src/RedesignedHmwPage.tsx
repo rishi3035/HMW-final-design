@@ -3,7 +3,7 @@ import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
 import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
 import { SecurityScoreSection } from "./components/SecurityScoreSection";
-import PricingSectionDemo from "@/components/ui/demo";
+import PricingSectionDemo from "@/components/ui/pricing-demo";
 import { FaqSection } from "./components/FaqSection";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
