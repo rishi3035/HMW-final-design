@@ -148,7 +148,7 @@ const PodHoverCard: React.FC<PodHoverCardProps> = ({ pod, align = "left" }) => {
   return (
     <div
       className={cn(
-        "absolute z-50 w-72 sm:w-80 p-4 rounded-2xl bg-[#090D18] border shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-xl pointer-events-none text-left transition-all duration-200",
+        "absolute z-50 w-72 sm:w-80 p-4 rounded-2xl bg-black border shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-xl pointer-events-none text-left transition-all duration-200",
         // Opposite positioning: left pods pop to the left (outward), right pods pop to the right (outward)
         align === "left" && "right-full mr-3 top-1/2 -translate-y-1/2",
         align === "right" && "left-full ml-3 top-1/2 -translate-y-1/2",
@@ -156,7 +156,7 @@ const PodHoverCard: React.FC<PodHoverCardProps> = ({ pod, align = "left" }) => {
       )}
       style={{ borderColor: pod.color + "80" }}
     >
-      <div className="flex items-center gap-2 mb-2 pb-1.5 border-b border-slate-800/80">
+      <div className="flex items-center gap-2 mb-2 pb-1.5 border-b border-neutral-800">
         <span
           className="size-2 rounded-full"
           style={{ backgroundColor: pod.color }}
@@ -178,7 +178,7 @@ const PodHoverCard: React.FC<PodHoverCardProps> = ({ pod, align = "left" }) => {
       <p className="text-xs text-slate-300 leading-relaxed font-sans">
         {pod.telemetry}
       </p>
-      <div className="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono">
+      <div className="mt-2.5 pt-2 border-t border-neutral-800 flex items-center justify-between text-[10px] font-mono">
         <span className="text-slate-500">ENGINE METRIC:</span>
         <span className="font-semibold" style={{ color: pod.color }}>
           {pod.metric}
@@ -190,8 +190,8 @@ const PodHoverCard: React.FC<PodHoverCardProps> = ({ pod, align = "left" }) => {
 
 const HmwHoverCard: React.FC = () => {
   return (
-    <div className="absolute z-50 w-80 p-4 rounded-2xl bg-[#090D18] border border-emerald-500/80 shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-xl pointer-events-none text-left transition-all duration-200 top-full mt-4 left-1/2 -translate-x-1/2">
-      <div className="flex items-center gap-2 mb-2 pb-1.5 border-b border-slate-800/80">
+    <div className="absolute z-50 w-80 p-4 rounded-2xl bg-black border border-emerald-500/80 shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-xl pointer-events-none text-left transition-all duration-200 top-full mt-4 left-1/2 -translate-x-1/2">
+      <div className="flex items-center gap-2 mb-2 pb-1.5 border-b border-neutral-800">
         <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
         <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
           HACKMYWEBSITE
@@ -204,7 +204,7 @@ const HmwHoverCard: React.FC = () => {
       <p className="text-xs text-slate-300 leading-relaxed font-sans">
         Correlates multi-engine DAST, CVE signatures, and SAST code traces into unified risk scores and verified 1-click IDE remediation prompts.
       </p>
-      <div className="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono">
+      <div className="mt-2.5 pt-2 border-t border-neutral-800 flex items-center justify-between text-[10px] font-mono">
         <span className="text-slate-500">COVERAGE:</span>
         <span className="font-semibold text-emerald-400">100% UNIFIED PIPELINE</span>
       </div>
@@ -272,13 +272,13 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group",
                     hoveredPodId === "zap"
-                      ? "bg-slate-900 border-emerald-500 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
+                      ? "bg-black border-emerald-500 shadow-md scale-105"
+                      : "bg-black border-neutral-800 hover:border-neutral-700",
                   )}
                 >
                   <div
                     ref={div1Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
+                    className="size-9 sm:size-10 rounded-lg bg-black border border-neutral-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.zap.icon}
                   </div>
@@ -305,13 +305,13 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group flex-row-reverse text-right",
                     hoveredPodId === "playwright"
-                      ? "bg-slate-900 border-teal-400 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
+                      ? "bg-black border-teal-400 shadow-md scale-105"
+                      : "bg-black border-neutral-800 hover:border-neutral-700",
                   )}
                 >
                   <div
                     ref={div5Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
+                    className="size-9 sm:size-10 rounded-lg bg-black border border-neutral-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.playwright.icon}
                   </div>
@@ -341,13 +341,13 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group",
                     hoveredPodId === "nuclei"
-                      ? "bg-slate-900 border-cyan-400 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
+                      ? "bg-black border-cyan-400 shadow-md scale-105"
+                      : "bg-black border-neutral-800 hover:border-neutral-700",
                   )}
                 >
                   <div
                     ref={div2Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
+                    className="size-9 sm:size-10 rounded-lg bg-black border border-neutral-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.nuclei.icon}
                   </div>
@@ -372,7 +372,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
               >
                 <div
                   ref={div4Ref}
-                  className="size-16 sm:size-20 rounded-2xl border-2 border-emerald-500 bg-slate-950 flex items-center justify-center shadow-lg cursor-pointer transition-transform duration-200 hover:scale-105"
+                  className="size-16 sm:size-20 rounded-2xl border-2 border-emerald-500 bg-black flex items-center justify-center shadow-lg cursor-pointer transition-transform duration-200 hover:scale-105"
                 >
                   {/* Clean Vector "H" Emblem */}
                   <HmwLogoIcon className="size-9 sm:size-11 text-white" />
@@ -402,13 +402,13 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group flex-row-reverse text-right",
                     hoveredPodId === "github"
-                      ? "bg-slate-900 border-sky-400 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
+                      ? "bg-black border-sky-400 shadow-md scale-105"
+                      : "bg-black border-neutral-800 hover:border-neutral-700",
                   )}
                 >
                   <div
                     ref={div6Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
+                    className="size-9 sm:size-10 rounded-lg bg-black border border-neutral-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.github.icon}
                   </div>
@@ -438,13 +438,13 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group",
                     hoveredPodId === "semgrep"
-                      ? "bg-slate-900 border-amber-400 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
+                      ? "bg-black border-amber-400 shadow-md scale-105"
+                      : "bg-black border-neutral-800 hover:border-neutral-700",
                   )}
                 >
                   <div
                     ref={div3Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
+                    className="size-9 sm:size-10 rounded-lg bg-black border border-neutral-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.semgrep.icon}
                   </div>
@@ -471,13 +471,13 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
                   className={cn(
                     "flex items-center gap-2.5 p-2 sm:p-2.5 rounded-xl border transition-all duration-200 cursor-pointer backdrop-blur-md group flex-row-reverse text-right",
                     hoveredPodId === "bashcraft"
-                      ? "bg-slate-900 border-purple-400 shadow-md scale-105"
-                      : "bg-slate-950/80 border-slate-800 hover:border-slate-700",
+                      ? "bg-black border-purple-400 shadow-md scale-105"
+                      : "bg-black border-neutral-800 hover:border-neutral-700",
                   )}
                 >
                   <div
                     ref={div7Ref}
-                    className="size-9 sm:size-10 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center shrink-0"
+                    className="size-9 sm:size-10 rounded-lg bg-black border border-neutral-800 flex items-center justify-center shrink-0"
                   >
                     {PODS.bashcraft.icon}
                   </div>

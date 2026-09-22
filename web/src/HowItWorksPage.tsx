@@ -33,7 +33,7 @@ export const HowItWorksPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#06080F] text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative flex flex-col justify-between">
+    <div className="min-h-screen bg-black text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative flex flex-col justify-between">
       {/* Enterprise Resizable Scroll-Morphing Navbar */}
       <Navbar className="top-3">
         {/* Desktop Navigation */}
@@ -59,7 +59,7 @@ export const HowItWorksPage: React.FC = () => {
             <button
               type="button"
               onClick={() => navigateTo("/")}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-slate-900 border border-slate-700 hover:border-slate-600 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-black hover:bg-neutral-900 border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
               Book Enterprise Demo
             </button>
@@ -107,7 +107,7 @@ export const HowItWorksPage: React.FC = () => {
                   navigateTo("/");
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 block"
+                className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-black border border-neutral-800 hover:border-neutral-700 block"
               >
                 Sign In
               </a>
@@ -117,7 +117,7 @@ export const HowItWorksPage: React.FC = () => {
                   navigateTo("/");
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full text-center text-white py-2.5 text-xs font-semibold rounded-xl bg-slate-800 border border-slate-700 shadow-md block cursor-pointer"
+                className="w-full text-center text-white py-2.5 text-xs font-semibold rounded-xl bg-black hover:bg-neutral-900 border border-neutral-700 shadow-md block cursor-pointer"
               >
                 Book Enterprise Demo
               </button>

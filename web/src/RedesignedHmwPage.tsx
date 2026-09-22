@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
 import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
+import { SecurityScoreSection } from "./components/SecurityScoreSection";
 import PricingSectionDemo from "@/components/ui/demo";
 import { FaqSection } from "./components/FaqSection";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
@@ -28,6 +29,7 @@ const enterpriseNavItems: NavItemConfig[] = [
   { name: "Platform", link: "/" },
   { name: "Security Engines", link: "#security" },
   { name: "How It Works", link: "#how-it-works" },
+  { name: "Launch Score", link: "#readiness-score" },
   { name: "Pricing", link: "#pricing" },
   { name: "FAQ", link: "#faq" },
 ];
@@ -37,7 +39,7 @@ export const RedesignedHmwPage: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#06080F] text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative">
+    <div className="min-h-screen bg-black text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative">
       {/* Enterprise Resizable Scroll-Morphing Navbar - Sticky/Fixed across page till footer */}
       <Navbar className="top-3">
         {/* Desktop Navigation */}
@@ -59,7 +61,7 @@ export const RedesignedHmwPage: React.FC = () => {
 
             <button
               type="button"
-              className="px-4 py-1.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs border border-slate-700 hover:border-slate-600 transition-all cursor-pointer shadow-sm whitespace-nowrap"
+              className="px-4 py-1.5 rounded-full bg-black hover:bg-neutral-900 text-white font-medium text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap"
             >
               Book Enterprise Demo
             </button>
@@ -86,7 +88,7 @@ export const RedesignedHmwPage: React.FC = () => {
                   key={`mobile-nav-${idx}`}
                   href={item.link}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-slate-200 hover:text-white font-semibold text-sm py-2 border-b border-slate-800/60"
+                  className="block text-slate-200 hover:text-white font-semibold text-sm py-2 border-b border-neutral-800"
                 >
                   {item.name}
                 </a>
@@ -97,14 +99,14 @@ export const RedesignedHmwPage: React.FC = () => {
               <a
                 href="#signin"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 block"
+                className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-black border border-neutral-800 hover:border-neutral-700 block"
               >
                 Sign In
               </a>
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center text-white py-2.5 text-xs font-semibold rounded-xl bg-slate-800 border border-slate-700 shadow-md block cursor-pointer"
+                className="w-full text-center text-white py-2.5 text-xs font-semibold rounded-xl bg-black hover:bg-neutral-900 border border-neutral-700 shadow-md block cursor-pointer"
               >
                 Book Enterprise Demo
               </button>
@@ -115,12 +117,12 @@ export const RedesignedHmwPage: React.FC = () => {
 
       {/* Hero Section with Living WebGL Simplex-Noise Shader (Velaris) - 100vh */}
       <Velaris
-        bg="#06080F"
+        bg="#000000"
         colors={["#10B981", "#34D399", "#059669", "#022C22"]}
         speed={1.0}
         grain={0.25}
         height="100vh"
-        className="relative overflow-hidden border-b border-slate-800/80 h-screen min-h-[100vh]"
+        className="relative overflow-hidden border-b border-neutral-800 h-screen min-h-[100vh]"
       >
         <div className="flex h-full w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-10">
           {/* Centered High-Impact Enterprise Hero — shifted lower than the middle */}
@@ -138,20 +140,20 @@ export const RedesignedHmwPage: React.FC = () => {
             </div>
 
             {/* Interactive URL Scanner Input Bar with Professional Enterprise Button */}
-            <div className="max-w-2xl mx-auto p-2 rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
+            <div className="max-w-2xl mx-auto p-2 rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
               <div className="flex items-center gap-2.5 px-3 py-2 w-full text-left">
-                <span className="text-slate-500 font-mono text-xs">https://</span>
+                <span className="text-neutral-500 font-mono text-xs">https://</span>
                 <input
                   type="text"
                   value={scanUrl.replace(/^https?:\/\//, "")}
                   onChange={(e) => setScanUrl(e.target.value)}
                   placeholder="app.your-startup.com"
-                  className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-slate-500"
+                  className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-neutral-500"
                 />
               </div>
               <button
                 type="button"
-                className="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs sm:text-sm border border-slate-700 hover:border-slate-600 transition-all cursor-pointer shrink-0 shadow-sm"
+                className="px-6 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs sm:text-sm border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shrink-0 shadow-sm"
               >
                 Start Free Security Scan
               </button>
@@ -195,7 +197,10 @@ export const RedesignedHmwPage: React.FC = () => {
       {/* SECTION 4 — HOW IT WORKS: CONTINUOUS SECURITY PIPELINE */}
       <SecurityPipelineSection />
 
-      {/* SECTION 5 — PRICING */}
+      {/* SECTION 5 — SECURITY READINESS SCORE & REVOLUTIONARY DOMAIN SIMULATOR */}
+      <SecurityScoreSection />
+
+      {/* SECTION 6 — PRICING */}
       <section id="pricing" aria-label="Transparent Pricing Plans" className="bg-black">
         <PricingSectionDemo />
       </section>

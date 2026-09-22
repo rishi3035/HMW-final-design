@@ -141,8 +141,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
           damping: 30,
         }}
         className={cn(
-          "relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-[#080D18]/75 border border-slate-800/80 lg:flex transition-colors",
-          visible && "bg-[#06080F]/90 border-slate-700/80 shadow-2xl",
+          "relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-black/80 border border-neutral-800/80 lg:flex transition-colors",
+          visible && "bg-black/95 border-neutral-700/80 shadow-2xl",
           className,
         )}
       >
@@ -240,8 +240,8 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
                   transition={{ duration: 0.18, ease: "easeOut" }}
                   className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 w-72 sm:w-80"
                 >
-                  <div className="rounded-2xl bg-[#0B0F19]/95 border border-slate-800 p-3 shadow-2xl backdrop-blur-2xl space-y-1">
-                    <div className="px-2 py-1 text-[10px] font-mono uppercase text-emerald-400 font-bold tracking-wider border-b border-slate-800/80 mb-1 flex items-center justify-between">
+                  <div className="rounded-2xl bg-black border border-neutral-800 p-3 shadow-2xl backdrop-blur-2xl space-y-1">
+                    <div className="px-2 py-1 text-[10px] font-mono uppercase text-emerald-400 font-bold tracking-wider border-b border-neutral-800 mb-1 flex items-center justify-between">
                       <span>{item.name} Capabilities</span>
                       <span className="text-[9px] text-slate-500">v2.5</span>
                     </div>
@@ -250,7 +250,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
                         key={`sub-${sIdx}`}
                         href={sub.link}
                         onClick={onItemClick}
-                        className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-slate-900/90 border border-transparent hover:border-slate-800 transition-all group text-left"
+                        className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-neutral-900 border border-transparent hover:border-neutral-800 transition-all group text-left"
                       >
                         <span className="text-sm shrink-0 mt-0.5 group-hover:scale-110 transition-transform">
                           {sub.icon || "•"}
@@ -299,7 +299,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
       }}
       className={cn(
         "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-4 py-2 lg:hidden",
-        visible && "bg-[#06080F]/90 border border-slate-800",
+        visible && "bg-black/95 border border-neutral-800",
         className,
       )}
     >
@@ -338,7 +338,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-[#0B0F19] border border-slate-800 p-6 shadow-2xl backdrop-blur-xl text-slate-200 max-h-[80vh] overflow-y-auto",
+            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-2xl bg-black border border-neutral-800 p-6 shadow-2xl backdrop-blur-xl text-slate-200 max-h-[80vh] overflow-y-auto",
             className,
           )}
         >
@@ -409,8 +409,8 @@ export const NavbarButton = ({
   const variantStyles = {
     primary:
       "bg-emerald-500 hover:bg-emerald-400 text-neutral-950 shadow-lg shadow-emerald-500/20",
-    secondary: "bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 text-slate-200",
-    dark: "bg-black text-white border border-slate-800",
+    secondary: "bg-black hover:bg-neutral-900 border border-neutral-700 text-neutral-200",
+    dark: "bg-black text-white border border-neutral-800",
     gradient:
       "bg-gradient-to-r from-emerald-500 to-teal-400 text-neutral-950 font-bold",
   };

@@ -190,7 +190,7 @@ export const SecurityPipelineSection: React.FC = () => {
     <section
       id="how-it-works"
       aria-label="Section 3 — How It Works: Continuous Security Pipeline"
-      className="relative w-full bg-[#06080F] text-slate-100 py-24 sm:py-32 border-b border-slate-800/80 overflow-hidden"
+      className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
     >
       {/* User-Provided Background Image Aura */}
       <div
@@ -200,7 +200,7 @@ export const SecurityPipelineSection: React.FC = () => {
         }}
       />
       {/* Vignette Gradients for seamless dark transition */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#06080F] via-transparent to-[#06080F] -z-10" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black via-transparent to-black -z-10" />
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-emerald-500/10 via-cyan-500/5 to-transparent blur-3xl -z-10" />
       <div className="pointer-events-none absolute bottom-10 left-10 w-96 h-96 rounded-full bg-emerald-950/20 blur-[130px] -z-10" />
       <div className="pointer-events-none absolute bottom-10 right-10 w-96 h-96 rounded-full bg-cyan-950/20 blur-[130px] -z-10" />
@@ -254,7 +254,7 @@ export const SecurityPipelineSection: React.FC = () => {
                 <Lock className="size-3.5 text-cyan-400" />
                 <span>NON-DESTRUCTIVE: <strong className="text-emerald-400">100% SAFE</strong></span>
               </span>
-              <span className="text-[10px] text-slate-500 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+              <span className="text-[10px] text-neutral-400 bg-black px-2 py-0.5 rounded border border-neutral-800">
                 ACTIVE STAGE: {PIPELINE_STAGES[activeStage].step} / 06
               </span>
             </div>
@@ -263,7 +263,7 @@ export const SecurityPipelineSection: React.FC = () => {
           {/* CONTINUOUS PIPELINE VISUAL BACKBONE TRACK (Desktop) */}
           <div className="hidden lg:block relative my-6">
             {/* Horizontal Bus Conduit Line */}
-            <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[2px] bg-slate-800" />
+            <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[2px] bg-neutral-800" />
 
             {/* Glowing Traveling Data Stream Beam */}
             <div
@@ -295,10 +295,10 @@ export const SecurityPipelineSection: React.FC = () => {
                       className={cn(
                         "relative size-9 rounded-full flex items-center justify-center transition-all duration-300 border-2",
                         isActive
-                          ? "bg-slate-950 scale-110 shadow-lg"
+                          ? "bg-black scale-110 shadow-lg"
                           : isPassed
-                          ? "bg-slate-900 border-slate-700 hover:border-slate-500"
-                          : "bg-slate-950 border-slate-800"
+                          ? "bg-black border-neutral-700 hover:border-neutral-500"
+                          : "bg-black border-neutral-800"
                       )}
                       style={{
                         borderColor: isActive ? stage.accentColor : undefined,
@@ -470,10 +470,10 @@ export const SecurityPipelineSection: React.FC = () => {
           </div>
 
           {/* LOWER PIPELINE TELEMETRY STREAM & ACTION CONSOLE */}
-          <div className="mt-8 sm:mt-10 pt-6 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="mt-8 sm:mt-10 pt-6 border-t border-neutral-800 flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Left: Continuous Process Flow Ticker */}
             <div className="flex items-center gap-3 w-full md:w-auto overflow-hidden">
-              <div className="size-8 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 shrink-0">
+              <div className="size-8 rounded-xl bg-black border border-neutral-800 flex items-center justify-center text-emerald-400 shrink-0">
                 <Zap className="size-4" />
               </div>
               <div className="text-left text-xs font-mono">
@@ -505,7 +505,7 @@ export const SecurityPipelineSection: React.FC = () => {
               <button
                 type="button"
                 onClick={handleStartScan}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-200 bg-slate-900/90 hover:bg-slate-800/90 border border-slate-700/80 hover:border-slate-600 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-200 bg-black hover:bg-neutral-900 border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
               >
                 Start a Free Scan
               </button>

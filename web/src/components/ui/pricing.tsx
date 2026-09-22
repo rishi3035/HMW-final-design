@@ -51,7 +51,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-neutral-700 bg-black text-white hover:bg-neutral-900 hover:border-neutral-500",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
@@ -248,7 +248,7 @@ function PricingToggle() {
 
   return (
     <div className="flex justify-center">
-      <div ref={confettiRef} className="relative flex w-fit items-center rounded-full bg-muted p-1">
+      <div ref={confettiRef} className="relative flex w-fit items-center rounded-full bg-black border border-neutral-800 p-1">
         <motion.div
           className="absolute left-0 top-0 h-full rounded-full bg-primary p-1"
           style={pillStyle}
@@ -313,10 +313,10 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
         delay: index * 0.15,
       }}
       className={cn(
-        "rounded-2xl p-8 flex flex-col relative bg-[#070B14]/90 backdrop-blur-sm",
+        "rounded-2xl p-8 flex flex-col relative bg-black backdrop-blur-sm",
         plan.isPopular
           ? "border-2 border-primary shadow-xl shadow-emerald-500/15"
-          : "border border-slate-800/90 hover:border-slate-700",
+          : "border border-neutral-800 hover:border-neutral-700",
       )}
     >
       {plan.isPopular && (

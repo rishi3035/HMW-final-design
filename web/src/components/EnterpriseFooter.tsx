@@ -19,13 +19,13 @@ export const EnterpriseFooter: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-[#04060A] text-slate-400 border-t border-slate-800/80 pt-16 sm:pt-20 pb-12 text-xs font-sans relative overflow-hidden">
+    <footer className="w-full bg-black text-slate-400 border-t border-neutral-900 pt-16 sm:pt-20 pb-12 text-xs font-sans relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-36 bg-gradient-to-t from-emerald-500/5 to-transparent blur-2xl -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
         {/* Top Header Block: Logo, Statement & Compact Actions */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-12 border-b border-slate-800/80">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-12 border-b border-neutral-800">
           <div className="space-y-2 text-left">
             <HmwLogo size="sm" showSubtitle={false} />
             <p className="text-sm text-slate-300 font-medium">
@@ -47,7 +47,7 @@ export const EnterpriseFooter: React.FC = () => {
               onClick={() => {
                 window.location.href = "mailto:security@hackmywebsite.io?subject=Enterprise%20Demo%20Request";
               }}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 border border-slate-700/80 hover:border-slate-600 hover:bg-slate-800 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-black border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-900 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>Book Enterprise Demo</span>
               <ArrowRight className="size-3.5 text-emerald-400" />

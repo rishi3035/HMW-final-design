@@ -96,7 +96,7 @@ export const FaqSection: React.FC = () => {
     <section
       id="faq"
       aria-label="Section 5 — Frequently Asked Questions"
-      className="relative w-full bg-[#06080F] text-slate-100 py-24 sm:py-32 border-b border-slate-800/80 overflow-hidden"
+      className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
     >
       {/* Subtle ambient lighting */}
       <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-emerald-950/15 blur-[140px] -z-10" />
@@ -119,7 +119,7 @@ export const FaqSection: React.FC = () => {
         </div>
 
         {/* Minimal Accordion List */}
-        <div className="rounded-3xl bg-[#080D1A]/70 border border-slate-800/80 divide-y divide-slate-800/80 p-2 sm:p-4 shadow-2xl backdrop-blur-xl">
+        <div className="rounded-3xl bg-black border border-neutral-800 divide-y divide-neutral-800 p-2 sm:p-4 shadow-2xl backdrop-blur-xl">
           {FAQS.map((faq, index) => {
             const isOpen = openId === faq.id;
             const itemNum = String(index + 1).padStart(2, "0");
@@ -129,7 +129,7 @@ export const FaqSection: React.FC = () => {
                 key={faq.id}
                 className={cn(
                   "transition-colors duration-200 rounded-2xl",
-                  isOpen ? "bg-[#0B1122]/90" : "hover:bg-slate-900/40"
+                  isOpen ? "bg-neutral-950" : "hover:bg-neutral-950/60"
                 )}
               >
                 <button
@@ -156,7 +156,7 @@ export const FaqSection: React.FC = () => {
                   </div>
 
                   <div className="flex items-center gap-3 shrink-0">
-                    <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900/90 text-slate-400 border border-slate-800 group-hover:border-slate-700">
+                    <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-black text-neutral-400 border border-neutral-800 group-hover:border-neutral-700">
                       {faq.category}
                     </span>
 
@@ -165,7 +165,7 @@ export const FaqSection: React.FC = () => {
                         "size-7 rounded-lg flex items-center justify-center border transition-all duration-200",
                         isOpen
                           ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 rotate-180"
-                          : "bg-slate-900 border-slate-800 text-slate-400 group-hover:text-white group-hover:border-slate-700"
+                          : "bg-black border-neutral-800 text-neutral-400 group-hover:text-white group-hover:border-neutral-700"
                       )}
                     >
                       <ChevronDown className="size-4" />
