@@ -192,16 +192,20 @@ export const SecurityPipelineSection: React.FC = () => {
       aria-label="Section 3 — How It Works: Continuous Security Pipeline"
       className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
     >
-      {/* Hero Wallpaper Background (Static Green & Black Wallpaper) */}
+      {/* User-Provided Green Aura Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        {/* Pure black base */}
         <div className="absolute inset-0 bg-black" />
+
+        {/* Green Aura Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
           style={{
-            backgroundImage: `url('/hero-wallpaper-bg.png')`,
+            backgroundImage: `url('/green-aura-bg.png')`,
           }}
         />
-        {/* Soft edge vignettes to blend seamlessly into adjacent pure-black borders */}
+
+        {/* Vignette Gradients for seamless dark transition to pure black */}
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
       </div>
 
