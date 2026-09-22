@@ -1,65 +1,84 @@
 import React from "react";
-import { PricingSection } from "@/components/ui/pricing";
+import { PricingSection, type PricingPlan } from "@/components/ui/pricing";
 
-// Demo data for the pricing plans
-export const demoPlans = [
+// Official HackMyWebsite pricing tiers from hackmywebsite.io
+const hmwPricingPlans: PricingPlan[] = [
+  {
+    name: "Free",
+    price: "0",
+    yearlyPrice: "0",
+    period: "month",
+    description: "Instant security scanning to identify vulnerability risks with blurred dashboard findings.",
+    buttonText: "Start Free Scan",
+    href: "https://hackmywebsite.io/workspace",
+    features: [
+      "1 website target",
+      "1 scan per month",
+      "2-page executive PDF summary",
+      "Blurred vulnerability details preview",
+      "Domain ownership verification required",
+    ],
+  },
   {
     name: "Starter",
-    price: "50",
-    yearlyPrice: "40",
+    price: "1999",
+    yearlyPrice: "1599",
     period: "month",
+    description: "For solo founders who want full unblurred security reports and PDF exports.",
+    buttonText: "Get Starter Plan",
+    href: "https://hackmywebsite.io/workspace?tab=billing&plan=starter",
     features: [
-      "Up to 10 projects",
-      "Basic analytics",
-      "48-hour support response time",
-      "Limited API access",
-      "Community support",
+      "1 website target",
+      "3 scans per month",
+      "Full unblurred PDF security report",
+      "AI Launch Score evaluation",
+      "Cursor / Claude Code fix prompts",
     ],
-    description: "Perfect for individuals and small projects.",
-    buttonText: "Start Free Trial",
-    href: "#",
   },
   {
-    name: "Professional",
-    price: "99",
-    yearlyPrice: "79",
+    name: "Pro",
+    price: "2999",
+    yearlyPrice: "2399",
     period: "month",
-    features: [
-      "Unlimited projects",
-      "Advanced analytics",
-      "24-hour support response time",
-      "Full API access",
-      "Priority support & Team collaboration",
-    ],
-    description: "Ideal for growing teams and businesses.",
-    buttonText: "Get Started",
-    href: "#",
+    description: "The most practical tier for growing startups with GitHub integration and API fuzzing.",
+    buttonText: "Get Pro Plan",
+    href: "https://hackmywebsite.io/workspace?tab=billing&plan=pro",
     isPopular: true,
+    popularBadge: "Most Practical",
+    features: [
+      "3 website targets",
+      "10 scans per month",
+      "GitHub repo SAST/DAST checks",
+      "API & GraphQL fuzzing",
+      "Priority scan queue processing",
+    ],
   },
   {
-    name: "Enterprise",
-    price: "299",
-    yearlyPrice: "239",
+    name: "Agency",
+    price: "4999",
+    yearlyPrice: "3999",
     period: "month",
+    description: "For agencies and development studios requiring white-label reports and compliance maps.",
+    buttonText: "Get Agency Plan",
+    href: "https://hackmywebsite.io/workspace?tab=billing&plan=agency",
     features: [
-      "Everything in Professional",
-      "Custom solutions & integrations",
-      "Dedicated account manager",
-      "SSO Authentication & Advanced security",
+      "10 website targets",
+      "Unlimited monthly scans",
+      "White-label PDF report branding",
+      "Compliance mapping (SOC 2, ISO, HIPAA, DPDP)",
+      "Dedicated agency support channel",
     ],
-    description: "For large organizations with specific needs.",
-    buttonText: "Contact Sales",
-    href: "#",
   },
 ];
 
-// Demo component to showcase the PricingSection
+// Showcase component connected to HackMyWebsite pricing
 export default function PricingSectionDemo() {
   return (
     <PricingSection
-      plans={demoPlans}
-      title="Find the Perfect Plan"
-      description="Select the ideal package for your needs and start building today."
+      plans={hmwPricingPlans}
+      badge="Transparent Subscription Tiers"
+      title="Predictable Pricing for Founders & Agencies"
+      description="Choose a plan to run unblurred scans, get AI remediation prompts, and unlock white-label client security deliverables."
     />
   );
 }

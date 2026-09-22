@@ -201,7 +201,7 @@ export const RedesignedHmwPage: React.FC = () => {
       <SecurityScoreSection />
 
       {/* SECTION 6 — PRICING */}
-      <section id="pricing" aria-label="Transparent Pricing Plans" className="bg-black">
+      <section id="pricing" aria-label="Transparent Pricing Plans" className="relative">
         <PricingSectionDemo />
       </section>
 

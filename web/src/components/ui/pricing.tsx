@@ -18,11 +18,11 @@ import { twMerge } from "tailwind-merge";
 
 // --- UTILITY FUNCTIONS ---
 
-export function cn(...inputs: ClassValue[]) {
+function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function useMediaQuery(query: string) {
+function useMediaQuery(query: string) {
   const [value, setValue] = useState(false);
 
   useEffect(() => {
@@ -146,10 +146,12 @@ export interface PricingPlan {
   buttonText: string;
   href: string;
   isPopular?: boolean;
+  popularBadge?: string;
 }
 
 export interface PricingSectionProps {
   plans: PricingPlan[];
+  badge?: string;
   title?: string;
   description?: string;
 }
@@ -166,44 +168,54 @@ const PricingContext = createContext<{
 // Main PricingSection Component
 export function PricingSection({
   plans,
-  title = "Simple, Transparent Pricing",
-  description = "Choose the plan that's right for you. All plans include our core features and support.",
+  badge = "Transparent Subscription Tiers",
+  title = "Predictable Pricing for Founders & Agencies",
+  description = "Choose a plan to run unblurred scans, get AI remediation prompts, and unlock white-label client security deliverables.",
 }: PricingSectionProps) {
   const [isMonthly, setIsMonthly] = useState(true);
 
   return (
     <PricingContext.Provider value={{ isMonthly, setIsMonthly }}>
       <div
-        className="relative w-full bg-black py-20 sm:py-24 border-t border-neutral-800 overflow-hidden"
+        className="relative w-full py-20 sm:py-24 border-t border-neutral-800 overflow-hidden"
       >
         {/* User-Provided Green Aura Background */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
           {/* Pure black base */}
           <div className="absolute inset-0 bg-black" />
 
           {/* Green Aura Image */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
             style={{
               backgroundImage: `url('/green-aura-bg.png')`,
             }}
           />
 
-          {/* Vignette Gradients for seamless dark transition to pure black */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+          {/* Soft edge vignettes for seamless dark transition to pure black */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center space-y-4 mb-12">
-            <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-white">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center space-y-3 mb-10 sm:mb-12">
+            {badge && (
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black border border-neutral-800 text-xs font-mono text-emerald-400">
+                <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>{badge}</span>
+              </div>
+            )}
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
               {title}
             </h2>
-            <p className="text-slate-400 text-lg whitespace-pre-line">
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               {description}
             </p>
           </div>
+
           <PricingToggle />
-          <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 items-start gap-8">
+
+          {/* 4-Column Responsive Pricing Grid (1 col mobile, 2 col tablet, 4 col desktop) */}
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch text-left">
             {plans.map((plan, index) => (
               <PricingCard key={index} plan={plan} index={index} />
             ))}
@@ -214,23 +226,31 @@ export function PricingSection({
   );
 }
 
-// Pricing Toggle Component
+// Pricing Toggle Component - Pixel-perfect padding and centering
 function PricingToggle() {
   const { isMonthly, setIsMonthly } = useContext(PricingContext);
   const confettiRef = useRef<HTMLDivElement>(null);
   const monthlyBtnRef = useRef<HTMLButtonElement>(null);
   const annualBtnRef = useRef<HTMLButtonElement>(null);
 
-  const [pillStyle, setPillStyle] = useState({});
+  const [pillStyle, setPillStyle] = useState<React.CSSProperties>({ opacity: 0 });
 
-  useEffect(() => {
+  const updatePill = () => {
     const btnRef = isMonthly ? monthlyBtnRef : annualBtnRef;
     if (btnRef.current) {
       setPillStyle({
         width: btnRef.current.offsetWidth,
-        transform: `translateX(${btnRef.current.offsetLeft}px)`,
+        height: btnRef.current.offsetHeight,
+        transform: `translate3d(${btnRef.current.offsetLeft}px, ${btnRef.current.offsetTop}px, 0)`,
+        opacity: 1,
       });
     }
+  };
+
+  useEffect(() => {
+    updatePill();
+    window.addEventListener("resize", updatePill);
+    return () => window.removeEventListener("resize", updatePill);
   }, [isMonthly]);
 
   const handleToggle = (monthly: boolean) => {
@@ -245,62 +265,71 @@ function PricingToggle() {
       const originY = (rect.top + rect.height / 2) / window.innerHeight;
 
       confetti({
-        particleCount: 80,
-        spread: 80,
+        particleCount: 70,
+        spread: 70,
         origin: { x: originX, y: originY },
         colors: [
           "#10B981",
-          "#06B6D4",
           "#34D399",
-          "#3B82F6",
+          "#059669",
+          "#6EE7B7",
         ],
-        ticks: 300,
+        ticks: 250,
         gravity: 1.2,
         decay: 0.94,
-        startVelocity: 30,
+        startVelocity: 26,
       });
     }
   };
 
   return (
     <div className="flex justify-center">
-      <div ref={confettiRef} className="relative flex w-fit items-center rounded-full bg-black border border-neutral-800 p-1">
+      <div
+        ref={confettiRef}
+        className="relative inline-flex items-center rounded-full bg-black border border-neutral-800 p-1.5 shadow-xl"
+      >
+        {/* Animated Sliding Pill - nested with uniform padding */}
         <motion.div
-          className="absolute left-0 top-0 h-full rounded-full bg-primary p-1"
+          className="absolute top-0 left-0 rounded-full bg-emerald-400 shadow-md shadow-emerald-400/25 pointer-events-none"
           style={pillStyle}
           transition={{ type: "spring", stiffness: 500, damping: 40 }}
         />
+
         <button
           ref={monthlyBtnRef}
+          type="button"
           onClick={() => handleToggle(true)}
           className={cn(
-            "relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm font-medium transition-colors",
+            "relative z-10 rounded-full px-5 sm:px-6 py-2 text-xs sm:text-sm font-bold transition-colors duration-200 cursor-pointer focus:outline-none",
             isMonthly
-              ? "text-primary-foreground"
-              : "text-muted-foreground hover:text-foreground",
+              ? "text-neutral-950"
+              : "text-slate-400 hover:text-white"
           )}
         >
           Monthly
         </button>
+
         <button
           ref={annualBtnRef}
+          type="button"
           onClick={() => handleToggle(false)}
           className={cn(
-            "relative z-10 rounded-full px-4 sm:px-6 py-2 text-sm font-medium transition-colors",
+            "relative z-10 rounded-full px-5 sm:px-6 py-2 text-xs sm:text-sm font-bold transition-colors duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5",
             !isMonthly
-              ? "text-primary-foreground"
-              : "text-muted-foreground hover:text-foreground",
+              ? "text-neutral-950"
+              : "text-slate-400 hover:text-white"
           )}
         >
-          Annual
+          <span>Annual</span>
           <span
             className={cn(
-              "hidden sm:inline",
-              !isMonthly ? "text-primary-foreground/80" : "",
+              "text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full transition-colors",
+              !isMonthly
+                ? "bg-neutral-950/15 text-neutral-950 font-extrabold"
+                : "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
             )}
           >
-            {" "}
-            (Save 20%)
+            Save 20%
           </span>
         </button>
       </div>
@@ -308,102 +337,107 @@ function PricingToggle() {
   );
 }
 
-// Pricing Card Component
+// Pricing Card Component (Opaque Black, Precise hackmywebsite.io styling)
 function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
   const { isMonthly } = useContext(PricingContext);
   const isDesktop = useMediaQuery("(min-width: 1024px)");
 
   return (
     <motion.div
-      initial={{ y: 50, opacity: 0 }}
+      initial={{ y: 30, opacity: 0 }}
       whileInView={{
-        y: plan.isPopular && isDesktop ? -20 : 0,
+        y: plan.isPopular && isDesktop ? -12 : 0,
         opacity: 1,
       }}
       viewport={{ once: true }}
       transition={{
-        duration: 0.6,
+        duration: 0.5,
         type: "spring",
         stiffness: 100,
         damping: 20,
-        delay: index * 0.15,
+        delay: index * 0.1,
       }}
       className={cn(
-        "rounded-2xl p-8 flex flex-col relative bg-black backdrop-blur-sm",
+        "rounded-2xl p-6 sm:p-7 flex flex-col justify-between relative bg-black transition-all duration-200",
         plan.isPopular
-          ? "border-2 border-primary shadow-xl shadow-emerald-500/15"
-          : "border border-neutral-800 hover:border-neutral-700",
+          ? "border-2 border-emerald-500 shadow-2xl shadow-emerald-500/20"
+          : "border border-neutral-800 hover:border-neutral-700"
       )}
     >
+      {/* Featured Badge */}
       {plan.isPopular && (
-        <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
-          <div className="bg-primary py-1.5 px-4 rounded-full flex items-center gap-1.5 shadow-md">
-            <LucideStar className="text-primary-foreground h-4 w-4 fill-current" />
-            <span className="text-primary-foreground text-sm font-semibold">
-              Most Popular
-            </span>
+        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
+          <div className="bg-emerald-500 text-neutral-950 py-1 px-3.5 rounded-full flex items-center gap-1.5 shadow-lg text-[10.5px] font-black tracking-wide uppercase">
+            <LucideStar className="size-3 fill-current" />
+            <span>{plan.popularBadge || "Most Practical"}</span>
           </div>
         </div>
       )}
-      <div className="flex-1 flex flex-col text-center">
-        <h3 className="text-xl font-semibold text-foreground">{plan.name}</h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          {plan.description}
-        </p>
-        <div className="mt-6 flex items-baseline justify-center gap-x-1">
-          <span className="text-5xl font-bold tracking-tight text-foreground">
-            <NumberFlow
-              value={
-                isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)
-              }
-              format={{
-                style: "currency",
-                currency: "USD",
-                minimumFractionDigits: 0,
-              }}
-              className="font-variant-numeric: tabular-nums"
-            />
+
+      {/* Plan Header */}
+      <div className="space-y-4">
+        <div>
+          <h3 className="text-lg font-bold text-white tracking-tight">{plan.name}</h3>
+          <p className="mt-1 text-xs text-slate-400 min-h-[36px] leading-relaxed">
+            {plan.description}
+          </p>
+        </div>
+
+        {/* Pricing Display with NumberFlow in INR */}
+        <div className="py-3 border-y border-neutral-800 flex items-baseline gap-1.5">
+          <span className="text-3xl font-extrabold text-white tracking-tight font-mono">
+            {plan.price === "0" ? (
+              "₹0"
+            ) : (
+              <NumberFlow
+                value={isMonthly ? Number(plan.price) : Number(plan.yearlyPrice)}
+                locales="en-IN"
+                format={{
+                  style: "currency",
+                  currency: "INR",
+                  maximumFractionDigits: 0,
+                }}
+                className="font-variant-numeric: tabular-nums"
+              />
+            )}
           </span>
-          <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
-            / {plan.period}
+          <span className="text-xs text-slate-400">
+            per month
           </span>
         </div>
-        <p className="text-xs text-muted-foreground mt-2">
-          {isMonthly ? "Billed Monthly" : "Billed Annually"}
-        </p>
 
+        {/* Features Checklist */}
         <ul
           role="list"
-          className="mt-8 space-y-3 text-sm leading-6 text-left text-muted-foreground"
+          aria-label={`${plan.name} plan features`}
+          className="space-y-2.5 text-xs text-slate-300"
         >
           {plan.features.map((feature) => (
-            <li key={feature} className="flex gap-x-3">
+            <li key={feature} className="flex items-start gap-2.5">
               <Check
-                className="h-6 w-5 flex-none text-primary"
+                className="size-4 text-emerald-400 shrink-0 mt-0.5"
                 aria-hidden="true"
               />
-              {feature}
+              <span className="leading-snug">{feature}</span>
             </li>
           ))}
         </ul>
+      </div>
 
-        <div className="mt-auto pt-8">
-          <a
-            href={plan.href}
-            className={cn(
-              buttonVariants({
-                variant: plan.isPopular ? "default" : "outline",
-                size: "lg",
-              }),
-              "w-full cursor-pointer",
-            )}
-          >
-            {plan.buttonText}
-          </a>
-        </div>
+      {/* Action CTA Button */}
+      <div className="pt-6 mt-6 border-t border-neutral-800">
+        <a
+          href={plan.href}
+          className={cn(
+            "w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all shadow-md text-center cursor-pointer",
+            plan.isPopular
+              ? "bg-emerald-500 hover:bg-emerald-400 text-neutral-950 shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
+              : "bg-black hover:bg-neutral-900 text-slate-200 border border-neutral-700 hover:border-neutral-500"
+          )}
+        >
+          <span>{plan.buttonText}</span>
+        </a>
       </div>
     </motion.div>
   );
 }
-
-export { Button, buttonVariants };

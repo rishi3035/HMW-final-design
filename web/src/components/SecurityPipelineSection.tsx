@@ -190,23 +190,23 @@ export const SecurityPipelineSection: React.FC = () => {
     <section
       id="how-it-works"
       aria-label="Section 3 — How It Works: Continuous Security Pipeline"
-      className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
+      className="relative w-full text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
     >
       {/* User-Provided Green Aura Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
         {/* Pure black base */}
         <div className="absolute inset-0 bg-black" />
 
         {/* Green Aura Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-80"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
           style={{
             backgroundImage: `url('/green-aura-bg.png')`,
           }}
         />
 
-        {/* Vignette Gradients for seamless dark transition to pure black */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        {/* Soft edge vignettes for seamless dark transition to pure black */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -223,7 +223,7 @@ export const SecurityPipelineSection: React.FC = () => {
 
         {/* PIPELINE INFRASTRUCTURE CONTAINER */}
         <div
-          className="relative w-full rounded-3xl bg-black/90 border border-neutral-800 p-5 sm:p-8 lg:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.85)] backdrop-blur-xl"
+          className="relative w-full rounded-3xl bg-black border border-neutral-800 p-5 sm:p-8 lg:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.85)]"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
@@ -341,10 +341,10 @@ export const SecurityPipelineSection: React.FC = () => {
                   key={stage.step}
                   onMouseEnter={() => setActiveStage(idx)}
                   className={cn(
-                    "group relative rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300 cursor-pointer text-left h-full min-h-[340px]",
+                    "group relative rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300 cursor-pointer text-left h-full min-h-[340px] bg-black",
                     isActive
-                      ? "bg-[#0A1020] border shadow-2xl scale-[1.02] z-20"
-                      : "bg-[#070B14]/90 hover:bg-[#090F1C] border border-slate-800/80 hover:border-slate-700/80"
+                      ? "border shadow-2xl scale-[1.02] z-20"
+                      : "border border-neutral-800 hover:border-neutral-700"
                   )}
                   style={{
                     borderColor: isActive ? stage.accentBorder : undefined,
@@ -427,7 +427,7 @@ export const SecurityPipelineSection: React.FC = () => {
                     </div>
 
                     {/* Structured Key-Values */}
-                    <div className="space-y-1.5 bg-slate-950/80 rounded-xl p-2.5 border border-slate-800/80 font-mono text-[10px]">
+                    <div className="space-y-1.5 bg-black rounded-xl p-2.5 border border-neutral-800 font-mono text-[10px]">
                       {stage.telemetryItems.map((item, iIdx) => (
                         <div
                           key={iIdx}
@@ -520,19 +520,19 @@ export const SecurityPipelineSection: React.FC = () => {
 
         {/* Pipeline Architecture Highlights Guarantee */}
         <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+          <div className="p-3 rounded-xl bg-black border border-neutral-800 text-left">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Scan Duration</span>
             <span className="text-sm font-mono font-bold text-white">3–8 Min Execution</span>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+          <div className="p-3 rounded-xl bg-black border border-neutral-800 text-left">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Accuracy Rate</span>
             <span className="text-sm font-mono font-bold text-emerald-400">99.2% Verified Proof</span>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+          <div className="p-3 rounded-xl bg-black border border-neutral-800 text-left">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Runtime Safety</span>
             <span className="text-sm font-mono font-bold text-cyan-400">100% Non-Destructive</span>
           </div>
-          <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-left">
+          <div className="p-3 rounded-xl bg-black border border-neutral-800 text-left">
             <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Fix Workflow</span>
             <span className="text-sm font-mono font-bold text-white">1-Click Cursor IDE Diffs</span>
           </div>
