@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
+import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
+import PricingSectionDemo from "@/components/ui/demo";
+import { FaqSection } from "./components/FaqSection";
+import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import {
   ShieldCheck,
@@ -22,11 +26,10 @@ import {
 
 const enterpriseNavItems: NavItemConfig[] = [
   { name: "Platform", link: "/" },
-  { name: "Solutions", link: "/#solutions" },
-  { name: "How It Works", link: "/how-it-works" },
-  { name: "Security", link: "/#security" },
-  { name: "Resources", link: "/#resources" },
-  { name: "Pricing", link: "/#pricing" },
+  { name: "Security Engines", link: "#security" },
+  { name: "How It Works", link: "#how-it-works" },
+  { name: "Pricing", link: "#pricing" },
+  { name: "FAQ", link: "#faq" },
 ];
 
 export const RedesignedHmwPage: React.FC = () => {
@@ -189,20 +192,19 @@ export const RedesignedHmwPage: React.FC = () => {
       {/* SECTION 3 — SECURITY TECHNOLOGY ANIMATED BEAM INTEGRATION (100vh) */}
       <SecurityTechnologyBeam />
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-slate-800 text-xs text-slate-500 bg-[#04060A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-left">
-            <HmwLogo size="sm" showSubtitle={true} />
-          </div>
-          <div className="flex items-center gap-6 text-slate-400">
-            <a href="/sample-report" className="hover:text-white transition-colors">Sample PDF Report</a>
-            <a href="/methodology" className="hover:text-white transition-colors">Methodology</a>
-            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
-          </div>
-        </div>
-      </footer>
+      {/* SECTION 4 — HOW IT WORKS: CONTINUOUS SECURITY PIPELINE */}
+      <SecurityPipelineSection />
+
+      {/* SECTION 5 — PRICING */}
+      <section id="pricing" aria-label="Transparent Pricing Plans" className="bg-black">
+        <PricingSectionDemo />
+      </section>
+
+      {/* SECTION 6 — FAQ */}
+      <FaqSection />
+
+      {/* SECTION 7 — ENTERPRISE FOOTER */}
+      <EnterpriseFooter />
     </div>
   );
 };

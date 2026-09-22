@@ -45,7 +45,16 @@ export const App: React.FC = () => {
               e.preventDefault();
               window.history.pushState({}, "", targetUrl.pathname + targetUrl.search + targetUrl.hash);
               setCurrentPath(targetUrl.pathname);
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              if (targetUrl.hash) {
+                setTimeout(() => {
+                  const targetEl = document.querySelector(targetUrl.hash);
+                  if (targetEl) {
+                    targetEl.scrollIntoView({ behavior: "smooth" });
+                  }
+                }, 100);
+              } else {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
             } else if (targetUrl.hash) {
               // Same page hash navigation
               const targetEl = document.querySelector(targetUrl.hash);

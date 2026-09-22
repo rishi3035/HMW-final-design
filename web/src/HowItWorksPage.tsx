@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
+import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import {
   Navbar,
@@ -131,19 +132,7 @@ export const HowItWorksPage: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-slate-800 text-xs text-slate-500 bg-[#04060A]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex flex-col sm:flex-row items-center gap-4 text-left">
-            <HmwLogo size="sm" showSubtitle={true} />
-          </div>
-          <div className="flex items-center gap-6 text-slate-400">
-            <a href="/sample-report" className="hover:text-white transition-colors">Sample PDF Report</a>
-            <a href="/methodology" className="hover:text-white transition-colors">Methodology</a>
-            <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-            <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
-          </div>
-        </div>
-      </footer>
+      <EnterpriseFooter />
     </div>
   );
 };
