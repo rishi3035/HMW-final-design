@@ -59,7 +59,7 @@ export const securityPipelineOrbits: OrbitRing[] = [
         icon: Layers,
       },
       {
-        name: "DOM Discovery",
+        name: "Playwright",
         role: "Surface Discovery",
         badge: "DOM CRAWL",
         color: "#A7F3D0",

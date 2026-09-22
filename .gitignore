@@ -13,3 +13,5 @@ references
 ant-design
 baseweb
 
+.vercel
+.env*

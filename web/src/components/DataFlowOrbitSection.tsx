@@ -24,7 +24,7 @@ export const DataFlowOrbitSection: React.FC = () => {
       name: "Surface Mapping & Ingestion",
       orbit: "Inner Orbit",
       desc: "Discovers and maps accessible web applications, dynamic single-page apps, and REST/GraphQL APIs before security testing begins.",
-      techs: ["Web Apps & SPAs", "GraphQL / REST APIs", "Dynamic DOM Crawler"],
+      techs: ["Web Apps & SPAs", "GraphQL / REST APIs", "Playwright DOM Crawler"],
       color: "emerald",
     },
     {
