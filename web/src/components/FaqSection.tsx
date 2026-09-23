@@ -1,112 +1,86 @@
 "use client";
 
-import React, { useState } from "react";
-import { ChevronDown, HelpCircle, ShieldCheck } from "lucide-react";
+import React from "react";
+import { HelpCircle, ArrowRight } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "framer-motion";
 
-interface FaqItem {
-  id: string;
+export type FAQItem = {
   question: string;
   answer: string;
-  category: string;
-}
+};
 
-const FAQS: FaqItem[] = [
+// Top 6 most critical, high-impact questions for founders, CTOs & security engineers
+const faqsLeft: FAQItem[] = [
   {
-    id: "scan-targets",
     question: "What can HackMyWebsite scan?",
     answer:
-      "HackMyWebsite scans web applications, Single Page Applications (React, Next.js, Vue, Angular), REST & GraphQL APIs, microservices, cloud storage perimeters, and repository code. It handles authenticated workflows seamlessly via session cookies, OAuth handshakes, and API tokens.",
-    category: "SCOPE",
+      "HackMyWebsite scans modern Single Page Applications (Next.js, React, Vue), REST and GraphQL APIs, DNS attack surfaces, exposed cloud buckets, and repository code. It also supports authenticated workflows via session cookies, OAuth tokens, and bearer credentials.",
   },
   {
-    id: "production-safety",
-    question: "Will scanning affect my production application?",
+    question: "Will scanning affect my live production application?",
     answer:
-      "No. HackMyWebsite is engineered to be 100% non-destructive. Our DAST and CVE engines utilize adaptive rate limiting and safe payload execution that validates security vulnerabilities without altering database state, degrading server availability, or disrupting live customer traffic.",
-    category: "SAFETY",
+      "Never. HackMyWebsite is engineered to be 100% non-destructive. Our DAST and CVE validation engines run with adaptive rate limiting and safe replay payloads that verify exploitability without mutating databases, degrading server response times, or disrupting customer traffic.",
   },
   {
-    id: "scan-duration",
-    question: "How long does a typical security scan take?",
+    question: "How long does a full security scan take?",
     answer:
-      "A standard full-pipeline scan executes in 3 to 8 minutes. Our distributed multi-engine architecture runs external reconnaissance, headless DOM crawling, runtime probing, and static AST analysis in parallel, delivering rigorous audit depth with zero developer delay.",
-    category: "PERFORMANCE",
+      "A full-pipeline security audit completes in 3 to 8 minutes. Our distributed multi-engine architecture runs external DNS reconnaissance, headless DOM crawling, runtime active probing, and AST token scanning in parallel with zero developer queue delay.",
   },
+];
+
+const faqsRight: FAQItem[] = [
   {
-    id: "vuln-types",
-    question: "What types of vulnerabilities can HackMyWebsite detect?",
+    question: "What types of vulnerabilities are detected?",
     answer:
-      "The platform detects OWASP Top 10 flaws (SQLi, XSS, SSRF, CSRF, IDOR), unpatched CVE zero-days, API authorization vulnerabilities, CORS and CSP misconfigurations, exposed secrets and API tokens in client bundles, and vulnerable third-party dependencies.",
-    category: "COVERAGE",
+      "The platform detects OWASP Top 10 vulnerabilities (SQL injection, XSS, SSRF, IDOR, CORS misconfigurations), unpatched CVE zero-days, exposed secret keys and API credentials in JS bundles, and vulnerable third-party npm/PyPI dependencies.",
   },
   {
-    id: "risk-scoring",
-    question: "How is the risk score calculated?",
+    question: "How does GitHub and Cursor IDE integration work?",
     answer:
-      "Risk scores range from 0 to 100 using a normalized telemetry algorithm combining CVSS v3.1 base severity with real-world internet reachability and asset business criticality. Crucially, only validated vulnerabilities with confirmed proof-of-concept impact your score.",
-    category: "TRIAGE",
+      "HackMyWebsite integrates directly into GitHub Actions as an automated PR security gate. When a vulnerability is confirmed, it generates 1-click Cursor and Claude Code fix prompts with ready-to-merge diffs so you can patch issues in seconds.",
   },
   {
-    id: "github-integration",
-    question: "Can HackMyWebsite integrate with GitHub and developer workflows?",
-    answer:
-      "Yes. HackMyWebsite integrates directly into GitHub Actions and GitLab CI/CD pipelines as an automated PR security gate. When vulnerabilities are detected, it generates 1-click Cursor IDE code diffs and contextual pull request comments with ready-to-merge patches.",
-    category: "INTEGRATION",
-  },
-  {
-    id: "data-privacy",
-    question: "How is application and scan data handled?",
-    answer:
-      "All scan telemetry is encrypted in transit via TLS 1.3 and at rest with AES-256 inside sovereign AWS Mumbai infrastructure with Redis semantic caching. We never store source code or database records, maintaining full compliance with India DPDP regulations and SOC 2 Type II controls.",
-    category: "COMPLIANCE",
-  },
-  {
-    id: "reports-export",
-    question: "Can I generate executive or security reports?",
-    answer:
-      "Yes. Every completed scan provides an executive PDF audit report alongside developer JSON and SARIF exports. Reports feature deterministic proof-of-concept evidence, executive risk summaries, compliance cross-references (SOC 2, ISO 27001), and step-by-step remediation instructions.",
-    category: "REPORTING",
-  },
-  {
-    id: "enterprise-support",
-    question: "Does HackMyWebsite support enterprise deployments?",
-    answer:
-      "Yes. Enterprise tiers support custom on-premises agent workers, VPC peering, SAML 2.0 / SSO authentication, multi-team role-based access control (RBAC), customized SLA thresholds, and dedicated security engineering support.",
-    category: "ENTERPRISE",
-  },
-  {
-    id: "free-scan",
     question: "Can I start with a free security scan?",
     answer:
-      "Yes. You can initiate an immediate, zero-friction external perimeter scan without entering a credit card. It discovers your public attack surface, maps exposed routes, and generates a preliminary security risk posture assessment within minutes.",
-    category: "ONBOARDING",
+      "Yes. You can initiate an immediate, zero-friction external perimeter scan without entering a credit card. It discovers your public attack surface, catalogs exposed routes, and delivers an executive security score within minutes.",
   },
 ];
 
 export const FaqSection: React.FC = () => {
-  const [openId, setOpenId] = useState<string | null>("scan-targets");
-
-  const toggleFaq = (id: string) => {
-    setOpenId((prev) => (prev === id ? null : id));
+  const scrollToScanInput = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const input = document.querySelector('input[type="text"]') as HTMLInputElement | null;
+    if (input) {
+      setTimeout(() => input.focus(), 600);
+    }
   };
 
   return (
     <section
       id="faq"
-      aria-label="Section 5 — Frequently Asked Questions"
-      className="relative w-full bg-black text-slate-100 py-24 sm:py-32 border-b border-neutral-800 overflow-hidden"
+      aria-label="Frequently Asked Questions"
+      className="relative w-full py-24 sm:py-32 border-b border-neutral-800 overflow-hidden text-slate-100"
     >
-      {/* Subtle ambient lighting */}
-      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full bg-emerald-950/15 blur-[140px] -z-10" />
+      {/* Green Aura Background */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
+        <div className="absolute inset-0 bg-black" />
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
+          style={{
+            backgroundImage: `url('/green-aura-bg.png')`,
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
+      </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center space-y-4 mb-16 sm:mb-20">
+        <div className="text-center space-y-4 mb-14 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-semibold tracking-wider uppercase shadow-inner">
             <HelpCircle className="size-3 text-emerald-400" />
-            <span>SECTION 05 // FAQ</span>
+            <span>SECTION 06 // FAQ</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[1.15]">
@@ -114,103 +88,56 @@ export const FaqSection: React.FC = () => {
           </h2>
 
           <p className="text-sm sm:text-base text-slate-400 leading-relaxed font-sans max-w-xl mx-auto">
-            Everything you need to know before connecting your application to HackMyWebsite.
+            Everything you need to know about our non-destructive vulnerability scanner, automated PR safeguards, and compliance audits.
           </p>
+
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={scrollToScanInput}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs sm:text-sm border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm group"
+            >
+              <span>Start Free Security Scan</span>
+              <ArrowRight className="size-3.5 group-hover:translate-x-0.5 transition-transform text-emerald-400" />
+            </button>
+          </div>
         </div>
 
-        {/* Minimal Accordion List */}
-        <div className="rounded-3xl bg-black border border-neutral-800 divide-y divide-neutral-800 p-2 sm:p-4 shadow-2xl backdrop-blur-xl">
-          {FAQS.map((faq, index) => {
-            const isOpen = openId === faq.id;
-            const itemNum = String(index + 1).padStart(2, "0");
-
-            return (
-              <div
-                key={faq.id}
-                className={cn(
-                  "transition-colors duration-200 rounded-2xl",
-                  isOpen ? "bg-neutral-950" : "hover:bg-neutral-950/60"
-                )}
-              >
-                <button
-                  type="button"
-                  onClick={() => toggleFaq(faq.id)}
-                  aria-expanded={isOpen}
-                  className="w-full py-4 sm:py-5 px-4 sm:px-6 flex items-center justify-between text-left gap-4 cursor-pointer focus:outline-none group"
-                >
-                  <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
-                    <span className="font-mono text-xs font-bold text-slate-500 group-hover:text-emerald-400 transition-colors shrink-0">
-                      {itemNum}
-                    </span>
-
-                    <span
-                      className={cn(
-                        "text-sm sm:text-base font-semibold transition-colors duration-150",
-                        isOpen
-                          ? "text-white"
-                          : "text-slate-200 group-hover:text-white"
-                      )}
-                    >
-                      {faq.question}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-black text-neutral-400 border border-neutral-800 group-hover:border-neutral-700">
-                      {faq.category}
-                    </span>
-
-                    <div
-                      className={cn(
-                        "size-7 rounded-lg flex items-center justify-center border transition-all duration-200",
-                        isOpen
-                          ? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 rotate-180"
-                          : "bg-black border-neutral-800 text-neutral-400 group-hover:text-white group-hover:border-neutral-700"
-                      )}
-                    >
-                      <ChevronDown className="size-4" />
-                    </div>
-                  </div>
-                </button>
-
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key={`content-${faq.id}`}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.22, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-4 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans border-t border-slate-800/40 mt-1 pl-11 sm:pl-14">
-                        <p>{faq.answer}</p>
+        {/* 2-Column Responsive Accordion Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 text-left items-start">
+          {[faqsLeft, faqsRight].map((faqColumn, columnIndex) => (
+            <Accordion
+              key={`faq-col-${columnIndex}`}
+              type="single"
+              collapsible
+              className="space-y-4"
+            >
+              {faqColumn.map((faq, i) => {
+                const itemNum = String(columnIndex * 3 + i + 1).padStart(2, "0");
+                return (
+                  <AccordionItem
+                    key={`item-${columnIndex}-${i}`}
+                    value={`item-${columnIndex}-${i}`}
+                    className="border border-neutral-800 rounded-2xl bg-black/95 px-5 sm:px-6 py-1 shadow-lg transition-colors hover:border-neutral-700"
+                  >
+                    <AccordionTrigger className="text-sm sm:text-base font-semibold text-white hover:text-emerald-400 hover:no-underline py-4 text-left gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="font-mono text-xs font-bold text-slate-500 shrink-0">
+                          {itemNum}
+                        </span>
+                        <span className="leading-snug">{faq.question}</span>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Objection-Free Trust Reassurance */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-mono text-center">
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="size-3.5 text-emerald-400" /> Zero Credit Card Required
-          </span>
-          <span className="text-slate-700">•</span>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="size-3.5 text-emerald-400" /> Non-Destructive Scanning
-          </span>
-          <span className="text-slate-700">•</span>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="size-3.5 text-emerald-400" /> Instant Results in 3–8 Min
-          </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-xs sm:text-sm text-slate-400 leading-relaxed pt-1 pb-4 pl-7">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                );
+              })}
+            </Accordion>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-
-export default FaqSection;

@@ -123,17 +123,17 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
     <NavbarContext.Provider value={{ visible: Boolean(visible) }}>
       <motion.div
         animate={{
-          backdropFilter: visible ? "blur(20px)" : "blur(14px)",
+          backdropFilter: "blur(20px)",
           boxShadow: visible
-            ? "0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-            : "0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.08)",
-          width: visible ? "72%" : "100%",
-          maxWidth: visible ? "890px" : "1240px",
-          paddingTop: visible ? "7px" : "10px",
-          paddingBottom: visible ? "7px" : "10px",
-          paddingLeft: visible ? "14px" : "24px",
-          paddingRight: visible ? "14px" : "24px",
-          y: visible ? 6 : 0,
+            ? "0 20px 50px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.1)"
+            : "0 15px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08)",
+          width: visible ? "92%" : "96%",
+          maxWidth: visible ? "840px" : "890px",
+          paddingTop: "7px",
+          paddingBottom: "7px",
+          paddingLeft: "16px",
+          paddingRight: "8px",
+          y: visible ? 4 : 0,
         }}
         transition={{
           type: "spring",
@@ -141,8 +141,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
           damping: 30,
         }}
         className={cn(
-          "relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-black/80 border border-neutral-800/80 lg:flex transition-colors",
-          visible && "bg-black/95 border-neutral-700/80 shadow-2xl",
+          "relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl lg:flex transition-colors",
+          visible && "border-neutral-700/80 shadow-2xl",
           className,
         )}
       >
@@ -196,14 +196,14 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               <button
                 type="button"
                 className={cn(
-                  "relative flex items-center gap-1 px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all cursor-pointer",
+                  "relative flex items-center gap-1 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all cursor-pointer",
                   isCurrentActive && "text-white"
                 )}
               >
                 {hovered === idx && (
                   <motion.div
                     layoutId="hovered-pill"
-                    className="absolute inset-0 h-full w-full rounded-full bg-emerald-500/15 border border-emerald-500/30 -z-10"
+                    className="absolute inset-0 h-full w-full rounded-xl bg-neutral-900 border border-neutral-800 -z-10"
                   />
                 )}
                 <span className="relative z-20 font-medium">{item.name}</span>
@@ -217,13 +217,13 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             ) : (
               <a
                 onClick={onItemClick}
-                className="relative flex items-center gap-1 px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white transition-all font-medium"
+                className="relative flex items-center gap-1 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all font-medium"
                 href={item.link || "#"}
               >
                 {hovered === idx && (
                   <motion.div
                     layoutId="hovered-pill"
-                    className="absolute inset-0 h-full w-full rounded-full bg-emerald-500/15 border border-emerald-500/30 -z-10"
+                    className="absolute inset-0 h-full w-full rounded-xl bg-neutral-900 border border-neutral-800 -z-10"
                   />
                 )}
                 <span className="relative z-20">{item.name}</span>

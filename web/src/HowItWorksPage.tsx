@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Timeline, { JourneyItem } from "@/components/ui/timeline";
-import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import {
@@ -84,9 +83,9 @@ export const HowItWorksPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative flex flex-col justify-between">
       {/* Enterprise Resizable Scroll-Morphing Navbar */}
-      <Navbar className="top-3">
+      <Navbar className="top-4">
         {/* Desktop Navigation */}
-        <NavBody className="max-w-7xl">
+        <NavBody className="max-w-4xl">
           {/* LEFT: Brand Logo */}
           <NavbarLogo href="/" />
 
@@ -94,21 +93,21 @@ export const HowItWorksPage: React.FC = () => {
           <NavItems items={navItems} />
 
           {/* RIGHT: Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <a
               href="/#signin"
               onClick={(e) => {
                 e.preventDefault();
                 navigateTo("/");
               }}
-              className="text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
             >
               Sign In
             </a>
             <button
               type="button"
               onClick={() => navigateTo("/")}
-              className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-black hover:bg-neutral-900 border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+              className="px-5 py-2 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm shrink-0 whitespace-nowrap"
             >
               Book Enterprise Demo
             </button>
@@ -175,27 +174,21 @@ export const HowItWorksPage: React.FC = () => {
         </MobileNav>
       </Navbar>
 
-      {/* Main Content Area */}
-      <main className="flex-1 w-full flex flex-col justify-start">
-        {/* Lead-in Hero for Timeline */}
-        <section className="min-h-[50vh] sm:min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4 sm:px-6 text-center pt-32 sm:pt-40 pb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-wider">
-            <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
-            <span>AUTONOMOUS EXECUTION ARCHITECTURE</span>
-          </div>
-
-          <h1 className="max-w-4xl text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
-            Six Stages, One Horizontal Execution Pipeline.
-          </h1>
-
-          <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-slate-400">
-            Scroll down — the section pins, the execution track slides sideways, and each security milestone draws its stem, illuminating runtime telemetry as it reaches center.
+      {/* Main Content Area: Pinned Horizontal Execution Timeline Experience */}
+      <main className="flex-1 w-full bg-black text-white">
+        {/* Lead-in Hero so the pinned timeline has somewhere to scroll in from */}
+        <section className="flex h-screen flex-col items-center justify-center gap-4 px-6 text-center pt-20">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-emerald-400">
+            Autonomous Security Execution Bus
           </p>
-
-          <div className="mt-4 flex items-center gap-2 text-xs font-mono text-emerald-400/90 animate-bounce">
-            <span>SCROLL TO EXPLORE PIPELINE</span>
-            <span>&darr;</span>
-          </div>
+          <h1 className="max-w-[18ch] text-4xl font-black leading-tight tracking-tight sm:text-6xl text-white">
+            Six stages, one horizontal execution pipeline.
+          </h1>
+          <p className="max-w-md text-sm leading-relaxed text-slate-400">
+            Keep scrolling — the section pins, the track slides sideways, and each
+            security milestone draws its stem and reveals its telemetry as it reaches center.
+          </p>
+          <span className="mt-4 animate-bounce text-emerald-400 text-xl font-bold">&darr;</span>
         </section>
 
         {/* Pinned Horizontal Scroll Timeline */}
@@ -204,7 +197,7 @@ export const HowItWorksPage: React.FC = () => {
           periodLabel="Surface ➔ Fix"
           backgroundColor="#000000"
           textColor="#ffffff"
-          mutedTextColor="#94a3b8"
+          mutedTextColor="#a1a1aa"
           activeColor="#10b981"
           imageUrl="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
           imageAlt="Cybersecurity SOC operations monitor"
@@ -213,18 +206,43 @@ export const HowItWorksPage: React.FC = () => {
           duration={1.4}
         />
 
-        {/* Lead-out Transition Section */}
-        <section className="py-16 px-6 text-center text-sm font-mono text-slate-400 border-t border-b border-neutral-900 bg-black">
-          <p className="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-1">
-            CONTINUOUS VERIFICATION GUARANTEE
+        {/* Lead-out Closing Section */}
+        <section className="flex h-screen flex-col items-center justify-center gap-6 px-6 text-center text-slate-400 border-t border-neutral-900 bg-black">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-emerald-400">
+            Closed-Loop Verification Guarantee
           </p>
-          <p className="text-white text-base font-semibold max-w-xl mx-auto">
-            From initial perimeter DNS mapping to mathematically verified 1-click pull request patches.
+          <h2 className="max-w-2xl text-2xl sm:text-4xl font-bold text-white tracking-tight leading-snug">
+            From initial perimeter reconnaissance to mathematically verified 1-click pull request patches.
+          </h2>
+          <p className="max-w-md text-sm text-neutral-400 leading-relaxed">
+            Zero bluff vulnerabilities. 100% reproducible non-destructive proof. Instant automated developer workflow.
           </p>
+          <div className="flex flex-col sm:flex-row items-center gap-3.5 pt-2">
+            <button
+              type="button"
+              onClick={() => {
+                navigateTo("/");
+                setTimeout(() => {
+                  const input = document.querySelector('input[placeholder*="your-startup"]') as HTMLInputElement | null;
+                  if (input) {
+                    input.focus();
+                    input.select();
+                  }
+                }, 300);
+              }}
+              className="w-full sm:w-auto px-6 py-3 rounded-xl text-xs font-bold text-neutral-950 bg-emerald-400 hover:bg-emerald-300 shadow-[0_4px_20px_rgba(16,185,129,0.35)] transition-all cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Start Free Security Scan
+            </button>
+            <button
+              type="button"
+              onClick={() => navigateTo("/")}
+              className="w-full sm:w-auto px-6 py-3 rounded-xl text-xs font-semibold text-slate-200 bg-black hover:bg-neutral-900 border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Book Enterprise Demo
+            </button>
+          </div>
         </section>
-
-        {/* Deep Multi-Engine Technical Specifications Flow */}
-        <MultiEngineSecurityArchitecture />
       </main>
 
       {/* Footer */}

@@ -177,25 +177,8 @@ export function PricingSection({
   return (
     <PricingContext.Provider value={{ isMonthly, setIsMonthly }}>
       <div
-        className="relative w-full py-20 sm:py-24 border-t border-neutral-800 overflow-hidden"
+        className="relative w-full py-20 sm:py-24 bg-black border-t border-neutral-800 overflow-hidden"
       >
-        {/* User-Provided Green Aura Background */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
-          {/* Pure black base */}
-          <div className="absolute inset-0 bg-black" />
-
-          {/* Green Aura Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
-            style={{
-              backgroundImage: `url('/green-aura-bg.png')`,
-            }}
-          />
-
-          {/* Soft edge vignettes for seamless dark transition to pure black */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-3 mb-10 sm:mb-12">
             {badge && (

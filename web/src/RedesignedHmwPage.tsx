@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
 import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
 import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
-import { SecurityScoreSection } from "./components/SecurityScoreSection";
 import PricingSectionDemo from "@/components/ui/demo";
 import { FaqSection } from "./components/FaqSection";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
@@ -29,7 +28,6 @@ const enterpriseNavItems: NavItemConfig[] = [
   { name: "Platform", link: "/" },
   { name: "Security Engines", link: "#security" },
   { name: "How It Works", link: "#how-it-works" },
-  { name: "Launch Score", link: "#readiness-score" },
   { name: "Pricing", link: "#pricing" },
   { name: "FAQ", link: "#faq" },
 ];
@@ -41,9 +39,9 @@ export const RedesignedHmwPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative">
       {/* Enterprise Resizable Scroll-Morphing Navbar - Sticky/Fixed across page till footer */}
-      <Navbar className="top-3">
+      <Navbar className="top-4">
         {/* Desktop Navigation */}
-        <NavBody className="max-w-7xl">
+        <NavBody className="max-w-4xl">
           {/* LEFT: Brand Logo */}
           <NavbarLogo />
 
@@ -54,14 +52,14 @@ export const RedesignedHmwPage: React.FC = () => {
           <div className="flex items-center gap-2 relative z-20 shrink-0">
             <a
               href="#signin"
-              className="px-3.5 py-1.5 rounded-full text-slate-300 hover:text-white text-xs font-medium transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
             >
               Sign In
             </a>
 
             <button
               type="button"
-              className="px-4 py-1.5 rounded-full bg-black hover:bg-neutral-900 text-white font-medium text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap"
+              className="px-5 py-2 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap"
             >
               Book Enterprise Demo
             </button>
@@ -197,10 +195,7 @@ export const RedesignedHmwPage: React.FC = () => {
       {/* SECTION 4 — HOW IT WORKS: CONTINUOUS SECURITY PIPELINE */}
       <SecurityPipelineSection />
 
-      {/* SECTION 5 — SECURITY READINESS SCORE & REVOLUTIONARY DOMAIN SIMULATOR */}
-      <SecurityScoreSection />
-
-      {/* SECTION 6 — PRICING */}
+      {/* SECTION 5 — PRICING */}
       <section id="pricing" aria-label="Transparent Pricing Plans" className="relative">
         <PricingSectionDemo />
       </section>
