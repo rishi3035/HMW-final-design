@@ -213,28 +213,7 @@ export function PricingSection({
 function PricingToggle() {
   const { isMonthly, setIsMonthly } = useContext(PricingContext);
   const confettiRef = useRef<HTMLDivElement>(null);
-  const monthlyBtnRef = useRef<HTMLButtonElement>(null);
   const annualBtnRef = useRef<HTMLButtonElement>(null);
-
-  const [pillStyle, setPillStyle] = useState<React.CSSProperties>({ opacity: 0 });
-
-  const updatePill = () => {
-    const btnRef = isMonthly ? monthlyBtnRef : annualBtnRef;
-    if (btnRef.current) {
-      setPillStyle({
-        width: btnRef.current.offsetWidth,
-        height: btnRef.current.offsetHeight,
-        transform: `translate3d(${btnRef.current.offsetLeft}px, ${btnRef.current.offsetTop}px, 0)`,
-        opacity: 1,
-      });
-    }
-  };
-
-  useEffect(() => {
-    updatePill();
-    window.addEventListener("resize", updatePill);
-    return () => window.removeEventListener("resize", updatePill);
-  }, [isMonthly]);
 
   const handleToggle = (monthly: boolean) => {
     if (isMonthly === monthly) return;
@@ -269,27 +248,26 @@ function PricingToggle() {
     <div className="flex justify-center">
       <div
         ref={confettiRef}
-        className="relative inline-flex items-center rounded-full bg-black border border-neutral-800 p-1.5 shadow-xl"
+        className="relative inline-flex items-center rounded-full bg-neutral-950 border border-neutral-800 p-1.5 shadow-xl"
       >
-        {/* Animated Sliding Pill - nested with uniform padding */}
-        <motion.div
-          className="absolute top-0 left-0 rounded-full bg-emerald-400 shadow-md shadow-emerald-400/25 pointer-events-none"
-          style={pillStyle}
-          transition={{ type: "spring", stiffness: 500, damping: 40 }}
-        />
-
         <button
-          ref={monthlyBtnRef}
           type="button"
           onClick={() => handleToggle(true)}
           className={cn(
             "relative z-10 rounded-full px-5 sm:px-6 py-2 text-xs sm:text-sm font-bold transition-colors duration-200 cursor-pointer focus:outline-none",
             isMonthly
-              ? "text-neutral-950"
+              ? "text-neutral-950 font-extrabold"
               : "text-slate-400 hover:text-white"
           )}
         >
-          Monthly
+          {isMonthly && (
+            <motion.div
+              layoutId="pricing-pill-active"
+              className="absolute inset-0 rounded-full bg-emerald-400 shadow-md shadow-emerald-400/30"
+              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+            />
+          )}
+          <span className="relative z-10">Monthly</span>
         </button>
 
         <button
@@ -299,16 +277,23 @@ function PricingToggle() {
           className={cn(
             "relative z-10 rounded-full px-5 sm:px-6 py-2 text-xs sm:text-sm font-bold transition-colors duration-200 cursor-pointer focus:outline-none flex items-center gap-1.5",
             !isMonthly
-              ? "text-neutral-950"
+              ? "text-neutral-950 font-extrabold"
               : "text-slate-400 hover:text-white"
           )}
         >
-          <span>Annual</span>
+          {!isMonthly && (
+            <motion.div
+              layoutId="pricing-pill-active"
+              className="absolute inset-0 rounded-full bg-emerald-400 shadow-md shadow-emerald-400/30"
+              transition={{ type: "spring", stiffness: 500, damping: 35 }}
+            />
+          )}
+          <span className="relative z-10">Annual</span>
           <span
             className={cn(
-              "text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full transition-colors",
+              "relative z-10 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded-full transition-colors",
               !isMonthly
-                ? "bg-neutral-950/15 text-neutral-950 font-extrabold"
+                ? "bg-neutral-950/20 text-neutral-950 font-extrabold"
                 : "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
             )}
           >

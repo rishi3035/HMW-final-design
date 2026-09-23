@@ -65,7 +65,6 @@ export const SecurityPipelineSection: React.FC = () => {
     { label: "Scan Velocity", value: "3.4ms", unit: "latency", trend: "3–8 Min Scan" },
     { label: "Verified Accuracy", value: "99.2%", unit: "proof", trend: "0% Bluff Data" },
     { label: "Runtime Safety", value: "100%", unit: "safe", trend: "Non-Destructive" },
-    { label: "Vulnerability Intel", value: "5,420+", unit: "cves", trend: "Real-Time NVD" },
   ];
 
   const integrations = [
@@ -207,11 +206,11 @@ await scan.verify();
           </div>
 
           {/* Metrics Card */}
-          <div className="group relative overflow-hidden rounded-2xl border border-neutral-800 bg-black p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:border-neutral-700 shadow-xl ring-1 ring-white/10">
+          <div className="group relative overflow-hidden rounded-2xl border border-neutral-800 bg-black p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-neutral-700 shadow-xl ring-1 ring-white/10">
             <div className="relative z-10 flex flex-col h-full justify-between">
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="p-1.5 bg-neutral-900 border border-neutral-800 rounded-lg text-emerald-400">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="p-2 bg-neutral-900 border border-neutral-800 rounded-lg text-emerald-400">
                     <BarChart3 className="w-4 h-4 text-emerald-400" />
                   </div>
                   <span className="text-[10px] px-2 py-0.5 rounded-md bg-emerald-950/60 border border-emerald-500/20 text-emerald-400 font-mono font-semibold">
@@ -219,27 +218,27 @@ await scan.verify();
                   </span>
                 </div>
                 <h3 className="text-sm font-bold text-white leading-none">Telemetry Metrics</h3>
-                <p className="text-[11px] text-slate-400 mt-1 mb-2.5">Real-time scan guarantees</p>
+                <p className="text-xs text-slate-400 mt-1.5 mb-3">Real-time scan guarantees</p>
               </div>
 
-              <div className="space-y-1.5">
+              <div className="space-y-2.5">
                 {metrics.map((metric, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setSelectedMetric(idx)}
                     className={cn(
-                      "w-full text-left px-2.5 py-1.5 rounded-lg transition-all duration-200 border cursor-pointer flex items-center justify-between",
+                      "w-full text-left px-3 py-2 sm:py-2.5 rounded-xl transition-all duration-200 border cursor-pointer flex items-center justify-between",
                       selectedMetric === idx
-                        ? "bg-neutral-900 border-emerald-500/40 shadow-[0_0_12px_rgba(16,185,129,0.12)]"
+                        ? "bg-neutral-900 border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.15)]"
                         : "bg-neutral-950/70 border-neutral-800/80 hover:border-neutral-700"
                     )}
                   >
                     <div>
-                      <p className="text-[9.5px] text-slate-400 font-mono leading-none">{metric.label}</p>
-                      <p className="text-xs sm:text-sm font-bold font-mono text-white leading-none mt-1">{metric.value}</p>
+                      <p className="text-[10px] text-slate-400 font-mono leading-none">{metric.label}</p>
+                      <p className="text-sm font-bold font-mono text-white leading-none mt-1.5">{metric.value}</p>
                     </div>
-                    <span className="text-[9.5px] text-emerald-400 font-semibold font-mono bg-emerald-950/50 border border-emerald-500/20 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] text-emerald-400 font-semibold font-mono bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md">
                       {metric.trend}
                     </span>
                   </button>
