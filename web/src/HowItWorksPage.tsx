@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Timeline, { JourneyItem } from "@/components/ui/timeline";
 import { MultiEngineSecurityArchitecture } from "./components/MultiEngineSecurityArchitecture";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
@@ -21,6 +22,54 @@ const navItems: NavItemConfig[] = [
   { name: "Security", link: "/#security" },
   { name: "Resources", link: "/#resources" },
   { name: "Pricing", link: "/#pricing" },
+];
+
+const hmwTopJourney: JourneyItem[] = [
+  {
+    id: "stage-01",
+    year: "STAGE 01",
+    month: "January",
+    content: "Discover: Autonomous external reconnaissance maps DNS, IP ranges, public cloud buckets, and exposed REST/GraphQL APIs.",
+  },
+  {
+    id: "stage-03",
+    year: "STAGE 03",
+    month: "March",
+    content: "Analyze: Multi-engine correlation runs active DAST probes and AST static token scans against 5,420+ CVE vulnerability signatures.",
+  },
+  {
+    id: "stage-05",
+    year: "STAGE 05",
+    month: "May",
+    content: "Prioritize: Contextual triage engine weighs CVSS 3.1 scores with real-world reachability, data sensitivity, and 0–100 posture score.",
+  },
+  {
+    id: "stage-07",
+    year: "VERIFIED",
+    month: "July",
+    content: "Continuous Gate: Closed-loop retesting confirms patches with automated PR checks and real-time posture monitoring.",
+  },
+];
+
+const hmwBottomJourney: JourneyItem[] = [
+  {
+    id: "stage-02",
+    year: "STAGE 02",
+    month: "February",
+    content: "Crawl: Headless browser spider walks dynamic SPAs, rendering DOM states and cataloging parameterized attack surfaces.",
+  },
+  {
+    id: "stage-04",
+    year: "STAGE 04",
+    month: "April",
+    content: "Validate: Safely replays proof-of-concept exploits in isolated sandboxes to eliminate noise and guarantee 0% bluff data.",
+  },
+  {
+    id: "stage-06",
+    year: "STAGE 06",
+    month: "June",
+    content: "Remediate: Produces ready-to-merge code diffs, contextual Cursor IDE prompts, and automated GitHub PR safeguard actions.",
+  },
 ];
 
 export const HowItWorksPage: React.FC = () => {
@@ -126,8 +175,55 @@ export const HowItWorksPage: React.FC = () => {
         </MobileNav>
       </Navbar>
 
-      {/* Main Content Area: Multi-Engine Security Architecture */}
-      <main className="flex-1 w-full flex flex-col justify-center">
+      {/* Main Content Area */}
+      <main className="flex-1 w-full flex flex-col justify-start">
+        {/* Lead-in Hero for Timeline */}
+        <section className="min-h-[50vh] sm:min-h-[60vh] flex flex-col items-center justify-center gap-4 px-4 sm:px-6 text-center pt-32 sm:pt-40 pb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 font-mono text-xs uppercase tracking-wider">
+            <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
+            <span>AUTONOMOUS EXECUTION ARCHITECTURE</span>
+          </div>
+
+          <h1 className="max-w-4xl text-3xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
+            Six Stages, One Horizontal Execution Pipeline.
+          </h1>
+
+          <p className="max-w-2xl text-sm sm:text-base leading-relaxed text-slate-400">
+            Scroll down — the section pins, the execution track slides sideways, and each security milestone draws its stem, illuminating runtime telemetry as it reaches center.
+          </p>
+
+          <div className="mt-4 flex items-center gap-2 text-xs font-mono text-emerald-400/90 animate-bounce">
+            <span>SCROLL TO EXPLORE PIPELINE</span>
+            <span>&darr;</span>
+          </div>
+        </section>
+
+        {/* Pinned Horizontal Scroll Timeline */}
+        <Timeline
+          title="Security Pipeline"
+          periodLabel="Surface ➔ Fix"
+          backgroundColor="#000000"
+          textColor="#ffffff"
+          mutedTextColor="#94a3b8"
+          activeColor="#10b981"
+          imageUrl="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=80"
+          imageAlt="Cybersecurity SOC operations monitor"
+          topItems={hmwTopJourney}
+          bottomItems={hmwBottomJourney}
+          duration={1.4}
+        />
+
+        {/* Lead-out Transition Section */}
+        <section className="py-16 px-6 text-center text-sm font-mono text-slate-400 border-t border-b border-neutral-900 bg-black">
+          <p className="text-emerald-400 font-bold text-xs uppercase tracking-widest mb-1">
+            CONTINUOUS VERIFICATION GUARANTEE
+          </p>
+          <p className="text-white text-base font-semibold max-w-xl mx-auto">
+            From initial perimeter DNS mapping to mathematically verified 1-click pull request patches.
+          </p>
+        </section>
+
+        {/* Deep Multi-Engine Technical Specifications Flow */}
         <MultiEngineSecurityArchitecture />
       </main>
 
