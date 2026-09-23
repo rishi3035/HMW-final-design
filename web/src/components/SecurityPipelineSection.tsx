@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 interface PipelineStage {
   step: string;
   name: string;
+  subTitle: string;
   tagline: string;
   description: string;
   accentColor: string;
@@ -30,6 +31,11 @@ interface PipelineStage {
   telemetryMetric: string;
   telemetryLabel: string;
   statusBadge: string;
+  speedScore: number;
+  depthScore: number;
+  speedLabel: string;
+  depthLabel: string;
+  outputLabel: string;
   telemetryItems: {
     key: string;
     val: string;
@@ -41,13 +47,19 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     step: "01",
     name: "Discover",
-    tagline: "Domains / APIs / Endpoints",
+    subTitle: "Perimeter Recon",
+    tagline: "Domains / APIs / Cloud Assets",
     description: "Autonomous external reconnaissance maps active subdomains, IP ranges, public cloud buckets, and exposed REST/GraphQL endpoints.",
     accentColor: "#10B981",
     accentBg: "rgba(16, 185, 129, 0.12)",
     accentBorder: "rgba(16, 185, 129, 0.4)",
-    glowColor: "rgba(16, 185, 129, 0.25)",
+    glowColor: "rgba(16, 185, 129, 0.45)",
     icon: Globe,
+    speedScore: 5,
+    depthScore: 6,
+    speedLabel: "SPEED",
+    depthLabel: "COVERAGE",
+    outputLabel: "TARGETS",
     telemetryMetric: "84 Endpoints",
     telemetryLabel: "Endpoints Discovered",
     statusBadge: "PERIMETER SCOPED",
@@ -60,13 +72,19 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     step: "02",
     name: "Crawl",
-    tagline: "Routes / Parameters / Attack Surface",
+    subTitle: "DOM & Attack Graph",
+    tagline: "Routes / Parameters / State",
     description: "Headless browser spider walks dynamic Single Page Applications, rendering DOM states and cataloging parameterized attack surfaces.",
     accentColor: "#06B6D4",
     accentBg: "rgba(6, 182, 212, 0.12)",
     accentBorder: "rgba(6, 182, 212, 0.4)",
-    glowColor: "rgba(6, 182, 212, 0.25)",
+    glowColor: "rgba(6, 182, 212, 0.45)",
     icon: Network,
+    speedScore: 4,
+    depthScore: 5,
+    speedLabel: "SPEED",
+    depthLabel: "DOM DEPTH",
+    outputLabel: "VECTORS",
     telemetryMetric: "420+ Vectors",
     telemetryLabel: "Routes & Params Mapped",
     statusBadge: "DOM GRAPHED",
@@ -79,13 +97,19 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     step: "03",
     name: "Analyze",
-    tagline: "DAST / SAST / CVE Intelligence",
-    description: "Multi-engine synthesis runs active behavioral runtime probes alongside AST static token scans against 5,400+ CVE vulnerability signatures.",
+    subTitle: "DAST & CVE Intelligence",
+    tagline: "Runtime Probes / Static SAST",
+    description: "Multi-engine synthesis runs active behavioral runtime probes alongside AST static token scans against 5,420+ CVE vulnerability signatures.",
     accentColor: "#3B82F6",
     accentBg: "rgba(59, 130, 246, 0.12)",
     accentBorder: "rgba(59, 130, 246, 0.4)",
-    glowColor: "rgba(59, 130, 246, 0.25)",
+    glowColor: "rgba(59, 130, 246, 0.45)",
     icon: Cpu,
+    speedScore: 5,
+    depthScore: 6,
+    speedLabel: "THROUGHPUT",
+    depthLabel: "INTELLIGENCE",
+    outputLabel: "SIGNATURES",
     telemetryMetric: "5,420 CVEs",
     telemetryLabel: "CVEs & AST Rules Scanned",
     statusBadge: "ENGINES CORRELATED",
@@ -98,13 +122,19 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     step: "04",
     name: "Validate",
-    tagline: "Exploit Verification / False-Positive Filtering",
+    subTitle: "Sandbox PoC Exploit",
+    tagline: "False-Positive Suppression",
     description: "Safely replays proof-of-concept exploits in an isolated sandbox environment to eliminate noise and mathematically guarantee findings.",
     accentColor: "#14B8A6",
     accentBg: "rgba(20, 184, 166, 0.12)",
     accentBorder: "rgba(20, 184, 166, 0.4)",
-    glowColor: "rgba(20, 184, 166, 0.25)",
+    glowColor: "rgba(20, 184, 166, 0.45)",
     icon: ShieldCheck,
+    speedScore: 5,
+    depthScore: 6,
+    speedLabel: "VERIFICATION",
+    depthLabel: "ACCURACY",
+    outputLabel: "PROOF CONFIDENCE",
     telemetryMetric: "99.2% Filtered",
     telemetryLabel: "Vulnerabilities Validated",
     statusBadge: "EXPLOIT VERIFIED",
@@ -117,13 +147,19 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     step: "05",
     name: "Prioritize",
-    tagline: "Risk Score / Severity / Business Impact",
+    subTitle: "Contextual Risk Triage",
+    tagline: "CVSS 3.1 / Reachability",
     description: "Contextual triage engine weighs CVSS 3.1 scores with real-world internet reachability, data sensitivity, and mission-critical business risk.",
     accentColor: "#F59E0B",
     accentBg: "rgba(245, 158, 11, 0.12)",
     accentBorder: "rgba(245, 158, 11, 0.4)",
-    glowColor: "rgba(245, 158, 11, 0.25)",
+    glowColor: "rgba(245, 158, 11, 0.45)",
     icon: BarChart3,
+    speedScore: 6,
+    depthScore: 5,
+    speedLabel: "TRIAGE SPEED",
+    depthLabel: "RISK MATRIX",
+    outputLabel: "POSTURE SCORE",
     telemetryMetric: "Score 0–100",
     telemetryLabel: "Risk Score Generated",
     statusBadge: "TRIAGE SYNTHESIZED",
@@ -136,13 +172,19 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     step: "06",
     name: "Remediate",
-    tagline: "Fix Guidance / Cursor Prompts / Developer Workflow",
+    subTitle: "Cursor & PR Gateway",
+    tagline: "1-Click Diffs / GitHub Action",
     description: "Produces ready-to-merge code diffs, contextual Cursor IDE prompts, and automated GitHub PR safeguard checks for instant developer execution.",
     accentColor: "#10B981",
     accentBg: "rgba(16, 185, 129, 0.12)",
     accentBorder: "rgba(16, 185, 129, 0.4)",
-    glowColor: "rgba(16, 185, 129, 0.25)",
+    glowColor: "rgba(16, 185, 129, 0.45)",
     icon: Terminal,
+    speedScore: 6,
+    depthScore: 6,
+    speedLabel: "DIFF VELOCITY",
+    depthLabel: "COMPLIANCE",
+    outputLabel: "IDE WORKFLOW",
     telemetryMetric: "1-Click Diffs",
     telemetryLabel: "Remediation Guidance Produced",
     statusBadge: "PATCH READY",
@@ -158,12 +200,12 @@ export const SecurityPipelineSection: React.FC = () => {
   const [activeStage, setActiveStage] = useState<number>(0);
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
-  // Auto-cycle through the 6 stages every 3 seconds unless hovered by user
+  // Auto-cycle through the 6 stages every 3.5 seconds unless hovered by user
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setActiveStage((prev) => (prev + 1) % PIPELINE_STAGES.length);
-    }, 3000);
+    }, 3500);
     return () => clearInterval(interval);
   }, [isPaused]);
 
@@ -184,6 +226,30 @@ export const SecurityPipelineSection: React.FC = () => {
     window.history.pushState({}, "", "/how-it-works");
     window.dispatchEvent(new Event("popstate"));
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Helper for segmented pills matching the reference image
+  const renderSegmentedPills = (activeCount: number, total: number = 6, color: string, glow: string) => {
+    return (
+      <div className="flex items-center gap-1.5">
+        {Array.from({ length: total }).map((_, i) => {
+          const isLit = i < activeCount;
+          return (
+            <span
+              key={i}
+              className={cn(
+                "h-1.5 w-3.5 sm:w-4 rounded-full transition-all duration-300",
+                isLit ? "" : "bg-neutral-800/90"
+              )}
+              style={{
+                backgroundColor: isLit ? color : undefined,
+                boxShadow: isLit ? `0 0 8px ${glow}` : undefined,
+              }}
+            />
+          );
+        })}
+      </div>
+    );
   };
 
   return (
@@ -256,7 +322,7 @@ export const SecurityPipelineSection: React.FC = () => {
           </div>
 
           {/* CONTINUOUS PIPELINE VISUAL BACKBONE TRACK (Desktop) */}
-          <div className="hidden lg:block relative my-6">
+          <div className="hidden lg:block relative my-8">
             {/* Horizontal Bus Conduit Line */}
             <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-[2px] bg-neutral-800" />
 
@@ -272,7 +338,7 @@ export const SecurityPipelineSection: React.FC = () => {
             />
 
             {/* 6 Sequential Bus Junction Nodes */}
-            <div className="relative flex items-center justify-between z-10">
+            <div className="relative flex items-center justify-between z-10 px-4">
               {PIPELINE_STAGES.map((stage, idx) => {
                 const isActive = activeStage === idx;
                 const isPassed = activeStage >= idx;
@@ -317,21 +383,20 @@ export const SecurityPipelineSection: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Small vertical connector down to stage HUD card */}
-                    <div
-                      className={cn(
-                        "w-[1.5px] h-4 transition-colors duration-300",
-                        isActive ? "bg-emerald-400" : "bg-slate-800"
-                      )}
-                    />
+                    <span className={cn(
+                      "mt-2 text-[11px] font-mono font-medium transition-colors",
+                      isActive ? "text-white font-bold" : "text-neutral-500 group-hover:text-neutral-300"
+                    )}>
+                      {stage.name}
+                    </span>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* SIX SEQUENTIAL PIPELINE STAGES HUD (Horizontal on Desktop, Scroll/Stack on Mobile) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-3.5 lg:gap-2.5 pt-2">
+          {/* REDESIGNED STAGE CARDS — 3x2 Grid matching reference images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 pt-4">
             {PIPELINE_STAGES.map((stage, idx) => {
               const isActive = activeStage === idx;
               const Icon = stage.icon;
@@ -341,44 +406,49 @@ export const SecurityPipelineSection: React.FC = () => {
                   key={stage.step}
                   onMouseEnter={() => setActiveStage(idx)}
                   className={cn(
-                    "group relative rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300 cursor-pointer text-left h-full min-h-[340px] bg-black",
+                    "group relative rounded-[28px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 cursor-pointer text-left overflow-hidden bg-black",
                     isActive
-                      ? "border shadow-2xl scale-[1.02] z-20"
-                      : "border border-neutral-800 hover:border-neutral-700"
+                      ? "border border-neutral-700 shadow-2xl scale-[1.01] z-20"
+                      : "border border-neutral-800/90 hover:border-neutral-700"
                   )}
                   style={{
                     borderColor: isActive ? stage.accentBorder : undefined,
                     boxShadow: isActive
-                      ? `0 15px 35px rgba(0, 0, 0, 0.7), 0 0 30px ${stage.glowColor}`
+                      ? `0 20px 45px rgba(0, 0, 0, 0.8), 0 0 35px ${stage.glowColor}`
                       : undefined,
                   }}
                 >
-                  {/* Active Top Beacon */}
-                  {isActive && (
-                    <div
-                      className="absolute -top-px left-6 right-6 h-[2px] rounded-full"
-                      style={{
-                        background: `linear-gradient(90deg, transparent, ${stage.accentColor}, transparent)`,
-                      }}
-                    />
-                  )}
+                  {/* Atmospheric Top Radial Neon Glow (Image 1 reference) */}
+                  <div
+                    className="pointer-events-none absolute -top-16 left-1/2 -translate-x-1/2 w-3/4 h-56 rounded-full blur-3xl opacity-35 group-hover:opacity-70 transition-opacity duration-500"
+                    style={{
+                      background: `radial-gradient(circle, ${stage.accentColor} 0%, transparent 70%)`,
+                    }}
+                  />
 
-                  {/* Stage Header Section */}
-                  <div className="space-y-2.5">
-                    {/* Top Row: Icon + Step Badge */}
+                  {/* Atmospheric Bottom-Right Corner Bloom (Image 2 reference) */}
+                  <div
+                    className="pointer-events-none absolute -bottom-12 -right-12 w-36 h-36 rounded-full blur-3xl opacity-15 group-hover:opacity-35 transition-opacity duration-500"
+                    style={{
+                      background: stage.accentColor,
+                    }}
+                  />
+
+                  {/* Top Rim Specular Neon Highlight */}
+                  <div
+                    className="pointer-events-none absolute -top-px left-8 right-8 h-[1.5px] rounded-full transition-opacity duration-300"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${stage.accentColor}, transparent)`,
+                      opacity: isActive ? 1 : 0.4,
+                    }}
+                  />
+
+                  {/* Upper Section: Stage Pill & Telemetry Status */}
+                  <div className="relative z-10 space-y-5">
+                    {/* Top Row: Stage Indicator & Status Badge */}
                     <div className="flex items-center justify-between">
-                      <div
-                        className="size-8 rounded-xl flex items-center justify-center transition-colors"
-                        style={{
-                          backgroundColor: stage.accentBg,
-                          color: stage.accentColor,
-                        }}
-                      >
-                        <Icon className="size-4" />
-                      </div>
-
                       <span
-                        className="font-mono text-[10px] font-bold px-2 py-0.5 rounded border transition-colors"
+                        className="font-mono text-[10px] font-bold px-2.5 py-1 rounded-full border transition-colors tracking-wider"
                         style={{
                           color: stage.accentColor,
                           backgroundColor: stage.accentBg,
@@ -387,76 +457,109 @@ export const SecurityPipelineSection: React.FC = () => {
                       >
                         STAGE {stage.step}
                       </span>
+
+                      <span className="text-[10px] font-mono text-neutral-400 bg-neutral-900/90 border border-neutral-800 px-2.5 py-0.5 rounded-full">
+                        {stage.statusBadge}
+                      </span>
                     </div>
 
-                    {/* Stage Name */}
-                    <div>
-                      <h3 className="text-base font-bold text-white tracking-tight flex items-center gap-1.5">
-                        {stage.name}
-                        {isActive && (
-                          <span
-                            className="size-1.5 rounded-full animate-ping"
-                            style={{ backgroundColor: stage.accentColor }}
-                          />
-                        )}
-                      </h3>
+                    {/* Emblem Pedestal with Luminous Glow (Image 1 & 2 fusion) */}
+                    <div className="pt-2 flex items-center justify-start">
+                      <div
+                        className="relative size-14 rounded-2xl flex items-center justify-center border transition-all duration-300"
+                        style={{
+                          background: "linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)",
+                          borderColor: "rgba(255, 255, 255, 0.12)",
+                          boxShadow: "inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 8px 20px rgba(0, 0, 0, 0.6)",
+                        }}
+                      >
+                        <Icon
+                          className="size-7 transition-transform duration-300 group-hover:scale-110"
+                          style={{
+                            color: stage.accentColor,
+                            filter: `drop-shadow(0 0 10px ${stage.accentColor})`,
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Headline: Stage Name (bold white) + Subtitle (Image 1 format) */}
+                    <div className="space-y-1">
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        <h3 className="text-xl font-bold text-white tracking-tight">
+                          {stage.name}
+                        </h3>
+                        <span className="text-sm font-medium text-neutral-300">
+                          {stage.subTitle}
+                        </span>
+                      </div>
                       <p
-                        className="font-mono text-[10.5px] font-semibold tracking-wide line-clamp-1 mt-0.5"
+                        className="font-mono text-[11px] font-semibold tracking-wide"
                         style={{ color: stage.accentColor }}
                       >
                         {stage.tagline}
                       </p>
                     </div>
 
-                    {/* Short Technical Description */}
-                    <p className="text-[11.5px] text-slate-400 leading-relaxed font-sans line-clamp-3">
+                    {/* Technical Description */}
+                    <p className="text-sm text-neutral-400 font-sans leading-relaxed line-clamp-3">
                       {stage.description}
                     </p>
                   </div>
 
-                  {/* Technical Telemetry HUD Box */}
-                  <div className="mt-4 pt-3 border-t border-slate-800/90 space-y-2">
-                    <div className="flex items-center justify-between text-[9.5px] font-mono uppercase tracking-wider text-slate-400">
-                      <span>Telemetry Feed</span>
+                  {/* Middle: Structured Telemetry Tags */}
+                  <div className="relative z-10 my-4 flex flex-wrap gap-1.5">
+                    {stage.telemetryItems.slice(0, 2).map((item, iIdx) => (
                       <span
-                        className="font-semibold"
-                        style={{ color: stage.accentColor }}
+                        key={iIdx}
+                        className={cn(
+                          "inline-flex items-center text-[10px] font-mono px-2 py-0.5 rounded-md border",
+                          item.highlight
+                            ? "bg-neutral-900 border-neutral-700 text-slate-200"
+                            : "bg-black/60 border-neutral-800 text-slate-400"
+                        )}
                       >
+                        <span className="text-neutral-500 mr-1">{item.key}:</span>
+                        <strong className={item.highlight ? "text-white" : ""}>{item.val}</strong>
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Lower Section: Segmented Pill Telemetry HUD (Direct from Image 1) */}
+                  <div className="relative z-10 pt-4 border-t border-neutral-800/80 space-y-2.5 font-mono">
+                    {/* Meter Row 1: SPEED / THROUGHPUT */}
+                    <div className="flex items-center justify-between text-[10px] tracking-wider text-neutral-400">
+                      <span className="uppercase font-semibold tracking-widest">{stage.speedLabel}</span>
+                      {renderSegmentedPills(stage.speedScore, 6, stage.accentColor, stage.glowColor)}
+                    </div>
+
+                    {/* Meter Row 2: COVERAGE / INTELLIGENCE */}
+                    <div className="flex items-center justify-between text-[10px] tracking-wider text-neutral-400">
+                      <span className="uppercase font-semibold tracking-widest">{stage.depthLabel}</span>
+                      {renderSegmentedPills(stage.depthScore, 6, stage.accentColor, stage.glowColor)}
+                    </div>
+
+                    {/* Row 3: OUTPUT / CONTEXT WINDOW */}
+                    <div className="flex items-center justify-between text-[10px] tracking-wider text-neutral-400 pt-0.5">
+                      <span className="uppercase font-semibold tracking-widest">{stage.outputLabel}</span>
+                      <span className="font-mono text-xs font-bold text-white">
                         {stage.telemetryMetric}
                       </span>
                     </div>
 
-                    {/* Structured Key-Values */}
-                    <div className="space-y-1.5 bg-black rounded-xl p-2.5 border border-neutral-800 font-mono text-[10px]">
-                      {stage.telemetryItems.map((item, iIdx) => (
-                        <div
-                          key={iIdx}
-                          className="flex items-center justify-between text-left gap-1"
-                        >
-                          <span className="text-slate-400 truncate max-w-[55%]">
-                            {item.key}:
-                          </span>
-                          <span
-                            className={cn(
-                              "font-semibold truncate max-w-[45%] text-right",
-                              item.highlight ? "text-slate-200" : "text-slate-300"
-                            )}
-                            style={{
-                              color: item.highlight && isActive ? stage.accentColor : undefined,
-                            }}
-                          >
-                            {item.val}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    {/* Interactive "Explore Engine →" Action Link (Image 2 style) */}
+                    <div className="pt-3 flex items-center justify-between">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-300 group-hover:text-white transition-colors">
+                        <span>Explore Engine</span>
+                        <ArrowRight
+                          className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                          style={{ color: stage.accentColor }}
+                        />
+                      </span>
 
-                    {/* Status Pill */}
-                    <div className="pt-1 flex items-center justify-between">
-                      <span className="text-[9px] font-mono text-slate-400 uppercase">
+                      <span className="text-[9px] font-mono text-neutral-500 uppercase tracking-wider">
                         {stage.telemetryLabel}
                       </span>
-                      <span className="size-1.5 rounded-full bg-emerald-400" />
                     </div>
                   </div>
                 </div>
