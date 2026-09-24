@@ -23,6 +23,7 @@ import {
   MobileNavMenu,
   NavItemConfig,
 } from "@/components/ui/resizable-navbar";
+import { AuthModal } from "./components/AuthModal";
 
 const enterpriseNavItems: NavItemConfig[] = [
   { name: "Platform", link: "/" },
@@ -35,31 +36,55 @@ const enterpriseNavItems: NavItemConfig[] = [
 export const RedesignedHmwPage: React.FC = () => {
   const [scanUrl, setScanUrl] = useState("https://my-startup.com");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  const handleOpenAuth = () => {
+    setIsAuthModalOpen(true);
+  };
+
+  const handleAuthSuccess = (email: string) => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem("hmw_target_domain", scanUrl);
+      window.sessionStorage.setItem("hmw_user_email", email);
+      window.history.pushState({}, "", "/workspace");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative">
       {/* Enterprise Resizable Scroll-Morphing Navbar - Sticky/Fixed across page till footer */}
       <Navbar className="top-4">
         {/* Desktop Navigation */}
-        <NavBody className="max-w-4xl">
+        <NavBody className="max-w-5xl">
           {/* LEFT: Brand Logo */}
-          <NavbarLogo />
+          <div className="flex-1 flex items-center justify-start z-20 min-w-0">
+            <NavbarLogo />
+          </div>
 
-          {/* CENTER: Clean Nav Items without dropdowns */}
-          <NavItems items={enterpriseNavItems} />
+          {/* CENTER: Perfectly Centered Middle Nav Items */}
+          <div className="flex items-center justify-center shrink-0 z-20">
+            <NavItems items={enterpriseNavItems} />
+          </div>
 
           {/* RIGHT: Professional Enterprise Actions */}
-          <div className="flex items-center gap-2 relative z-20 shrink-0">
+          <div className="flex-1 flex items-center justify-end gap-2.5 z-20 min-w-0">
             <a
               href="#signin"
-              className="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                handleOpenAuth();
+              }}
+              className="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
             >
               Sign In
             </a>
 
             <button
               type="button"
-              className="px-5 py-2 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap"
+              onClick={handleOpenAuth}
+              className="px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap"
             >
               Book Enterprise Demo
             </button>
@@ -96,14 +121,21 @@ export const RedesignedHmwPage: React.FC = () => {
             <div className="flex w-full flex-col gap-2.5 pt-3">
               <a
                 href="#signin"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-black border border-neutral-800 hover:border-neutral-700 block"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  handleOpenAuth();
+                }}
+                className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-black border border-neutral-800 hover:border-neutral-700 block cursor-pointer"
               >
                 Sign In
               </a>
               <button
                 type="button"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleOpenAuth();
+                }}
                 className="w-full text-center text-white py-2.5 text-xs font-semibold rounded-xl bg-black hover:bg-neutral-900 border border-neutral-700 shadow-md block cursor-pointer"
               >
                 Book Enterprise Demo
@@ -138,20 +170,24 @@ export const RedesignedHmwPage: React.FC = () => {
             </div>
 
             {/* Interactive URL Scanner Input Bar with Professional Enterprise Button */}
-            <div className="max-w-2xl mx-auto p-2 rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
+            <div className="max-w-2xl mx-auto p-2 min-h-[58px] sm:h-[58px] rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
               <div className="flex items-center gap-2.5 px-3 py-2 w-full text-left">
                 <span className="text-neutral-500 font-mono text-xs">https://</span>
                 <input
                   type="text"
                   value={scanUrl.replace(/^https?:\/\//, "")}
                   onChange={(e) => setScanUrl(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleOpenAuth();
+                  }}
                   placeholder="app.your-startup.com"
-                  className="w-full bg-transparent text-white font-mono text-xs focus:outline-none placeholder-neutral-500"
+                  className="w-full bg-transparent text-white font-mono text-xs sm:text-sm focus:outline-none placeholder-neutral-500"
                 />
               </div>
               <button
                 type="button"
-                className="px-6 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs sm:text-sm border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shrink-0 shadow-sm"
+                onClick={handleOpenAuth}
+                className="px-6 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs sm:text-sm border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shrink-0 shadow-sm whitespace-nowrap"
               >
                 Start Free Security Scan
               </button>
@@ -205,6 +241,14 @@ export const RedesignedHmwPage: React.FC = () => {
 
       {/* SECTION 7 — ENTERPRISE FOOTER */}
       <EnterpriseFooter />
+
+      {/* Enterprise Authentication Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={handleAuthSuccess}
+        initialDomain={scanUrl}
+      />
     </div>
   );
 };

@@ -85,29 +85,33 @@ export const HowItWorksPage: React.FC = () => {
       {/* Enterprise Resizable Scroll-Morphing Navbar */}
       <Navbar className="top-4">
         {/* Desktop Navigation */}
-        <NavBody className="max-w-4xl">
+        <NavBody className="max-w-5xl">
           {/* LEFT: Brand Logo */}
-          <NavbarLogo href="/" />
+          <div className="flex-1 flex items-center justify-start z-20 min-w-0">
+            <NavbarLogo href="/" />
+          </div>
 
           {/* CENTER: Navigation Links */}
-          <NavItems items={navItems} />
+          <div className="flex items-center justify-center shrink-0 z-20">
+            <NavItems items={navItems} />
+          </div>
 
           {/* RIGHT: Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex-1 flex items-center justify-end gap-2.5 z-20 min-w-0">
             <a
               href="/#signin"
               onClick={(e) => {
                 e.preventDefault();
                 navigateTo("/");
               }}
-              className="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
             >
               Sign In
             </a>
             <button
               type="button"
               onClick={() => navigateTo("/")}
-              className="px-5 py-2 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm shrink-0 whitespace-nowrap"
+              className="px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm shrink-0 whitespace-nowrap"
             >
               Book Enterprise Demo
             </button>

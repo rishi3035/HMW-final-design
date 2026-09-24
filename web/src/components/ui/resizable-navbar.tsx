@@ -127,12 +127,11 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
           boxShadow: visible
             ? "0 20px 50px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.1)"
             : "0 15px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08)",
-          width: visible ? "92%" : "96%",
-          maxWidth: visible ? "840px" : "890px",
-          paddingTop: "7px",
-          paddingBottom: "7px",
-          paddingLeft: "16px",
-          paddingRight: "8px",
+          width: visible ? "94%" : "96%",
+          maxWidth: visible ? "980px" : "1060px",
+          height: "58px",
+          paddingLeft: "20px",
+          paddingRight: "12px",
           y: visible ? 4 : 0,
         }}
         transition={{
@@ -141,7 +140,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
           damping: 30,
         }}
         className={cn(
-          "relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl lg:flex transition-colors",
+          "relative z-[60] mx-auto hidden w-full h-[58px] flex-row items-center justify-between self-start rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl lg:flex transition-colors",
           visible && "border-neutral-700/80 shadow-2xl",
           className,
         )}
@@ -178,7 +177,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <div
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "hidden flex-1 flex-row items-center justify-center space-x-1 text-xs font-semibold text-slate-300 lg:flex relative",
+        "hidden flex-row items-center justify-center space-x-1 text-xs font-semibold text-slate-300 lg:flex relative",
         className,
       )}
     >
@@ -364,7 +363,6 @@ export const MobileNavToggle = ({
 };
 
 export const NavbarLogo = ({
-  visible: propVisible,
   href = "/",
   onClick,
 }: {
@@ -372,16 +370,13 @@ export const NavbarLogo = ({
   href?: string;
   onClick?: (e: React.MouseEvent) => void;
 }) => {
-  const context = React.useContext(NavbarContext);
-  const isScrolled = propVisible ?? context.visible;
-
   return (
     <a
       href={href}
       onClick={onClick}
-      className="relative z-20 flex items-center gap-2 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200 cursor-pointer"
+      className="relative z-20 flex items-center gap-2.5 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200 cursor-pointer"
     >
-      <HmwLogo size="sm" showText={!isScrolled} />
+      <HmwLogo size="sm" showText={true} />
     </a>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RedesignedHmwPage } from "./RedesignedHmwPage";
 import { HowItWorksPage } from "./HowItWorksPage";
+import { DashboardPage } from "./DashboardPage";
 
 export const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>(
@@ -87,6 +88,30 @@ export const App: React.FC = () => {
     currentPath === "/how-it-works" ||
     currentPath.startsWith("/how-it-works/") ||
     currentPath.endsWith("how-it-works");
+
+  const isWorkspace =
+    currentPath === "/workspace" ||
+    currentPath.startsWith("/workspace/") ||
+    currentPath === "/dashboard" ||
+    currentPath.startsWith("/dashboard/");
+
+  if (isWorkspace) {
+    const targetDomain =
+      typeof window !== "undefined"
+        ? window.sessionStorage.getItem("hmw_target_domain") || undefined
+        : undefined;
+
+    return (
+      <DashboardPage
+        initialDomain={targetDomain}
+        onNavigateHome={() => {
+          window.history.pushState({}, "", "/");
+          setCurrentPath("/");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
 
   if (isHowItWorks) {
     return <HowItWorksPage />;
