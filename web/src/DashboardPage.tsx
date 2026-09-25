@@ -62,14 +62,16 @@ interface DomainTarget {
 
 interface DashboardPageProps {
   initialDomain?: string;
+  initialTab?: string;
   onNavigateHome: () => void;
 }
 
 export const DashboardPage: React.FC<DashboardPageProps> = ({
   initialDomain,
+  initialTab = "overview",
   onNavigateHome,
 }) => {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState(initialTab);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [copiedIp, setCopiedIp] = useState(false);
   const [isAddDomainOpen, setIsAddDomainOpen] = useState(false);
@@ -1351,6 +1353,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
+                          <a
+                            href="/dashboard/scan/scan-8942-mvpstudio"
+                            className="px-3 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs flex items-center gap-1.5 cursor-pointer font-mono"
+                          >
+                            <span>Deep-Dive Console</span>
+                          </a>
                           <button
                             type="button"
                             onClick={() => setIsPdfModalOpen(true)}

@@ -71,11 +71,7 @@ export const RedesignedHmwPage: React.FC = () => {
           {/* RIGHT: Professional Enterprise Actions */}
           <div className="flex-1 flex items-center justify-end gap-2.5 z-20 min-w-0">
             <a
-              href="#signin"
-              onClick={(e) => {
-                e.preventDefault();
-                handleOpenAuth();
-              }}
+              href="/login"
               className="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
             >
               Sign In
@@ -120,12 +116,8 @@ export const RedesignedHmwPage: React.FC = () => {
 
             <div className="flex w-full flex-col gap-2.5 pt-3">
               <a
-                href="#signin"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsMobileMenuOpen(false);
-                  handleOpenAuth();
-                }}
+                href="/login"
+                onClick={() => setIsMobileMenuOpen(false)}
                 className="w-full text-center text-slate-200 py-2.5 text-xs font-medium rounded-xl bg-black border border-neutral-800 hover:border-neutral-700 block cursor-pointer"
               >
                 Sign In

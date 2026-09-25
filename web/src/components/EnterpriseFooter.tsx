@@ -138,8 +138,13 @@ export const EnterpriseFooter: React.FC = () => {
                 </a>
               </li>
               <li>
+                <a href="/methodology" className="hover:text-white transition-colors">
+                  Score Methodology
+                </a>
+              </li>
+              <li>
                 <a href="/sample-report" className="hover:text-white transition-colors">
-                  Reports
+                  Sample Report
                 </a>
               </li>
             </ul>
@@ -157,7 +162,7 @@ export const EnterpriseFooter: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:contact@hackmywebsite.io" className="hover:text-white transition-colors">
+                <a href="/contact" className="hover:text-white transition-colors">
                   Contact
                 </a>
               </li>

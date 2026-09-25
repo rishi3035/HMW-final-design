@@ -6,6 +6,8 @@ import { MethodologyPage } from "./MethodologyPage";
 import { SampleReportPage } from "./SampleReportPage";
 import { ContactPage } from "./ContactPage";
 import { LegalPage } from "./LegalPage";
+import { AuthPage } from "./AuthPage";
+import { ScanDetailPage } from "./ScanDetailPage";
 
 export const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>(
@@ -88,10 +90,44 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  const isHowItWorks =
-    currentPath === "/how-it-works" ||
-    currentPath.startsWith("/how-it-works/") ||
-    currentPath.endsWith("how-it-works");
+  // Scan detail route: /dashboard/scan/:scanId or /workspace/scan/:scanId
+  const scanMatch = currentPath.match(/^\/(?:dashboard|workspace)\/scan\/([^/]+)/);
+  if (scanMatch) {
+    const scanId = decodeURIComponent(scanMatch[1]);
+    return (
+      <ScanDetailPage
+        scanId={scanId}
+        onNavigateBack={() => {
+          window.history.pushState({}, "", "/workspace");
+          setCurrentPath("/workspace");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
+
+  // Auth routes
+  if (currentPath === "/login") {
+    return <AuthPage initialMode="login" />;
+  }
+
+  if (currentPath === "/signup") {
+    return <AuthPage initialMode="signup" />;
+  }
+
+  // Workspace automation subroute
+  if (currentPath === "/workspace/automation" || currentPath === "/dashboard/automation") {
+    return (
+      <DashboardPage
+        initialTab="automation"
+        onNavigateHome={() => {
+          window.history.pushState({}, "", "/");
+          setCurrentPath("/");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
 
   const isWorkspace =
     currentPath === "/workspace" ||
@@ -116,6 +152,11 @@ export const App: React.FC = () => {
       />
     );
   }
+
+  const isHowItWorks =
+    currentPath === "/how-it-works" ||
+    currentPath.startsWith("/how-it-works/") ||
+    currentPath.endsWith("how-it-works");
 
   if (isHowItWorks) {
     return <HowItWorksPage />;
