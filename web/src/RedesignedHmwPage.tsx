@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
-import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
+import { OfficialMultiEngineSection } from "./components/OfficialMultiEngineSection";
 import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
 import PricingSectionDemo from "@/components/ui/demo";
 import { FaqSection } from "./components/FaqSection";
@@ -225,8 +225,8 @@ export const RedesignedHmwPage: React.FC = () => {
         </div>
       </Velaris>
 
-      {/* SECTION 3 — SECURITY TECHNOLOGY ANIMATED BEAM INTEGRATION (100vh) */}
-      <SecurityTechnologyBeam />
+      {/* SECTION 3 — MULTI-ENGINE DETECTION ARCHITECTURE */}
+      <OfficialMultiEngineSection />
 
       {/* SECTION 4 — HOW IT WORKS: CONTINUOUS SECURITY PIPELINE */}
       <SecurityPipelineSection />

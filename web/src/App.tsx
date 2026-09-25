@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { RedesignedHmwPage } from "./RedesignedHmwPage";
 import { HowItWorksPage } from "./HowItWorksPage";
 import { DashboardPage } from "./DashboardPage";
+import { MethodologyPage } from "./MethodologyPage";
+import { SampleReportPage } from "./SampleReportPage";
+import { ContactPage } from "./ContactPage";
+import { LegalPage } from "./LegalPage";
 
 export const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>(
@@ -115,6 +119,46 @@ export const App: React.FC = () => {
 
   if (isHowItWorks) {
     return <HowItWorksPage />;
+  }
+
+  const isMethodology =
+    currentPath === "/methodology" ||
+    currentPath.startsWith("/methodology/");
+
+  if (isMethodology) {
+    return <MethodologyPage />;
+  }
+
+  const isSampleReport =
+    currentPath === "/sample-report" ||
+    currentPath.startsWith("/sample-report/");
+
+  if (isSampleReport) {
+    return <SampleReportPage />;
+  }
+
+  const isContact =
+    currentPath === "/contact" ||
+    currentPath.startsWith("/contact/");
+
+  if (isContact) {
+    return <ContactPage />;
+  }
+
+  const isPrivacy =
+    currentPath === "/privacy-policy" ||
+    currentPath === "/privacy";
+
+  if (isPrivacy) {
+    return <LegalPage initialTab="privacy" />;
+  }
+
+  const isTerms =
+    currentPath === "/terms" ||
+    currentPath === "/terms-and-conditions";
+
+  if (isTerms) {
+    return <LegalPage initialTab="terms" />;
   }
 
   return <RedesignedHmwPage />;
