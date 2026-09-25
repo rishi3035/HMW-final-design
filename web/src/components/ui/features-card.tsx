@@ -152,7 +152,7 @@ await app.deploy();
                       )}
                     />
                     <span className="text-xs font-bold text-white text-left">{feature.title}</span>
-                    <span className="text-[10px] text-zinc-400 text-left mt-1 line-clamp-1">
+                    <span className="text-xs text-zinc-400 text-left mt-1 line-clamp-1">
                       {feature.stat}
                     </span>
                   </button>
@@ -163,11 +163,11 @@ await app.deploy();
             {/* Dynamic Content Area */}
             <div className="relative z-10 mt-6 p-4 rounded-xl bg-zinc-900 border border-zinc-800">
               <div className="flex-1">
-                <p className="text-xs font-mono text-zinc-500 mb-1">Selected:</p>
+                <p className="text-xs  text-zinc-500 mb-1">Selected:</p>
                 <p className="text-lg font-bold text-white">{activeFeature.title}</p>
                 <p className="text-xs text-zinc-400 mt-1">{activeFeature.desc}</p>
               </div>
-              <div className="text-3xl font-bold font-mono text-white mt-3">
+              <div className="text-3xl font-bold  text-white mt-3">
                 {activeFeature.stat}
               </div>
             </div>
@@ -199,10 +199,10 @@ await app.deploy();
                         : "bg-zinc-900 border-zinc-800 hover:border-zinc-700"
                     )}
                   >
-                    <p className="text-[10px] text-zinc-400">{metric.label}</p>
+                    <p className="text-xs text-zinc-400">{metric.label}</p>
                     <div className="flex items-baseline justify-between mt-0.5">
                       <span className="text-sm font-bold text-white">{metric.value}</span>
-                      <span className="text-[10px] text-zinc-300 font-semibold">
+                      <span className="text-xs text-zinc-300 font-semibold">
                         {metric.trend}
                       </span>
                     </div>
@@ -230,7 +230,7 @@ await app.deploy();
                     <span className="text-xl group-hover/int:scale-125 transition-transform duration-200">
                       {int.abbr}
                     </span>
-                    <p className="text-[9px] text-zinc-500 text-center">{int.name}</p>
+                    <p className="text-xs text-zinc-500 text-center">{int.name}</p>
                   </div>
                 ))}
               </div>
@@ -247,7 +247,7 @@ await app.deploy();
                 <h3 className="text-sm font-bold text-white">Deploy Command</h3>
               </div>
 
-              <div className="bg-black border border-zinc-800 rounded-lg p-4 font-mono text-[12px] leading-relaxed overflow-auto max-h-32 scrollbar-hide">
+              <div className="bg-black border border-zinc-800 rounded-lg p-4  text-[12px] leading-relaxed overflow-auto max-h-32 scrollbar-hide">
                 {codeExample.split("\n").map((line, idx) => (
                   <div key={idx} className="flex gap-2">
                     <span className="text-zinc-600 select-none w-6 text-right">{idx + 1}</span>

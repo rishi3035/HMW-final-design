@@ -59,7 +59,7 @@ export const EnterpriseFooter: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 text-left">
           {/* Column 1: Product */}
           <div className="space-y-3.5">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+            <h4 className=" text-xs font-bold uppercase tracking-wider text-white">
               Product
             </h4>
             <ul className="space-y-2.5">
@@ -89,7 +89,7 @@ export const EnterpriseFooter: React.FC = () => {
 
           {/* Column 2: Solutions */}
           <div className="space-y-3.5">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+            <h4 className=" text-xs font-bold uppercase tracking-wider text-white">
               Solutions
             </h4>
             <ul className="space-y-2.5">
@@ -118,7 +118,7 @@ export const EnterpriseFooter: React.FC = () => {
 
           {/* Column 3: Resources */}
           <div className="space-y-3.5">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+            <h4 className=" text-xs font-bold uppercase tracking-wider text-white">
               Resources
             </h4>
             <ul className="space-y-2.5">
@@ -147,7 +147,7 @@ export const EnterpriseFooter: React.FC = () => {
 
           {/* Column 4: Company */}
           <div className="space-y-3.5">
-            <h4 className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+            <h4 className=" text-xs font-bold uppercase tracking-wider text-white">
               Company
             </h4>
             <ul className="space-y-2.5">
@@ -164,7 +164,7 @@ export const EnterpriseFooter: React.FC = () => {
               <li>
                 <a href="/careers" className="hover:text-white transition-colors flex items-center gap-1.5">
                   <span>Careers</span>
-                  <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span className="text-xs  px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     Hiring
                   </span>
                 </a>
@@ -174,7 +174,7 @@ export const EnterpriseFooter: React.FC = () => {
         </div>
 
         {/* Bottom Bar: Copyright, System Telemetry & Statutory Credentials */}
-        <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-[11px] font-mono">
+        <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-500 text-xs ">
           <div className="flex flex-wrap items-center gap-2 text-left">
             <span>© 2026 HackMyWebsite.</span>
             <span className="hidden sm:inline text-slate-700">•</span>
@@ -182,7 +182,7 @@ export const EnterpriseFooter: React.FC = () => {
           </div>
 
           {/* Understated Security Status Telemetry */}
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-[10px]">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-slate-800 text-xs">
             <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-slate-300">All Systems Operational</span>
             <span className="text-slate-600">|</span>

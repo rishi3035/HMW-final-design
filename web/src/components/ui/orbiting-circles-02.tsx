@@ -184,14 +184,14 @@ export function OrbitingCirclesGlobe({
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-auto text-center p-3 sm:p-4 rounded-2xl bg-slate-950/90 border border-emerald-500/50 backdrop-blur-xl shadow-[0_0_40px_rgba(16,185,129,0.35)] min-w-[140px] sm:min-w-[170px] select-none group">
           <div className="flex items-center justify-center gap-1.5 text-emerald-400 mb-1">
             <Shield className="size-4 animate-pulse" />
-            <span className="text-[10px] font-mono font-black uppercase tracking-wider">
+            <span className="text-xs  font-black uppercase tracking-wider">
               SOVEREIGN CORE
             </span>
           </div>
           <div className="text-xs sm:text-sm font-black text-white tracking-tight">
             HackMyWebsite
           </div>
-          <div className="text-[10px] font-mono text-slate-400 mt-0.5">
+          <div className="text-xs  text-slate-400 mt-0.5">
             AI Risk Engine • 0–100 Score
           </div>
         </div>
@@ -217,7 +217,7 @@ export function OrbitingCirclesGlobe({
             }}
           >
             {/* Stage Tag on Ring Border */}
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-slate-950/95 border border-slate-800 text-[9px] font-mono font-bold text-slate-400 tracking-wider uppercase backdrop-blur-md">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-slate-950/95 border border-slate-800 text-xs  font-bold text-slate-400 tracking-wider uppercase backdrop-blur-md">
               <span className="text-emerald-400">{orbit.stage}</span> • {orbit.stageName}
             </div>
 
@@ -256,13 +256,13 @@ export function OrbitingCirclesGlobe({
                     {/* Popover Hover Telemetry Badge */}
                     <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:flex flex-col items-center pointer-events-none z-30 min-w-[130px]">
                       <div className="p-2 rounded-xl bg-slate-950/95 border border-emerald-500/50 shadow-2xl backdrop-blur-xl text-center space-y-0.5">
-                        <div className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wide">
+                        <div className="text-xs  font-bold text-emerald-400 uppercase tracking-wide">
                           {iconData.badge}
                         </div>
                         <div className="text-xs font-bold text-white whitespace-nowrap">
                           {iconData.name}
                         </div>
-                        <div className="text-[10px] text-slate-400 whitespace-nowrap">
+                        <div className="text-xs text-slate-400 whitespace-nowrap">
                           {iconData.role}
                         </div>
                       </div>

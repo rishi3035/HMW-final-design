@@ -27,7 +27,7 @@ export const GitHubSecurityGate: React.FC = () => {
           {/* LEFT SIDE (5 Columns): Text & Capability Items */}
           <div className="lg:col-span-5 space-y-8">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400 font-mono uppercase tracking-wider backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400  uppercase tracking-wider backdrop-blur-md shadow-sm">
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>SECURITY IN THE DEVELOPMENT WORKFLOW</span>
               </div>
@@ -56,7 +56,7 @@ export const GitHubSecurityGate: React.FC = () => {
                     Pull Request Scanning
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Analyze code changes before merge.
                 </p>
               </div>
@@ -69,7 +69,7 @@ export const GitHubSecurityGate: React.FC = () => {
                     Security Gates
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Enforce defined security policies.
                 </p>
               </div>
@@ -82,7 +82,7 @@ export const GitHubSecurityGate: React.FC = () => {
                     Developer Findings
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Surface security issues in the workflow where engineers already work.
                 </p>
               </div>
@@ -95,15 +95,15 @@ export const GitHubSecurityGate: React.FC = () => {
                     Pre-Production Prevention
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Identify security issues before release.
                 </p>
               </div>
             </div>
 
             {/* Visual Story Ribbon */}
-            <div className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 text-[11px] font-mono text-slate-400 space-y-2">
-              <div className="text-emerald-400 font-bold uppercase tracking-wider text-[10px]">
+            <div className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 text-xs  text-slate-400 space-y-2">
+              <div className="text-emerald-400 font-bold uppercase tracking-wider text-xs">
                 PRE-MERGE CI/CD LIFECYCLE
               </div>
               <div className="flex flex-wrap items-center gap-1.5 text-slate-300">
@@ -142,12 +142,12 @@ export const GitHubSecurityGate: React.FC = () => {
                   <div className="size-3 rounded-full bg-red-500/70" />
                   <div className="size-3 rounded-full bg-amber-500/70" />
                   <div className="size-3 rounded-full bg-emerald-500/70" />
-                  <span className="ml-2 text-xs font-mono text-slate-400 flex items-center gap-1.5">
+                  <span className="ml-2 text-xs  text-slate-400 flex items-center gap-1.5">
                     <GitBranch className="size-3.5 text-slate-500" />
                     github.com/enterprise/web-app/pull/482
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded">
+                <span className="text-xs  text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5 rounded">
                   GitHub App Connected
                 </span>
               </div>
@@ -160,11 +160,11 @@ export const GitHubSecurityGate: React.FC = () => {
                       <GitPullRequest className="size-3.5" />
                       Open
                     </span>
-                    <span className="text-xs font-mono text-slate-400">
+                    <span className="text-xs  text-slate-400">
                       Pull Request #482
                     </span>
                   </div>
-                  <span className="text-xs text-slate-500 font-mono">
+                  <span className="text-xs text-slate-500 ">
                     Updated 2m ago by <span className="text-slate-300">@alex-dev</span>
                   </span>
                 </div>
@@ -173,7 +173,7 @@ export const GitHubSecurityGate: React.FC = () => {
                   feat: update authentication flow
                 </h3>
 
-                <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                <div className="flex items-center gap-2 text-xs  text-slate-400">
                   <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-300">
                     feat/auth-v2
                   </span>
@@ -191,17 +191,17 @@ export const GitHubSecurityGate: React.FC = () => {
                     <div className="size-6 rounded bg-emerald-500/10 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
                       <ShieldCheck className="size-3.5" />
                     </div>
-                    <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider ">
                       HACKMYWEBSITE SECURITY CHECK
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400">
+                  <span className="text-xs  text-slate-400">
                     Workflow #1,492 • Run in 38s
                   </span>
                 </div>
 
                 {/* Checklist Badges */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs ">
                   <div className="p-2.5 rounded-lg bg-slate-950 border border-slate-800 flex items-center gap-2 text-emerald-400">
                     <CheckCircle2 className="size-3.5 shrink-0" />
                     <span>Static Analysis</span>
@@ -219,11 +219,11 @@ export const GitHubSecurityGate: React.FC = () => {
                 {/* 1 HIGH SEVERITY FINDING CARD */}
                 <div className="p-4 rounded-xl bg-slate-950 border border-red-500/40 space-y-3 shadow-md">
                   <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-[11px] font-mono font-bold bg-red-500/15 border border-red-500/40 text-red-400">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs  font-bold bg-red-500/15 border border-red-500/40 text-red-400">
                       <AlertTriangle className="size-3" />
                       1 HIGH SEVERITY FINDING
                     </span>
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-xs  text-slate-400">
                       CWE-287 • CVSS 7.8
                     </span>
                   </div>
@@ -232,7 +232,7 @@ export const GitHubSecurityGate: React.FC = () => {
                     <h4 className="text-sm font-bold text-white">
                       Broken Authentication Control
                     </h4>
-                    <div className="flex items-center gap-2 mt-1 text-xs font-mono text-slate-400">
+                    <div className="flex items-center gap-2 mt-1 text-xs  text-slate-400">
                       <FileCode className="size-3.5 text-slate-500" />
                       <span className="text-slate-300">src/auth/middleware.ts</span>
                       <span className="text-slate-600">•</span>
@@ -241,7 +241,7 @@ export const GitHubSecurityGate: React.FC = () => {
                   </div>
 
                   {/* Code Context Preview */}
-                  <div className="p-3 rounded-lg bg-[#06080F] border border-slate-800 font-mono text-[11px] text-slate-300 space-y-1 overflow-x-auto">
+                  <div className="p-3 rounded-lg bg-[#06080F] border border-slate-800  text-xs text-slate-300 space-y-1 overflow-x-auto">
                     <div className="text-slate-500">// Insecure JWT payload decoding without signature verification</div>
                     <div className="text-red-400 bg-red-950/20 px-1 py-0.5 rounded border-l-2 border-red-500">
                       <span className="text-slate-500 select-none mr-2">147:</span>
@@ -262,14 +262,14 @@ export const GitHubSecurityGate: React.FC = () => {
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-mono font-bold text-red-400 uppercase tracking-wide">
+                        <span className="text-xs  font-bold text-red-400 uppercase tracking-wide">
                           SECURITY GATE
                         </span>
-                        <span className="px-2 py-0.2 rounded bg-red-500 text-white font-mono text-[10px] font-black">
+                        <span className="px-2 py-0.2 rounded bg-red-500 text-white  text-xs font-black">
                           FAILED
                         </span>
                       </div>
-                      <p className="text-[11px] text-slate-300 mt-0.5">
+                      <p className="text-xs text-slate-300 mt-0.5">
                         Policy Rule #12: Merging blocked until High & Critical findings are resolved.
                       </p>
                     </div>

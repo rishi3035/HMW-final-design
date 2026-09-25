@@ -54,7 +54,7 @@ export const DataFlowOrbitSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14 sm:space-y-16">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400 font-mono uppercase tracking-wider backdrop-blur-md shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400  uppercase tracking-wider backdrop-blur-md shadow-sm">
             <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>DATA FLOW ARCHITECTURE</span>
           </div>
@@ -72,7 +72,7 @@ export const DataFlowOrbitSection: React.FC = () => {
         <div className="relative rounded-3xl bg-[#080C14]/90 border border-slate-800 p-4 sm:p-8 shadow-2xl overflow-hidden">
           {/* Top Orbit Controls & Stage Legend */}
           <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-4 mb-2">
-            <div className="flex items-center gap-2 text-xs font-mono text-slate-300">
+            <div className="flex items-center gap-2 text-xs  text-slate-300">
               <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
               <span className="font-bold text-white">LIVE SPHERICAL DATA FLOW</span>
               <span className="text-slate-600">•</span>
@@ -80,7 +80,7 @@ export const DataFlowOrbitSection: React.FC = () => {
             </div>
 
             {/* Ascending Order Badges */}
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-950 border border-slate-800 text-xs ">
               {stages.map((st, i) => (
                 <button
                   key={st.stage}
@@ -118,10 +118,10 @@ export const DataFlowOrbitSection: React.FC = () => {
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                    <span className="text-xs  font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                       {st.stage}
                     </span>
-                    <span className="text-[10px] font-mono text-slate-500 uppercase">
+                    <span className="text-xs  text-slate-500 uppercase">
                       {st.orbit}
                     </span>
                   </div>
@@ -138,7 +138,7 @@ export const DataFlowOrbitSection: React.FC = () => {
                     {st.techs.map((tech, idx) => (
                       <span
                         key={idx}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-300"
+                        className="text-xs  px-2 py-0.5 rounded bg-slate-950 border border-slate-800 text-slate-300"
                       >
                         {tech}
                       </span>

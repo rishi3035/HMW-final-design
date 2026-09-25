@@ -504,7 +504,7 @@ export default function Timeline({
             <div className="h-1/2 flex items-center justify-start w-full">
               <div className="w-[34%] pt-[2vw] max-[600px]:pt-[5vw] max-[600px]:w-[30%] h-full">
                 <p
-                  className="text-[1.65vw] leading-none max-[600px]:text-[4.2vw] font-mono"
+                  className="text-[1.65vw] leading-none max-[600px]:text-[4.2vw] "
                   style={mutedTextStyle}
                 >
                   {periodLabel}

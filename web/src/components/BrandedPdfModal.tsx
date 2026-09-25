@@ -186,17 +186,17 @@ startxref
         className="relative w-full max-w-5xl h-[92vh] flex flex-col rounded-3xl border border-neutral-800 bg-[#0c0d12] shadow-2xl overflow-hidden"
       >
         {/* ================= PDF TOOLBAR ================= */}
-        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 border-b border-neutral-800/90 bg-neutral-950/80 text-xs font-mono shrink-0">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5 border-b border-neutral-800/90 bg-neutral-950/80 text-xs  shrink-0">
           {/* Left: Document Badge */}
           <div className="flex items-center gap-2.5">
-            <span className="px-2 py-0.5 rounded-md bg-red-950/80 text-red-400 border border-red-500/30 text-[10px] font-bold">
+            <span className="px-2 py-0.5 rounded-md bg-red-950/80 text-red-400 border border-red-500/30 text-xs font-bold">
               PDF
             </span>
             <span className="text-white font-semibold truncate max-w-xs sm:max-w-md">
               {agencyName.replace(/\s+/g, "_")}_Executive_Audit_Report.pdf
             </span>
             <span className="hidden sm:inline-block text-neutral-500">|</span>
-            <span className="hidden sm:inline-block text-neutral-400 text-[11px]">
+            <span className="hidden sm:inline-block text-neutral-400 text-xs">
               Page 1 of 1 (A4)
             </span>
           </div>
@@ -204,7 +204,7 @@ startxref
           {/* Right Controls */}
           <div className="flex items-center gap-2">
             {/* Theme Toggle */}
-            <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-xl p-0.5 text-[11px]">
+            <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-xl p-0.5 text-xs">
               <button
                 type="button"
                 onClick={() => setReportTheme("dark")}
@@ -232,7 +232,7 @@ startxref
             </div>
 
             {/* Zoom Controls */}
-            <div className="hidden md:flex items-center bg-neutral-900 border border-neutral-800 rounded-xl px-1 text-[11px]">
+            <div className="hidden md:flex items-center bg-neutral-900 border border-neutral-800 rounded-xl px-1 text-xs">
               <button
                 type="button"
                 onClick={() => setZoomLevel((z) => Math.max(75, z - 10))}
@@ -256,7 +256,7 @@ startxref
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3 py-1.5 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-neutral-300 hover:text-white flex items-center gap-1.5 text-[11px] cursor-pointer"
+              className="px-3 py-1.5 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-neutral-700 text-neutral-300 hover:text-white flex items-center gap-1.5 text-xs cursor-pointer"
               title="Print / Save as PDF via Browser"
             >
               <IconPrinter className="w-3.5 h-3.5 text-neutral-400" />
@@ -267,7 +267,7 @@ startxref
             <button
               type="button"
               onClick={handleDownloadRawPdf}
-              className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold flex items-center gap-1.5 text-[11px] shadow-lg shadow-emerald-500/20 cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold flex items-center gap-1.5 text-xs shadow-lg shadow-emerald-500/20 cursor-pointer"
             >
               <IconDownload className="w-3.5 h-3.5" />
               <span>Download .pdf</span>
@@ -327,14 +327,14 @@ startxref
                   <h1 className="text-xl sm:text-2xl font-black tracking-tight leading-none">
                     {agencyName}
                   </h1>
-                  <p className="text-[10px] font-mono tracking-widest uppercase mt-1 opacity-70">
+                  <p className="text-xs  tracking-widest uppercase mt-1 opacity-70">
                     INDEPENDENT CYBERSECURITY AUDIT & COMPLIANCE DOSSIER
                   </p>
                 </div>
               </div>
 
               {/* Statutory & Audit Metadata */}
-              <div className="text-right text-[10px] font-mono opacity-80 space-y-0.5 shrink-0">
+              <div className="text-right text-xs  opacity-80 space-y-0.5 shrink-0">
                 <div>
                   AUDIT ID: <span className="font-bold text-emerald-400">HMW-AUD-2026-9482</span>
                 </div>
@@ -349,23 +349,23 @@ startxref
             {/* Target Domain & Scope Card */}
             <div
               className={cn(
-                "mt-6 p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono",
+                "mt-6 p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs ",
                 reportTheme === "dark"
                   ? "bg-black/60 border-neutral-800"
                   : "bg-neutral-50 border-neutral-200"
               )}
             >
               <div>
-                <span className="text-[10px] uppercase opacity-60 block">Verified Target Scope</span>
+                <span className="text-xs uppercase opacity-60 block">Verified Target Scope</span>
                 <span className="text-sm font-bold tracking-tight text-emerald-400">
                   {targetDomain || "https://www.mvpstudio.in"}
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">
+                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">
                   SAFE HARBOR AUTHORIZED
                 </span>
-                <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-950/80 text-cyan-400 border border-cyan-500/40">
+                <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-cyan-950/80 text-cyan-400 border border-cyan-500/40">
                   OWASP TOP 10 CERTIFIED
                 </span>
               </div>
@@ -382,13 +382,13 @@ startxref
                     : "bg-neutral-50 border-neutral-200"
                 )}
               >
-                <span className="text-[9px] font-mono uppercase tracking-wider opacity-60 block mb-1">
+                <span className="text-xs  uppercase tracking-wider opacity-60 block mb-1">
                   AI LAUNCH SCORE
                 </span>
                 <div className="text-2xl sm:text-3xl font-black text-emerald-400">
-                  {score} <span className="text-xs font-mono font-medium text-emerald-500">/ 100</span>
+                  {score} <span className="text-xs  font-medium text-emerald-500">/ 100</span>
                 </div>
-                <span className="text-[10px] font-mono font-bold text-emerald-400 block mt-0.5">
+                <span className="text-xs  font-bold text-emerald-400 block mt-0.5">
                   GRADE A+ EXCELLENT
                 </span>
               </div>
@@ -402,11 +402,11 @@ startxref
                     : "bg-neutral-50 border-neutral-200"
                 )}
               >
-                <span className="text-[9px] font-mono uppercase tracking-wider opacity-60 block mb-1">
+                <span className="text-xs  uppercase tracking-wider opacity-60 block mb-1">
                   DAST PROBES
                 </span>
                 <div className="text-2xl sm:text-3xl font-black text-white">200+</div>
-                <span className="text-[10px] font-mono font-semibold text-emerald-400 block mt-0.5">
+                <span className="text-xs  font-semibold text-emerald-400 block mt-0.5">
                   100% Non-Destructive
                 </span>
               </div>
@@ -420,11 +420,11 @@ startxref
                     : "bg-neutral-50 border-neutral-200"
                 )}
               >
-                <span className="text-[9px] font-mono uppercase tracking-wider opacity-60 block mb-1">
+                <span className="text-xs  uppercase tracking-wider opacity-60 block mb-1">
                   CRITICAL RISKS
                 </span>
                 <div className="text-2xl sm:text-3xl font-black text-emerald-400">0</div>
-                <span className="text-[10px] font-mono font-semibold opacity-70 block mt-0.5">
+                <span className="text-xs  font-semibold opacity-70 block mt-0.5">
                   Zero Exploitable RCE
                 </span>
               </div>
@@ -438,11 +438,11 @@ startxref
                     : "bg-neutral-50 border-neutral-200"
                 )}
               >
-                <span className="text-[9px] font-mono uppercase tracking-wider opacity-60 block mb-1">
+                <span className="text-xs  uppercase tracking-wider opacity-60 block mb-1">
                   AUDIT STANDARD
                 </span>
                 <div className="text-base sm:text-lg font-black text-white mt-1">OWASP Top 10</div>
-                <span className="text-[10px] font-mono font-semibold opacity-70 block mt-0.5">
+                <span className="text-xs  font-semibold opacity-70 block mt-0.5">
                   Nuclei v3.2 CVEs
                 </span>
               </div>
@@ -450,18 +450,18 @@ startxref
 
             {/* Deterministic OWASP Top 10 Checklist */}
             <div className="mt-6">
-              <div className="flex items-center justify-between mb-2 text-xs font-mono">
+              <div className="flex items-center justify-between mb-2 text-xs ">
                 <span className="font-bold uppercase tracking-wider">
                   OWASP Top 10 Penetration Vector Coverage
                 </span>
-                <span className="text-emerald-400 font-bold text-[10px]">
+                <span className="text-emerald-400 font-bold text-xs">
                   ✓ 9 / 10 FULL PASS (1 INFORMATIONAL)
                 </span>
               </div>
 
               <div
                 className={cn(
-                  "rounded-xl border overflow-hidden text-[11px] font-mono divide-y",
+                  "rounded-xl border overflow-hidden text-xs  divide-y",
                   reportTheme === "dark"
                     ? "bg-black/40 border-neutral-800 divide-neutral-900"
                     : "bg-neutral-50 border-neutral-200 divide-neutral-200"
@@ -480,7 +480,7 @@ startxref
                       <span className="text-neutral-500 font-bold">{item.code}</span>
                       <span className="truncate max-w-xs sm:max-w-md">{item.name}</span>
                     </div>
-                    <span className={cn("font-bold text-[10px] px-2 py-0.5 rounded", item.color, "bg-neutral-900 border border-neutral-800")}>
+                    <span className={cn("font-bold text-xs px-2 py-0.5 rounded", item.color, "bg-neutral-900 border border-neutral-800")}>
                       {item.status}
                     </span>
                   </div>
@@ -490,13 +490,13 @@ startxref
 
             {/* Findings & Remediation Section */}
             <div className="mt-6">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider block mb-2">
+              <span className="text-xs  font-bold uppercase tracking-wider block mb-2">
                 Active Finding Remediation Playbook (Medium Severity)
               </span>
 
               <div
                 className={cn(
-                  "p-3.5 rounded-xl border text-xs font-mono space-y-2",
+                  "p-3.5 rounded-xl border text-xs  space-y-2",
                   reportTheme === "dark"
                     ? "bg-amber-950/20 border-amber-500/30 text-amber-200/90"
                     : "bg-amber-50 border-amber-300 text-amber-900"
@@ -506,14 +506,14 @@ startxref
                   <span className="font-bold text-amber-400">
                     CWE-693: Strict-Transport-Security (HSTS) Header Absent
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">
+                  <span className="text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">
                     CVSS 5.3
                   </span>
                 </div>
-                <p className="text-[11px] leading-relaxed opacity-90">
+                <p className="text-xs leading-relaxed opacity-90">
                   Root Cause: The server response at <code className="text-white">/api/v1/auth</code> did not enforce the HSTS header.
                 </p>
-                <div className="p-2 rounded-lg bg-black/60 border border-neutral-800 text-[10px] text-emerald-400">
+                <div className="p-2 rounded-lg bg-black/60 border border-neutral-800 text-xs text-emerald-400">
                   Recommended Cursor / Claude Fix: Add <code className="text-white">Strict-Transport-Security: max-age=63072000; includeSubDomains; preload</code> to your reverse proxy / next.config.js headers.
                 </div>
               </div>
@@ -521,21 +521,21 @@ startxref
 
             {/* Custom Disclaimer from Agency Form */}
             <div className="mt-6 pt-4 border-t border-neutral-800/80">
-              <span className="text-[9px] font-mono uppercase tracking-wider opacity-50 block mb-1">
+              <span className="text-xs  uppercase tracking-wider opacity-50 block mb-1">
                 Agency Legal Notice & Disclaimer
               </span>
-              <p className="text-[10px] font-mono leading-relaxed opacity-70">
+              <p className="text-xs  leading-relaxed opacity-70">
                 {disclaimer ||
                   "Confidential client report prepared exclusively by our cybersecurity advisory team. All penetration payloads executed with non-destructive Safe Harbor authorization."}
               </p>
             </div>
 
             {/* Dual Signatures & Seal Footer */}
-            <div className="mt-6 pt-4 border-t border-neutral-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[10px] font-mono">
+            <div className="mt-6 pt-4 border-t border-neutral-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs ">
               <div>
                 <span className="opacity-50 block">Delivering Authority</span>
                 <span className="font-bold text-white text-xs">{agencyName}</span>
-                <span className="block opacity-60 text-[9px]">
+                <span className="block opacity-60 text-xs">
                   In association with Hack My Website Engine
                 </span>
               </div>
@@ -545,7 +545,7 @@ startxref
                 <span className="text-emerald-400 font-bold block">
                   AIVI Intelligence Private Limited
                 </span>
-                <span className="text-neutral-400 text-[9px] block">
+                <span className="text-neutral-400 text-xs block">
                   CIN: U62099UP2026PTC249169 • DPIIT #DIPP271794
                 </span>
               </div>

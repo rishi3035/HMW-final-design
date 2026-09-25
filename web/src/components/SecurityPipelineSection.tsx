@@ -139,7 +139,7 @@ await scan.verify();
           {/* Large Hero Card - Interactive Features */}
           <div className="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-2xl border border-neutral-800 bg-black p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:border-neutral-700 shadow-xl ring-1 ring-white/10">
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-lg bg-neutral-900 border border-neutral-800 text-emerald-400 text-xs font-mono font-semibold">
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-lg bg-neutral-900 border border-neutral-800 text-emerald-400 text-xs  font-semibold">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 Autonomous Engine
               </div>
@@ -175,7 +175,7 @@ await scan.verify();
                       )}
                     />
                     <span className="text-xs font-bold text-white text-left">{feature.title}</span>
-                    <span className="text-[10px] text-emerald-400/90 text-left mt-1 font-mono font-medium line-clamp-1">
+                    <span className="text-xs text-emerald-400/90 text-left mt-1  font-medium line-clamp-1">
                       {feature.stat}
                     </span>
                   </button>
@@ -187,18 +187,18 @@ await scan.verify();
             <div className="relative z-10 p-4 rounded-xl bg-neutral-950 border border-neutral-800 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-mono text-emerald-400 font-bold uppercase">
+                  <span className="text-xs  text-emerald-400 font-bold uppercase">
                     STAGE 0{activeFeature.id + 1} // {activeFeature.badge}
                   </span>
-                  <span className="text-[10px] font-mono text-slate-500">Telemetry Active</span>
+                  <span className="text-xs  text-slate-500">Telemetry Active</span>
                 </div>
                 <p className="text-base sm:text-lg font-bold text-white">{activeFeature.title}</p>
                 <p className="text-xs text-slate-300 mt-1 leading-relaxed">{activeFeature.desc}</p>
               </div>
 
               {/* Code Snippet Preview */}
-              <div className="mt-3 p-2.5 rounded-lg bg-black border border-neutral-800/80 font-mono text-[11px] text-slate-400 leading-snug">
-                <pre className="whitespace-pre-wrap font-mono text-[11px] text-emerald-400/90">
+              <div className="mt-3 p-2.5 rounded-lg bg-black border border-neutral-800/80  text-xs text-slate-400 leading-snug">
+                <pre className="whitespace-pre-wrap  text-xs text-emerald-400/90">
                   {activeFeature.codeSnippet}
                 </pre>
               </div>
@@ -213,7 +213,7 @@ await scan.verify();
                   <div className="p-2 bg-neutral-900 border border-neutral-800 rounded-lg text-emerald-400">
                     <BarChart3 className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-emerald-950/60 border border-emerald-500/20 text-emerald-400 font-mono font-semibold">
+                  <span className="text-xs px-2 py-0.5 rounded-md bg-emerald-950/60 border border-emerald-500/20 text-emerald-400  font-semibold">
                     Live Stream
                   </span>
                 </div>
@@ -235,10 +235,10 @@ await scan.verify();
                     )}
                   >
                     <div>
-                      <p className="text-[10px] text-slate-400 font-mono leading-none">{metric.label}</p>
-                      <p className="text-sm font-bold font-mono text-white leading-none mt-1.5">{metric.value}</p>
+                      <p className="text-xs text-slate-400  leading-none">{metric.label}</p>
+                      <p className="text-sm font-bold  text-white leading-none mt-1.5">{metric.value}</p>
                     </div>
-                    <span className="text-[10px] text-emerald-400 font-semibold font-mono bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md">
+                    <span className="text-xs text-emerald-400 font-semibold  bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md">
                       {metric.trend}
                     </span>
                   </button>
@@ -265,7 +265,7 @@ await scan.verify();
                     <span className="text-xl group-hover/int:scale-125 transition-transform duration-200">
                       {int.abbr}
                     </span>
-                    <p className="text-[9px] text-slate-400 text-center font-mono">{int.name}</p>
+                    <p className="text-xs text-slate-400 text-center ">{int.name}</p>
                   </div>
                 ))}
               </div>
@@ -281,22 +281,22 @@ await scan.verify();
                 </div>
                 <h3 className="text-sm font-bold text-white">Autonomous Scan Command</h3>
               </div>
-              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded font-semibold">
+              <span className="text-xs  text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded font-semibold">
                 GitHub PR Gateway
               </span>
             </div>
 
             {/* Terminal Code Box - Scrollable Command Center */}
-            <div className="flex-1 w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 sm:p-4 font-mono text-[11px] sm:text-[11.5px] leading-relaxed overflow-y-auto max-h-[195px] terminal-scroll pr-2.5">
+            <div className="flex-1 w-full bg-neutral-950 border border-neutral-800 rounded-xl p-3 sm:p-4  text-xs sm:text-[11.5px] leading-relaxed overflow-y-auto max-h-[195px] terminal-scroll pr-2.5">
               <div className="space-y-1">
                 {codeExample.split("\n").map((line, idx) => (
                   <div key={idx} className="flex gap-2.5 items-start">
-                    <span className="text-neutral-600 select-none w-4 text-right shrink-0 font-mono text-[10px] pt-0.5">
+                    <span className="text-neutral-600 select-none w-4 text-right shrink-0  text-xs pt-0.5">
                       {idx + 1}
                     </span>
                     <span
                       className={cn(
-                        "whitespace-pre font-mono",
+                        "whitespace-pre ",
                         line.includes("//")
                           ? "text-slate-500 font-medium"
                           : line.includes("✓")
@@ -328,11 +328,11 @@ await scan.verify();
                 className="group relative overflow-hidden rounded-xl border border-neutral-800 bg-black p-4 transition-all duration-300 hover:border-neutral-700 shadow-lg ring-1 ring-white/5"
               >
                 <Icon className="w-4 h-4 text-emerald-400 mb-2 relative z-10" />
-                <p className="text-xs text-slate-400 relative z-10 font-mono">{stat.label}</p>
-                <p className="text-xl font-bold font-mono text-white mt-0.5 relative z-10">
+                <p className="text-xs text-slate-400 relative z-10 ">{stat.label}</p>
+                <p className="text-xl font-bold  text-white mt-0.5 relative z-10">
                   {stat.value}
                 </p>
-                <p className="text-[10px] text-slate-500 mt-1 relative z-10">
+                <p className="text-xs text-slate-500 mt-1 relative z-10">
                   {stat.detail}
                 </p>
               </div>

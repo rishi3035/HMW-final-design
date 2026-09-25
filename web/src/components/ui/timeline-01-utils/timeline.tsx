@@ -72,7 +72,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, className }) => {
                   <div className="pointer-events-none absolute -top-10 left-1/2 -translate-x-1/2 w-48 h-32 rounded-full bg-emerald-500/10 blur-2xl group-hover:bg-emerald-500/20 transition-all duration-500" />
 
                   {/* Date Badge */}
-                  <span className="inline-block px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold tracking-wider bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 mb-3">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-xs  font-semibold tracking-wider bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 mb-3">
                     {item.date}
                   </span>
 

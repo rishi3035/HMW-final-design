@@ -240,9 +240,9 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
                   className="absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50 w-72 sm:w-80"
                 >
                   <div className="rounded-2xl bg-black border border-neutral-800 p-3 shadow-2xl backdrop-blur-2xl space-y-1">
-                    <div className="px-2 py-1 text-[10px] font-mono uppercase text-emerald-400 font-bold tracking-wider border-b border-neutral-800 mb-1 flex items-center justify-between">
+                    <div className="px-2 py-1 text-xs  uppercase text-emerald-400 font-bold tracking-wider border-b border-neutral-800 mb-1 flex items-center justify-between">
                       <span>{item.name} Capabilities</span>
-                      <span className="text-[9px] text-slate-500">v2.5</span>
+                      <span className="text-xs text-slate-500">v2.5</span>
                     </div>
                     {item.dropdown?.map((sub, sIdx) => (
                       <a
@@ -259,7 +259,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
                             {sub.name}
                           </div>
                           {sub.desc && (
-                            <div className="text-[11px] text-slate-400 line-clamp-1 leading-snug mt-0.5">
+                            <div className="text-xs text-slate-400 line-clamp-1 leading-snug mt-0.5">
                               {sub.desc}
                             </div>
                           )}

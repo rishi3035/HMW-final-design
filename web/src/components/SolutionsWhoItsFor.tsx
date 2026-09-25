@@ -21,7 +21,7 @@ export const SolutionsWhoItsFor: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16 sm:space-y-20">
         {/* Section Header */}
         <div className="text-center space-y-4 max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400 font-mono uppercase tracking-wider backdrop-blur-md shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400  uppercase tracking-wider backdrop-blur-md shadow-sm">
             <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>WHO IT'S FOR</span>
           </div>
@@ -45,7 +45,7 @@ export const SolutionsWhoItsFor: React.FC = () => {
             <div className="space-y-6">
               {/* Card Tag & Icon */}
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+                <span className="text-xs  font-bold px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
                   ENGINEERING TEAMS
                 </span>
                 <div className="size-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
@@ -64,8 +64,8 @@ export const SolutionsWhoItsFor: React.FC = () => {
               </div>
 
               {/* Micro UI: CLI & PR Check Simulation */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90 font-mono text-[11px] space-y-2 text-slate-300 shadow-inner">
-                <div className="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-800/80 pb-1.5">
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90  text-xs space-y-2 text-slate-300 shadow-inner">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-800/80 pb-1.5">
                   <span className="flex items-center gap-1.5 text-emerald-400">
                     <Terminal className="size-3" /> git push origin feat/auth
                   </span>
@@ -108,7 +108,7 @@ export const SolutionsWhoItsFor: React.FC = () => {
             <div className="space-y-6">
               {/* Card Tag & Icon */}
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
+                <span className="text-xs  font-bold px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 uppercase tracking-wider">
                   SECURITY TEAMS
                 </span>
                 <div className="size-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
@@ -127,8 +127,8 @@ export const SolutionsWhoItsFor: React.FC = () => {
               </div>
 
               {/* Micro UI: AppSec Posture Meter */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90 font-mono text-[11px] space-y-2 text-slate-300 shadow-inner">
-                <div className="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-800/80 pb-1.5">
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90  text-xs space-y-2 text-slate-300 shadow-inner">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-800/80 pb-1.5">
                   <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
                     <Activity className="size-3" /> TRI-ENGINE AUDIT ROLLUP
                   </span>
@@ -171,7 +171,7 @@ export const SolutionsWhoItsFor: React.FC = () => {
             <div className="space-y-6">
               {/* Card Tag & Icon */}
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
+                <span className="text-xs  font-bold px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider">
                   AGENCIES & PARTNERS
                 </span>
                 <div className="size-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-transform">
@@ -190,8 +190,8 @@ export const SolutionsWhoItsFor: React.FC = () => {
               </div>
 
               {/* Micro UI: Multi-Tenant Client Switcher */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90 font-mono text-[11px] space-y-2 text-slate-300 shadow-inner">
-                <div className="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-800/80 pb-1.5">
+              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800/90  text-xs space-y-2 text-slate-300 shadow-inner">
+                <div className="flex items-center justify-between text-xs text-slate-500 border-b border-slate-800/80 pb-1.5">
                   <span className="flex items-center gap-1.5 text-emerald-400 font-bold">
                     <Layers className="size-3" /> CLIENT WORKSPACE HUB
                   </span>

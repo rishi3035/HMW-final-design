@@ -44,7 +44,7 @@ export function BentoCard({
       </div>
       <div className="relative p-7 sm:p-8 z-20 isolate mt-[-90px] min-h-[12.5rem] backdrop-blur-xl bg-black/95 border-t border-neutral-800 text-white flex flex-col justify-between">
         <div>
-          <span className="font-mono text-xs font-bold text-emerald-400 uppercase tracking-wider block">
+          <span className=" text-xs font-bold text-emerald-400 uppercase tracking-wider block">
             {eyebrow}
           </span>
           <h3 className="mt-1 text-xl sm:text-2xl font-bold tracking-tight text-white">
@@ -62,7 +62,7 @@ export function BentoCard({
 export default function FUIBentoGridDark() {
   return (
     <div className="pt-32 container mx-auto bg-black min-w-screen flex flex-col p-10 bg-gray-950/10">
-      <h1 className="font-mono tracking-tight text-3xl md:text-5xl text-white">
+      <h1 className=" tracking-tight text-3xl md:text-5xl text-white">
         Sales
       </h1>
       <p className="max-w-3xl text-2xl/8 font-medium tracking-tight mt-2 bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent">

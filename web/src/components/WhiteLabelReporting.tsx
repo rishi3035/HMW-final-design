@@ -40,13 +40,13 @@ export const WhiteLabelReporting: React.FC = () => {
                     <span className="text-xs font-bold text-white tracking-wide block">
                       APEX DIGITAL CONSULTING
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400 block">
+                    <span className="text-xs  text-slate-400 block">
                       Enterprise Technology & Cybersecurity Partner
                     </span>
                   </div>
                 </div>
 
-                <div className="text-right font-mono text-[10px] text-slate-400">
+                <div className="text-right  text-xs text-slate-400">
                   <span className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-emerald-400 font-semibold inline-block mb-0.5">
                     CONFIDENTIAL AUDIT
                   </span>
@@ -57,7 +57,7 @@ export const WhiteLabelReporting: React.FC = () => {
               {/* Title & Metadata Banner */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-950/80 p-4 rounded-2xl border border-slate-800">
                 <div>
-                  <span className="text-[10px] font-mono text-emerald-400 uppercase font-bold tracking-wider block">
+                  <span className="text-xs  text-emerald-400 uppercase font-bold tracking-wider block">
                     CLIENT AUDIT DELIVERABLE
                   </span>
                   <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">
@@ -71,16 +71,16 @@ export const WhiteLabelReporting: React.FC = () => {
                 {/* Score Widget */}
                 <div className="flex items-center gap-3 bg-[#06080F] p-2.5 px-4 rounded-xl border border-emerald-500/40 shadow-inner">
                   <div className="text-center">
-                    <span className="text-[10px] font-mono text-slate-400 uppercase block">
+                    <span className="text-xs  text-slate-400 uppercase block">
                       SECURITY SCORE
                     </span>
                     <div className="flex items-baseline justify-center gap-1">
                       <span className="text-2xl font-black text-emerald-400">82</span>
-                      <span className="text-xs font-mono text-slate-500">/ 100</span>
+                      <span className="text-xs  text-slate-500">/ 100</span>
                     </div>
                   </div>
                   <div className="h-8 w-px bg-slate-800" />
-                  <span className="text-[11px] font-bold text-amber-400 font-mono">
+                  <span className="text-xs font-bold text-amber-400 ">
                     Action<br />Required
                   </span>
                 </div>
@@ -88,7 +88,7 @@ export const WhiteLabelReporting: React.FC = () => {
 
               {/* Document Table of Contents / Key Assessment Sections */}
               <div className="space-y-2.5 font-sans text-xs">
-                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider block px-1">
+                <span className="text-xs  font-bold text-slate-400 uppercase tracking-wider block px-1">
                   REPORT SECTIONS INCLUDED
                 </span>
 
@@ -99,7 +99,7 @@ export const WhiteLabelReporting: React.FC = () => {
                       <span className="size-1.5 rounded-full bg-emerald-400" />
                       <span className="font-semibold text-slate-200">Executive Summary</span>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500">Section 01</span>
+                    <span className="text-xs  text-slate-500">Section 01</span>
                   </div>
 
                   {/* Section 2 */}
@@ -108,7 +108,7 @@ export const WhiteLabelReporting: React.FC = () => {
                       <span className="size-1.5 rounded-full bg-emerald-400" />
                       <span className="font-semibold text-slate-200">Risk Overview</span>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-500">Section 02</span>
+                    <span className="text-xs  text-slate-500">Section 02</span>
                   </div>
 
                   {/* Section 3 */}
@@ -117,7 +117,7 @@ export const WhiteLabelReporting: React.FC = () => {
                       <span className="size-1.5 rounded-full bg-emerald-400" />
                       <span className="font-semibold text-slate-200">Critical Findings (0)</span>
                     </div>
-                    <span className="text-[10px] font-mono text-emerald-400 font-bold">Clear</span>
+                    <span className="text-xs  text-emerald-400 font-bold">Clear</span>
                   </div>
 
                   {/* Section 4 */}
@@ -126,7 +126,7 @@ export const WhiteLabelReporting: React.FC = () => {
                       <span className="size-1.5 rounded-full bg-amber-400" />
                       <span className="font-semibold text-slate-200">High-Risk Findings (2)</span>
                     </div>
-                    <span className="text-[10px] font-mono text-amber-400 font-bold">Action</span>
+                    <span className="text-xs  text-amber-400 font-bold">Action</span>
                   </div>
 
                   {/* Section 5 */}
@@ -135,7 +135,7 @@ export const WhiteLabelReporting: React.FC = () => {
                       <span className="size-1.5 rounded-full bg-cyan-400" />
                       <span className="font-semibold text-slate-200">Remediation Guidance</span>
                     </div>
-                    <span className="text-[10px] font-mono text-cyan-400 font-bold">Fixes</span>
+                    <span className="text-xs  text-cyan-400 font-bold">Fixes</span>
                   </div>
 
                   {/* Section 6 */}
@@ -144,13 +144,13 @@ export const WhiteLabelReporting: React.FC = () => {
                       <span className="size-1.5 rounded-full bg-emerald-400" />
                       <span className="font-semibold text-slate-200">Verification Results</span>
                     </div>
-                    <span className="text-[10px] font-mono text-slate-400">Retest</span>
+                    <span className="text-xs  text-slate-400">Retest</span>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Verification Seal */}
-              <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-400">
+              <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs  text-slate-400">
                 <div className="flex items-center gap-2">
                   <Shield className="size-3.5 text-emerald-400" />
                   <span>Verified Sovereign Multi-Engine Audit</span>
@@ -165,7 +165,7 @@ export const WhiteLabelReporting: React.FC = () => {
           {/* RIGHT SIDE (6 Columns): Copy, Features & B2B2C Positioning */}
           <div className="lg:col-span-6 space-y-8">
             <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400 font-mono uppercase tracking-wider backdrop-blur-md shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-xs font-semibold text-emerald-400  uppercase tracking-wider backdrop-blur-md shadow-sm">
                 <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>CLIENT SECURITY REPORTING</span>
               </div>
@@ -189,7 +189,7 @@ export const WhiteLabelReporting: React.FC = () => {
                     White-Label Branding
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Present security assessments using your own brand identity.
                 </p>
               </div>
@@ -202,7 +202,7 @@ export const WhiteLabelReporting: React.FC = () => {
                     Executive Summary
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Translate technical findings into a format decision-makers can understand.
                 </p>
               </div>
@@ -215,7 +215,7 @@ export const WhiteLabelReporting: React.FC = () => {
                     Technical Evidence
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Show severity, affected assets, evidence, and remediation details.
                 </p>
               </div>
@@ -228,7 +228,7 @@ export const WhiteLabelReporting: React.FC = () => {
                     Remediation Tracking
                   </h4>
                 </div>
-                <p className="text-[11px] text-slate-400 leading-relaxed">
+                <p className="text-xs text-slate-400 leading-relaxed">
                   Show which findings were identified, addressed, and verified.
                 </p>
               </div>

@@ -16,7 +16,7 @@ export default function TimelineDemo(props: Partial<typeof settings>) {
     <main className="bg-background text-foreground">
       {/* Lead-in so the pinned timeline has somewhere to scroll in from. */}
       <section className="flex h-screen flex-col items-center justify-center gap-4 px-6 text-center">
-        <p className="font-mono text-xs uppercase tracking-[0.3em] text-emerald-400">
+        <p className=" text-xs uppercase tracking-[0.3em] text-emerald-400">
           Continuous Security Pipeline
         </p>
         <h1 className="max-w-[18ch] text-4xl font-semibold leading-tight tracking-tight sm:text-6xl text-white">

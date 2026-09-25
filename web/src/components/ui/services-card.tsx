@@ -271,7 +271,7 @@ export const ServiceCard = ({ service, index }: { service: Service; index: numbe
     >
       {/* Card Content Top */}
       <div className="z-10 flex flex-col items-start text-left">
-        <span className="mb-8 text-sm font-mono font-bold text-slate-400 group-hover:text-emerald-400 transition-colors">
+        <span className="mb-8 text-sm  font-bold text-slate-400 group-hover:text-emerald-400 transition-colors">
           ( {service.number} )
         </span>
         <div className="size-14 rounded-2xl bg-slate-950/60 border border-slate-700/60 flex items-center justify-center text-white mb-auto shadow-inner group-hover:scale-110 group-hover:border-emerald-500/50 transition-all duration-300">
@@ -285,7 +285,7 @@ export const ServiceCard = ({ service, index }: { service: Service; index: numbe
           {service.title}
         </h3>
         {service.subheading && (
-          <h4 className="text-xs font-semibold text-emerald-300 font-mono">
+          <h4 className="text-xs font-semibold text-emerald-300 ">
             {service.subheading}
           </h4>
         )}

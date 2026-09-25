@@ -89,7 +89,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </h2>
               <p className="text-xs text-neutral-400 mt-1 max-w-xs">
                 Authenticate to run real-time DAST, CVE audits, and auto-generate patches for{" "}
-                <span className="font-mono text-emerald-400 font-medium">
+                <span className=" text-emerald-400 font-medium">
                   {initialDomain.replace(/^https?:\/\//, "")}
                 </span>
               </p>
@@ -104,7 +104,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               >
                 <IconBrandGithub className="w-4 h-4 text-white group-hover:scale-110 transition-transform" />
                 <span>Continue with GitHub</span>
-                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-1.5 py-0.5 rounded ml-auto">
+                <span className="text-xs  text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-1.5 py-0.5 rounded ml-auto">
                   Instant
                 </span>
               </button>
@@ -122,7 +122,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             {/* Divider */}
             <div className="relative flex items-center justify-center mb-5">
               <div className="border-t border-neutral-800/80 w-full" />
-              <span className="bg-neutral-950 px-3 text-[10px] font-mono text-neutral-500 uppercase tracking-wider">
+              <span className="bg-neutral-950 px-3 text-xs  text-neutral-500 uppercase tracking-wider">
                 Or with work email
               </span>
               <div className="border-t border-neutral-800/80 w-full" />
@@ -131,7 +131,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             {/* Email Form */}
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
-                <label className="block text-[11px] font-mono text-neutral-400 mb-1.5 text-left">
+                <label className="block text-xs  text-neutral-400 mb-1.5 text-left">
                   Corporate Work Email
                 </label>
                 <input
@@ -140,7 +140,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   placeholder="founder@your-startup.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-neutral-800 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/30 transition-all font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-black border border-neutral-800 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/60 focus:ring-1 focus:ring-emerald-500/30 transition-all "
                 />
               </div>
 
@@ -170,7 +170,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <button
                 type="button"
                 onClick={handleQuickDemo}
-                className="text-[11px] text-neutral-400 hover:text-emerald-400 transition-colors inline-flex items-center gap-1.5 font-mono cursor-pointer"
+                className="text-xs text-neutral-400 hover:text-emerald-400 transition-colors inline-flex items-center gap-1.5  cursor-pointer"
               >
                 <IconKey className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Demo Bypass: Enter as Rishi (Agency Admin)</span>

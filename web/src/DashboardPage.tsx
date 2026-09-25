@@ -328,7 +328,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
           
           {/* Engines Active Pill Beacon */}
-          <div className="mt-4 flex items-center justify-between px-3 py-2 rounded-full bg-[#0e121d] border border-neutral-800 text-[11px] font-mono">
+          <div className="mt-4 flex items-center justify-between px-3 py-2 rounded-full bg-[#0e121d] border border-neutral-800 text-xs ">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -336,7 +336,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </span>
               <span className="text-emerald-400 font-medium">Engines Active</span>
             </div>
-            <span className="text-neutral-500 text-[10px]">v2.4</span>
+            <span className="text-neutral-500 text-xs">v2.4</span>
           </div>
 
           {/* Navigation Menu Items */}
@@ -368,7 +368,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   {item.badge && (
                     <span
                       className={cn(
-                        "text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold",
+                        "text-xs  px-2 py-0.5 rounded-full font-semibold",
                         isActive || item.badge === "v2"
                           ? "bg-[#0e2720] text-emerald-400 border border-emerald-500/30"
                           : "bg-[#131b2e] text-slate-300"
@@ -387,7 +387,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         <div className="pt-4 border-t border-neutral-800/80">
           <div className="flex items-center justify-between p-2 rounded-2xl bg-neutral-950 border border-neutral-800/90">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-8 h-8 rounded-full bg-[#16222f] border border-neutral-700/60 flex items-center justify-center text-teal-300 font-bold text-xs font-mono shrink-0">
+              <div className="w-8 h-8 rounded-full bg-[#16222f] border border-neutral-700/60 flex items-center justify-center text-teal-300 font-bold text-xs  shrink-0">
                 R
               </div>
               <div className="min-w-0">
@@ -395,7 +395,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   rishi3035singh@g...
                 </p>
                 <div className="flex items-center gap-1.5 mt-1">
-                  <span className="text-[9px] font-mono font-bold text-emerald-400 uppercase tracking-wider">
+                  <span className="text-xs  font-bold text-emerald-400 uppercase tracking-wider">
                     AGENCY
                   </span>
                 </div>
@@ -462,7 +462,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               >
                 <span>{item.label}</span>
                 {item.badge && (
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400">
+                  <span className="text-xs  px-2 py-0.5 rounded bg-emerald-950 text-emerald-400">
                     {item.badge}
                   </span>
                 )}
@@ -488,7 +488,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         {/* Top Header & Breadcrumbs (From HMW Screen) */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-neutral-800/80 mb-6">
           <div>
-            <div className="flex items-center gap-2 text-[10px] font-mono text-neutral-400 uppercase tracking-widest mb-1">
+            <div className="flex items-center gap-2 text-xs  text-neutral-400 uppercase tracking-widest mb-1">
               <span>Security Workspace</span>
               <span>/</span>
               <span className="text-emerald-400">Console</span>
@@ -526,189 +526,631 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           </div>
         </div>
 
-        {/* ===================== OVERVIEW TAB: RIGHT SIDE VISUALS WITH HMW CONTENT ===================== */}
+                {/* ===================== OVERVIEW TAB: FOCUSED SECURITY COMMAND CENTER ===================== */}
         {activeTab === "overview" && (
           <div className="space-y-6 mb-10">
 
-            {/* 1. HERO GREETING & HMW FLOATING METRIC COUNTERS */}
-            <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6 pb-2">
-              {/* Left: Greeting + 4 Status Pills with HMW Data */}
-              <div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-4">
-                  Welcome in,{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
-                    Rishi
-                  </span>
-                </h2>
-
-                {/* 4 Status Pills with HMW Content */}
-                <div className="flex flex-wrap items-center gap-3">
-                  {/* Monthly Audit Quota (0 / 150) */}
-                  <div>
-                    <div className="text-[11px] font-mono text-neutral-400 mb-1">Monthly Audit Quota</div>
-                    <div className="px-4 py-1.5 rounded-full bg-emerald-500 text-neutral-950 font-bold text-xs shadow-sm shadow-emerald-500/20">
-                      {isScanning ? "1 / 150" : "0 / 150"}
-                    </div>
+            {/* 1. TOP KPI SECTION: 4 COMPACT CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* CARD 1: Monthly Audit Quota */}
+              <div className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-colors flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-neutral-400 font-medium">Monthly Audit Quota</span>
+                  <div className="w-7 h-7 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400">
+                    <IconReceipt className="w-3.5 h-3.5" />
                   </div>
-
-                  {/* Monitored Domains (1 / 10) */}
-                  <div>
-                    <div className="text-[11px] font-mono text-neutral-400 mb-1">Monitored Domains</div>
-                    <div className="px-4 py-1.5 rounded-full bg-white text-neutral-950 font-bold text-xs shadow-sm">
-                      {domains.length} / 10
-                    </div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    {isScanning ? "1 / 1" : "0 / 1"}
                   </div>
-
-                  {/* DNS Safe Harbor */}
-                  <div>
-                    <div className="text-[11px] font-mono text-neutral-400 mb-1">Safe Harbor</div>
-                    <div className="px-4 py-1.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 font-bold text-xs">
-                      {verifiedDomainsCount} Verified
-                    </div>
-                  </div>
-
-                  {/* Scanner Static IP (168.144.94.35) */}
-                  <div>
-                    <div className="text-[11px] font-mono text-neutral-400 mb-1">Scanner Static IP</div>
-                    <div
-                      onClick={handleCopyIp}
-                      title="Click to copy Scanner Static IP (168.144.94.35)"
-                      className="px-4 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-slate-300 font-bold text-xs cursor-pointer [background-image:repeating-linear-gradient(45deg,#1f2937_0,#1f2937_2px,transparent_0,transparent_6px)] hover:text-emerald-400 hover:border-emerald-500/30 transition-colors"
-                    >
-                      {copiedIp ? "IP Copied!" : "168.144.94.35"}
-                    </div>
-                  </div>
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Scans available for live DAST audits
+                  </p>
                 </div>
               </div>
 
-              {/* Right: 3 Big Floating Metric Counters with HMW Telemetry */}
-              <div className="flex items-center gap-8 sm:gap-12 shrink-0">
-                {/* Counter 1: Avg Launch Score (From HMW Screen) */}
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-mono font-bold">
-                      <IconArrowUpRight className="w-3 h-3" />
-                      <span>+12%</span>
-                    </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-mono text-amber-400 leading-none">
-                      {domains.some((d) => d.lastScore) ? "98 A+" : "Ready"}
-                    </span>
+              {/* CARD 2: Monitored Domains */}
+              <div className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-colors flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-neutral-400 font-medium">Monitored Domains</span>
+                  <div className="w-7 h-7 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-neutral-400">
+                    <IconWorld className="w-3.5 h-3.5" />
                   </div>
-                  <div className="text-xs font-mono text-neutral-400">Avg Launch Score</div>
                 </div>
-
-                {/* Counter 2: DAST CVE Engines (200+) */}
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[11px] font-mono font-bold">
-                      <IconArrowUpRight className="w-3 h-3" />
-                      <span>+24%</span>
-                    </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-mono text-white leading-none">
-                      200+
-                    </span>
+                  <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    {domains.length} / 1
                   </div>
-                  <div className="text-xs font-mono text-neutral-400">DAST CVE Engines</div>
+                  <p className="text-xs text-emerald-400 font-medium mt-1">
+                    {verifiedDomainsCount} domain verified
+                  </p>
                 </div>
+              </div>
 
-                {/* Counter 3: Active Findings (0 Advisories from HMW Screen) */}
+              {/* CARD 3: Avg Launch Score */}
+              <div className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-colors flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-neutral-400 font-medium">Avg Launch Score</span>
+                  <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">
+                    <IconArrowUpRight className="w-3 h-3" />
+                    <span>+12%</span>
+                  </span>
+                </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-400 border border-teal-500/30 text-[11px] font-mono font-bold">
-                      <IconCheck className="w-3 h-3" />
-                      <span>0 CVE</span>
-                    </span>
-                    <span className="text-3xl sm:text-4xl font-extrabold font-mono text-white leading-none">
-                      0
-                    </span>
+                  <div className="text-2xl sm:text-3xl font-bold text-emerald-400 tracking-tight">
+                    98 A+
                   </div>
-                  <div className="text-xs font-mono text-neutral-400">Active Advisories</div>
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Continuous perimeter evaluation
+                  </p>
+                </div>
+              </div>
+
+              {/* CARD 4: Active Findings */}
+              <div className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-colors flex flex-col justify-between space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-neutral-400 font-medium">Active Findings</span>
+                  <div className="w-7 h-7 rounded-xl bg-emerald-950/60 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <IconShieldCheck className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                    0 Advisories
+                  </div>
+                  <p className="text-xs text-emerald-400 font-medium mt-1">
+                    0 Critical • Clean perimeter status
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* 2. MIDDLE ROW (3 CARDS) WITH HMW CONTENT */}
+            {/* 2 & 3. VULNERABILITY BREAKDOWN & QUICK PENETRATION AUDIT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
               
-              {/* CARD 1 (Left - 3 Cols): Vulnerability Breakdown Spectrum */}
-              <div className="lg:col-span-3 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between shadow-xl">
+              {/* 2. VULNERABILITY BREAKDOWN SPECTRUM (6 COLS) */}
+              <div className="lg:col-span-6 p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between shadow-xl">
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-sm font-bold text-white">Vulnerability Spectrum</h3>
-                    <span className="text-[10px] font-mono text-neutral-400 px-2 py-0.5 rounded-full bg-black border border-neutral-800">
-                      0 Total
+                    <div>
+                      <h3 className="text-base font-bold text-white tracking-tight">Vulnerability Breakdown</h3>
+                      <p className="text-xs text-neutral-400 mt-0.5">Real-time CVE & OWASP severity distribution</p>
+                    </div>
+                    <span className="text-xs text-neutral-400 px-2.5 py-1 rounded-full bg-black border border-neutral-800">
+                      0 Total Active
                     </span>
                   </div>
 
                   <div className="space-y-3">
-                    {/* Critical Severity (0) */}
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-neutral-900 border border-neutral-800">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
-                        <span className="text-xs font-medium text-slate-200">Critical Severity</span>
+                    {/* Critical Severity */}
+                    <div className="p-3 rounded-xl bg-neutral-900/90 border border-neutral-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
+                          <span className="text-xs font-semibold text-slate-200">Critical Severity</span>
+                        </div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-black text-rose-400 text-xs font-bold border border-neutral-800">
+                          0
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-black text-rose-400 text-xs font-mono font-bold border border-neutral-800">
-                        0
-                      </span>
+                      <div className="h-1.5 w-full bg-black/60 rounded-full overflow-hidden">
+                        <div className="h-full bg-rose-500 rounded-full transition-all duration-300" style={{ width: "0%" }} />
+                      </div>
                     </div>
 
-                    {/* High Severity (0) */}
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-neutral-900 border border-neutral-800">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                        <span className="text-xs font-medium text-slate-200">High Severity</span>
+                    {/* High Severity */}
+                    <div className="p-3 rounded-xl bg-neutral-900/90 border border-neutral-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                          <span className="text-xs font-semibold text-slate-200">High Severity</span>
+                        </div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-black text-amber-400 text-xs font-bold border border-neutral-800">
+                          0
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-black text-amber-400 text-xs font-mono font-bold border border-neutral-800">
-                        0
-                      </span>
+                      <div className="h-1.5 w-full bg-black/60 rounded-full overflow-hidden">
+                        <div className="h-full bg-amber-500 rounded-full transition-all duration-300" style={{ width: "0%" }} />
+                      </div>
                     </div>
 
-                    {/* Medium Severity (0) */}
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-neutral-900 border border-neutral-800">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-                        <span className="text-xs font-medium text-slate-200">Medium Severity</span>
+                    {/* Medium Severity */}
+                    <div className="p-3 rounded-xl bg-neutral-900/90 border border-neutral-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                          <span className="text-xs font-semibold text-slate-200">Medium Severity</span>
+                        </div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-black text-yellow-400 text-xs font-bold border border-neutral-800">
+                          0
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-black text-yellow-400 text-xs font-mono font-bold border border-neutral-800">
-                        0
-                      </span>
+                      <div className="h-1.5 w-full bg-black/60 rounded-full overflow-hidden">
+                        <div className="h-full bg-yellow-500 rounded-full transition-all duration-300" style={{ width: "0%" }} />
+                      </div>
                     </div>
 
-                    {/* Low & Informational (0) */}
-                    <div className="flex items-center justify-between p-3 rounded-2xl bg-neutral-900 border border-neutral-800">
-                      <div className="flex items-center gap-2.5">
-                        <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
-                        <span className="text-xs font-medium text-slate-200">Low & Info</span>
+                    {/* Low & Informational */}
+                    <div className="p-3 rounded-xl bg-neutral-900/90 border border-neutral-800 space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+                          <span className="text-xs font-semibold text-slate-200">Low & Informational</span>
+                        </div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-black text-cyan-400 text-xs font-bold border border-neutral-800">
+                          0
+                        </span>
                       </div>
-                      <span className="px-3 py-1 rounded-full bg-black text-cyan-400 text-xs font-mono font-bold border border-neutral-800">
-                        0
-                      </span>
+                      <div className="h-1.5 w-full bg-black/60 rounded-full overflow-hidden">
+                        <div className="h-full bg-cyan-400 rounded-full transition-all duration-300" style={{ width: "0%" }} />
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Bottom Callout Note */}
-                <div className="mt-5 pt-3.5 border-t border-neutral-800/80 flex items-start gap-2 text-[11px] text-neutral-400 font-mono">
-                  <span className="w-4 h-4 rounded-full bg-neutral-900 border border-neutral-800 text-emerald-400 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                    ✓
-                  </span>
-                  <span>
-                    Deterministic zero-bluff telemetry: Fleet Guard Synchronized
-                  </span>
+                {/* Bottom Status Callout */}
+                <div className="mt-4 pt-3 border-t border-neutral-800/80 flex items-center justify-between text-xs text-neutral-400">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                    <span>Deterministic zero-bluff telemetry</span>
+                  </div>
+                  <span className="text-emerald-400 font-medium">Fleet Guard Active</span>
                 </div>
               </div>
 
-              {/* CARD 2 (Center - 6 Cols): DAST Security Risk Velocity Wave Chart */}
-              <div className="lg:col-span-6 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between relative overflow-hidden shadow-xl">
+              {/* 3. QUICK PENETRATION AUDIT (6 COLS) */}
+              <div className="lg:col-span-6 p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between shadow-xl">
                 <div>
-                  {/* Header & Pill Time Toggles */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-base font-bold text-white tracking-tight">Quick Penetration Audit</h3>
+                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">
+                      Automated Pipeline
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-400 leading-relaxed mb-4">
+                    Launch automated DAST, CVE, and secret scans across your verified targets.
+                  </p>
+
+                  {/* Scanner Static IP Box */}
+                  <div className="p-3.5 rounded-xl bg-black border border-neutral-800 mb-4 flex items-center justify-between">
                     <div>
-                      <h3 className="text-sm font-bold text-white">DAST Risk Velocity</h3>
-                      <p className="text-[11px] text-neutral-400 font-mono">Clean scan execution telemetry across fleet</p>
+                      <div className="text-xs text-neutral-400 font-medium">Scanner Static IP</div>
+                      <div className="text-sm font-bold text-white tracking-wide mt-0.5">168.144.94.35</div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleCopyIp}
+                      className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-xs text-slate-300 hover:text-emerald-400 border border-neutral-800 transition-colors flex items-center gap-1.5 cursor-pointer"
+                    >
+                      <IconCopy className="w-3.5 h-3.5" />
+                      <span>{copiedIp ? "Copied!" : "Copy IP"}</span>
+                    </button>
+                  </div>
+
+                  {/* Scan Progress Bar if Active */}
+                  {isScanning && (
+                    <div className="p-3 rounded-xl bg-black border border-emerald-500/40 mb-4 space-y-1.5">
+                      <div className="flex items-center justify-between text-xs text-emerald-400">
+                        <span className="flex items-center gap-1.5 font-medium">
+                          <IconTerminal2 className="w-3.5 h-3.5 animate-spin" />
+                          DAST Pipeline Executing: Nuclei CVE + OWASP ZAP...
+                        </span>
+                        <span className="font-bold">{scanProgress}%</span>
+                      </div>
+                      <div className="h-1.5 w-full bg-neutral-900 rounded-full overflow-hidden">
+                        <div
+                          className="h-full bg-emerald-500 rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(16,185,129,0.7)]"
+                          style={{ width: `${scanProgress}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Primary & Secondary Action CTAs */}
+                <div className="space-y-2 pt-2 border-t border-neutral-800/80">
+                  <div className="flex flex-col sm:flex-row items-center gap-2.5">
+                    {/* Primary Standout CTA: MANAGE TARGET WEBSITES */}
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab("domains")}
+                      className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
+                    >
+                      <span>MANAGE TARGET WEBSITES</span>
+                      <IconArrowUpRight className="w-4 h-4 text-neutral-950 stroke-[2.5]" />
+                    </button>
+
+                    {/* Clear action to launch/run audit if verified target exists */}
+                    <button
+                      type="button"
+                      disabled={Boolean(isScanning)}
+                      onClick={() => {
+                        const verifiedDomain = domains.find((d) => d.status === "verified");
+                        if (verifiedDomain) handleTriggerScan(verifiedDomain.id);
+                        else if (domains.length > 0) handleTriggerScan(domains[0].id);
+                      }}
+                      className={cn(
+                        "w-full sm:w-auto py-3 px-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer border",
+                        isScanning
+                          ? "bg-neutral-800 text-neutral-500 border-neutral-800 cursor-not-allowed"
+                          : "bg-neutral-900 hover:bg-neutral-800 text-emerald-400 hover:text-emerald-300 border-emerald-500/40"
+                      )}
+                    >
+                      <IconPlayerPlay className="w-4 h-4 fill-current" />
+                      <span>{isScanning ? `SCANNING (${scanProgress}%)` : "RUN SECURITY AUDIT"}</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* 4. MONITORED TARGET DOMAINS */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all shadow-xl space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-base font-bold text-white tracking-tight">
+                    Monitored Target Domains ({domains.length})
+                  </h3>
+                  <p className="text-xs text-neutral-400 mt-0.5">
+                    Continuous monitoring, ownership verification, and security re-tests
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsAddDomainOpen(true)}
+                    className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-slate-300 hover:text-white border border-neutral-800 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  >
+                    <IconPlus className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Add Website</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab("domains")}
+                    className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-slate-300 hover:text-white border border-neutral-800 text-xs font-semibold transition-colors cursor-pointer"
+                  >
+                    View All
+                  </button>
+                </div>
+              </div>
+
+              {/* Clean Domain Cards Grid - Essential Information Only */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {domains.map((d) => {
+                  const isVer = d.status === "verified";
+                  const isThisScanning = isScanning === d.id;
+                  return (
+                    <div
+                      key={d.id}
+                      className="p-4 rounded-xl bg-black border border-neutral-800/80 hover:border-neutral-700 transition-colors flex flex-col justify-between space-y-3"
+                    >
+                      <div>
+                        {/* Domain URL & Status Badge */}
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <div className="flex items-center gap-2 min-w-0">
+                            <IconWorld className="w-4 h-4 text-emerald-400 shrink-0" />
+                            <span className="text-xs font-bold text-white truncate">{d.url}</span>
+                          </div>
+                          <span
+                            className={cn(
+                              "text-xs px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider shrink-0",
+                              isVer
+                                ? "bg-emerald-950/80 text-emerald-400 border border-emerald-500/30"
+                                : "bg-amber-950/80 text-amber-400 border border-amber-500/30"
+                            )}
+                          >
+                            {isVer ? "SAFE HARBOR VERIFIED" : "PENDING DNS"}
+                          </span>
+                        </div>
+
+                        {/* Status / Date Line */}
+                        <div className="flex items-center justify-between text-xs text-neutral-400 mt-1">
+                          {isVer ? (
+                            <span className="text-emerald-400 font-medium">
+                              Score: {d.lastScore || "98/100"} • Continuous DAST active
+                            </span>
+                          ) : (
+                            <span className="text-neutral-500">
+                              Added {d.addedDate} • DNS TXT verification pending
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* In-flight Scan Progress */}
+                      {isThisScanning && (
+                        <div className="p-2.5 rounded-lg bg-neutral-900 border border-emerald-500/30 text-xs space-y-1">
+                          <div className="flex justify-between text-emerald-400 font-medium">
+                            <span>Scanning...</span>
+                            <span>{scanProgress}%</span>
+                          </div>
+                          <div className="w-full h-1.5 rounded-full bg-black overflow-hidden">
+                            <div
+                              className="h-full bg-emerald-500 transition-all duration-300"
+                              style={{ width: `${scanProgress}%` }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Primary Actions */}
+                      <div className="flex items-center gap-2 pt-2 border-t border-neutral-800/80">
+                        {isVer ? (
+                          <>
+                            <button
+                              type="button"
+                              onClick={() => handleTriggerScan(d.id)}
+                              className="flex-1 py-2 px-3 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-emerald-400 hover:text-emerald-300 border border-neutral-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                            >
+                              <IconPlayerPlay className="w-3.5 h-3.5 fill-current" />
+                              <span>Re-Run Audit</span>
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setActiveTab("audits")}
+                              className="py-2 px-3 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-300 hover:text-white border border-neutral-800 text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                            >
+                              <span>Analytics</span>
+                              <IconArrowUpRight className="w-3.5 h-3.5" />
+                            </button>
+                          </>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => setVerifyTarget(d)}
+                            className="w-full py-2 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-sm"
+                          >
+                            <IconKey className="w-3.5 h-3.5 text-neutral-950" />
+                            <span>Verify Domain</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 5. COMPACT COPILOT / QUICK ACTIONS */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all shadow-xl">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                <div>
+                  <h3 className="text-base font-bold text-white flex items-center gap-1.5">
+                    <span>Quick Actions & Security Copilot</span>
+                    <span className="text-base">⚡</span>
+                  </h3>
+                  <p className="text-xs text-neutral-400 mt-0.5">
+                    Instant shortcuts for fleet management and telemetry checks
+                  </p>
+                </div>
+              </div>
+
+              {/* 4 Useful Action Buttons */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { label: "Quick DAST Audit", icon: IconPlayerPlay, color: "text-emerald-400", action: () => handleCopilotAction("Quick DAST Audit") },
+                  { label: "Verify DNS TXT", icon: IconKey, color: "text-amber-400", action: () => handleCopilotAction("Verify DNS TXT") },
+                  { label: "Add Target Domain", icon: IconWorld, color: "text-cyan-400", action: () => handleCopilotAction("Add Target Domain") },
+                  { label: "Copy Static IP", icon: IconCopy, color: "text-teal-300", action: () => handleCopilotAction("Copy Static IP") },
+                ].map((btn, idx) => {
+                  const Icon = btn.icon;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      onClick={btn.action}
+                      className="p-3 rounded-xl bg-black hover:bg-neutral-900 border border-neutral-800 hover:border-neutral-700 flex items-center gap-2 text-xs font-semibold text-slate-200 transition-colors cursor-pointer text-left"
+                    >
+                      <Icon className={cn("w-3.5 h-3.5 shrink-0", btn.color)} />
+                      <span className="truncate">{btn.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Copilot feedback banner if present */}
+              {copilotResponse && (
+                <div className="p-3 rounded-xl bg-black border border-emerald-500/30 text-xs text-emerald-400 flex items-start justify-between gap-2 mt-3">
+                  <span>{copilotResponse}</span>
+                  <button
+                    type="button"
+                    onClick={() => setCopilotResponse(null)}
+                    className="text-neutral-500 hover:text-white"
+                  >
+                    <IconX className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+          </div>
+        )}
+
+        {/* ===================== OTHER TABS ===================== */}
+        {activeTab === "domains" && (
+          <div className="space-y-6 mb-10">
+            {/* Top Card: Register & Verify New Website matching media_1790272212696.png */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Register & Verify New Website
+              </h3>
+              <p className="text-xs text-neutral-400 ">
+                Paste the exact HTTPS origin you own. Safe Harbor verification is required before initiating penetration scans.
+              </p>
+              <form onSubmit={handleAddDomain} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                <div className="flex-1 flex items-center gap-2 px-4 py-3 rounded-2xl bg-black border border-neutral-800 focus-within:border-emerald-500/50">
+                  <span className="text-neutral-500  text-xs">https://</span>
+                  <input
+                    type="text"
+                    required
+                    placeholder="yourwebsite.com"
+                    value={newDomainUrl.replace(/^https?:\/\//, "")}
+                    onChange={(e) => setNewDomainUrl(e.target.value)}
+                    className="w-full bg-transparent text-xs text-white  focus:outline-none placeholder-neutral-600"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer transition-colors uppercase tracking-wider"
+                >
+                  ADD DOMAIN
+                </button>
+              </form>
+            </div>
+
+            {/* Bottom Card: Monitored Target Websites matching media_1790272212696.png */}
+            <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    Monitored Target Websites ({domains.length})
+                  </h3>
+                  <p className="text-xs text-neutral-400  mt-1">
+                    Click any domain card for deep analytics, vulnerability history, and multi-mode scan controls.
+                  </p>
+                </div>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 text-xs ">
+                  <IconShieldCheck className="w-4 h-4" />
+                  <span>{verifiedDomainsCount} / {domains.length} Verified Safe Harbor</span>
+                </div>
+              </div>
+
+              {/* Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
+                {domains.map((d) => {
+                  const isVer = d.status === "verified";
+                  const isThisScanning = isScanning === d.id;
+                  return (
+                    <div
+                      key={d.id}
+                      className="p-5 rounded-2xl bg-black border border-neutral-800 flex flex-col justify-between space-y-4 hover:border-neutral-700 transition-colors"
+                    >
+                      {/* Top Header of Card */}
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-8 h-8 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                            <IconWorld className="w-4 h-4" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="text-xs  font-bold text-white truncate">
+                              {d.url}
+                            </div>
+                            <div className="text-xs text-neutral-500 ">
+                              Added {d.addedDate}
+                            </div>
+                          </div>
+                        </div>
+
+                        <span
+                          className={cn(
+                            "text-xs  px-2 py-0.5 rounded-md uppercase font-bold shrink-0",
+                            isVer
+                              ? "bg-emerald-950/80 text-emerald-400 border border-emerald-500/30"
+                              : "bg-amber-950/80 text-amber-400 border border-amber-500/30"
+                          )}
+                        >
+                          {isVer ? "Verified" : "Unverified"}
+                        </span>
+                      </div>
+
+                      {/* Inset Metric Block */}
+                      <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800/90  space-y-2 text-xs">
+                        <div className="flex justify-between items-center text-neutral-400 text-xs uppercase">
+                          <span>LAUNCH SCORE</span>
+                          <span>AI MONITOR</span>
+                        </div>
+                        <div className="flex justify-between items-baseline">
+                          <span className={cn("text-base font-bold", isVer ? "text-emerald-400" : "text-white")}>
+                            {d.lastScore || (isVer ? "98/100 A+" : "Not Scanned")}
+                          </span>
+                          <span className="text-xs text-slate-300">
+                            {isVer ? "Continuous 24/7" : "Manual Only"}
+                          </span>
+                        </div>
+                        <div className="pt-2 border-t border-neutral-800/80 flex items-center justify-between text-xs">
+                          <span className="px-2 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-slate-300 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                            <span>{isVer ? "3 Audits" : "0 Audits"}</span>
+                          </span>
+                          <span className="text-neutral-500">Safe Harbor Auth</span>
+                        </div>
+                      </div>
+
+                      {/* In-flight Scan Progress */}
+                      {isThisScanning && (
+                        <div className="p-2.5 rounded-xl bg-neutral-900/90 border border-emerald-500/30  text-xs space-y-1.5">
+                          <div className="flex justify-between text-emerald-400">
+                            <span>Scanning DAST Probes...</span>
+                            <span>{scanProgress}%</span>
+                          </div>
+                          <div className="w-full h-1.5 rounded-full bg-black overflow-hidden">
+                            <div
+                              className="h-full bg-emerald-500 transition-all duration-300"
+                              style={{ width: `${scanProgress}%` }}
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Action Buttons */}
+                      <div className="space-y-2 pt-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (!isVer) setVerifyTarget(d);
+                            else setActiveTab("audits");
+                          }}
+                          className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                        >
+                          <span>MANAGE & DEEP DIVE</span>
+                          <IconArrowUpRight className="w-4 h-4" />
+                        </button>
+
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => (isVer ? handleTriggerScan(d.id) : setVerifyTarget(d))}
+                            className="flex-1 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs  font-medium flex items-center justify-center gap-1.5 cursor-pointer"
+                          >
+                            <IconPlayerPlay className="w-3.5 h-3.5 text-emerald-400" />
+                            <span>{isVer ? "Quick Scan" : "Verify DNS"}</span>
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteDomain(d.id)}
+                            title="Delete Target"
+                            className="p-2 rounded-xl bg-neutral-900 hover:bg-red-950/80 text-neutral-400 hover:text-red-400 border border-neutral-800 hover:border-red-500/30 transition-colors cursor-pointer"
+                          >
+                            <IconTrash className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+
+                {activeTab === "audits" && (
+          <div className="space-y-6 mb-10">
+            {/* Relocated Analytics: DAST Risk Velocity & Fleet Telemetry */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+              
+              {/* DAST Risk Velocity Wave Chart (8 Cols) */}
+              <div className="lg:col-span-8 p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between relative overflow-hidden shadow-xl">
+                <div>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div>
+                      <h3 className="text-base font-bold text-white tracking-tight">DAST Risk Velocity</h3>
+                      <p className="text-xs text-neutral-400 mt-0.5">Clean scan execution telemetry across fleet</p>
                     </div>
 
-                    <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-full border border-neutral-800 text-[11px] font-mono">
+                    <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-full border border-neutral-800 text-xs">
                       <button
                         type="button"
                         onClick={() => setTimeRange("12months")}
@@ -744,23 +1186,19 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                   {/* Chart Canvas with SVG Dual Smooth Curves & Floating Tooltip */}
                   <div className="relative pt-6 pb-2">
-                    
-                    {/* Floating Tooltip at Peak */}
                     <div className="absolute top-1 left-[52%] -translate-x-1/2 px-3 py-1.5 rounded-xl bg-neutral-900/95 border border-emerald-500/40 shadow-2xl backdrop-blur-md text-center pointer-events-none z-20">
-                      <div className="text-[10px] text-neutral-400 font-mono">7 September</div>
-                      <div className="text-xs font-bold text-emerald-400 font-mono">318 Scans Passed (0 Advisories)</div>
+                      <div className="text-xs text-neutral-400">7 September</div>
+                      <div className="text-xs font-bold text-emerald-400">318 Scans Passed (0 Advisories)</div>
                     </div>
 
                     <div className="flex items-stretch gap-3">
-                      {/* Y-axis Labels */}
-                      <div className="flex flex-col justify-between text-[10px] font-mono text-neutral-500 py-1 shrink-0 h-44">
+                      <div className="flex flex-col justify-between text-xs text-neutral-500 py-1 shrink-0 h-44">
                         <span>400</span>
                         <span>300</span>
                         <span>200</span>
                         <span>100</span>
                       </div>
 
-                      {/* SVG Wave */}
                       <div className="flex-1 relative">
                         <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible" preserveAspectRatio="none">
                           <defs>
@@ -776,13 +1214,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                             </linearGradient>
                           </defs>
 
-                          {/* Horizontal Gridlines */}
                           <line x1="0" y1="20" x2="600" y2="20" stroke="#1c1f2e" strokeDasharray="3 3" />
                           <line x1="0" y1="70" x2="600" y2="70" stroke="#1c1f2e" strokeDasharray="3 3" />
                           <line x1="0" y1="120" x2="600" y2="120" stroke="#1c1f2e" strokeDasharray="3 3" />
                           <line x1="0" y1="170" x2="600" y2="170" stroke="#1c1f2e" strokeDasharray="3 3" />
 
-                          {/* Curve 1: Emerald Sine Wave */}
                           <motion.path
                             d="M 0 160 C 40 170, 70 135, 110 130 C 150 125, 175 45, 215 45 C 255 45, 275 165, 315 165 C 355 165, 375 65, 415 65 C 455 65, 495 140, 545 130 C 575 125, 590 140, 600 145"
                             fill="none"
@@ -793,7 +1229,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                             transition={{ duration: 1.2, ease: "easeInOut" }}
                           />
 
-                          {/* Curve 2: Cyan/Teal Sine Wave */}
                           <motion.path
                             d="M 0 80 C 40 55, 80 140, 130 140 C 180 140, 230 95, 270 90 C 305 85, 315 48, 335 45 C 360 42, 385 135, 430 135 C 475 135, 510 60, 555 55 C 580 50, 590 65, 600 70"
                             fill="none"
@@ -804,7 +1239,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                             transition={{ duration: 1.4, ease: "easeInOut" }}
                           />
 
-                          {/* Glowing Pulsing Node on Wave Peak */}
                           <circle cx="335" cy="45" r="7" fill="#10B981" className="animate-ping opacity-60" />
                           <circle cx="335" cy="45" r="5" fill="#34D399" />
                           <circle cx="335" cy="45" r="2.5" fill="#ffffff" />
@@ -812,8 +1246,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       </div>
                     </div>
 
-                    {/* X-axis Date Markers */}
-                    <div className="flex items-center justify-between text-[10px] font-mono text-neutral-500 pl-8 pt-2">
+                    <div className="flex items-center justify-between text-xs text-neutral-500 pl-8 pt-2">
                       <span>24 Aug</span>
                       <span>31 Aug</span>
                       <span className="text-emerald-400 font-bold">7 Sept</span>
@@ -825,471 +1258,53 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </div>
               </div>
 
-              {/* CARD 3 (Right - 3 Cols): Quick Penetration Audit (From HMW Screen) */}
-              <div className="lg:col-span-3 p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-900 border border-emerald-500/40 shadow-2xl shadow-emerald-500/20 flex flex-col justify-between text-white relative overflow-hidden group">
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-base font-bold text-white tracking-tight">Quick Penetration Audit</h3>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (domains.length > 0) handleTriggerScan(domains[0].id);
-                      }}
-                      className="w-8 h-8 rounded-full bg-emerald-950/60 border border-emerald-400/40 hover:bg-emerald-900 text-white flex items-center justify-center transition-colors cursor-pointer"
-                      title="Trigger Automated Security Audit"
-                    >
-                      <IconArrowUpRight className="w-4 h-4 text-white" />
-                    </button>
-                  </div>
-                  <p className="text-xs text-emerald-100 leading-relaxed font-normal mb-5">
-                    Launch automated 200+ DAST, CVE Nuclei, and secret scans across verified targets with a single click.
-                  </p>
-                </div>
-
-                {/* Overlapping tilted 3D Cards with HMW Telemetry */}
-                <div className="relative pt-2 pb-1">
-                  {/* Bottom Peaking Shadow Layer */}
-                  <div className="w-[86%] mx-auto h-5 bg-emerald-300/30 rounded-2xl -mb-3 shadow" />
-
-                  {/* Middle Light Card (DAST Safe Harbor) */}
-                  <div className="relative z-10 p-3.5 rounded-2xl bg-emerald-100 text-neutral-900 shadow-md flex items-center justify-between transform rotate-2 hover:rotate-0 transition-transform mb-[-8px]">
-                    <span className="text-xs font-semibold text-neutral-900">Safe Harbor DAST</span>
-                    <span className="px-2.5 py-0.5 rounded-full bg-neutral-950 text-emerald-400 font-mono text-[10px] font-bold">
-                      200+ Tests
-                    </span>
-                  </div>
-
-                  {/* Top White Card (Scanner Static IP) */}
-                  <div className="relative z-20 p-3.5 rounded-2xl bg-white text-neutral-950 shadow-xl flex items-center justify-between transform -rotate-1 hover:rotate-0 transition-transform">
-                    <div className="text-xs font-bold text-neutral-950">Scanner Static IP</div>
-                    <div className="px-2.5 py-0.5 rounded-full bg-neutral-950 text-emerald-400 font-mono text-[10px] font-bold">
-                      168.144.94.35
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 3. BOTTOM ROW (3 CARDS) WITH HMW CONTENT */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-              
-              {/* CARD 4 (Left - 5 Cols): Monitored Target Domains (From HMW Screen) */}
-              <div className="lg:col-span-5 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between shadow-xl">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="text-sm font-bold text-white">Monitored Target Domains</h3>
-                      <p className="text-[11px] text-neutral-400 font-mono">Manage ownership and launch security audits</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-mono text-neutral-400 px-2.5 py-1 rounded-full bg-neutral-900 border border-neutral-800">
-                        View All ({domains.length})
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Domains Cards Grid (Directly from HMW screen) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    {/* Domain 1: https://www.mvpstudio.in (Pending DNS) */}
-                    <div className="p-4 rounded-2xl bg-black border border-neutral-800/80 flex flex-col justify-between space-y-3">
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="px-2.5 py-0.5 rounded-full bg-neutral-900 text-amber-400 border border-amber-500/20 text-[10px] font-mono font-semibold uppercase">
-                            Pending DNS
-                          </span>
-                          <div className="text-[10px] font-mono text-neutral-400">
-                            Sep 5, 2026
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-white font-bold truncate">
-                          <IconWorld className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                          <span className="truncate">https://www.mvpstudio.in</span>
-                        </div>
-                        <p className="text-[11px] text-neutral-400 font-mono mt-1">
-                          Safe Harbor authorization token pending verification.
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-2 pt-2 border-t border-neutral-800/80">
-                        <button
-                          type="button"
-                          onClick={() => setVerifyTarget(domains[0])}
-                          className="flex-1 py-1.5 px-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-amber-400 text-xs font-mono font-medium flex items-center justify-center gap-1 transition-colors border border-neutral-800"
-                        >
-                          <IconKey className="w-3 h-3 text-amber-400" />
-                          <span>Verify Domain 🔑</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleTriggerScan(domains[0]?.id)}
-                          className="p-1.5 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/60 text-emerald-400 border border-emerald-500/30 text-xs transition-colors"
-                          title="Quick Scan"
-                        >
-                          <IconPlayerPlay className="w-3.5 h-3.5 fill-emerald-400" />
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Domain 2: Entered / Second Target */}
-                    <div className="p-4 rounded-2xl bg-black border border-neutral-800/80 flex flex-col justify-between space-y-3">
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-semibold uppercase">
-                            Safe Harbor Verified
-                          </span>
-                          <div className="text-[10px] font-mono text-neutral-400">
-                            {domains[1]?.addedDate || "Sep 24, 2026"}
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-white font-bold truncate">
-                          <IconWorld className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                          <span className="truncate">{domains[1]?.url || "https://app.startup.io"}</span>
-                        </div>
-                        <p className="text-[11px] text-emerald-400 font-mono mt-1">
-                          Score: {domains[1]?.lastScore || "98/100 A+"} • Continuous DAST active
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-2 pt-2 border-t border-neutral-800/80">
-                        <button
-                          type="button"
-                          onClick={() => handleTriggerScan(domains[1]?.id || "target-demo")}
-                          className="flex-1 py-1.5 px-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-mono font-medium flex items-center justify-center gap-1 transition-colors border border-neutral-800"
-                        >
-                          <IconActivity className="w-3 h-3 text-emerald-400" />
-                          <span>Re-Run Audit</span>
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleTriggerScan(domains[1]?.id || "target-demo")}
-                          className="p-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 text-xs transition-colors font-bold"
-                          title="Quick Scan"
-                        >
-                          <IconPlayerPlay className="w-3.5 h-3.5 fill-neutral-950" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* In-flight Scan Progress if scanning */}
-                {isScanning && (
-                  <div className="mt-4 p-3 rounded-2xl bg-black border border-emerald-500/40 space-y-1.5">
-                    <div className="flex items-center justify-between text-xs font-mono text-emerald-400">
-                      <span className="flex items-center gap-1.5">
-                        <IconTerminal2 className="w-3.5 h-3.5 animate-spin" />
-                        DAST Pipeline Executing: Nuclei CVE + OWASP ZAP...
-                      </span>
-                      <span className="font-bold">{scanProgress}%</span>
-                    </div>
-                    <div className="h-1.5 w-full bg-neutral-900 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-emerald-500 rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(16,185,129,0.7)]"
-                        style={{ width: `${scanProgress}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* CARD 5 (Center - 3 Cols): Statistics Overlapping Bubbles (HMW Fleet Telemetry) */}
-              <div className="lg:col-span-3 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all relative overflow-hidden flex flex-col justify-between shadow-xl">
+              {/* Fleet Telemetry (4 Cols) */}
+              <div className="lg:col-span-4 p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all relative overflow-hidden flex flex-col justify-between shadow-xl">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h3 className="text-sm font-bold text-white">Fleet Telemetry</h3>
-                    <p className="text-[10px] text-neutral-500 font-mono">Safe Harbor & quota coverage</p>
+                    <h3 className="text-base font-bold text-white tracking-tight">Fleet Telemetry</h3>
+                    <p className="text-xs text-neutral-500 mt-0.5">Safe Harbor & quota coverage</p>
                   </div>
-                  <button
-                    type="button"
-                    className="w-7 h-7 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 flex items-center justify-center text-neutral-300 transition-colors cursor-pointer"
-                  >
-                    <IconArrowUpRight className="w-3.5 h-3.5" />
-                  </button>
                 </div>
 
-                {/* Organic Overlapping Bubble Circles in Emerald & Cyan */}
                 <div className="relative flex items-center justify-center py-6 my-auto">
-                  {/* Big Emerald Bubble (Safe Harbor 100%) */}
-                  <div className="w-32 h-32 rounded-full bg-emerald-500 flex flex-col items-center justify-center text-neutral-950 shadow-2xl shadow-emerald-500/25 relative z-10">
-                    <span className="text-2xl font-black font-mono leading-none mb-0.5">100%</span>
-                    <span className="text-[11px] font-semibold text-neutral-900">Safe Harbor</span>
+                  <div className="w-28 h-28 rounded-full bg-emerald-500 flex flex-col items-center justify-center text-neutral-950 shadow-2xl shadow-emerald-500/25 relative z-10">
+                    <span className="text-2xl font-bold leading-none mb-0.5">100%</span>
+                    <span className="text-xs font-semibold text-neutral-900">Safe Harbor</span>
                   </div>
 
-                  {/* Medium Cyan Bubble (0 CVE Advisories) */}
-                  <div className="w-24 h-24 rounded-full bg-cyan-500 flex flex-col items-center justify-center text-neutral-950 shadow-xl shadow-cyan-500/20 -ml-6 mt-8 relative z-20">
-                    <span className="text-lg font-bold font-mono leading-none mb-0.5">0 CVE</span>
-                    <span className="text-[10px] font-medium text-neutral-900">Advisories</span>
+                  <div className="w-20 h-20 rounded-full bg-cyan-500 flex flex-col items-center justify-center text-neutral-950 shadow-xl shadow-cyan-500/20 -ml-5 mt-6 relative z-20">
+                    <span className="text-base font-bold leading-none mb-0.5">0 CVE</span>
+                    <span className="text-xs font-medium text-neutral-900">Advisories</span>
                   </div>
 
-                  {/* Small Striped Dark Bubble (150 Scans Quota) */}
-                  <div className="w-16 h-16 rounded-full bg-neutral-900 border border-neutral-700 flex flex-col items-center justify-center text-emerald-400 -mt-16 -ml-4 relative z-30 [background-image:repeating-linear-gradient(45deg,#1f2937_0,#1f2937_2px,transparent_0,transparent_6px)] shadow-lg">
-                    <span className="text-xs font-bold font-mono leading-none mb-0.5">150</span>
-                    <span className="text-[9px] text-neutral-400">Quota</span>
+                  <div className="w-14 h-14 rounded-full bg-neutral-900 border border-neutral-700 flex flex-col items-center justify-center text-emerald-400 -mt-14 -ml-3 relative z-30 [background-image:repeating-linear-gradient(45deg,#1f2937_0,#1f2937_2px,transparent_0,transparent_6px)] shadow-lg">
+                    <span className="text-xs font-bold leading-none mb-0.5">150</span>
+                    <span className="text-xs text-neutral-400">Quota</span>
                   </div>
                 </div>
 
-                {/* Bottom-left Paper Peel / Curled Fold Effect */}
-                <div className="absolute bottom-0 left-0 w-9 h-9 overflow-hidden rounded-bl-3xl pointer-events-none">
-                  <div className="absolute -bottom-4.5 -left-4.5 w-9 h-9 bg-neutral-900 rotate-45 border-t border-r border-neutral-700 shadow-lg" />
+                <div className="pt-3 border-t border-neutral-800/80 flex items-center justify-between text-xs text-neutral-400">
+                  <span>Coverage Status:</span>
+                  <span className="text-emerald-400 font-semibold">100% Monitored</span>
                 </div>
-              </div>
-
-              {/* CARD 6 (Right - 4 Cols): HMW Security Copilot */}
-              <div className="lg:col-span-4 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between shadow-xl">
-                <div>
-                  <div className="mb-4">
-                    <h3 className="text-base font-bold text-white flex items-center gap-1.5">
-                      <span>Hi, Rishi</span>
-                      <span className="text-lg">👋</span>
-                    </h3>
-                    <p className="text-sm font-semibold text-slate-300">How can I help you?</p>
-                  </div>
-
-                  {/* 4 Quick Action Buttons (HMW Cybersecurity Focused) */}
-                  <div className="grid grid-cols-2 gap-2.5 mb-4">
-                    {[
-                      { label: "Quick DAST Audit", icon: IconPlayerPlay, color: "text-emerald-400" },
-                      { label: "Verify DNS TXT", icon: IconKey, color: "text-amber-400" },
-                      { label: "Add Target Domain", icon: IconWorld, color: "text-cyan-400" },
-                      { label: "Copy Static IP", icon: IconCopy, color: "text-teal-300" },
-                    ].map((btn, idx) => {
-                      const Icon = btn.icon;
-                      return (
-                        <button
-                          key={idx}
-                          type="button"
-                          onClick={() => handleCopilotAction(btn.label)}
-                          className="p-3 rounded-2xl bg-neutral-900 hover:bg-neutral-850 border border-neutral-800 flex items-center gap-2 text-xs font-medium text-slate-200 transition-colors text-left cursor-pointer"
-                        >
-                          <Icon className={cn("w-3.5 h-3.5 shrink-0", btn.color)} />
-                          <span className="truncate">{btn.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* Simulated Copilot Response Banner if triggered */}
-                  {copilotResponse && (
-                    <div className="p-3 rounded-xl bg-black border border-emerald-500/30 text-xs font-mono text-emerald-400 mb-3 flex items-start justify-between gap-2">
-                      <span>{copilotResponse}</span>
-                      <button
-                        type="button"
-                        onClick={() => setCopilotResponse(null)}
-                        className="text-neutral-500 hover:text-white"
-                      >
-                        <IconX className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Bottom Input Box */}
-                <form onSubmit={handleCopilotSubmit} className="relative mt-2">
-                  <input
-                    type="text"
-                    placeholder="Ask HMW Copilot (e.g. audit target, WAF IP)..."
-                    value={copilotQuery}
-                    onChange={(e) => setCopilotQuery(e.target.value)}
-                    className="w-full pl-4 pr-10 py-3 rounded-2xl bg-neutral-900 border border-neutral-800 text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50 transition-all font-mono"
-                  />
-                  <button
-                    type="submit"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 hover:text-emerald-300 cursor-pointer"
-                  >
-                    <IconSparkles className="w-4 h-4" />
-                  </button>
-                </form>
               </div>
 
             </div>
-
-          </div>
-        )}
-
-        {/* ===================== OTHER TABS ===================== */}
-        {activeTab === "domains" && (
-          <div className="space-y-6 mb-10">
-            {/* Top Card: Register & Verify New Website matching media_1790272212696.png */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
-              <h3 className="text-xl font-black text-white tracking-tight">
-                Register & Verify New Website
-              </h3>
-              <p className="text-xs text-neutral-400 font-mono">
-                Paste the exact HTTPS origin you own. Safe Harbor verification is required before initiating penetration scans.
-              </p>
-              <form onSubmit={handleAddDomain} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-                <div className="flex-1 flex items-center gap-2 px-4 py-3 rounded-2xl bg-black border border-neutral-800 focus-within:border-emerald-500/50">
-                  <span className="text-neutral-500 font-mono text-xs">https://</span>
-                  <input
-                    type="text"
-                    required
-                    placeholder="yourwebsite.com"
-                    value={newDomainUrl.replace(/^https?:\/\//, "")}
-                    onChange={(e) => setNewDomainUrl(e.target.value)}
-                    className="w-full bg-transparent text-xs text-white font-mono focus:outline-none placeholder-neutral-600"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer transition-colors uppercase tracking-wider"
-                >
-                  ADD DOMAIN
-                </button>
-              </form>
-            </div>
-
-            {/* Bottom Card: Monitored Target Websites matching media_1790272212696.png */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <h3 className="text-xl font-black text-white tracking-tight">
-                    Monitored Target Websites ({domains.length})
-                  </h3>
-                  <p className="text-xs text-neutral-400 font-mono mt-1">
-                    Click any domain card for deep analytics, vulnerability history, and multi-mode scan controls.
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
-                  <IconShieldCheck className="w-4 h-4" />
-                  <span>{verifiedDomainsCount} / {domains.length} Verified Safe Harbor</span>
-                </div>
-              </div>
-
-              {/* Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pt-2">
-                {domains.map((d) => {
-                  const isVer = d.status === "verified";
-                  const isThisScanning = isScanning === d.id;
-                  return (
-                    <div
-                      key={d.id}
-                      className="p-5 rounded-2xl bg-black border border-neutral-800 flex flex-col justify-between space-y-4 hover:border-neutral-700 transition-colors"
-                    >
-                      {/* Top Header of Card */}
-                      <div className="flex items-start justify-between gap-2">
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <div className="w-8 h-8 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
-                            <IconWorld className="w-4 h-4" />
-                          </div>
-                          <div className="min-w-0">
-                            <div className="text-xs font-mono font-bold text-white truncate">
-                              {d.url}
-                            </div>
-                            <div className="text-[10px] text-neutral-500 font-mono">
-                              Added {d.addedDate}
-                            </div>
-                          </div>
-                        </div>
-
-                        <span
-                          className={cn(
-                            "text-[10px] font-mono px-2 py-0.5 rounded-md uppercase font-bold shrink-0",
-                            isVer
-                              ? "bg-emerald-950/80 text-emerald-400 border border-emerald-500/30"
-                              : "bg-amber-950/80 text-amber-400 border border-amber-500/30"
-                          )}
-                        >
-                          {isVer ? "Verified" : "Unverified"}
-                        </span>
-                      </div>
-
-                      {/* Inset Metric Block */}
-                      <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800/90 font-mono space-y-2 text-xs">
-                        <div className="flex justify-between items-center text-neutral-400 text-[10px] uppercase">
-                          <span>LAUNCH SCORE</span>
-                          <span>AI MONITOR</span>
-                        </div>
-                        <div className="flex justify-between items-baseline">
-                          <span className={cn("text-base font-black", isVer ? "text-emerald-400" : "text-white")}>
-                            {d.lastScore || (isVer ? "98/100 A+" : "Not Scanned")}
-                          </span>
-                          <span className="text-[11px] text-slate-300">
-                            {isVer ? "Continuous 24/7" : "Manual Only"}
-                          </span>
-                        </div>
-                        <div className="pt-2 border-t border-neutral-800/80 flex items-center justify-between text-[10px]">
-                          <span className="px-2 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-slate-300 flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                            <span>{isVer ? "3 Audits" : "0 Audits"}</span>
-                          </span>
-                          <span className="text-neutral-500">Safe Harbor Auth</span>
-                        </div>
-                      </div>
-
-                      {/* In-flight Scan Progress */}
-                      {isThisScanning && (
-                        <div className="p-2.5 rounded-xl bg-neutral-900/90 border border-emerald-500/30 font-mono text-[10px] space-y-1.5">
-                          <div className="flex justify-between text-emerald-400">
-                            <span>Scanning DAST Probes...</span>
-                            <span>{scanProgress}%</span>
-                          </div>
-                          <div className="w-full h-1.5 rounded-full bg-black overflow-hidden">
-                            <div
-                              className="h-full bg-emerald-500 transition-all duration-300"
-                              style={{ width: `${scanProgress}%` }}
-                            />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Action Buttons */}
-                      <div className="space-y-2 pt-1">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (!isVer) setVerifyTarget(d);
-                            else setActiveTab("audits");
-                          }}
-                          className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5"
-                        >
-                          <span>MANAGE & DEEP DIVE</span>
-                          <IconArrowUpRight className="w-4 h-4" />
-                        </button>
-
-                        <div className="flex items-center gap-2">
-                          <button
-                            type="button"
-                            onClick={() => (isVer ? handleTriggerScan(d.id) : setVerifyTarget(d))}
-                            className="flex-1 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs font-mono font-medium flex items-center justify-center gap-1.5 cursor-pointer"
-                          >
-                            <IconPlayerPlay className="w-3.5 h-3.5 text-emerald-400" />
-                            <span>{isVer ? "Quick Scan" : "Verify DNS"}</span>
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteDomain(d.id)}
-                            title="Delete Target"
-                            className="p-2 rounded-xl bg-neutral-900 hover:bg-red-950/80 text-neutral-400 hover:text-red-400 border border-neutral-800 hover:border-red-500/30 transition-colors cursor-pointer"
-                          >
-                            <IconTrash className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {activeTab === "audits" && (
-          <div className="space-y-6 mb-10">
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-6">
               {/* Header with Title and Filter Pills from media_1790272244432.png */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-black text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     Security Audits & Scan Stream
                   </h3>
-                  <p className="text-xs text-neutral-400 font-mono mt-1">
+                  <p className="text-xs text-neutral-400  mt-1">
                     Real-time audit history, multi-engine progress, AI Launch Scores, and PDF reports.
                   </p>
                 </div>
 
                 {/* Filter Pills from media_1790272244432.png */}
-                <div className="flex items-center bg-black border border-neutral-800 rounded-full p-1 text-xs font-mono">
+                <div className="flex items-center bg-black border border-neutral-800 rounded-full p-1 text-xs ">
                   {(["all", "completed", "active", "failed"] as const).map((mode) => {
                     const countMap = { all: 3, completed: 2, active: 1, failed: 0 };
                     const isActive = auditFilter === mode;
@@ -1314,7 +1329,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
               {/* When Failed filter selected -> Exact UI from media_1790272244432.png */}
               {auditFilter === "failed" ? (
-                <div className="p-12 rounded-2xl bg-black/60 border border-neutral-800/80 text-center font-mono text-xs text-neutral-500">
+                <div className="p-12 rounded-2xl bg-black/60 border border-neutral-800/80 text-center  text-xs text-neutral-500">
                   No scans match the selected filter.
                 </div>
               ) : (
@@ -1325,13 +1340,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <div className="p-5 rounded-2xl bg-black border border-neutral-800 hover:border-neutral-700 transition-colors space-y-4">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-neutral-800/80">
                         <div className="flex items-center gap-3">
-                          <span className="text-xs font-mono font-bold text-emerald-400">
+                          <span className="text-xs  font-bold text-emerald-400">
                             AUD-2026-0924-01
                           </span>
-                          <span className="text-white font-mono font-semibold text-xs truncate max-w-xs">
+                          <span className="text-white  font-semibold text-xs truncate max-w-xs">
                             https://www.mvpstudio.in
                           </span>
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30">
+                          <span className="px-2 py-0.5 rounded text-xs  font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30">
                             COMPLETED
                           </span>
                         </div>
@@ -1339,7 +1354,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                           <button
                             type="button"
                             onClick={() => setIsPdfModalOpen(true)}
-                            className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs font-mono flex items-center gap-1.5 cursor-pointer"
+                            className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs  flex items-center gap-1.5 cursor-pointer"
                           >
                             <IconDownload className="w-3.5 h-3.5 text-emerald-400" />
                             <span>Download PDF</span>
@@ -1351,7 +1366,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                                 expandedTelemetryId === "aud-1" ? null : "aud-1"
                               )
                             }
-                            className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs font-mono flex items-center gap-1.5 cursor-pointer"
+                            className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs  flex items-center gap-1.5 cursor-pointer"
                           >
                             <IconTerminal2 className="w-3.5 h-3.5 text-cyan-400" />
                             <span>{expandedTelemetryId === "aud-1" ? "Hide Logs" : "Telemetry"}</span>
@@ -1359,28 +1374,28 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs ">
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">LAUNCH SCORE</span>
-                          <span className="text-base font-black text-emerald-400">98 / 100 A+</span>
+                          <span className="text-xs text-neutral-500 uppercase block">LAUNCH SCORE</span>
+                          <span className="text-base font-bold text-emerald-400">98 / 100 A+</span>
                         </div>
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">ENGINES EXECUTED</span>
+                          <span className="text-xs text-neutral-500 uppercase block">ENGINES EXECUTED</span>
                           <span className="text-slate-200">OWASP ZAP + Nuclei v3.2</span>
                         </div>
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">DURATION</span>
+                          <span className="text-xs text-neutral-500 uppercase block">DURATION</span>
                           <span className="text-slate-200">4m 12s</span>
                         </div>
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">ADVISORIES</span>
+                          <span className="text-xs text-neutral-500 uppercase block">ADVISORIES</span>
                           <span className="text-emerald-400 font-bold">0 CVEs (Clean Pass)</span>
                         </div>
                       </div>
 
                       {/* Expandable Telemetry Box */}
                       {expandedTelemetryId === "aud-1" && (
-                        <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800 font-mono text-[11px] text-neutral-400 space-y-1">
+                        <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800  text-xs text-neutral-400 space-y-1">
                           <p className="text-emerald-400 font-bold">✓ [PERIMETER] Resolved host 168.144.94.35 — TLS 1.3 negotiated.</p>
                           <p className="text-slate-300">✓ [DAST] 200+ non-destructive payload injections passed cleanly.</p>
                           <p className="text-slate-300">✓ [NUCLEI] 4,812 CVE templates evaluated — 0 matches.</p>
@@ -1395,41 +1410,41 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <div className="p-5 rounded-2xl bg-black border border-neutral-800 hover:border-neutral-700 transition-colors space-y-4">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-neutral-800/80">
                         <div className="flex items-center gap-3">
-                          <span className="text-xs font-mono font-bold text-emerald-400">
+                          <span className="text-xs  font-bold text-emerald-400">
                             AUD-2026-0924-02
                           </span>
-                          <span className="text-white font-mono font-semibold text-xs truncate max-w-xs">
+                          <span className="text-white  font-semibold text-xs truncate max-w-xs">
                             https://api.your-startup.com
                           </span>
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30">
+                          <span className="px-2 py-0.5 rounded text-xs  font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30">
                             COMPLETED
                           </span>
                         </div>
                         <button
                           type="button"
                           onClick={() => setIsPdfModalOpen(true)}
-                          className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs font-mono flex items-center gap-1.5 cursor-pointer self-start md:self-auto"
+                          className="px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-850 text-slate-200 hover:text-white border border-neutral-800 text-xs  flex items-center gap-1.5 cursor-pointer self-start md:self-auto"
                         >
                           <IconDownload className="w-3.5 h-3.5 text-emerald-400" />
                           <span>Download PDF</span>
                         </button>
                       </div>
 
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs ">
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">LAUNCH SCORE</span>
-                          <span className="text-base font-black text-emerald-400">96 / 100 A</span>
+                          <span className="text-xs text-neutral-500 uppercase block">LAUNCH SCORE</span>
+                          <span className="text-base font-bold text-emerald-400">96 / 100 A</span>
                         </div>
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">ENGINES EXECUTED</span>
+                          <span className="text-xs text-neutral-500 uppercase block">ENGINES EXECUTED</span>
                           <span className="text-slate-200">Semgrep AST + Secret Scan</span>
                         </div>
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">DURATION</span>
+                          <span className="text-xs text-neutral-500 uppercase block">DURATION</span>
                           <span className="text-slate-200">2m 45s</span>
                         </div>
                         <div>
-                          <span className="text-[10px] text-neutral-500 uppercase block">ADVISORIES</span>
+                          <span className="text-xs text-neutral-500 uppercase block">ADVISORIES</span>
                           <span className="text-amber-400 font-bold">1 Low (Header Notice)</span>
                         </div>
                       </div>
@@ -1441,22 +1456,22 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <div className="p-5 rounded-2xl bg-black border border-emerald-500/40 space-y-4 shadow-[0_0_25px_rgba(16,185,129,0.15)]">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-neutral-800/80">
                         <div className="flex items-center gap-3">
-                          <span className="text-xs font-mono font-bold text-cyan-400">
+                          <span className="text-xs  font-bold text-cyan-400">
                             AUD-2026-0924-03
                           </span>
-                          <span className="text-white font-mono font-semibold text-xs truncate max-w-xs">
+                          <span className="text-white  font-semibold text-xs truncate max-w-xs">
                             https://auth.your-startup.com
                           </span>
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+                          <span className="px-2 py-0.5 rounded text-xs  font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
                             <span className="size-1.5 rounded-full bg-emerald-400 animate-ping" />
                             <span>RUNNING STAGE 3</span>
                           </span>
                         </div>
-                        <span className="text-xs font-mono text-neutral-400">Elapsed: 1m 20s</span>
+                        <span className="text-xs  text-neutral-400">Elapsed: 1m 20s</span>
                       </div>
 
-                      <div className="space-y-2 font-mono text-xs">
-                        <div className="flex justify-between text-neutral-400 text-[11px]">
+                      <div className="space-y-2  text-xs">
+                        <div className="flex justify-between text-neutral-400 text-xs">
                           <span>Active Payload Fuzzing (OWASP ZAP 2.14)</span>
                           <span className="text-emerald-400 font-bold">68% Complete</span>
                         </div>
@@ -1478,15 +1493,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               {/* Header with Severity Filter Pills from media_1790272274587.png */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-black text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     Vulnerability Matrix & AI Remediation
                   </h3>
-                  <p className="text-xs text-neutral-400 font-mono mt-1">
+                  <p className="text-xs text-neutral-400  mt-1">
                     Unified inventory of all security advisories with copyable Claude & Cursor fix prompts.
                   </p>
                 </div>
 
-                <div className="flex flex-wrap items-center bg-black border border-neutral-800 rounded-full p-1 text-xs font-mono">
+                <div className="flex flex-wrap items-center bg-black border border-neutral-800 rounded-full p-1 text-xs ">
                   {(["all", "critical", "high", "medium", "low"] as const).map((sev) => {
                     const sevCount = { all: 1, critical: 0, high: 0, medium: 1, low: 0 };
                     const isSelected = matrixFilter === sev;
@@ -1512,14 +1527,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               {/* Callout from media_1790272274587.png with Green Sparkle */}
               <div className="p-4 rounded-2xl bg-[#091b16] border border-emerald-500/30 flex items-start gap-3">
                 <IconSparkles className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                <p className="text-xs font-mono text-emerald-200/90 leading-relaxed">
+                <p className="text-xs  text-emerald-200/90 leading-relaxed">
                   Consolidated SOC repository across DAST, Nuclei CVEs, and Semgrep SAST scans. Click any audit below to inspect vulnerable endpoints, view remediation playbooks, and copy tailored AI Fix Prompts for <strong className="text-white">Cursor</strong> & <strong className="text-white">Claude Code</strong>.
                 </p>
               </div>
 
               {/* Zero Vulnerabilities State matching media_1790272274587.png */}
               {matrixFilter === "critical" || matrixFilter === "high" || matrixFilter === "low" ? (
-                <div className="py-16 text-center space-y-3 font-mono">
+                <div className="py-16 text-center space-y-3 ">
                   <div className="w-12 h-12 mx-auto rounded-full bg-emerald-950/80 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
                     <IconCheck className="w-6 h-6 stroke-[3]" />
                   </div>
@@ -1533,19 +1548,19 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 <div className="p-6 rounded-2xl bg-black border border-neutral-800 space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-neutral-800/80">
                     <div className="flex items-center gap-3">
-                      <span className="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold bg-amber-950/80 text-amber-400 border border-amber-500/30">
+                      <span className="px-2.5 py-0.5 rounded-md text-xs  font-bold bg-amber-950/80 text-amber-400 border border-amber-500/30">
                         MEDIUM • CVSS 5.3
                       </span>
-                      <h4 className="text-sm font-mono font-bold text-white">
+                      <h4 className="text-sm  font-bold text-white">
                         CWE-693: Missing Strict-Transport-Security (HSTS) Header
                       </h4>
                     </div>
-                    <span className="text-[11px] font-mono text-neutral-400">
+                    <span className="text-xs  text-neutral-400">
                       Engine: OWASP ZAP 2.14 Passive (Rule 10038)
                     </span>
                   </div>
 
-                  <p className="text-xs font-mono text-neutral-300 leading-relaxed">
+                  <p className="text-xs  text-neutral-300 leading-relaxed">
                     The web application response for <code className="text-emerald-400">https://www.mvpstudio.in/api/v1/auth</code> did not enforce the Strict-Transport-Security header. Browsers could be tricked into sending unencrypted HTTP traffic via SSL stripping.
                   </p>
 
@@ -1554,7 +1569,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <button
                       type="button"
                       onClick={handleCopyCursorPrompt}
-                      className="px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-emerald-500/50 text-white font-mono text-xs font-semibold flex items-center gap-2 cursor-pointer transition-all shadow-sm"
+                      className="px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-emerald-500/50 text-white  text-xs font-semibold flex items-center gap-2 cursor-pointer transition-all shadow-sm"
                     >
                       {copiedCursorPrompt ? (
                         <>
@@ -1572,7 +1587,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <button
                       type="button"
                       onClick={handleCopyClaudePrompt}
-                      className="px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-cyan-500/50 text-white font-mono text-xs font-semibold flex items-center gap-2 cursor-pointer transition-all shadow-sm"
+                      className="px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 hover:border-cyan-500/50 text-white  text-xs font-semibold flex items-center gap-2 cursor-pointer transition-all shadow-sm"
                     >
                       {copiedClaudePrompt ? (
                         <>
@@ -1590,7 +1605,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsPlaybookExpanded(!isPlaybookExpanded)}
-                      className="px-3.5 py-2 rounded-xl bg-black border border-neutral-800 text-neutral-400 hover:text-white font-mono text-xs flex items-center gap-1.5 cursor-pointer ml-auto"
+                      className="px-3.5 py-2 rounded-xl bg-black border border-neutral-800 text-neutral-400 hover:text-white  text-xs flex items-center gap-1.5 cursor-pointer ml-auto"
                     >
                       <IconCode className="w-4 h-4" />
                       <span>{isPlaybookExpanded ? "Hide Playbook" : "View Playbook"}</span>
@@ -1599,11 +1614,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                   {/* Expandable Remediation Playbook */}
                   {isPlaybookExpanded && (
-                    <div className="mt-3 p-4 rounded-xl bg-neutral-950 border border-neutral-800 font-mono text-xs space-y-2">
-                      <span className="text-[10px] text-neutral-500 uppercase block font-bold">
+                    <div className="mt-3 p-4 rounded-xl bg-neutral-950 border border-neutral-800  text-xs space-y-2">
+                      <span className="text-xs text-neutral-500 uppercase block font-bold">
                         Next.js next.config.js Headers Playbook
                       </span>
-                      <pre className="text-emerald-400 text-[11px] overflow-x-auto p-3 rounded-lg bg-black border border-neutral-900">
+                      <pre className="text-emerald-400 text-xs overflow-x-auto p-3 rounded-lg bg-black border border-neutral-900">
 {`async headers() {
   return [
     {
@@ -1632,17 +1647,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-5">
               <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
                 <div className="max-w-xl space-y-3">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400  text-xs font-bold uppercase tracking-wider">
                     <IconBrandGithub className="w-3.5 h-3.5" />
                     <span>GITHUB EPHEMERAL SAST SCANNER •</span>
                   </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight leading-snug">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     Connect a repository for code-level Trust Score audits
                   </h3>
-                  <p className="text-xs text-neutral-400 font-mono leading-relaxed">
+                  <p className="text-xs text-neutral-400  leading-relaxed">
                     Perform read-only code snapshot scanning for secrets, API vulnerabilities, and dependency risks. Raw source and credentials are never stored; evidence is automatically masked before telemetry is saved.
                   </p>
-                  <div className="flex flex-wrap items-center gap-2 pt-1 font-mono text-[11px]">
+                  <div className="flex flex-wrap items-center gap-2 pt-1  text-xs">
                     <span className="px-2.5 py-1 rounded-full bg-black border border-neutral-800 text-slate-300 flex items-center gap-1.5">
                       <IconShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                       <span>Zero Source Storage</span>
@@ -1660,13 +1675,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {/* Right Sub-Card: Repository Authentication */}
                 <div className="w-full lg:w-96 p-5 rounded-2xl bg-black border border-neutral-800 space-y-3 shrink-0">
-                  <div className="flex items-center justify-between text-[11px] font-mono">
+                  <div className="flex items-center justify-between text-xs ">
                     <span className="text-neutral-400 uppercase tracking-wider font-bold">REPOSITORY AUTHENTICATION</span>
-                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold text-[10px]">
+                    <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold text-xs">
                       Connected
                     </span>
                   </div>
-                  <div className="space-y-2 font-mono text-xs">
+                  <div className="space-y-2  text-xs">
                     <input
                       type="text"
                       placeholder="github-username or org"
@@ -1681,7 +1696,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       onChange={(e) => setGithubRepo(e.target.value)}
                       className="w-full px-3 py-2 rounded-xl bg-neutral-950 border border-neutral-800 text-white placeholder-neutral-600 focus:outline-none focus:border-emerald-500/50"
                     />
-                    <label className="flex items-center gap-2 pt-1 text-[11px] text-neutral-400 cursor-pointer">
+                    <label className="flex items-center gap-2 pt-1 text-xs text-neutral-400 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={isPrivateRepo}
@@ -1694,7 +1709,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={() => setIsGithubConnected(true)}
-                    className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2"
                   >
                     <IconBrandGithub className="w-4 h-4" />
                     <span>Connect & Test</span>
@@ -1708,18 +1723,18 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               {/* Left: Read-Only Permission Model */}
               <div className="p-6 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 font-bold block">
+                  <span className="text-xs  uppercase tracking-wider text-neutral-500 font-bold block">
                     SECURITY PROTOCOL
                   </span>
                   <h4 className="text-base font-bold text-white tracking-tight mt-0.5">
                     Read-Only Permission Model
                   </h4>
-                  <p className="text-xs text-neutral-400 font-mono mt-1">
+                  <p className="text-xs text-neutral-400  mt-1">
                     We enforce strict zero-write isolation. No commits, pull requests, or branch writes are ever requested.
                   </p>
                 </div>
 
-                <div className="space-y-2 text-xs font-mono">
+                <div className="space-y-2 text-xs ">
                   {[
                     { label: "Repository Contents", badge: "Read-Only Analysis", active: true },
                     { label: "Repository Metadata", badge: "Read-Only Tags", active: true },
@@ -1732,7 +1747,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                         <span className={cn("size-2 rounded-full", item.active ? "bg-emerald-400" : "bg-neutral-600")} />
                         <span className="text-slate-200">{item.label}</span>
                       </div>
-                      <span className={cn("text-[10px] font-bold px-2 py-0.5 rounded", item.active ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30" : "bg-neutral-900 text-neutral-400 border border-neutral-800")}>
+                      <span className={cn("text-xs font-bold px-2 py-0.5 rounded", item.active ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30" : "bg-neutral-900 text-neutral-400 border border-neutral-800")}>
                         {item.badge}
                       </span>
                     </div>
@@ -1744,36 +1759,36 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               <div className="p-6 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 font-bold block">
+                    <span className="text-xs  uppercase tracking-wider text-neutral-500 font-bold block">
                       REPOSITORY INVENTORY
                     </span>
                     <h4 className="text-base font-bold text-white tracking-tight mt-0.5">
                       Select Active Audit Target
                     </h4>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                  <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-xs  font-bold">
                     1 Active Repo
                   </span>
                 </div>
-                <p className="text-xs text-neutral-400 font-mono">
+                <p className="text-xs text-neutral-400 ">
                   Choose which connected repository to synchronize with your workspace Trust Score.
                 </p>
 
-                <div className="p-4 rounded-2xl bg-black border border-emerald-500/40 space-y-3 font-mono text-xs">
+                <div className="p-4 rounded-2xl bg-black border border-emerald-500/40 space-y-3  text-xs">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <IconBrandGithub className="w-5 h-5 text-emerald-400" />
                       <span className="font-bold text-white">{githubOrg}/{githubRepo}</span>
                     </div>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold">
+                    <span className="text-xs px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold">
                       TRUST SCORE: 98 A+
                     </span>
                   </div>
-                  <div className="flex justify-between text-neutral-400 text-[11px]">
+                  <div className="flex justify-between text-neutral-400 text-xs">
                     <span>Branch: <code className="text-white">main</code></span>
                     <span>Commit: <code className="text-neutral-300">a92f81c</code></span>
                   </div>
-                  <p className="text-[10px] text-neutral-500 pt-1 border-t border-neutral-900">
+                  <p className="text-xs text-neutral-500 pt-1 border-t border-neutral-900">
                     Ephemeral isolation verified. Zero raw source code persisted to disks.
                   </p>
                 </div>
@@ -1784,7 +1799,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Left Card: Live SAST Audit Pipeline */}
               <div className="p-6 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
-                <div className="flex items-center bg-black border border-neutral-800 rounded-full p-1 text-xs font-mono self-start w-fit">
+                <div className="flex items-center bg-black border border-neutral-800 rounded-full p-1 text-xs  self-start w-fit">
                   <button
                     type="button"
                     onClick={() => setSastMode("live")}
@@ -1817,17 +1832,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <h4 className="text-base font-bold text-white tracking-tight">
                     Live SAST Audit Pipeline
                   </h4>
-                  <p className="text-xs text-neutral-400 font-mono mt-1 leading-relaxed">
+                  <p className="text-xs text-neutral-400  mt-1 leading-relaxed">
                     Clones the latest commit from your selected repository into an isolated memory sandbox, runs static code analysis (Semgrep AST + secret pattern matching), and destroys the cloned code immediately.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-black border border-neutral-800 font-mono text-xs space-y-2">
+                <div className="p-4 rounded-2xl bg-black border border-neutral-800  text-xs space-y-2">
                   <div className="flex items-center gap-2 text-emerald-400 font-bold">
                     <IconSparkles className="w-4 h-4" />
                     <span>Ephemeral Isolation Engine</span>
                   </div>
-                  <div className="space-y-1 text-[11px] text-neutral-400">
+                  <div className="space-y-1 text-xs text-neutral-400">
                     <div>Target: <span className="text-white font-semibold">{githubOrg}/{githubRepo}:main</span></div>
                     <div>Execution: <span className="text-slate-200">Automated Semgrep AST + Secret Scanner</span></div>
                     <div>Persistence: <span className="text-emerald-400 font-bold">Zero raw code stored</span></div>
@@ -1835,8 +1850,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </div>
 
                 {isSastScanning && (
-                  <div className="p-3 rounded-xl bg-neutral-900 border border-emerald-500/40 font-mono text-xs space-y-2">
-                    <div className="flex justify-between text-emerald-400 text-[11px]">
+                  <div className="p-3 rounded-xl bg-neutral-900 border border-emerald-500/40  text-xs space-y-2">
+                    <div className="flex justify-between text-emerald-400 text-xs">
                       <span>Ephemeral Memory Sandbox Running...</span>
                       <span>{sastProgress}%</span>
                     </div>
@@ -1850,7 +1865,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   type="button"
                   onClick={handleRunSastScan}
                   disabled={isSastScanning}
-                  className="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                  className="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
                 >
                   <IconPlayerPlay className="w-4 h-4" />
                   <span>{isSastScanning ? "RUNNING EPHEMERAL AUDIT..." : "RUN LIVE EPHEMERAL AUDIT"}</span>
@@ -1861,28 +1876,28 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               <div className="p-6 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-neutral-500 font-bold block">
+                    <span className="text-xs  uppercase tracking-wider text-neutral-500 font-bold block">
                       AUDIT TELEMETRY
                     </span>
                     <h4 className="text-base font-bold text-white tracking-tight mt-0.5">
                       Code Vulnerability Evidence
                     </h4>
                   </div>
-                  <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                  <span className="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-xs  font-bold">
                     Telemetry In Sync
                   </span>
                 </div>
-                <p className="text-xs text-neutral-400 font-mono">
+                <p className="text-xs text-neutral-400 ">
                   Static analysis findings synced with your workspace Launch Trust Score.
                 </p>
 
-                <div className="space-y-3 font-mono text-xs">
+                <div className="space-y-3  text-xs">
                   <div className="p-3.5 rounded-2xl bg-black border border-neutral-800 space-y-1">
                     <div className="flex justify-between text-slate-200">
                       <span>Masked Secrets Scanner</span>
                       <span className="text-emerald-400 font-bold">0 Leaks</span>
                     </div>
-                    <p className="text-[10px] text-neutral-500">41 files checked across JavaScript, TypeScript, and JSON configs.</p>
+                    <p className="text-xs text-neutral-500">41 files checked across JavaScript, TypeScript, and JSON configs.</p>
                   </div>
 
                   <div className="p-3.5 rounded-2xl bg-black border border-neutral-800 space-y-1">
@@ -1890,7 +1905,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       <span>Dependency CVE Heuristics</span>
                       <span className="text-emerald-400 font-bold">0 Critical / High</span>
                     </div>
-                    <p className="text-[10px] text-neutral-500">142 npm packages mapped against GitHub Security Advisory database.</p>
+                    <p className="text-xs text-neutral-500">142 npm packages mapped against GitHub Security Advisory database.</p>
                   </div>
 
                   <div className="p-3.5 rounded-2xl bg-black border border-neutral-800 space-y-1">
@@ -1898,7 +1913,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       <span>AST Code Hygiene (Semgrep)</span>
                       <span className="text-emerald-400 font-bold">98.8% Score</span>
                     </div>
-                    <p className="text-[10px] text-neutral-500">Zero arbitrary code execution or unvalidated deserialization vectors.</p>
+                    <p className="text-xs text-neutral-500">Zero arbitrary code execution or unvalidated deserialization vectors.</p>
                   </div>
                 </div>
               </div>
@@ -1912,28 +1927,28 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="space-y-1">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/30 text-emerald-400  text-xs font-bold uppercase tracking-wider">
                     <IconPalette className="w-3.5 h-3.5" />
                     <span>Agency White-Label Suite</span>
                   </div>
-                  <h3 className="text-2xl font-black text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     Client Deliverable PDF & Report Branding
                   </h3>
                 </div>
-                <span className="px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-xs font-mono font-bold self-start sm:self-auto">
+                <span className="px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-xs  font-bold self-start sm:self-auto">
                   Agency Tier Active
                 </span>
               </div>
 
-              <p className="text-xs text-neutral-400 font-mono">
+              <p className="text-xs text-neutral-400 ">
                 Fully white-label executive PDF security audits with your custom agency name, transparent logo, color scheme, and confidential client notices.
               </p>
 
               {/* Form Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4  text-xs">
                 {/* Agency Name */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] uppercase text-neutral-400 tracking-wider font-bold">
+                  <label className="text-xs uppercase text-neutral-400 tracking-wider font-bold">
                     AGENCY / COMPANY NAME
                   </label>
                   <input
@@ -1942,14 +1957,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     onChange={(e) => setAgencyName(e.target.value)}
                     className="w-full px-4 py-3 rounded-2xl bg-black border border-neutral-800 text-white focus:outline-none focus:border-emerald-500/50"
                   />
-                  <span className="text-[10px] text-neutral-500 block">
+                  <span className="text-xs text-neutral-500 block">
                     Displayed as the delivering entity on report cover pages, headers, and certifications.
                   </span>
                 </div>
 
                 {/* Logo URL */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] uppercase text-neutral-400 tracking-wider font-bold">
+                  <label className="text-xs uppercase text-neutral-400 tracking-wider font-bold">
                     AGENCY LOGO URL
                   </label>
                   <input
@@ -1958,14 +1973,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     onChange={(e) => setAgencyLogoUrl(e.target.value)}
                     className="w-full px-4 py-3 rounded-2xl bg-black border border-neutral-800 text-white focus:outline-none focus:border-emerald-500/50"
                   />
-                  <span className="text-[10px] text-neutral-500 block">
+                  <span className="text-xs text-neutral-500 block">
                     Transparent PNG or SVG URL placed in the top-left of every report page.
                   </span>
                 </div>
 
                 {/* Primary Color */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] uppercase text-neutral-400 tracking-wider font-bold">
+                  <label className="text-xs uppercase text-neutral-400 tracking-wider font-bold">
                     PRIMARY BRAND ACCENT (HEX)
                   </label>
                   <div className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-black border border-neutral-800">
@@ -1982,14 +1997,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       className="w-full bg-transparent text-white focus:outline-none"
                     />
                   </div>
-                  <span className="text-[10px] text-neutral-500 block">
+                  <span className="text-xs text-neutral-500 block">
                     Applied to report headers, score meters, and callout borders.
                   </span>
                 </div>
 
                 {/* Secondary Color */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] uppercase text-neutral-400 tracking-wider font-bold">
+                  <label className="text-xs uppercase text-neutral-400 tracking-wider font-bold">
                     SECONDARY BRAND ACCENT (HEX)
                   </label>
                   <div className="flex items-center gap-2 px-3 py-2 rounded-2xl bg-black border border-neutral-800">
@@ -2006,15 +2021,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       className="w-full bg-transparent text-white focus:outline-none"
                     />
                   </div>
-                  <span className="text-[10px] text-neutral-500 block">
+                  <span className="text-xs text-neutral-500 block">
                     Applied to table headers and metric backgrounds.
                   </span>
                 </div>
               </div>
 
               {/* Disclaimer */}
-              <div className="space-y-1.5 font-mono text-xs">
-                <label className="text-[10px] uppercase text-neutral-400 tracking-wider font-bold">
+              <div className="space-y-1.5  text-xs">
+                <label className="text-xs uppercase text-neutral-400 tracking-wider font-bold">
                   CUSTOM REPORT DISCLAIMER & CLIENT NOTICE
                 </label>
                 <textarea
@@ -2023,14 +2038,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   onChange={(e) => setReportDisclaimer(e.target.value)}
                   className="w-full px-4 py-3 rounded-2xl bg-black border border-neutral-800 text-white focus:outline-none focus:border-emerald-500/50 resize-none"
                 />
-                <span className="text-[10px] text-neutral-500 block">
+                <span className="text-xs text-neutral-500 block">
                   Printed at the bottom of the executive summary and findings annexes.
                 </span>
               </div>
 
               {/* Quick Select Preset Palettes from media_1790272328285.png */}
-              <div className="space-y-2 font-mono text-xs">
-                <span className="text-[10px] uppercase text-neutral-400 tracking-wider font-bold block">
+              <div className="space-y-2  text-xs">
+                <span className="text-xs uppercase text-neutral-400 tracking-wider font-bold block">
                   QUICK-SELECT PRESET SECURITY PALETTES:
                 </span>
                 <div className="flex flex-wrap items-center gap-2">
@@ -2063,10 +2078,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             {/* Live PDF Deliverable Preview Card matching media_1790272335132.png & media_1790272340091.png */}
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                <span className="text-xs  font-bold text-white uppercase tracking-wider">
                   LIVE PDF DELIVERABLE PREVIEW
                 </span>
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold flex items-center gap-1.5">
+                <span className="px-2.5 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 text-xs  font-bold flex items-center gap-1.5">
                   <span className="size-1.5 rounded-full bg-emerald-400 animate-ping" />
                   <span>• Live Dynamic Render</span>
                 </span>
@@ -2079,36 +2094,36 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <h4 className="text-base font-bold text-white">
                       Executive Security Audit & Vulnerability Assessment
                     </h4>
-                    <p className="text-xs font-mono text-neutral-400">
+                    <p className="text-xs  text-neutral-400">
                       Prepared by <strong className="text-white">{agencyName}</strong> for <span className="text-cyan-400">Client Target ({domains[0]?.url || "https://example.com"})</span>
                     </p>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[10px] font-mono text-slate-300 font-bold self-start">
+                  <span className="px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs  text-slate-300 font-bold self-start">
                     Safe Harbor Certified
                   </span>
                 </div>
 
                 {/* 4 Metric Boxes from screenshot */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3  text-xs">
                   <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 uppercase block">AI LAUNCH SCORE</span>
-                    <span className="text-lg font-black text-white">96 / 100</span>
+                    <span className="text-xs text-neutral-500 uppercase block">AI LAUNCH SCORE</span>
+                    <span className="text-lg font-bold text-white">96 / 100</span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 uppercase block">DAST CHECKS</span>
-                    <span className="text-lg font-black text-white">200+ Passed</span>
+                    <span className="text-xs text-neutral-500 uppercase block">DAST CHECKS</span>
+                    <span className="text-lg font-bold text-white">200+ Passed</span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 uppercase block">CRITICAL RISKS</span>
-                    <span className="text-lg font-black text-emerald-400">0 Detected</span>
+                    <span className="text-xs text-neutral-500 uppercase block">CRITICAL RISKS</span>
+                    <span className="text-lg font-bold text-emerald-400">0 Detected</span>
                   </div>
                   <div className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800">
-                    <span className="text-[10px] text-neutral-500 uppercase block">AUDIT STANDARD</span>
-                    <span className="text-lg font-black text-white">OWASP Top 10</span>
+                    <span className="text-xs text-neutral-500 uppercase block">AUDIT STANDARD</span>
+                    <span className="text-lg font-bold text-white">OWASP Top 10</span>
                   </div>
                 </div>
 
-                <p className="text-[11px] font-mono text-neutral-500 italic">
+                <p className="text-xs  text-neutral-500 italic">
                   Notice: {reportDisclaimer}
                 </p>
               </div>
@@ -2119,7 +2134,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={handleSaveBranding}
-                    className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                    className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
                   >
                     <IconDeviceFloppy className="w-4 h-4" />
                     <span>{isSavedBrandingToast ? "BRANDING SAVED!" : "SAVE AGENCY BRANDING"}</span>
@@ -2128,14 +2143,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={() => setIsPdfModalOpen(true)}
-                    className="px-6 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 border border-emerald-500/50 text-emerald-400 hover:text-emerald-300 font-bold text-xs font-mono uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-md"
+                    className="px-6 py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 border border-emerald-500/50 text-emerald-400 hover:text-emerald-300 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-md"
                   >
                     <IconEye className="w-4 h-4" />
                     <span>GENERATE BRANDING DUMMY 1 (PDF)</span>
                   </button>
                 </div>
 
-                <div className="flex items-center gap-1.5 text-[11px] font-mono text-neutral-500">
+                <div className="flex items-center gap-1.5 text-xs  text-neutral-500">
                   <IconLock className="w-3.5 h-3.5 text-emerald-500" />
                   <span>Encrypted at rest using AES-256-GCM enterprise vault.</span>
                 </div>
@@ -2150,38 +2165,38 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold">
+                  <span className="text-xs  uppercase tracking-wider text-emerald-400 font-bold">
                     ACTIVE SUBSCRIPTION
                   </span>
-                  <h3 className="text-2xl font-black text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                     Agency Plan
                   </h3>
-                  <p className="text-xs text-neutral-400 font-mono">
+                  <p className="text-xs text-neutral-400 ">
                     Your account follows the verified quota limits configured for this billing cycle.
                   </p>
                 </div>
-                <span className="px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-xs font-mono font-bold self-start sm:self-auto">
+                <span className="px-3 py-1 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-500/40 text-xs  font-bold self-start sm:self-auto">
                   ACTIVE ACCOUNT
                 </span>
               </div>
 
               {/* 4 Metric Boxes */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 font-mono text-xs">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3  text-xs">
                 <div className="p-4 rounded-2xl bg-black border border-neutral-800 space-y-1">
-                  <span className="text-[10px] text-neutral-500 uppercase block">Websites Allowed</span>
-                  <span className="text-xl font-black text-white">1 / 10</span>
+                  <span className="text-xs text-neutral-500 uppercase block">Websites Allowed</span>
+                  <span className="text-xl font-bold text-white">1 / 10</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-black border border-neutral-800 space-y-1">
-                  <span className="text-[10px] text-neutral-500 uppercase block">Monthly Scans</span>
-                  <span className="text-xl font-black text-white">0 / 150</span>
+                  <span className="text-xs text-neutral-500 uppercase block">Monthly Scans</span>
+                  <span className="text-xl font-bold text-white">0 / 150</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-black border border-neutral-800 space-y-1">
-                  <span className="text-[10px] text-neutral-500 uppercase block">PDF Report Export</span>
-                  <span className="text-xl font-black text-emerald-400">Included</span>
+                  <span className="text-xs text-neutral-500 uppercase block">PDF Report Export</span>
+                  <span className="text-xl font-bold text-emerald-400">Included</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-black border border-neutral-800 space-y-1">
-                  <span className="text-[10px] text-neutral-500 uppercase block">AI Trust Monitor</span>
-                  <span className="text-xl font-black text-amber-400">Weekly-Ready</span>
+                  <span className="text-xs text-neutral-500 uppercase block">AI Trust Monitor</span>
+                  <span className="text-xl font-bold text-amber-400">Weekly-Ready</span>
                 </div>
               </div>
             </div>
@@ -2189,10 +2204,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             {/* Section 2: Upgrade or Switch Commercial Tier matching media_1790272350143.png */}
             <div className="space-y-4">
               <div>
-                <h3 className="text-xl font-black text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                   Upgrade or Switch Commercial Tier
                 </h3>
-                <p className="text-xs text-neutral-400 font-mono mt-0.5">
+                <p className="text-xs text-neutral-400  mt-0.5">
                   Instant in-app checkout via Razorpay (UPI, Credit Cards, NetBanking)
                 </p>
               </div>
@@ -2201,21 +2216,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {/* 1. Starter (Free) */}
                 <div className="p-5 rounded-3xl bg-neutral-950 border border-neutral-800 flex flex-col justify-between space-y-5">
-                  <div className="space-y-3 font-mono">
+                  <div className="space-y-3 ">
                     <h4 className="text-base font-bold text-white">Starter (Free)</h4>
                     <div>
-                      <span className="text-2xl font-black text-white">₹0</span>
+                      <span className="text-2xl font-bold text-white">₹0</span>
                       <span className="text-xs text-neutral-500"> /forever free</span>
                     </div>
-                    <p className="text-[11px] text-neutral-400 leading-snug">
+                    <p className="text-xs text-neutral-400 leading-snug">
                       For individual builders testing single projects.
                     </p>
-                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-[11px] text-emerald-400 font-bold space-y-0.5">
+                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-xs text-emerald-400 font-bold space-y-0.5">
                       <div>1 Monitored Website</div>
                       <div className="text-neutral-400 font-normal">3 Scans / Month</div>
                     </div>
-                    <div className="space-y-2 text-[11px] text-neutral-300 pt-2 border-t border-neutral-900">
-                      <div className="text-[10px] uppercase text-neutral-500 font-bold">FEATURES:</div>
+                    <div className="space-y-2 text-xs text-neutral-300 pt-2 border-t border-neutral-900">
+                      <div className="text-xs uppercase text-neutral-500 font-bold">FEATURES:</div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>200+ DAST & Nuclei CVE Scans</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>AI Launch Score Assessment</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>Public PDF Summary Report</span></div>
@@ -2226,7 +2241,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     type="button"
                     onClick={() => setSelectedBillingTier("starter")}
                     className={cn(
-                      "w-full py-2.5 rounded-xl font-mono text-xs font-bold transition-colors cursor-pointer",
+                      "w-full py-2.5 rounded-xl  text-xs font-bold transition-colors cursor-pointer",
                       selectedBillingTier === "starter"
                         ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
                         : "bg-neutral-900 hover:bg-neutral-800 text-neutral-300"
@@ -2238,21 +2253,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {/* 2. Starter Pro */}
                 <div className="p-5 rounded-3xl bg-neutral-950 border border-neutral-800 flex flex-col justify-between space-y-5">
-                  <div className="space-y-3 font-mono">
+                  <div className="space-y-3 ">
                     <h4 className="text-base font-bold text-white">Starter Pro</h4>
                     <div>
-                      <span className="text-2xl font-black text-white">₹1,999</span>
+                      <span className="text-2xl font-bold text-white">₹1,999</span>
                       <span className="text-xs text-neutral-500"> /per month</span>
                     </div>
-                    <p className="text-[11px] text-neutral-400 leading-snug">
+                    <p className="text-xs text-neutral-400 leading-snug">
                       For active builders launching production products.
                     </p>
-                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-[11px] text-emerald-400 font-bold space-y-0.5">
+                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-xs text-emerald-400 font-bold space-y-0.5">
                       <div>2 Monitored Websites</div>
                       <div className="text-neutral-400 font-normal">10 Scans / Month</div>
                     </div>
-                    <div className="space-y-2 text-[11px] text-neutral-300 pt-2 border-t border-neutral-900">
-                      <div className="text-[10px] uppercase text-neutral-500 font-bold">FEATURES:</div>
+                    <div className="space-y-2 text-xs text-neutral-300 pt-2 border-t border-neutral-900">
+                      <div className="text-xs uppercase text-neutral-500 font-bold">FEATURES:</div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>All Free Features Included</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>Full Unblurred Vulnerability Dossier</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>Detailed Executive PDF Deliverables</span></div>
@@ -2263,7 +2278,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     type="button"
                     onClick={() => setSelectedBillingTier("starter_pro")}
                     className={cn(
-                      "w-full py-2.5 rounded-xl font-mono text-xs font-bold transition-colors cursor-pointer",
+                      "w-full py-2.5 rounded-xl  text-xs font-bold transition-colors cursor-pointer",
                       selectedBillingTier === "starter_pro"
                         ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
                         : "bg-neutral-900 hover:bg-neutral-800 text-neutral-300"
@@ -2275,24 +2290,24 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {/* 3. Founder Pro (Most Popular) */}
                 <div className="p-5 rounded-3xl bg-neutral-950 border border-emerald-500/50 flex flex-col justify-between space-y-5 relative shadow-[0_0_30px_rgba(16,185,129,0.15)]">
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500 text-neutral-950 text-[10px] font-mono font-bold uppercase tracking-wider">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500 text-neutral-950 text-xs  font-bold uppercase tracking-wider">
                     MOST POPULAR
                   </span>
-                  <div className="space-y-3 font-mono">
+                  <div className="space-y-3 ">
                     <h4 className="text-base font-bold text-white">Founder Pro</h4>
                     <div>
-                      <span className="text-2xl font-black text-white">₹2,999</span>
+                      <span className="text-2xl font-bold text-white">₹2,999</span>
                       <span className="text-xs text-neutral-500"> /per month</span>
                     </div>
-                    <p className="text-[11px] text-neutral-400 leading-snug">
+                    <p className="text-xs text-neutral-400 leading-snug">
                       For growing startups with multi-domain portfolios.
                     </p>
-                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-[11px] text-emerald-400 font-bold space-y-0.5">
+                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-xs text-emerald-400 font-bold space-y-0.5">
                       <div>5 Monitored Websites</div>
                       <div className="text-neutral-400 font-normal">40 Scans / Month</div>
                     </div>
-                    <div className="space-y-2 text-[11px] text-neutral-300 pt-2 border-t border-neutral-900">
-                      <div className="text-[10px] uppercase text-neutral-500 font-bold">FEATURES:</div>
+                    <div className="space-y-2 text-xs text-neutral-300 pt-2 border-t border-neutral-900">
+                      <div className="text-xs uppercase text-neutral-500 font-bold">FEATURES:</div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>All Starter Pro Features</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>CI/CD GitHub App Merge Gate</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>AI IDE Issue Sync (Cursor/Claude)</span></div>
@@ -2303,7 +2318,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     type="button"
                     onClick={() => setSelectedBillingTier("founder_pro")}
                     className={cn(
-                      "w-full py-2.5 rounded-xl font-mono text-xs font-bold transition-colors cursor-pointer",
+                      "w-full py-2.5 rounded-xl  text-xs font-bold transition-colors cursor-pointer",
                       selectedBillingTier === "founder_pro"
                         ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
                         : "bg-emerald-500 hover:bg-emerald-400 text-neutral-950"
@@ -2315,24 +2330,24 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {/* 4. Agency & Studio (Current) */}
                 <div className="p-5 rounded-3xl bg-neutral-950 border border-neutral-800 flex flex-col justify-between space-y-5 relative">
-                  <span className="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">
+                  <span className="absolute top-4 right-4 px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/30 text-xs  font-bold">
                     Current
                   </span>
-                  <div className="space-y-3 font-mono">
+                  <div className="space-y-3 ">
                     <h4 className="text-base font-bold text-white">Agency & Studio</h4>
                     <div>
-                      <span className="text-2xl font-black text-white">₹4,999</span>
+                      <span className="text-2xl font-bold text-white">₹4,999</span>
                       <span className="text-xs text-neutral-500"> /per month</span>
                     </div>
-                    <p className="text-[11px] text-neutral-400 leading-snug">
+                    <p className="text-xs text-neutral-400 leading-snug">
                       For web agencies, dev shops, and audit consultancies.
                     </p>
-                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-[11px] text-emerald-400 font-bold space-y-0.5">
+                    <div className="p-2.5 rounded-xl bg-black border border-neutral-800 text-xs text-emerald-400 font-bold space-y-0.5">
                       <div>15 Monitored Websites</div>
                       <div className="text-neutral-400 font-normal">150 Scans / Month</div>
                     </div>
-                    <div className="space-y-2 text-[11px] text-neutral-300 pt-2 border-t border-neutral-900">
-                      <div className="text-[10px] uppercase text-neutral-500 font-bold">FEATURES:</div>
+                    <div className="space-y-2 text-xs text-neutral-300 pt-2 border-t border-neutral-900">
+                      <div className="text-xs uppercase text-neutral-500 font-bold">FEATURES:</div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>All Founder Pro Features</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>100% Custom White-Label PDF Branding</span></div>
                       <div className="flex items-center gap-1.5"><IconCheck className="w-3.5 h-3.5 text-emerald-400" /><span>Custom Logo & Brand Palette</span></div>
@@ -2342,7 +2357,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={() => setSelectedBillingTier("agency")}
-                    className="w-full py-2.5 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-mono text-xs font-bold"
+                    className="w-full py-2.5 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-500/30  text-xs font-bold"
                   >
                     Active Plan
                   </button>
@@ -2356,15 +2371,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div className="space-y-6 mb-10">
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-5">
               <div>
-                <h3 className="text-xl font-black text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                   Continuous DAST Scheduler & Webhook Gateways
                 </h3>
-                <p className="text-xs text-neutral-400 font-mono mt-1">
+                <p className="text-xs text-neutral-400  mt-1">
                   Automate perimeter audits and route zero-false-positive alerts to your team.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 font-mono text-xs">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5  text-xs">
                 {/* DAST Scheduler */}
                 <div className="p-5 rounded-2xl bg-black border border-neutral-800 space-y-3">
                   <div className="flex items-center justify-between">
@@ -2373,7 +2388,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       type="button"
                       onClick={() => setIsDailyDastEnabled(!isDailyDastEnabled)}
                       className={cn(
-                        "px-2.5 py-0.5 rounded text-[10px] font-bold cursor-pointer transition-colors",
+                        "px-2.5 py-0.5 rounded text-xs font-bold cursor-pointer transition-colors",
                         isDailyDastEnabled
                           ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
                           : "bg-neutral-900 text-neutral-500"
@@ -2382,7 +2397,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       {isDailyDastEnabled ? "ENABLED" : "PAUSED"}
                     </button>
                   </div>
-                  <p className="text-[11px] text-neutral-400 leading-relaxed">
+                  <p className="text-xs text-neutral-400 leading-relaxed">
                     Executes automated 200+ DAST and Nuclei checks every night at 00:00 UTC across verified targets.
                   </p>
                 </div>
@@ -2395,7 +2410,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       type="button"
                       onClick={() => setIsSlackAlertsEnabled(!isSlackAlertsEnabled)}
                       className={cn(
-                        "px-2.5 py-0.5 rounded text-[10px] font-bold cursor-pointer transition-colors",
+                        "px-2.5 py-0.5 rounded text-xs font-bold cursor-pointer transition-colors",
                         isSlackAlertsEnabled
                           ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
                           : "bg-neutral-900 text-neutral-500"
@@ -2404,7 +2419,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       {isSlackAlertsEnabled ? "ACTIVE" : "OFF"}
                     </button>
                   </div>
-                  <p className="text-[11px] text-neutral-400 leading-relaxed">
+                  <p className="text-xs text-neutral-400 leading-relaxed">
                     Immediate notification dispatched to <code className="text-white">#security-alerts</code> on any verified critical advisory.
                   </p>
                 </div>
@@ -2454,27 +2469,27 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
               <form onSubmit={handleAddDomain} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-mono text-neutral-400 mb-1.5">
+                  <label className="block text-xs  text-neutral-400 mb-1.5">
                     Root or Subdomain URL
                   </label>
                   <div className="flex items-center gap-2 px-3 py-2.5 rounded-2xl bg-black border border-neutral-800 focus-within:border-emerald-500/50">
-                    <span className="text-neutral-500 font-mono text-xs">https://</span>
+                    <span className="text-neutral-500  text-xs">https://</span>
                     <input
                       type="text"
                       required
                       placeholder="api.startup.com"
                       value={newDomainUrl.replace(/^https?:\/\//, "")}
                       onChange={(e) => setNewDomainUrl(e.target.value)}
-                      className="w-full bg-transparent text-xs text-white font-mono focus:outline-none placeholder-neutral-600"
+                      className="w-full bg-transparent text-xs text-white  focus:outline-none placeholder-neutral-600"
                     />
                   </div>
                 </div>
 
-                <div className="p-3 rounded-2xl bg-black border border-neutral-800 text-[11px] text-neutral-400 font-mono space-y-1">
+                <div className="p-3 rounded-2xl bg-black border border-neutral-800 text-xs text-neutral-400  space-y-1">
                   <p className="text-emerald-400 font-bold flex items-center gap-1">
                     <IconAlertTriangle className="w-3.5 h-3.5" /> Safe Harbor Guarantee
                   </p>
-                  <p className="text-neutral-500 text-[10px]">
+                  <p className="text-neutral-500 text-xs">
                     100% non-destructive payload testing. Zero database mutations or customer downtime.
                   </p>
                 </div>
@@ -2533,7 +2548,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </div>
                 <div>
                   <h3 className="text-base font-bold text-white">DNS Ownership Verification</h3>
-                  <p className="text-xs text-neutral-400 font-mono truncate max-w-xs">{verifyTarget.url}</p>
+                  <p className="text-xs text-neutral-400  truncate max-w-xs">{verifyTarget.url}</p>
                 </div>
               </div>
 
@@ -2543,18 +2558,18 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
               <div className="space-y-3 mb-5">
                 <div className="p-3 rounded-2xl bg-black border border-neutral-800 space-y-1">
-                  <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                  <div className="flex justify-between text-xs  text-neutral-400">
                     <span>Record Type:</span>
                     <span className="text-emerald-400 font-bold">TXT</span>
                   </div>
-                  <div className="flex justify-between text-[11px] font-mono text-neutral-400">
+                  <div className="flex justify-between text-xs  text-neutral-400">
                     <span>Host / Name:</span>
                     <span className="text-white font-bold">_hackmywebsite-challenge</span>
                   </div>
                 </div>
 
                 <div className="p-3 rounded-2xl bg-black border border-neutral-800">
-                  <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400 mb-1">
+                  <div className="flex items-center justify-between text-xs  text-neutral-400 mb-1">
                     <span>TXT Value / Token:</span>
                     <button
                       type="button"
@@ -2565,7 +2580,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       <span>{copiedDns ? "Copied" : "Copy"}</span>
                     </button>
                   </div>
-                  <code className="text-xs font-mono text-emerald-400 break-all select-all">
+                  <code className="text-xs  text-emerald-400 break-all select-all">
                     hmw-verify=9a8f27e103ab47dc839f992
                   </code>
                 </div>

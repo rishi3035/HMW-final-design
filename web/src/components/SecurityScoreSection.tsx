@@ -274,7 +274,7 @@ export const SecurityScoreSection: React.FC = () => {
           <div className="space-y-3 max-w-2xl text-left">
             <div className="flex items-center gap-2">
               <span className="h-px w-8 bg-emerald-400" />
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-400">
+              <span className=" text-xs font-bold uppercase tracking-wider text-emerald-400">
                 AI LAUNCH SCORE
               </span>
             </div>
@@ -287,7 +287,7 @@ export const SecurityScoreSection: React.FC = () => {
             </p>
           </div>
 
-          <div className="max-w-md text-left lg:text-right text-xs text-slate-400 font-mono hidden lg:block">
+          <div className="max-w-md text-left lg:text-right text-xs text-slate-400  hidden lg:block">
             <span>Deterministic Multi-Engine Synthesis</span> •{" "}
             <span className="text-emerald-400">Zero Bluff Data</span>
           </div>
@@ -317,7 +317,7 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
+                      <span className=" text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
                         LAUNCH READY (85 - 100 pts)
                       </span>
                       {selectedTargetId === "acme" && (
@@ -330,10 +330,10 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-emerald-950/80 border border-emerald-500/40 text-emerald-400">
+                  <span className="px-3 py-1 rounded-full text-xs  font-bold bg-emerald-950/80 border border-emerald-500/40 text-emerald-400">
                     SAFE
                   </span>
-                  <span className="text-xs font-mono font-bold text-emerald-400 hidden sm:inline">
+                  <span className="text-xs  font-bold text-emerald-400 hidden sm:inline">
                     92/100
                   </span>
                 </div>
@@ -357,7 +357,7 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
+                      <span className=" text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
                         ACTION RECOMMENDED (70 - 84 pts)
                       </span>
                       {selectedTargetId === "cloud-crm" && (
@@ -370,10 +370,10 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-yellow-950/80 border border-yellow-500/40 text-yellow-400">
+                  <span className="px-3 py-1 rounded-full text-xs  font-bold bg-yellow-950/80 border border-yellow-500/40 text-yellow-400">
                     REVIEW
                   </span>
-                  <span className="text-xs font-mono font-bold text-yellow-400 hidden sm:inline">
+                  <span className="text-xs  font-bold text-yellow-400 hidden sm:inline">
                     76/100
                   </span>
                 </div>
@@ -397,7 +397,7 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
+                      <span className=" text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
                         HIGH RISK (50 - 69 pts)
                       </span>
                       {selectedTargetId === "ai-agent" && (
@@ -410,10 +410,10 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-orange-950/80 border border-orange-500/40 text-orange-400">
+                  <span className="px-3 py-1 rounded-full text-xs  font-bold bg-orange-950/80 border border-orange-500/40 text-orange-400">
                     RISK
                   </span>
-                  <span className="text-xs font-mono font-bold text-orange-400 hidden sm:inline">
+                  <span className="text-xs  font-bold text-orange-400 hidden sm:inline">
                     67/100
                   </span>
                 </div>
@@ -437,7 +437,7 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
+                      <span className=" text-xs sm:text-sm font-bold text-white uppercase tracking-tight">
                         LAUNCH BLOCKER (&lt; 50 pts)
                       </span>
                       {selectedTargetId === "legacy" && (
@@ -450,10 +450,10 @@ export const SecurityScoreSection: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold bg-red-950/80 border border-red-500/40 text-red-400">
+                  <span className="px-3 py-1 rounded-full text-xs  font-bold bg-red-950/80 border border-red-500/40 text-red-400">
                     BLOCKER
                   </span>
-                  <span className="text-xs font-mono font-bold text-red-400 hidden sm:inline">
+                  <span className="text-xs  font-bold text-red-400 hidden sm:inline">
                     34/100
                   </span>
                 </div>
@@ -461,7 +461,7 @@ export const SecurityScoreSection: React.FC = () => {
             </div>
 
             {/* AI Fix Prompt for Cursor & Claude (Terminal) */}
-            <div className="rounded-2xl bg-black border border-neutral-800 shadow-2xl overflow-hidden font-mono text-xs">
+            <div className="rounded-2xl bg-black border border-neutral-800 shadow-2xl overflow-hidden  text-xs">
               {/* Terminal Titlebar */}
               <div className="flex items-center justify-between px-4 py-2.5 bg-black border-b border-neutral-800">
                 <div className="flex items-center gap-2 text-emerald-400 font-bold">
@@ -471,7 +471,7 @@ export const SecurityScoreSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleCopy}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded text-[11px] text-neutral-300 hover:text-white bg-black hover:bg-neutral-900 border border-neutral-700 hover:border-neutral-500 transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs text-neutral-300 hover:text-white bg-black hover:bg-neutral-900 border border-neutral-700 hover:border-neutral-500 transition-colors cursor-pointer"
                 >
                   {copied ? (
                     <>
@@ -489,7 +489,7 @@ export const SecurityScoreSection: React.FC = () => {
 
               {/* Terminal Body */}
               <div className="p-4 bg-black overflow-x-auto text-[11.5px] leading-relaxed text-slate-300">
-                <pre className="font-mono whitespace-pre text-slate-300">
+                <pre className=" whitespace-pre text-slate-300">
                   {currentTarget.fixPrompt}
                 </pre>
               </div>
@@ -500,10 +500,10 @@ export const SecurityScoreSection: React.FC = () => {
           <div className="lg:col-span-5 rounded-3xl bg-black border border-neutral-800 p-6 sm:p-8 shadow-2xl backdrop-blur-xl space-y-6 text-left">
             {/* Simulator Title */}
             <div className="flex items-center justify-between border-b border-neutral-800 pb-3">
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-emerald-400">
+              <span className=" text-xs font-bold uppercase tracking-wider text-emerald-400">
                 SIMULATE TARGET DOMAIN
               </span>
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
+              <div className="flex items-center gap-1.5 text-xs  text-slate-400">
                 <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
                 <span>INTERACTIVE</span>
               </div>
@@ -531,11 +531,11 @@ export const SecurityScoreSection: React.FC = () => {
                     }}
                   >
                     <div className="flex items-center justify-between gap-1">
-                      <span className="font-mono text-[11px] font-bold text-slate-200 truncate">
+                      <span className=" text-xs font-bold text-slate-200 truncate">
                         {t.domain}
                       </span>
                       <span
-                        className="text-[11px] font-mono font-black px-1.5 py-0.5 rounded shrink-0"
+                        className="text-xs  font-black px-1.5 py-0.5 rounded shrink-0"
                         style={{
                           color: targetTheme.color,
                           backgroundColor: targetTheme.bg,
@@ -545,7 +545,7 @@ export const SecurityScoreSection: React.FC = () => {
                         {t.score}/100
                       </span>
                     </div>
-                    <span className="text-[10px] text-slate-400 font-sans">
+                    <span className="text-xs text-slate-400 font-sans">
                       {t.tag}
                     </span>
                   </button>
@@ -584,20 +584,20 @@ export const SecurityScoreSection: React.FC = () => {
                 {/* Score Number in Gauge Center - Animated from 0 to target score */}
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                   <div className="flex items-baseline justify-center">
-                    <span className="text-4xl sm:text-5xl font-mono font-black text-white tracking-tight">
+                    <span className="text-4xl sm:text-5xl  font-black text-white tracking-tight">
                       {displayScore}
                     </span>
-                    <span className="text-base sm:text-lg font-mono text-neutral-400 font-bold ml-0.5">
+                    <span className="text-base sm:text-lg  text-neutral-400 font-bold ml-0.5">
                       /100
                     </span>
                   </div>
                   {isLoading ? (
-                    <span className="text-[10px] font-mono font-bold mt-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 animate-pulse">
+                    <span className="text-xs  font-bold mt-1 px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 animate-pulse">
                       EVALUATING...
                     </span>
                   ) : (
                     <span
-                      className="text-[11px] font-mono font-bold mt-1 px-2.5 py-0.5 rounded border transition-all"
+                      className="text-xs  font-bold mt-1 px-2.5 py-0.5 rounded border transition-all"
                       style={{
                         color: currentTheme.color,
                         backgroundColor: currentTheme.bg,
@@ -610,7 +610,7 @@ export const SecurityScoreSection: React.FC = () => {
                 </div>
               </div>
 
-              <p className="font-mono text-[11px] text-slate-400 mt-4 text-center">
+              <p className=" text-xs text-slate-400 mt-4 text-center">
                 Calculated against {currentTarget.vectors} security vectors •{" "}
                 <span className={currentTarget.activeWarnings > 0 ? "text-amber-400 font-bold" : "text-emerald-400 font-bold"}>
                   {currentTarget.activeWarnings} active warnings
@@ -619,11 +619,11 @@ export const SecurityScoreSection: React.FC = () => {
             </div>
 
             {/* Sub-Engine Health Telemetry Bars - Filling smoothly in sync */}
-            <div className="space-y-3 pt-3 border-t border-neutral-800 font-mono text-xs">
+            <div className="space-y-3 pt-3 border-t border-neutral-800  text-xs">
               <div className="grid grid-cols-2 gap-3">
                 {/* DAST Runtime */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
+                  <div className="flex items-center justify-between text-xs text-slate-300">
                     <span className="truncate">DAST Runtime & APIs</span>
                     <span className="text-emerald-400 font-bold">{animDast}%</span>
                   </div>
@@ -637,7 +637,7 @@ export const SecurityScoreSection: React.FC = () => {
 
                 {/* CVE Feed */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
+                  <div className="flex items-center justify-between text-xs text-slate-300">
                     <span className="truncate">CVE Zero-Day Feed</span>
                     <span className="text-emerald-400 font-bold">{animCve}%</span>
                   </div>
@@ -651,7 +651,7 @@ export const SecurityScoreSection: React.FC = () => {
 
                 {/* SAST Code Logic */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
+                  <div className="flex items-center justify-between text-xs text-slate-300">
                     <span className="truncate">SAST AST Code</span>
                     <span className="text-emerald-400 font-bold">{animSast}%</span>
                   </div>
@@ -665,7 +665,7 @@ export const SecurityScoreSection: React.FC = () => {
 
                 {/* Production Auth */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between text-[11px] text-slate-300">
+                  <div className="flex items-center justify-between text-xs text-slate-300">
                     <span className="truncate">Auth & Surface Graph</span>
                     <span className="text-emerald-400 font-bold">{animAuth}%</span>
                   </div>

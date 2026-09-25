@@ -172,7 +172,7 @@ export const RedesignedHmwPage: React.FC = () => {
             {/* Interactive URL Scanner Input Bar with Professional Enterprise Button */}
             <div className="max-w-2xl mx-auto p-2 min-h-[58px] sm:h-[58px] rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl flex flex-col sm:flex-row items-center gap-2">
               <div className="flex items-center gap-2.5 px-3 py-2 w-full text-left">
-                <span className="text-neutral-500 font-mono text-xs">https://</span>
+                <span className="text-neutral-500  text-xs">https://</span>
                 <input
                   type="text"
                   value={scanUrl.replace(/^https?:\/\//, "")}
@@ -181,7 +181,7 @@ export const RedesignedHmwPage: React.FC = () => {
                     if (e.key === "Enter") handleOpenAuth();
                   }}
                   placeholder="app.your-startup.com"
-                  className="w-full bg-transparent text-white font-mono text-xs sm:text-sm focus:outline-none placeholder-neutral-500"
+                  className="w-full bg-transparent text-white  text-xs sm:text-sm focus:outline-none placeholder-neutral-500"
                 />
               </div>
               <button
@@ -206,7 +206,7 @@ export const RedesignedHmwPage: React.FC = () => {
               ].map((tech, idx) => (
                 <span
                   key={idx}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black border border-slate-800 text-xs font-mono font-medium text-slate-300 shadow-sm"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-black border border-slate-800 text-xs  font-medium text-slate-300 shadow-sm"
                 >
                   <span className="size-1.5 rounded-full bg-emerald-400" />
                   {tech}

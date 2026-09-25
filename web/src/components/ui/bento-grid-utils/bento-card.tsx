@@ -88,7 +88,7 @@ export function BentoCard({
 
             <div className="flex items-center gap-1.5">
               {badge && (
-                <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md font-semibold">
+                <span className="text-xs  text-emerald-400 bg-emerald-950/60 border border-emerald-500/20 px-2 py-0.5 rounded-md font-semibold">
                   {badge}
                 </span>
               )}
