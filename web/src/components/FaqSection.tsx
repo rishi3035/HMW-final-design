@@ -87,7 +87,7 @@ export const FaqSection: React.FC = () => {
             Questions Before You Scan?
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-400 leading-relaxed font-sans max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-slate-200 font-medium leading-relaxed font-sans max-w-xl mx-auto">
             Everything you need to know about our non-destructive vulnerability scanner, automated PR safeguards, and compliance audits.
           </p>
 
