@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Velaris } from "@/components/ui/velaris";
-import { OfficialMultiEngineSection } from "./components/OfficialMultiEngineSection";
-import { SecurityPipelineSection } from "./components/SecurityPipelineSection";
+import { SecurityTechnologyBeam } from "@/components/ui/security-technology-beam";
+import { HowItWorksStepsSection } from "./components/HowItWorksStepsSection";
 import PricingSectionDemo from "@/components/ui/demo";
 import { FaqSection } from "./components/FaqSection";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
@@ -225,11 +225,11 @@ export const RedesignedHmwPage: React.FC = () => {
         </div>
       </Velaris>
 
-      {/* SECTION 3 — MULTI-ENGINE DETECTION ARCHITECTURE */}
-      <OfficialMultiEngineSection />
+      {/* SECTION 3 — SECURITY TECHNOLOGY ANIMATED BEAM INTEGRATION (100vh) */}
+      <SecurityTechnologyBeam />
 
-      {/* SECTION 4 — HOW IT WORKS: CONTINUOUS SECURITY PIPELINE */}
-      <SecurityPipelineSection />
+      {/* SECTION 4 — HOW IT WORKS IN 3 SIMPLE STEPS */}
+      <HowItWorksStepsSection />
 
       {/* SECTION 5 — PRICING */}
       <section id="pricing" aria-label="Transparent Pricing Plans" className="relative">
