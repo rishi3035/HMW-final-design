@@ -183,7 +183,14 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     >
       {items.map((item, idx) => {
         const hasDropdown = Boolean(item.dropdown && item.dropdown.length > 0);
-        const isCurrentActive = activeDropdown === idx;
+        const isActive =
+          typeof window !== "undefined" &&
+          (item.link === "/"
+            ? window.location.pathname === "/" && !window.location.hash
+            : item.link.startsWith("/#")
+            ? window.location.pathname === "/" && window.location.hash === item.link.slice(1)
+            : window.location.pathname === item.link ||
+              (item.link !== "/" && window.location.pathname.startsWith(item.link)));
 
         return (
           <div
@@ -195,7 +202,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               <button
                 type="button"
                 className={cn(
-                  "relative flex items-center gap-1 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all cursor-pointer",
+                  "relative flex items-center gap-1 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all cursor-pointer whitespace-nowrap",
                   isCurrentActive && "text-white"
                 )}
               >
@@ -216,7 +223,12 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
             ) : (
               <a
                 onClick={onItemClick}
-                className="relative flex items-center gap-1 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all font-medium"
+                className={cn(
+                  "relative flex items-center gap-1 px-3 py-1.5 rounded-xl transition-all font-medium whitespace-nowrap cursor-pointer",
+                  isActive
+                    ? "text-emerald-400 font-semibold"
+                    : "text-slate-300 hover:text-white"
+                )}
                 href={item.link || "#"}
               >
                 {hovered === idx && (
@@ -226,6 +238,9 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
                   />
                 )}
                 <span className="relative z-20">{item.name}</span>
+                {isActive && (
+                  <span className="w-1 h-1 rounded-full bg-emerald-400 -mr-0.5 ml-0.5" />
+                )}
               </a>
             )}
 
