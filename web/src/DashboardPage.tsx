@@ -50,7 +50,7 @@ import { ScoreBreakdownModal } from "./components/ScoreBreakdownModal";
 import { ScanComparisonModal } from "./components/ScanComparisonModal";
 import { RiskEffortMatrixModal } from "./components/RiskEffortMatrixModal";
 import { ShareReportModal } from "./components/ShareReportModal";
-import { RiskVelocityTelemetrySection } from "./components/RiskVelocityTelemetrySection";
+import { SecurityAuditTelemetryVisual } from "./components/SecurityAuditTelemetryVisual";
 import { cn } from "@/lib/utils";
 
 interface DomainTarget {
@@ -625,10 +625,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
             </div>
 
-            {/* 2. DAST RISK VELOCITY & FLEET TELEMETRY ANALYTICS (TELEMETRY VISUAL) */}
-            <RiskVelocityTelemetrySection />
-
-            {/* 3 & 4. VULNERABILITY BREAKDOWN & QUICK PENETRATION AUDIT */}
+            {/* 2 & 3. VULNERABILITY BREAKDOWN & QUICK PENETRATION AUDIT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
               
               {/* 2. VULNERABILITY BREAKDOWN SPECTRUM (6 COLS) */}
@@ -1164,8 +1161,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {activeTab === "audits" && (
           <div className="space-y-6 mb-10">
-            {/* DAST Risk Velocity & Fleet Telemetry */}
-            <RiskVelocityTelemetrySection />
+            {/* Security Audit Telemetry Motion Graphics: DAST Risk Velocity & Fleet Defense Radar */}
+            <SecurityAuditTelemetryVisual
+              timeRange={timeRange}
+              setTimeRange={setTimeRange}
+              scannerIp="168.144.94.35"
+              onCopyIp={handleCopyIp}
+            />
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-6">
               {/* Header with Title and Filter Pills from media_1790272244432.png */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
