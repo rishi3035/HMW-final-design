@@ -150,7 +150,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#10B981]" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]" />
                 <h3 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
                   <span>DAST Risk Velocity</span>
                   <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
@@ -236,7 +236,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
           </div>
 
           {/* ─────────────────────────────────────────────────────────
-              MOTION GRAPHICS CHART CANVAS
+              ENTERPRISE TELEMETRY CHART CANVAS (STATIC & HIGH-PRECISION)
              ───────────────────────────────────────────────────────── */}
           <div className="relative pt-6 pb-2 select-none">
             {/* Glassmorphic Floating HUD Tooltip */}
@@ -270,20 +270,8 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
               )}
             </AnimatePresence>
 
-            {/* SVG Visualizer with Equalizer Frequency Bars + Neon Spline + Laser Sweep */}
+            {/* SVG Visualizer with Equalizer Frequency Bars + Neon Spline */}
             <div className="relative w-full h-48 overflow-hidden rounded-xl bg-black/40 border border-neutral-900">
-              {/* Motion Graphic 1: Sweeping Radar Laser Scanline */}
-              <motion.div
-                className="absolute top-0 bottom-0 w-[2px] bg-gradient-to-b from-emerald-400/80 via-cyan-400/90 to-transparent pointer-events-none z-20 shadow-[0_0_12px_#10B981]"
-                animate={{
-                  x: [0, svgWidth - 10, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
 
               <svg
                 viewBox={`0 0 ${svgWidth} ${svgHeight}`}
@@ -322,9 +310,10 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                   </linearGradient>
                 </defs>
 
-                {/* Subtle Horizontal Guide Grid Lines */}
+                {/* Subtle Horizontal Guide Grid Lines with Enterprise Scale Indicators */}
                 {[0.2, 0.45, 0.7, 0.95].map((pct, idx) => {
                   const y = paddingYTop + usableHeight * (1 - pct);
+                  const approxValue = Math.round((maxScans * pct) / 10) * 10;
                   return (
                     <g key={idx}>
                       <line
@@ -332,15 +321,25 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                         y1={y}
                         x2={svgWidth - paddingX}
                         y2={y}
-                        stroke="#1a1e29"
+                        stroke="#1e2433"
                         strokeDasharray="4 4"
                         strokeWidth="1"
                       />
+                      <text
+                        x={paddingX - 8}
+                        y={y + 3}
+                        textAnchor="end"
+                        fill="#52525b"
+                        fontSize="9"
+                        fontFamily="monospace"
+                      >
+                        {approxValue >= 1000 ? `${(approxValue / 1000).toFixed(1)}k` : approxValue}
+                      </text>
                     </g>
                   );
                 })}
 
-                {/* Motion Graphics: Equalizer Volume Bars for Each Interval */}
+                {/* Enterprise Volume Bars for Each Interval */}
                 {points.map((p, idx) => {
                   const isHovered = activeIndex === idx;
                   const barWidth = 24;
@@ -400,33 +399,35 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                   filter="url(#neonGlow)"
                   initial={{ pathLength: 0 }}
                   animate={{ pathLength: 1 }}
-                  transition={{ duration: 1.1, ease: "easeInOut" }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
                 />
 
-                {/* Motion Graphic 2: Active Node Glowing Pulse Indicator */}
-                <circle
-                  cx={activeCoord.x}
-                  cy={activeCoord.y}
-                  r="10"
-                  fill="#10B981"
-                  className="animate-ping opacity-40 pointer-events-none"
-                />
-                <circle
-                  cx={activeCoord.x}
-                  cy={activeCoord.y}
-                  r="6"
-                  fill="#059669"
-                  stroke="#34D399"
-                  strokeWidth="2"
-                  className="pointer-events-none"
-                />
-                <circle
-                  cx={activeCoord.x}
-                  cy={activeCoord.y}
-                  r="2.5"
-                  fill="#ffffff"
-                  className="pointer-events-none"
-                />
+                {/* Static Enterprise Active Node Indicator */}
+                <g className="pointer-events-none">
+                  <circle
+                    cx={activeCoord.x}
+                    cy={activeCoord.y}
+                    r="9"
+                    fill="#10B981"
+                    fillOpacity="0.15"
+                    stroke="#10B981"
+                    strokeWidth="1.5"
+                  />
+                  <circle
+                    cx={activeCoord.x}
+                    cy={activeCoord.y}
+                    r="5"
+                    fill="#059669"
+                    stroke="#34D399"
+                    strokeWidth="2"
+                  />
+                  <circle
+                    cx={activeCoord.x}
+                    cy={activeCoord.y}
+                    r="2"
+                    fill="#ffffff"
+                  />
+                </g>
               </svg>
             </div>
 
@@ -457,7 +458,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
         {/* Bottom Cyber Telemetry Ticker Stream */}
         <div className="pt-3 border-t border-neutral-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-neutral-400">
           <div className="flex items-center gap-2 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981]" />
             <span className="text-[11px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
               LIVE DAST STREAM:
             </span>
@@ -496,29 +497,23 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
             <p className="text-xs text-neutral-400">Safe Harbor & quota coverage</p>
           </div>
           <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981]" />
             100% SECURE
           </span>
         </div>
 
         {/* ─────────────────────────────────────────────────────────
-            MOTION GRAPHICS CONCENTRIC ORBITAL RADAR
+            STATIC ENTERPRISE CONCENTRIC TELEMETRY RETICLE
            ───────────────────────────────────────────────────────── */}
         <div className="relative flex items-center justify-center py-4 my-auto select-none">
           {/* Radar Container Frame */}
           <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full border border-neutral-800 bg-black/60 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center overflow-hidden">
-            {/* Motion Graphic 1: Infinite 360° Rotating Radar Sweep */}
-            <motion.div
-              className="absolute inset-0 rounded-full pointer-events-none"
+            {/* High-Precision Static Radar Reticle Overlay */}
+            <div
+              className="absolute inset-0 rounded-full pointer-events-none opacity-40"
               style={{
                 background:
-                  "conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(16, 185, 129, 0.05) 300deg, rgba(16, 185, 129, 0.28) 360deg)",
-              }}
-              animate={{ rotate: 360 }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "linear",
+                  "radial-gradient(circle at center, transparent 30%, rgba(16, 185, 129, 0.04) 70%, rgba(16, 185, 129, 0.12) 100%)",
               }}
             />
 
@@ -547,7 +542,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 stroke="#1f2937"
                 strokeWidth="4"
               />
-              <motion.circle
+              <circle
                 cx="100"
                 cy="100"
                 r="80"
@@ -556,9 +551,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray="502"
-                initial={{ strokeDashoffset: 502 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{ duration: 1.4, ease: "easeOut" }}
+                strokeDashoffset="0"
                 filter="url(#radarRingGlow)"
               />
 
@@ -571,7 +564,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 stroke="#1f2937"
                 strokeWidth="4"
               />
-              <motion.circle
+              <circle
                 cx="100"
                 cy="100"
                 r="62"
@@ -580,9 +573,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray="390"
-                initial={{ strokeDashoffset: 390 }}
-                animate={{ strokeDashoffset: 0 }}
-                transition={{ duration: 1.6, delay: 0.2, ease: "easeOut" }}
+                strokeDashoffset="0"
                 filter="url(#radarRingGlow)"
               />
 
@@ -595,7 +586,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 stroke="#1f2937"
                 strokeWidth="4"
               />
-              <motion.circle
+              <circle
                 cx="100"
                 cy="100"
                 r="44"
@@ -604,32 +595,20 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeDasharray="276"
-                initial={{ strokeDashoffset: 276 }}
-                animate={{ strokeDashoffset: 69 }}
-                transition={{ duration: 1.8, delay: 0.4, ease: "easeOut" }}
+                strokeDashoffset="69"
                 filter="url(#radarRingGlow)"
               />
             </svg>
 
-            {/* Motion Graphic 2: Orbiting Telemetry Satellite Node on Outer Ring */}
-            <motion.div
-              className="absolute inset-0 pointer-events-none"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981] flex items-center justify-center">
-                <span className="w-1 h-1 rounded-full bg-white" />
-              </div>
-            </motion.div>
+            {/* Static Telemetry Cardinal Markers */}
+            <div className="absolute top-[14px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981] flex items-center justify-center pointer-events-none">
+              <span className="w-1 h-1 rounded-full bg-white" />
+            </div>
+            <div className="absolute bottom-[14px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#06B6D4] pointer-events-none" />
 
-            {/* Center Breathing Cyber Shield Hub */}
-            <div className="absolute w-14 h-14 rounded-2xl bg-neutral-900 border border-emerald-500/40 shadow-xl shadow-emerald-500/20 flex flex-col items-center justify-center z-10">
-              <motion.div
-                animate={{ scale: [1, 1.12, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <IconShieldCheck className="w-6 h-6 text-emerald-400" />
-              </motion.div>
+            {/* Center Static Cyber Shield Hub */}
+            <div className="absolute w-14 h-14 rounded-2xl bg-neutral-900 border border-emerald-500/40 shadow-xl shadow-emerald-500/20 flex flex-col items-center justify-center z-10 pointer-events-none">
+              <IconShieldCheck className="w-6 h-6 text-emerald-400" />
               <span className="text-[9px] font-extrabold text-white font-mono mt-0.5">
                 SAFE
               </span>

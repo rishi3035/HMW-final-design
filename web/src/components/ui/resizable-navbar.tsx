@@ -121,32 +121,15 @@ const NavbarContext = React.createContext<{ visible: boolean }>({ visible: false
 export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <NavbarContext.Provider value={{ visible: Boolean(visible) }}>
-      <motion.div
-        animate={{
-          backdropFilter: "blur(20px)",
-          boxShadow: visible
-            ? "0 20px 50px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.1)"
-            : "0 15px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08)",
-          width: visible ? "96%" : "98%",
-          maxWidth: visible ? "1060px" : "1140px",
-          height: "58px",
-          paddingLeft: "16px",
-          paddingRight: "12px",
-          y: visible ? 4 : 0,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 240,
-          damping: 30,
-        }}
+      <div
         className={cn(
-          "relative z-[60] mx-auto hidden w-full h-[58px] flex-row items-center justify-between self-start rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl lg:flex transition-colors",
+          "relative z-[60] mx-auto hidden w-[96%] max-w-[1140px] h-[58px] flex-row items-center justify-between self-start rounded-2xl bg-black/95 border border-neutral-800 shadow-2xl backdrop-blur-xl lg:flex transition-colors px-4 sm:px-5",
           visible && "border-neutral-700/80 shadow-2xl",
           className,
         )}
       >
         {children}
-      </motion.div>
+      </div>
     </NavbarContext.Provider>
   );
 };
@@ -292,33 +275,16 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
   );
 };
 
-export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
+export const MobileNav = ({ children, className }: MobileNavProps) => {
   return (
-    <motion.div
-      animate={{
-        backdropFilter: visible ? "blur(16px)" : "blur(8px)",
-        boxShadow: visible
-          ? "0 0 24px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 16px 68px rgba(0, 0, 0, 0.5)"
-          : "none",
-        width: visible ? "95%" : "100%",
-        paddingRight: visible ? "12px" : "0px",
-        paddingLeft: visible ? "12px" : "0px",
-        borderRadius: visible ? "16px" : "2rem",
-        y: visible ? 8 : 0,
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 50,
-      }}
+    <div
       className={cn(
-        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between bg-transparent px-4 py-2 lg:hidden",
-        visible && "bg-black/95 border border-neutral-800",
+        "relative z-50 mx-auto flex w-full max-w-[calc(100vw-2rem)] flex-col items-center justify-between rounded-2xl bg-black/95 border border-neutral-800 px-4 py-2.5 lg:hidden shadow-2xl backdrop-blur-xl",
         className,
       )}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
@@ -378,7 +344,6 @@ export const MobileNavToggle = ({
 };
 
 export const NavbarLogo = ({
-  visible: propVisible,
   href = "/",
   onClick,
   children,
@@ -388,9 +353,6 @@ export const NavbarLogo = ({
   onClick?: (e: React.MouseEvent) => void;
   children?: React.ReactNode;
 }) => {
-  const context = React.useContext(NavbarContext);
-  const isScrolled = propVisible ?? context.visible;
-
   if (children) {
     return (
       <div className="relative z-20 flex items-center shrink-0">
@@ -408,22 +370,12 @@ export const NavbarLogo = ({
       <div className="text-white shrink-0 drop-shadow-[0_2px_10px_rgba(16,185,129,0.3)]">
         <HmwLogoIcon className="h-6 w-6" />
       </div>
-      <AnimatePresence initial={false}>
-        {!isScrolled && (
-          <motion.div
-            initial={{ opacity: 0, width: 0 }}
-            animate={{ opacity: 1, width: "auto" }}
-            exit={{ opacity: 0, width: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="overflow-hidden whitespace-nowrap"
-          >
-            <div className="font-black tracking-tight font-sans text-xs flex items-center gap-1.5 leading-none pl-0.5">
-              <span className="text-white">HACK MY</span>
-              <span className="text-[#10B981]">WEBSITE</span>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="whitespace-nowrap">
+        <div className="font-black tracking-tight font-sans text-xs flex items-center gap-1.5 leading-none pl-0.5">
+          <span className="text-white">HACK MY</span>
+          <span className="text-[#10B981]">WEBSITE</span>
+        </div>
+      </div>
     </a>
   );
 };

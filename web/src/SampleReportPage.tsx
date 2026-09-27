@@ -28,18 +28,7 @@ import { sampleReport, type SampleFinding } from "./lib/sampleReportData";
 import { BrandedPdfModal } from "./components/BrandedPdfModal";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
-import {
-  Navbar,
-  NavBody,
-  NavItems,
-  MobileNav,
-  NavbarLogo,
-  MobileNavHeader,
-  MobileNavToggle,
-  MobileNavMenu,
-  NavItemConfig,
-} from "@/components/ui/resizable-navbar";
-import { globalNavItems } from "@/lib/navigation";
+import { GlobalNavbar } from "./components/GlobalNavbar";
 
 export const SampleReportPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"findings" | "executive" | "ide-prompts">("findings");
@@ -107,106 +96,8 @@ export const SampleReportPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased">
-      {/* Resizable Global Navbar */}
-      <Navbar className="top-4">
-        <NavBody>
-          {/* LEFT: Brand Logo */}
-          <div className="shrink-0 flex items-center justify-start z-20">
-            <NavbarLogo />
-          </div>
-
-          {/* CENTER: Perfectly Centered Middle Nav Items */}
-          <div className="flex-1 flex items-center justify-center z-20 min-w-0 px-2">
-            <NavItems items={globalNavItems} />
-          </div>
-
-          {/* RIGHT: Actions */}
-          <div className="shrink-0 flex items-center justify-end gap-2.5 z-20">
-            <button
-              type="button"
-              onClick={() => setIsPdfModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-xs font-mono font-semibold text-emerald-400 border border-emerald-500/30 transition-all cursor-pointer shadow-sm hover:scale-[1.02] whitespace-nowrap shrink-0"
-            >
-              <Download className="size-3.5 text-emerald-400" />
-              <span>Export PDF</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => navigateTo("/workspace")}
-              className="px-4.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-emerald-500/20 hover:scale-[1.02] whitespace-nowrap shrink-0"
-            >
-              Launch Console
-            </button>
-          </div>
-        </NavBody>
-
-        <MobileNav>
-          <MobileNavHeader>
-            <NavbarLogo />
-            <MobileNavToggle
-              isOpen={isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            />
-          </MobileNavHeader>
-
-          <MobileNavMenu
-            isOpen={isMobileMenuOpen}
-            onClose={() => setIsMobileMenuOpen(false)}
-          >
-            <div className="w-full space-y-2 max-h-[60vh] overflow-y-auto pr-1">
-              {globalNavItems.map((item, idx) => (
-                <div key={`mobile-nav-${idx}`} className="border-b border-neutral-800/80 pb-2">
-                  <a
-                    href={item.link}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="block text-slate-200 hover:text-emerald-400 font-semibold text-sm py-1.5 transition-colors"
-                  >
-                    {item.name}
-                  </a>
-                  {item.dropdown && (
-                    <div className="pl-3 mt-1 space-y-1.5 border-l border-neutral-800">
-                      {item.dropdown.map((sub, sIdx) => (
-                        <a
-                          key={`mobile-sub-${sIdx}`}
-                          href={sub.link}
-                          onClick={() => setIsMobileMenuOpen(false)}
-                          className="flex items-center gap-2 text-xs text-slate-400 hover:text-emerald-300 py-1 transition-colors"
-                        >
-                          <span className="text-xs">{sub.icon}</span>
-                          <span className="font-medium">{sub.name}</span>
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className="pt-4 border-t border-neutral-800 space-y-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsPdfModalOpen(true);
-                }}
-                className="w-full py-2.5 rounded-xl bg-neutral-900 border border-emerald-500/40 text-emerald-400 font-bold text-xs uppercase tracking-wider"
-              >
-                Export Branded PDF
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  navigateTo("/workspace");
-                }}
-                className="w-full py-2.5 rounded-xl bg-emerald-500 text-neutral-950 font-bold text-xs uppercase tracking-wider"
-              >
-                Launch Console
-              </button>
-            </div>
-          </MobileNavMenu>
-        </MobileNav>
-      </Navbar>
+      {/* Enterprise Static Global Navbar */}
+      <GlobalNavbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 space-y-8">
         
