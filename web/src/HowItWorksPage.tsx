@@ -32,6 +32,7 @@ import {
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
+import { Velaris } from "@/components/ui/velaris";
 
 export const HowItWorksPage: React.FC = () => {
   const [copiedStep, setCopiedStep] = useState<string | null>(null);
@@ -60,30 +61,38 @@ export const HowItWorksPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased">
+    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
+      {/* Background Cybernetic Grid & Ambient Emerald Aura */}
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
       <main id="main-content" className="space-y-0 pt-20">
         
         {/* ========================================================================= */}
-        {/* SECTION 01: PAGE HERO                                                     */}
+        {/* SECTION 01: PAGE HERO WITH LIVING GREEN-BLACK SHADER (VELARIS)             */}
         {/* ========================================================================= */}
-        <section className="relative pt-16 pb-16 md:pt-24 md:pb-24 border-b border-neutral-800 bg-neutral-950 overflow-hidden text-center">
-          {/* Ambient Glow */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 blur-[130px] pointer-events-none" />
-
+        <Velaris
+          bg="#000000"
+          colors={["#10B981", "#34D399", "#059669", "#022C22"]}
+          speed={1.0}
+          grain={0.25}
+          height="auto"
+          className="relative pt-16 pb-16 md:pt-24 md:pb-24 border-b border-neutral-800 overflow-hidden text-center"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 border border-neutral-800 text-xs font-mono text-emerald-400 backdrop-blur-md shadow-lg">
               <Sparkles className="size-3.5" />
               <span>The Complete Security Engineering Workflow</span>
             </div>
 
             <div className="space-y-4 max-w-4xl mx-auto">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.1]">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.1] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
                 From Scan to <span className="text-emerald-400">Verified Fix</span>.
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow">
                 Hack My Website doesn't stop at finding vulnerabilities. It proves the evidence, explains the risk, gives your developers an actionable AI fix prompt, and lets you retest the finding in seconds.
               </p>
             </div>
@@ -103,7 +112,7 @@ export const HowItWorksPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigateTo("/sample-report")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-slate-200 border border-neutral-700/80 text-sm font-semibold transition-colors cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-black/80 hover:bg-neutral-900 text-slate-200 border border-neutral-700/80 text-sm font-semibold transition-colors cursor-pointer backdrop-blur-md"
               >
                 <FileText className="size-4 text-slate-400" />
                 <span>View Sample Report</span>
@@ -113,7 +122,7 @@ export const HowItWorksPage: React.FC = () => {
 
             {/* Compact Visual Workflow Strip */}
             <div className="pt-8 max-w-5xl mx-auto">
-              <div className="p-4 sm:p-5 rounded-2xl bg-neutral-900/80 border border-neutral-800 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-mono">
+              <div className="p-4 sm:p-5 rounded-2xl bg-black/80 border border-neutral-800 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-mono backdrop-blur-md shadow-2xl">
                 <span className="text-emerald-400 font-bold">01 VERIFY</span>
                 <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
                 <span className="text-sky-400 font-bold">02 SCAN</span>
@@ -130,7 +139,7 @@ export const HowItWorksPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </section>
+        </Velaris>
 
         {/* ========================================================================= */}
         {/* SECTION 02: THE COMPLETE 8-STAGE WORKFLOW JOURNEY                         */}

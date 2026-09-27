@@ -29,6 +29,7 @@ import { BrandedPdfModal } from "./components/BrandedPdfModal";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
+import { Velaris } from "@/components/ui/velaris";
 
 export const SampleReportPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"findings" | "executive" | "ide-prompts">("findings");
@@ -95,7 +96,11 @@ export const SampleReportPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased">
+    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
+      {/* Background ambient depth glow & cybernetic grid */}
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
@@ -104,7 +109,14 @@ export const SampleReportPage: React.FC = () => {
         {/* ========================================================================= */}
         {/* 1. REPORT HERO & AI LAUNCH SCORE HERO BANNER                              */}
         {/* ========================================================================= */}
-        <section className="rounded-3xl border border-neutral-800 bg-neutral-900/90 p-6 sm:p-8 shadow-2xl space-y-6 text-left">
+        <Velaris
+          bg="#000000"
+          colors={["#10B981", "#34D399", "#059669", "#022C22"]}
+          speed={1.0}
+          grain={0.25}
+          height="auto"
+          className="rounded-3xl border border-neutral-800 bg-neutral-900/60 backdrop-blur-md p-6 sm:p-8 shadow-2xl space-y-6 text-left overflow-hidden"
+        >
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-neutral-800">
             <div className="space-y-2">
               <div className="flex flex-wrap items-center gap-2.5">
@@ -182,7 +194,7 @@ export const SampleReportPage: React.FC = () => {
               </button>
             ))}
           </div>
-        </section>
+        </Velaris>
 
         {/* ========================================================================= */}
         {/* 2. INTERACTIVE TAB NAVIGATION                                             */}

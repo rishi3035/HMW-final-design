@@ -13,6 +13,7 @@ import {
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
+import { Velaris } from "@/components/ui/velaris";
 
 export const ContactPage: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -36,31 +37,43 @@ export const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased">
+    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
+      {/* Background ambient depth glow & cybernetic grid */}
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
-      <main className="py-16 md:py-24 pt-24 md:pt-32">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-              <MessageSquare className="size-3.5" />
-              <span>Direct Security & Agency Support</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              Contact Hack My Website
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Have questions regarding custom scanning quotas, agency white-label reports, or specific framework vulnerability rules? Our engineering team is here to assist.
-            </p>
+      {/* Hero with Velaris Shader */}
+      <Velaris
+        bg="#000000"
+        colors={["#10B981", "#34D399", "#059669", "#022C22"]}
+        speed={1.0}
+        grain={0.25}
+        height="auto"
+        className="relative pt-28 pb-16 md:pt-36 md:pb-20 border-b border-neutral-800 overflow-hidden text-center"
+      >
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-xs font-mono text-emerald-400">
+            <MessageSquare className="size-3.5" />
+            <span>Direct Security & Agency Support</span>
           </div>
 
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            Contact Hack My Website
+          </h1>
+
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Have questions regarding custom scanning quotas, agency white-label reports, or specific framework vulnerability rules? Our engineering team is here to assist.
+          </p>
+        </div>
+      </Velaris>
+
+      <main className="py-12 md:py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           {/* Contact & Inquiry Grid */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/90 border border-neutral-800 shadow-2xl text-left">
+          <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800 shadow-2xl text-left">
             <div className="grid gap-10 lg:grid-cols-12 items-start">
               
               {/* Left Column: Information */}

@@ -3,6 +3,7 @@ import { LockKeyhole, FileText, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
+import { Velaris } from "@/components/ui/velaris";
 
 interface LegalPageProps {
   initialTab?: "privacy" | "terms";
@@ -18,60 +19,72 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
   };
 
   return (
-    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased">
+    <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
+      {/* Background ambient depth glow & cybernetic grid */}
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
+      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
-      <main className="py-16 md:py-24 pt-24 md:pt-32">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">
-          
-          {/* Header */}
-          <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-              <ShieldCheck className="size-3.5" />
-              <span>Statutory Legal & Security Agreements</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              {activeTab === "privacy" ? "Privacy & Data Protection Policy" : "Terms & Conditions"}
-            </h1>
-
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Operated by <strong>AIVI Intelligence Private Limited</strong> (CIN: U62099UP2026PTC249169).
-            </p>
-
-            {/* Legal Document Tab Switcher */}
-            <div className="inline-flex items-center gap-2 p-1 rounded-2xl bg-neutral-900 border border-neutral-800">
-              <button
-                type="button"
-                onClick={() => setActiveTab("privacy")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
-                  activeTab === "privacy"
-                    ? "bg-emerald-500 text-neutral-950 shadow-md"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                <LockKeyhole className="size-3.5" />
-                <span>Privacy Policy</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab("terms")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
-                  activeTab === "terms"
-                    ? "bg-emerald-500 text-neutral-950 shadow-md"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                <FileText className="size-3.5" />
-                <span>Terms of Service</span>
-              </button>
-            </div>
+      {/* Header & Tabs with signature Velaris shader */}
+      <Velaris
+        bg="#000000"
+        colors={["#10B981", "#34D399", "#059669", "#022C22"]}
+        speed={1.0}
+        grain={0.25}
+        height="auto"
+        className="relative pt-28 pb-16 md:pt-36 md:pb-20 border-b border-neutral-800 overflow-hidden text-center"
+      >
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-xs font-mono text-emerald-400">
+            <ShieldCheck className="size-3.5" />
+            <span>Statutory Legal & Security Agreements</span>
           </div>
 
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            {activeTab === "privacy" ? "Privacy & Data Protection Policy" : "Terms & Conditions"}
+          </h1>
+
+          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Operated by <strong>AIVI Intelligence Private Limited</strong> (CIN: U62099UP2026PTC249169).
+          </p>
+
+          {/* Legal Document Tab Switcher */}
+          <div className="inline-flex items-center gap-2 p-1.5 rounded-2xl bg-neutral-950/80 backdrop-blur-md border border-neutral-800 mt-2">
+            <button
+              type="button"
+              onClick={() => setActiveTab("privacy")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
+                activeTab === "privacy"
+                  ? "bg-emerald-500 text-neutral-950 shadow-md"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              <LockKeyhole className="size-3.5" />
+              <span>Privacy Policy</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab("terms")}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
+                activeTab === "terms"
+                  ? "bg-emerald-500 text-neutral-950 shadow-md"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              <FileText className="size-3.5" />
+              <span>Terms of Service</span>
+            </button>
+          </div>
+        </div>
+      </Velaris>
+
+      <main className="py-12 md:py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">
           {/* Legal Document Body */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-neutral-900/90 border border-neutral-800 space-y-8 shadow-2xl text-xs sm:text-sm text-slate-300 leading-relaxed">
+          <div className="p-8 sm:p-12 rounded-3xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800 space-y-8 shadow-2xl text-xs sm:text-sm text-slate-300 leading-relaxed">
             
             {activeTab === "privacy" ? (
               <>
