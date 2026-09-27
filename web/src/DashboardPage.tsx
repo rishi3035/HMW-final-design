@@ -50,6 +50,7 @@ import { ScoreBreakdownModal } from "./components/ScoreBreakdownModal";
 import { ScanComparisonModal } from "./components/ScanComparisonModal";
 import { RiskEffortMatrixModal } from "./components/RiskEffortMatrixModal";
 import { ShareReportModal } from "./components/ShareReportModal";
+import { RiskVelocityTelemetrySection } from "./components/RiskVelocityTelemetrySection";
 import { cn } from "@/lib/utils";
 
 interface DomainTarget {
@@ -624,7 +625,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
             </div>
 
-            {/* 2 & 3. VULNERABILITY BREAKDOWN & QUICK PENETRATION AUDIT */}
+            {/* 2. DAST RISK VELOCITY & FLEET TELEMETRY ANALYTICS (TELEMETRY VISUAL) */}
+            <RiskVelocityTelemetrySection />
+
+            {/* 3 & 4. VULNERABILITY BREAKDOWN & QUICK PENETRATION AUDIT */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
               
               {/* 2. VULNERABILITY BREAKDOWN SPECTRUM (6 COLS) */}
@@ -1160,159 +1164,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {activeTab === "audits" && (
           <div className="space-y-6 mb-10">
-            {/* Relocated Analytics: DAST Risk Velocity & Fleet Telemetry */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-              
-              {/* DAST Risk Velocity Wave Chart (8 Cols) */}
-              <div className="lg:col-span-8 p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all flex flex-col justify-between relative overflow-hidden shadow-xl">
-                <div>
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                    <div>
-                      <h3 className="text-base font-bold text-white tracking-tight">DAST Risk Velocity</h3>
-                      <p className="text-xs text-neutral-400 mt-0.5">Clean scan execution telemetry across fleet</p>
-                    </div>
-
-                    <div className="flex items-center gap-1 bg-neutral-900 p-1 rounded-full border border-neutral-800 text-xs">
-                      <button
-                        type="button"
-                        onClick={() => setTimeRange("12months")}
-                        className={cn(
-                          "px-3 py-1 rounded-full transition-colors cursor-pointer",
-                          timeRange === "12months" ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold" : "text-neutral-400 hover:text-white"
-                        )}
-                      >
-                        12 months
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setTimeRange("30days")}
-                        className={cn(
-                          "px-3 py-1 rounded-full transition-colors cursor-pointer",
-                          timeRange === "30days" ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold" : "text-neutral-400 hover:text-white"
-                        )}
-                      >
-                        30 days
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setTimeRange("1week")}
-                        className={cn(
-                          "px-3 py-1 rounded-full transition-colors cursor-pointer",
-                          timeRange === "1week" ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold" : "text-neutral-400 hover:text-white"
-                        )}
-                      >
-                        1 week
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Chart Canvas with SVG Dual Smooth Curves & Floating Tooltip */}
-                  <div className="relative pt-6 pb-2">
-                    <div className="absolute top-1 left-[52%] -translate-x-1/2 px-3 py-1.5 rounded-xl bg-neutral-900/95 border border-emerald-500/40 shadow-2xl backdrop-blur-md text-center pointer-events-none z-20">
-                      <div className="text-xs text-neutral-400">7 September</div>
-                      <div className="text-xs font-bold text-emerald-400">318 Scans Passed (0 Advisories)</div>
-                    </div>
-
-                    <div className="flex items-stretch gap-3">
-                      <div className="flex flex-col justify-between text-xs text-neutral-500 py-1 shrink-0 h-44">
-                        <span>400</span>
-                        <span>300</span>
-                        <span>200</span>
-                        <span>100</span>
-                      </div>
-
-                      <div className="flex-1 relative">
-                        <svg viewBox="0 0 600 180" className="w-full h-44 overflow-visible" preserveAspectRatio="none">
-                          <defs>
-                            <linearGradient id="emeraldWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#10B981" />
-                              <stop offset="50%" stopColor="#34D399" />
-                              <stop offset="100%" stopColor="#059669" />
-                            </linearGradient>
-                            <linearGradient id="cyanWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#06B6D4" />
-                              <stop offset="50%" stopColor="#2DD4BF" />
-                              <stop offset="100%" stopColor="#14B8A6" />
-                            </linearGradient>
-                          </defs>
-
-                          <line x1="0" y1="20" x2="600" y2="20" stroke="#1c1f2e" strokeDasharray="3 3" />
-                          <line x1="0" y1="70" x2="600" y2="70" stroke="#1c1f2e" strokeDasharray="3 3" />
-                          <line x1="0" y1="120" x2="600" y2="120" stroke="#1c1f2e" strokeDasharray="3 3" />
-                          <line x1="0" y1="170" x2="600" y2="170" stroke="#1c1f2e" strokeDasharray="3 3" />
-
-                          <motion.path
-                            d="M 0 160 C 40 170, 70 135, 110 130 C 150 125, 175 45, 215 45 C 255 45, 275 165, 315 165 C 355 165, 375 65, 415 65 C 455 65, 495 140, 545 130 C 575 125, 590 140, 600 145"
-                            fill="none"
-                            stroke="url(#emeraldWaveGrad)"
-                            strokeWidth="2.5"
-                            initial={{ pathLength: 0 }}
-                            animate={{ pathLength: 1 }}
-                            transition={{ duration: 1.2, ease: "easeInOut" }}
-                          />
-
-                          <motion.path
-                            d="M 0 80 C 40 55, 80 140, 130 140 C 180 140, 230 95, 270 90 C 305 85, 315 48, 335 45 C 360 42, 385 135, 430 135 C 475 135, 510 60, 555 55 C 580 50, 590 65, 600 70"
-                            fill="none"
-                            stroke="url(#cyanWaveGrad)"
-                            strokeWidth="2.5"
-                            initial={{ pathLength: 0 }}
-                            animate={{ pathLength: 1 }}
-                            transition={{ duration: 1.4, ease: "easeInOut" }}
-                          />
-
-                          <circle cx="335" cy="45" r="7" fill="#10B981" className="animate-ping opacity-60" />
-                          <circle cx="335" cy="45" r="5" fill="#34D399" />
-                          <circle cx="335" cy="45" r="2.5" fill="#ffffff" />
-                        </svg>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between text-xs text-neutral-500 pl-8 pt-2">
-                      <span>24 Aug</span>
-                      <span>31 Aug</span>
-                      <span className="text-emerald-400 font-bold">7 Sept</span>
-                      <span>14 Sept</span>
-                      <span>21 Sept</span>
-                      <span>28 Sept</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Fleet Telemetry (4 Cols) */}
-              <div className="lg:col-span-4 p-5 sm:p-6 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-all relative overflow-hidden flex flex-col justify-between shadow-xl">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-base font-bold text-white tracking-tight">Fleet Telemetry</h3>
-                    <p className="text-xs text-neutral-500 mt-0.5">Safe Harbor & quota coverage</p>
-                  </div>
-                </div>
-
-                <div className="relative flex items-center justify-center py-6 my-auto">
-                  <div className="w-28 h-28 rounded-full bg-emerald-500 flex flex-col items-center justify-center text-neutral-950 shadow-2xl shadow-emerald-500/25 relative z-10">
-                    <span className="text-2xl font-bold leading-none mb-0.5">100%</span>
-                    <span className="text-xs font-semibold text-neutral-900">Safe Harbor</span>
-                  </div>
-
-                  <div className="w-20 h-20 rounded-full bg-cyan-500 flex flex-col items-center justify-center text-neutral-950 shadow-xl shadow-cyan-500/20 -ml-5 mt-6 relative z-20">
-                    <span className="text-base font-bold leading-none mb-0.5">0 CVE</span>
-                    <span className="text-xs font-medium text-neutral-900">Advisories</span>
-                  </div>
-
-                  <div className="w-14 h-14 rounded-full bg-neutral-900 border border-neutral-700 flex flex-col items-center justify-center text-emerald-400 -mt-14 -ml-3 relative z-30 [background-image:repeating-linear-gradient(45deg,#1f2937_0,#1f2937_2px,transparent_0,transparent_6px)] shadow-lg">
-                    <span className="text-xs font-bold leading-none mb-0.5">150</span>
-                    <span className="text-xs text-neutral-400">Quota</span>
-                  </div>
-                </div>
-
-                <div className="pt-3 border-t border-neutral-800/80 flex items-center justify-between text-xs text-neutral-400">
-                  <span>Coverage Status:</span>
-                  <span className="text-emerald-400 font-semibold">100% Monitored</span>
-                </div>
-              </div>
-
-            </div>
+            {/* DAST Risk Velocity & Fleet Telemetry */}
+            <RiskVelocityTelemetrySection />
             <div className="p-6 sm:p-8 rounded-3xl bg-neutral-950 border border-neutral-800 space-y-6">
               {/* Header with Title and Filter Pills from media_1790272244432.png */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
