@@ -41,9 +41,15 @@ import {
   IconBrandSlack,
   IconEye,
   IconFilter,
+  IconShare,
+  IconFlame,
 } from "@tabler/icons-react";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { BrandedPdfModal } from "./components/BrandedPdfModal";
+import { ScoreBreakdownModal } from "./components/ScoreBreakdownModal";
+import { ScanComparisonModal } from "./components/ScanComparisonModal";
+import { RiskEffortMatrixModal } from "./components/RiskEffortMatrixModal";
+import { ShareReportModal } from "./components/ShareReportModal";
 import { cn } from "@/lib/utils";
 
 interface DomainTarget {
@@ -117,6 +123,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   );
   const [selectedPresetPalette, setSelectedPresetPalette] = useState("emerald");
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+  const [isScoreBreakdownOpen, setIsScoreBreakdownOpen] = useState(false);
+  const [isScanComparisonOpen, setIsScanComparisonOpen] = useState(false);
+  const [isRiskEffortOpen, setIsRiskEffortOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [isSavedBrandingToast, setIsSavedBrandingToast] = useState(false);
 
   // Plan & Billing state
@@ -571,7 +581,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               </div>
 
               {/* CARD 3: Avg Launch Score */}
-              <div className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-neutral-700 transition-colors flex flex-col justify-between space-y-3">
+              <div
+                onClick={() => setIsScoreBreakdownOpen(true)}
+                className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800 hover:border-emerald-500/50 transition-all flex flex-col justify-between space-y-3 cursor-pointer group"
+              >
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-neutral-400 font-medium">Avg Launch Score</span>
                   <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-xs font-semibold">
@@ -580,11 +593,14 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </span>
                 </div>
                 <div>
-                  <div className="text-2xl sm:text-3xl font-bold text-emerald-400 tracking-tight">
-                    98 A+
+                  <div className="text-2xl sm:text-3xl font-bold text-emerald-400 tracking-tight flex items-baseline justify-between">
+                    <span>98 A+</span>
+                    <span className="text-[11px] text-emerald-400/80 group-hover:text-emerald-300 font-mono transition-colors">
+                      Breakdown →
+                    </span>
                   </div>
                   <p className="text-xs text-neutral-500 mt-1">
-                    Continuous perimeter evaluation
+                    Deterministic 6-pillar multi-engine evaluation
                   </p>
                 </div>
               </div>
@@ -929,13 +945,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </div>
               </div>
 
-              {/* 4 Useful Action Buttons */}
+              {/* 8 Useful Action Buttons */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {[
+                  { label: "Score Breakdown", icon: IconSparkles, color: "text-emerald-400", action: () => setIsScoreBreakdownOpen(true) },
+                  { label: "Trajectory Diff", icon: IconActivity, color: "text-teal-300", action: () => setIsScanComparisonOpen(true) },
+                  { label: "Leverage Matrix", icon: IconFlame, color: "text-amber-400", action: () => setIsRiskEffortOpen(true) },
+                  { label: "Share Audit Link", icon: IconShare, color: "text-cyan-400", action: () => setIsShareModalOpen(true) },
                   { label: "Quick DAST Audit", icon: IconPlayerPlay, color: "text-emerald-400", action: () => handleCopilotAction("Quick DAST Audit") },
                   { label: "Verify DNS TXT", icon: IconKey, color: "text-amber-400", action: () => handleCopilotAction("Verify DNS TXT") },
                   { label: "Add Target Domain", icon: IconWorld, color: "text-cyan-400", action: () => handleCopilotAction("Add Target Domain") },
-                  { label: "Copy Static IP", icon: IconCopy, color: "text-teal-300", action: () => handleCopilotAction("Copy Static IP") },
+                  { label: "Branded PDF Export", icon: IconDownload, color: "text-emerald-300", action: () => setIsPdfModalOpen(true) },
                 ].map((btn, idx) => {
                   const Icon = btn.icon;
                   return (
@@ -2627,6 +2647,43 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         disclaimer={reportDisclaimer}
         targetDomain={domains[0]?.url || "https://www.mvpstudio.in"}
         score={96}
+      />
+
+      {/* ===================== SCORE BREAKDOWN MODAL ===================== */}
+      <ScoreBreakdownModal
+        isOpen={isScoreBreakdownOpen}
+        onClose={() => setIsScoreBreakdownOpen(false)}
+        currentScore={98}
+        onSelectFinding={() => {
+          setActiveTab("matrix");
+        }}
+      />
+
+      {/* ===================== SCAN COMPARISON MODAL ===================== */}
+      <ScanComparisonModal
+        isOpen={isScanComparisonOpen}
+        onClose={() => setIsScanComparisonOpen(false)}
+        onSelectFinding={() => {
+          setActiveTab("matrix");
+        }}
+      />
+
+      {/* ===================== RISK EFFORT MATRIX MODAL ===================== */}
+      <RiskEffortMatrixModal
+        isOpen={isRiskEffortOpen}
+        onClose={() => setIsRiskEffortOpen(false)}
+        onSelectFinding={() => {
+          setActiveTab("matrix");
+        }}
+      />
+
+      {/* ===================== SHARE REPORT MODAL ===================== */}
+      <ShareReportModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        scanId="scan-8942-mvpstudio"
+        targetUrl={domains[0]?.url || "https://www.mvpstudio.in"}
+        score={98}
       />
 
     </div>

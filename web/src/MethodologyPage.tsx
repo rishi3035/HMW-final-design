@@ -33,15 +33,7 @@ import {
   MobileNavMenu,
   NavItemConfig,
 } from "@/components/ui/resizable-navbar";
-
-const navItems: NavItemConfig[] = [
-  { name: "Platform", link: "/" },
-  { name: "How It Works", link: "/how-it-works" },
-  { name: "Methodology", link: "/methodology" },
-  { name: "Sample Report", link: "/sample-report" },
-  { name: "Pricing", link: "/#pricing" },
-  { name: "Contact", link: "/contact" },
-];
+import { globalNavItems } from "@/lib/navigation";
 
 export const MethodologyPage: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,7 +58,7 @@ export const MethodologyPage: React.FC = () => {
             </div>
           </NavbarLogo>
 
-          <NavItems items={navItems} />
+          <NavItems items={globalNavItems} />
 
           <div className="hidden lg:flex items-center gap-3">
             <button
@@ -102,16 +94,34 @@ export const MethodologyPage: React.FC = () => {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            {navItems.map((item, idx) => (
-              <a
-                key={idx}
-                href={item.link}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-sm font-medium text-neutral-300 hover:text-emerald-400 transition-colors py-2"
-              >
-                {item.name}
-              </a>
-            ))}
+            <div className="w-full space-y-2 max-h-[60vh] overflow-y-auto pr-1">
+              {globalNavItems.map((item, idx) => (
+                <div key={`mobile-nav-${idx}`} className="border-b border-neutral-800/80 pb-2">
+                  <a
+                    href={item.link}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-slate-200 hover:text-emerald-400 font-semibold text-sm py-1.5 transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                  {item.dropdown && (
+                    <div className="pl-3 mt-1 space-y-1.5 border-l border-neutral-800">
+                      {item.dropdown.map((sub, sIdx) => (
+                        <a
+                          key={`mobile-sub-${sIdx}`}
+                          href={sub.link}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="flex items-center gap-2 text-xs text-slate-400 hover:text-emerald-300 py-1 transition-colors"
+                        >
+                          <span className="text-xs">{sub.icon}</span>
+                          <span className="font-medium">{sub.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
             <div className="pt-4 border-t border-neutral-800 space-y-2">
               <button
                 type="button"

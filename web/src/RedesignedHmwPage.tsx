@@ -24,14 +24,7 @@ import {
   NavItemConfig,
 } from "@/components/ui/resizable-navbar";
 import { AuthModal } from "./components/AuthModal";
-
-const enterpriseNavItems: NavItemConfig[] = [
-  { name: "Platform", link: "/" },
-  { name: "Security Engines", link: "#security" },
-  { name: "How It Works", link: "#how-it-works" },
-  { name: "Pricing", link: "#pricing" },
-  { name: "FAQ", link: "#faq" },
-];
+import { globalNavItems } from "@/lib/navigation";
 
 export const RedesignedHmwPage: React.FC = () => {
   const [scanUrl, setScanUrl] = useState("https://my-startup.com");
@@ -65,7 +58,7 @@ export const RedesignedHmwPage: React.FC = () => {
 
           {/* CENTER: Perfectly Centered Middle Nav Items */}
           <div className="flex items-center justify-center shrink-0 z-20">
-            <NavItems items={enterpriseNavItems} />
+            <NavItems items={globalNavItems} />
           </div>
 
           {/* RIGHT: Professional Enterprise Actions */}
@@ -101,16 +94,32 @@ export const RedesignedHmwPage: React.FC = () => {
             isOpen={isMobileMenuOpen}
             onClose={() => setIsMobileMenuOpen(false)}
           >
-            <div className="w-full space-y-2">
-              {enterpriseNavItems.map((item, idx) => (
-                <a
-                  key={`mobile-nav-${idx}`}
-                  href={item.link}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-slate-200 hover:text-white font-semibold text-sm py-2 border-b border-neutral-800"
-                >
-                  {item.name}
-                </a>
+            <div className="w-full space-y-2 max-h-[60vh] overflow-y-auto pr-1">
+              {globalNavItems.map((item, idx) => (
+                <div key={`mobile-nav-${idx}`} className="border-b border-neutral-800/80 pb-2">
+                  <a
+                    href={item.link}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-slate-200 hover:text-emerald-400 font-semibold text-sm py-1.5 transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                  {item.dropdown && (
+                    <div className="pl-3 mt-1 space-y-1.5 border-l border-neutral-800">
+                      {item.dropdown.map((sub, sIdx) => (
+                        <a
+                          key={`mobile-sub-${sIdx}`}
+                          href={sub.link}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="flex items-center gap-2 text-xs text-slate-400 hover:text-emerald-300 py-1 transition-colors"
+                        >
+                          <span className="text-xs">{sub.icon}</span>
+                          <span className="font-medium">{sub.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
 

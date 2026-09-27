@@ -34,6 +34,10 @@ import {
   type TicketingFindingContext,
 } from "./lib/ticketing-dispatcher";
 import { BrandedPdfModal } from "./components/BrandedPdfModal";
+import { ScoreBreakdownModal } from "./components/ScoreBreakdownModal";
+import { ScanComparisonModal } from "./components/ScanComparisonModal";
+import { RiskEffortMatrixModal } from "./components/RiskEffortMatrixModal";
+import { ShareReportModal } from "./components/ShareReportModal";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 
 interface ScanDetailPageProps {
@@ -62,6 +66,10 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
   const [activeEvidenceTab, setActiveEvidenceTab] = useState<"evidence" | "curl" | "prompt">("evidence");
   const [copiedStatus, setCopiedStatus] = useState<string | null>(null);
   const [isPdfModalOpen, setIsPdfModalOpen] = useState(false);
+  const [isScoreBreakdownOpen, setIsScoreBreakdownOpen] = useState(false);
+  const [isScanComparisonOpen, setIsScanComparisonOpen] = useState(false);
+  const [isRiskEffortOpen, setIsRiskEffortOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const [retestStatus, setRetestStatus] = useState<"idle" | "running" | "done">("idle");
   const [fixedFindingIds, setFixedFindingIds] = useState<Set<string>>(new Set());
   const [ideDispatchStatus, setIdeDispatchStatus] = useState<string | null>(null);
@@ -204,7 +212,34 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setIsShareModalOpen(true)}
+            className="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-mono font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 transition-all cursor-pointer"
+          >
+            <IconShare className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden md:inline">Share</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsScanComparisonOpen(true)}
+            className="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-mono font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 transition-all cursor-pointer"
+          >
+            <IconActivity className="w-3.5 h-3.5 text-teal-400" />
+            <span className="hidden md:inline">Diff</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsRiskEffortOpen(true)}
+            className="h-9 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs font-mono font-semibold text-slate-300 hover:text-white inline-flex items-center gap-1.5 transition-all cursor-pointer"
+          >
+            <IconFlame className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden md:inline">Matrix</span>
+          </button>
+
           <button
             type="button"
             onClick={handleRetestAll}
@@ -275,9 +310,16 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
                   6-Pillar Risk Breakdown
                 </h3>
               </div>
-              <span className="text-xs font-mono text-emerald-400">
-                200 Engine Checks Verified
-              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setIsScoreBreakdownOpen(true)}
+                  className="px-2.5 py-1 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-mono cursor-pointer flex items-center gap-1 transition-all"
+                >
+                  <span>Interactive Breakdown</span>
+                  <IconChevronRight className="w-3 h-3" />
+                </button>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
@@ -708,6 +750,67 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
         disclaimer="Confidential client report prepared exclusively by our cybersecurity advisory team."
         targetDomain={sampleReport.domain}
         findingsCount={sampleReport.findings.length}
+      />
+
+      {/* Score Breakdown Modal */}
+      <ScoreBreakdownModal
+        isOpen={isScoreBreakdownOpen}
+        onClose={() => setIsScoreBreakdownOpen(false)}
+        currentScore={sampleReport.score}
+        findings={sampleReport.findings.map((f) => ({
+          id: f.id,
+          title: f.title,
+          severity: f.severity,
+          affected_url: f.affectedUrl,
+          tool_source: f.toolSource,
+        }))}
+        onSelectFinding={(id) => {
+          setSelectedFindingId(id);
+          setIsScoreBreakdownOpen(false);
+        }}
+      />
+
+      {/* Scan Comparison Modal */}
+      <ScanComparisonModal
+        isOpen={isScanComparisonOpen}
+        onClose={() => setIsScanComparisonOpen(false)}
+        findings={sampleReport.findings.map((f) => ({
+          id: f.id,
+          title: f.title,
+          severity: f.severity,
+          affected_url: f.affectedUrl,
+        }))}
+        onSelectFinding={(id) => {
+          setSelectedFindingId(id);
+          setIsScanComparisonOpen(false);
+        }}
+      />
+
+      {/* Risk Effort Matrix Modal */}
+      <RiskEffortMatrixModal
+        isOpen={isRiskEffortOpen}
+        onClose={() => setIsRiskEffortOpen(false)}
+        findings={sampleReport.findings.map((f) => ({
+          id: f.id,
+          title: f.title,
+          severity: f.severity,
+          affected_url: f.affectedUrl,
+          business_impact: f.businessImpact,
+          owasp_category: f.owaspCategory,
+        }))}
+        onSelectFinding={(id) => {
+          setSelectedFindingId(id);
+          setIsRiskEffortOpen(false);
+        }}
+      />
+
+      {/* Share Report Modal */}
+      <ShareReportModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        scanId={scanId}
+        targetUrl={sampleReport.domain}
+        score={sampleReport.score}
       />
     </div>
   );
