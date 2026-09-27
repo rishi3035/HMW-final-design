@@ -108,7 +108,7 @@ BT
 (EXECUTIVE SUMMARY & LAUNCH SCORE) Tj
 /F2 11 Tf
 0 -20 Td
-(Overall Launch Trust Score: ${score}/100 [GRADE A+]) Tj
+(Overall Launch Trust Score: ${score}/100) Tj
 0 -15 Td
 (DAST Checks: 200+ Passed | Critical Risks: 0 Detected | High: 0 | Medium: 1) Tj
 0 -15 Td
@@ -389,7 +389,7 @@ startxref
                   {score} <span className="text-xs  font-medium text-emerald-500">/ 100</span>
                 </div>
                 <span className="text-xs  font-bold text-emerald-400 block mt-0.5">
-                  GRADE A+ EXCELLENT
+                  EXCELLENT (VERIFIED)
                 </span>
               </div>
 

@@ -155,7 +155,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         url: formatted,
         status: "verified",
         addedDate: "Sep 24, 2026",
-        lastScore: "98/100 A+",
+        lastScore: "98/100",
       });
     }
     return list;
@@ -209,7 +209,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             setScanProgress(0);
             setDomains((prevDomains) =>
               prevDomains.map((d) =>
-                d.id === id ? { ...d, status: "verified", lastScore: "98/100 A+" } : d
+                d.id === id ? { ...d, status: "verified", lastScore: "98/100" } : d
               )
             );
           }, 600);
@@ -310,7 +310,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       handleCopyIp();
       setCopilotResponse("Scanner static IP 168.144.94.35 copied. Whitelist in Cloudflare WAF.");
     } else {
-      setCopilotResponse(`Autonomous Copilot: Evaluated "${copilotQuery}". Fleet security score is 98/100 (A+). 0 Advisories across OWASP ZAP, Nuclei, and Semgrep.`);
+      setCopilotResponse(`Autonomous Copilot: Evaluated "${copilotQuery}". Fleet security score is 98/100. 0 Advisories across OWASP ZAP, Nuclei, and Semgrep.`);
     }
     setCopilotQuery("");
   };
@@ -594,7 +594,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </div>
                 <div>
                   <div className="text-2xl sm:text-3xl font-bold text-emerald-400 tracking-tight flex items-baseline justify-between">
-                    <span>98 A+</span>
+                    <span>98/100</span>
                     <span className="text-[11px] text-emerald-400/80 group-hover:text-emerald-300 font-mono transition-colors">
                       Breakdown →
                     </span>
@@ -1085,7 +1085,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                         </div>
                         <div className="flex justify-between items-baseline">
                           <span className={cn("text-base font-bold", isVer ? "text-emerald-400" : "text-white")}>
-                            {d.lastScore || (isVer ? "98/100 A+" : "Not Scanned")}
+                            {d.lastScore || (isVer ? "98/100" : "Not Scanned")}
                           </span>
                           <span className="text-xs text-slate-300">
                             {isVer ? "Continuous 24/7" : "Manual Only"}
@@ -1405,7 +1405,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs ">
                         <div>
                           <span className="text-xs text-neutral-500 uppercase block">LAUNCH SCORE</span>
-                          <span className="text-base font-bold text-emerald-400">98 / 100 A+</span>
+                          <span className="text-base font-bold text-emerald-400">98/100</span>
                         </div>
                         <div>
                           <span className="text-xs text-neutral-500 uppercase block">ENGINES EXECUTED</span>
@@ -1427,7 +1427,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                           <p className="text-emerald-400 font-bold">✓ [PERIMETER] Resolved host 168.144.94.35 — TLS 1.3 negotiated.</p>
                           <p className="text-slate-300">✓ [DAST] 200+ non-destructive payload injections passed cleanly.</p>
                           <p className="text-slate-300">✓ [NUCLEI] 4,812 CVE templates evaluated — 0 matches.</p>
-                          <p className="text-emerald-400 font-bold">✓ [TRUST SCORE] Launch score verified at 98/100 Grade A+.</p>
+                          <p className="text-emerald-400 font-bold">✓ [TRUST SCORE] Launch score verified at 98/100.</p>
                         </div>
                       )}
                     </div>
@@ -1809,7 +1809,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       <span className="font-bold text-white">{githubOrg}/{githubRepo}</span>
                     </div>
                     <span className="text-xs px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold">
-                      TRUST SCORE: 98 A+
+                      TRUST SCORE: 98/100
                     </span>
                   </div>
                   <div className="flex justify-between text-neutral-400 text-xs">
