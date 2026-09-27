@@ -23,7 +23,7 @@ import {
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
-import { Velaris } from "@/components/ui/velaris";
+import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
 
 export const MethodologyPage: React.FC = () => {
   const navigateTo = (path: string) => {
@@ -42,17 +42,11 @@ export const MethodologyPage: React.FC = () => {
       <GlobalNavbar />
 
       {/* ========================================================================= */}
-      {/* HEADER SECTION WITH VELARIS LIVING GREEN-BLACK SHADER                     */}
+      {/* HEADER SECTION WITH GREEN AURA THEME (FULL SCREEN)                        */}
       {/* ========================================================================= */}
-      <Velaris
-        bg="#000000"
-        colors={["#10B981", "#34D399", "#059669", "#022C22"]}
-        speed={1.0}
-        grain={0.25}
-        height="auto"
-        className="relative pt-24 pb-16 md:pt-32 md:pb-20 border-b border-neutral-800 overflow-hidden text-center"
-      >
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 text-center relative z-10">
+      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
+        <GreenAuraBackground opacity={100} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4 text-center relative z-10 w-full">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 border border-neutral-800 text-xs font-mono text-emerald-400 backdrop-blur-md shadow-lg">
             <Sparkles className="size-3.5" />
             <span>Scientific Threat Modeling & Scoring Matrix</span>
@@ -67,15 +61,14 @@ export const MethodologyPage: React.FC = () => {
             The AI Launch Score is an objective, mathematical security index designed to evaluate the launch-readiness of modern websites, SaaS applications, and AI tools. It synthesizes <strong>200+ automated multi-engine checks</strong> across 6 weighted security dimensions into actionable readiness bands.
           </p>
         </div>
-      </Velaris>
+      </section>
 
-      <main className="py-12 md:py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-
-          {/* ========================================================================= */}
-          {/* 6 DIMENSIONS OF LAUNCH READINESS                                          */}
-          {/* ========================================================================= */}
-          <section className="p-8 sm:p-12 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-10 text-left shadow-2xl">
+      <main className="space-y-0">
+        {/* ========================================================================= */}
+        {/* SECTION 02: 6 DIMENSIONS OF LAUNCH READINESS (DEEP BLACK FULL SCREEN)     */}
+        {/* ========================================================================= */}
+        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left relative z-10 w-full">
             <div className="space-y-2 border-b border-neutral-800 pb-6">
               <div className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold">
                 Multi-Engine Weighted Architecture
@@ -260,12 +253,15 @@ export const MethodologyPage: React.FC = () => {
               </div>
 
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ========================================================================= */}
-          {/* POINT DEDUCTIONS & SEVERITY PENALTY MATRIX                                */}
-          {/* ========================================================================= */}
-          <section className="p-8 sm:p-12 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-8 text-left shadow-2xl">
+        {/* ========================================================================= */}
+        {/* SECTION 03: POINT DEDUCTIONS & SEVERITY PENALTY (GREEN AURA FULL SCREEN)  */}
+        {/* ========================================================================= */}
+        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-left relative z-10 w-full">
             <div className="space-y-2 border-b border-neutral-800 pb-6">
               <div className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold">
                 Mathematical Deduction Model
@@ -374,12 +370,14 @@ export const MethodologyPage: React.FC = () => {
               </div>
 
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ========================================================================= */}
-          {/* 4 HIGH-VISIBILITY READINESS BANDS BREAKDOWN                                */}
-          {/* ========================================================================= */}
-          <section className="p-8 sm:p-12 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-8 text-left shadow-2xl">
+        {/* ========================================================================= */}
+        {/* SECTION 04: READINESS BANDS MATRIX (DEEP BLACK FULL SCREEN)               */}
+        {/* ========================================================================= */}
+        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 text-left relative z-10 w-full">
             <div className="space-y-2 border-b border-neutral-800 pb-6">
               <div className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold">
                 Deployment Decision Matrix
@@ -483,19 +481,22 @@ export const MethodologyPage: React.FC = () => {
               </div>
 
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* ========================================================================= */}
-          {/* BOTTOM CONVERSION CTA                                                     */}
-          {/* ========================================================================= */}
-          <div className="p-8 sm:p-12 rounded-3xl bg-neutral-900/90 border border-emerald-500/40 text-center space-y-5 shadow-2xl">
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
+        {/* ========================================================================= */}
+        {/* SECTION 05: CONVERSION CTA (GREEN AURA FULL SCREEN)                       */}
+        {/* ========================================================================= */}
+        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10 w-full">
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
               Ready to Measure Your Website's Launch Readiness?
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
               Verify your domain origin in 30 seconds and generate an objective 0–100 AI Launch Score with instant code fix prompts.
             </p>
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <button
                 type="button"
                 onClick={() => navigateTo("/workspace")}
@@ -507,21 +508,21 @@ export const MethodologyPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigateTo("/how-it-works")}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-slate-200 font-bold text-xs border border-neutral-700 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-black/80 hover:bg-neutral-900 text-slate-200 font-bold text-xs border border-neutral-700 transition-colors cursor-pointer backdrop-blur-md"
               >
                 <span>See How It Works</span>
               </button>
               <button
                 type="button"
                 onClick={() => navigateTo("/sample-report")}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-slate-200 font-bold text-xs border border-neutral-700 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-black/80 hover:bg-neutral-900 text-slate-200 font-bold text-xs border border-neutral-700 transition-colors cursor-pointer backdrop-blur-md"
               >
                 <span>View Sample PDF Report</span>
               </button>
             </div>
           </div>
+        </section>
 
-        </div>
       </main>
 
       <EnterpriseFooter />

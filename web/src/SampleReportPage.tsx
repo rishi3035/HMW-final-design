@@ -29,7 +29,7 @@ import { BrandedPdfModal } from "./components/BrandedPdfModal";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
-import { Velaris } from "@/components/ui/velaris";
+import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
 
 export const SampleReportPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"findings" | "executive" | "ide-prompts">("findings");
@@ -104,97 +104,100 @@ export const SampleReportPage: React.FC = () => {
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 space-y-8">
-        
+      <main className="space-y-0">
         {/* ========================================================================= */}
-        {/* 1. REPORT HERO & AI LAUNCH SCORE HERO BANNER                              */}
+        {/* 1. REPORT HERO & AI LAUNCH SCORE HERO BANNER (GREEN AURA FULL SCREEN)     */}
         {/* ========================================================================= */}
-        <Velaris
-          bg="#000000"
-          colors={["#10B981", "#34D399", "#059669", "#022C22"]}
-          speed={1.0}
-          grain={0.25}
-          height="auto"
-          className="rounded-3xl border border-neutral-800 bg-neutral-900/60 backdrop-blur-md p-6 sm:p-8 shadow-2xl space-y-6 text-left overflow-hidden"
-        >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-neutral-800">
-            <div className="space-y-2">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-xs font-bold">
-                  SAMPLE AUDIT
-                </span>
-                <span className="text-xs text-neutral-400 font-mono flex items-center gap-1.5">
-                  <Calendar className="size-3.5" />
-                  {sampleReport.scanDate}
-                </span>
+        <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-left">
+        <GreenAuraBackground opacity={100} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+          <div className="rounded-3xl border border-neutral-800 bg-neutral-900/80 backdrop-blur-md p-6 sm:p-8 shadow-2xl space-y-6">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-neutral-800">
+              <div className="space-y-2">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono text-xs font-bold">
+                    SAMPLE AUDIT
+                  </span>
+                  <span className="text-xs text-neutral-400 font-mono flex items-center gap-1.5">
+                    <Calendar className="size-3.5" />
+                    {sampleReport.scanDate}
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
+                  <Globe className="size-7 text-emerald-400 shrink-0" />
+                  <span>{sampleReport.domain}</span>
+                </h1>
+                <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+                  Automated security assessment conducted across OWASP ZAP (DAST), Nuclei v3.3 CVE engine, and Semgrep static analysis.
+                </p>
               </div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                <Globe className="size-7 text-emerald-400 shrink-0" />
-                <span>{sampleReport.domain}</span>
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                Automated security assessment conducted across OWASP ZAP (DAST), Nuclei v3.3 CVE engine, and Semgrep static analysis.
-              </p>
+
+              {/* AI Launch Score Metric Card */}
+              <div className="flex items-center gap-6 bg-neutral-950 border border-neutral-800 rounded-2xl p-4 sm:p-6 shrink-0 shadow-inner">
+                <div className="space-y-1 text-right sm:text-left">
+                  <div className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">
+                    AI Launch Score
+                  </div>
+                  <div className="text-4xl sm:text-5xl font-extrabold font-mono text-amber-400 tracking-tight">
+                    {sampleReport.launchScore}
+                    <span className="text-lg text-neutral-500 font-normal">/100</span>
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30 text-[11px] font-bold">
+                    HIGH RISK
+                  </div>
+                </div>
+
+                <div className="h-16 w-px bg-neutral-800 hidden sm:block" />
+
+                <div className="space-y-1.5 hidden sm:block text-xs font-mono text-neutral-400">
+                  <div>Status: <strong className="text-amber-400">Pre-Launch</strong></div>
+                  <div>Action: <strong className="text-slate-200">Fix 3 Mediums</strong></div>
+                  <button
+                    type="button"
+                    onClick={() => setIsPdfModalOpen(true)}
+                    className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 cursor-pointer pt-1"
+                  >
+                    <Download className="size-3" />
+                    <span>Preview PDF Deliverable</span>
+                  </button>
+                </div>
+              </div>
             </div>
 
-            {/* AI Launch Score Metric Card */}
-            <div className="flex items-center gap-6 bg-neutral-950 border border-neutral-800 rounded-2xl p-4 sm:p-6 shrink-0 shadow-inner">
-              <div className="space-y-1 text-right sm:text-left">
-                <div className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider">
-                  AI Launch Score
-                </div>
-                <div className="text-4xl sm:text-5xl font-extrabold font-mono text-amber-400 tracking-tight">
-                  {sampleReport.launchScore}
-                  <span className="text-lg text-neutral-500 font-normal">/100</span>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-orange-500/10 text-orange-400 border border-orange-500/30 text-[11px] font-bold">
-                  HIGH RISK
-                </div>
-              </div>
-
-              <div className="h-16 w-px bg-neutral-800 hidden sm:block" />
-
-              <div className="space-y-1.5 hidden sm:block text-xs font-mono text-neutral-400">
-                <div>Status: <strong className="text-amber-400">Pre-Launch</strong></div>
-                <div>Action: <strong className="text-slate-200">Fix 3 Mediums</strong></div>
+            {/* Severity 5-Column Metric Cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
+              {[
+                { label: "CRITICAL", count: sampleReport.severitySummary.critical, color: "border-rose-500/30 bg-rose-950/10 text-rose-400", filter: "critical" },
+                { label: "HIGH", count: sampleReport.severitySummary.high, color: "border-orange-500/30 bg-orange-950/10 text-orange-400", filter: "high" },
+                { label: "MEDIUM", count: sampleReport.severitySummary.medium, color: "border-amber-500/30 bg-amber-950/10 text-amber-400", filter: "medium" },
+                { label: "LOW", count: sampleReport.severitySummary.low, color: "border-sky-500/30 bg-sky-950/10 text-sky-400", filter: "low" },
+                { label: "INFO", count: sampleReport.severitySummary.info, color: "border-neutral-700/40 bg-neutral-900/30 text-neutral-400", filter: "info" },
+              ].map((sev) => (
                 <button
-                  type="button"
-                  onClick={() => setIsPdfModalOpen(true)}
-                  className="text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1 cursor-pointer pt-1"
+                  key={sev.label}
+                  onClick={() => setSeverityFilter(severityFilter === sev.filter ? "all" : sev.filter)}
+                  className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${sev.color} ${
+                    severityFilter === sev.filter ? "ring-2 ring-emerald-400 scale-[1.02]" : "hover:border-neutral-600"
+                  }`}
                 >
-                  <Download className="size-3" />
-                  <span>Preview PDF Deliverable</span>
+                  <div className="text-[10px] font-mono font-bold tracking-wider uppercase opacity-80">
+                    {sev.label}
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-extrabold font-mono mt-0.5">
+                    {sev.count}
+                  </div>
                 </button>
-              </div>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Severity 5-Column Metric Cards */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
-            {[
-              { label: "CRITICAL", count: sampleReport.severitySummary.critical, color: "border-rose-500/30 bg-rose-950/10 text-rose-400", filter: "critical" },
-              { label: "HIGH", count: sampleReport.severitySummary.high, color: "border-orange-500/30 bg-orange-950/10 text-orange-400", filter: "high" },
-              { label: "MEDIUM", count: sampleReport.severitySummary.medium, color: "border-amber-500/30 bg-amber-950/10 text-amber-400", filter: "medium" },
-              { label: "LOW", count: sampleReport.severitySummary.low, color: "border-sky-500/30 bg-sky-950/10 text-sky-400", filter: "low" },
-              { label: "INFO", count: sampleReport.severitySummary.info, color: "border-neutral-700/40 bg-neutral-900/30 text-neutral-400", filter: "info" },
-            ].map((sev) => (
-              <button
-                key={sev.label}
-                onClick={() => setSeverityFilter(severityFilter === sev.filter ? "all" : sev.filter)}
-                className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer ${sev.color} ${
-                  severityFilter === sev.filter ? "ring-2 ring-emerald-400 scale-[1.02]" : "hover:border-neutral-600"
-                }`}
-              >
-                <div className="text-[10px] font-mono font-bold tracking-wider uppercase opacity-80">
-                  {sev.label}
-                </div>
-                <div className="text-2xl sm:text-3xl font-extrabold font-mono mt-0.5">
-                  {sev.count}
-                </div>
-              </button>
-            ))}
-          </div>
-        </Velaris>
+      {/* ========================================================================= */}
+      {/* 2. FINDINGS & TECHNICAL AUDIT (DEEP BLACK FULL SCREEN)                    */}
+      {/* ========================================================================= */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black text-left">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10 w-full">
 
         {/* ========================================================================= */}
         {/* 2. INTERACTIVE TAB NAVIGATION                                             */}
@@ -599,26 +602,33 @@ export const SampleReportPage: React.FC = () => {
           </div>
         )}
 
-        {/* Bottom CTA Banner */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900 border border-neutral-800 text-center space-y-5 shadow-2xl">
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. CONVERSION CTA (GREEN AURA FULL SCREEN)                                */}
+      {/* ========================================================================= */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
+        <GreenAuraBackground opacity={90} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10 w-full">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Ready to scan your own website?
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+          </h2>
+          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
             Verify domain ownership in under 60 seconds and receive your full interactive security report with prioritized fixes.
           </p>
-          <div className="pt-2">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               type="button"
               onClick={() => navigateTo("/workspace")}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 hover:scale-[1.02] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 hover:scale-[1.02] cursor-pointer"
             >
               <span>Launch Free Security Scan</span>
               <ArrowRight className="size-4" />
             </button>
           </div>
         </div>
-
+      </section>
       </main>
 
       {/* Global Footer */}

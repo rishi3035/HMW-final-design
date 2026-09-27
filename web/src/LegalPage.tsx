@@ -3,7 +3,7 @@ import { LockKeyhole, FileText, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
-import { Velaris } from "@/components/ui/velaris";
+import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
 
 interface LegalPageProps {
   initialTab?: "privacy" | "terms";
@@ -27,35 +27,29 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
-      {/* Header & Tabs with signature Velaris shader */}
-      <Velaris
-        bg="#000000"
-        colors={["#10B981", "#34D399", "#059669", "#022C22"]}
-        speed={1.0}
-        grain={0.25}
-        height="auto"
-        className="relative pt-28 pb-16 md:pt-36 md:pb-20 border-b border-neutral-800 overflow-hidden text-center"
-      >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      {/* SECTION 01: Statutory Header & Interactive Document Switcher (Full Screen 100vh Green Aura Theme) */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
+        <GreenAuraBackground opacity={100} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-xs font-mono text-emerald-400">
             <ShieldCheck className="size-3.5" />
             <span>Statutory Legal & Security Agreements</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
             {activeTab === "privacy" ? "Privacy & Data Protection Policy" : "Terms & Conditions"}
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
             Operated by <strong>AIVI Intelligence Private Limited</strong> (CIN: U62099UP2026PTC249169).
           </p>
 
           {/* Legal Document Tab Switcher */}
-          <div className="inline-flex items-center gap-2 p-1.5 rounded-2xl bg-neutral-950/80 backdrop-blur-md border border-neutral-800 mt-2">
+          <div className="inline-flex items-center gap-2 p-1.5 rounded-2xl bg-neutral-950/80 backdrop-blur-md border border-neutral-800 mt-4">
             <button
               type="button"
               onClick={() => setActiveTab("privacy")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
                 activeTab === "privacy"
                   ? "bg-emerald-500 text-neutral-950 shadow-md"
                   : "text-neutral-400 hover:text-white"
@@ -68,7 +62,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
             <button
               type="button"
               onClick={() => setActiveTab("terms")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
                 activeTab === "terms"
                   ? "bg-emerald-500 text-neutral-950 shadow-md"
                   : "text-neutral-400 hover:text-white"
@@ -79,10 +73,11 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
             </button>
           </div>
         </div>
-      </Velaris>
+      </section>
 
-      <main className="py-12 md:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 text-left">
+      {/* SECTION 02: Statutory Legal Body & Sovereign DPDP Clauses (Full Screen 100vh Deep Black Theme) */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-10 text-left">
           {/* Legal Document Body */}
           <div className="p-8 sm:p-12 rounded-3xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800 space-y-8 shadow-2xl text-xs sm:text-sm text-slate-300 leading-relaxed">
             
@@ -155,7 +150,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
           </div>
 
         </div>
-      </main>
+      </section>
 
       <EnterpriseFooter />
     </div>

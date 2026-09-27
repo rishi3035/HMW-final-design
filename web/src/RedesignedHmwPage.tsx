@@ -44,12 +44,12 @@ export const RedesignedHmwPage: React.FC = () => {
         colors={["#10B981", "#34D399", "#059669", "#022C22"]}
         speed={1.0}
         grain={0.25}
-        height="100vh"
-        className="relative overflow-hidden border-b border-neutral-800 h-screen min-h-[100vh]"
+        height="auto"
+        className="relative overflow-hidden border-b border-neutral-800 min-h-screen flex flex-col justify-center"
       >
-        <div className="flex h-full w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 pb-10">
-          {/* Centered High-Impact Enterprise Hero — shifted lower than the middle */}
-          <div className="max-w-5xl w-full text-center space-y-6 sm:space-y-7 relative z-10 translate-y-8 sm:translate-y-12 md:translate-y-16">
+        <div className="flex h-full w-full flex-col items-center justify-center px-4 sm:px-6 lg:px-8 pt-28 pb-16 sm:py-28 md:py-32">
+          {/* Centered High-Impact Enterprise Hero */}
+          <div className="max-w-5xl w-full text-center space-y-6 sm:space-y-7 relative z-10">
             {/* Primary Headline - One Uniform Solid Color Throughout */}
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.12] max-w-4xl mx-auto drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
               Detect Security Risk Before<br className="hidden sm:inline" /> It Reaches Production.

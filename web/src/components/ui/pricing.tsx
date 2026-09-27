@@ -177,9 +177,9 @@ export function PricingSection({
   return (
     <PricingContext.Provider value={{ isMonthly, setIsMonthly }}>
       <div
-        className="relative w-full py-20 sm:py-24 bg-black border-t border-neutral-800 overflow-hidden"
+        className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 bg-black border-t border-neutral-800 overflow-hidden"
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="max-w-3xl mx-auto text-center space-y-3 mb-10 sm:mb-12">
             {badge && (
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black border border-neutral-800 text-xs font-mono text-emerald-400">

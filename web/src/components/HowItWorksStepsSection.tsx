@@ -59,21 +59,21 @@ export const HowItWorksStepsSection: React.FC = () => {
     <section
       id="how-it-works"
       aria-label="How It Works in 3 Simple Steps"
-      className="relative w-full py-16 sm:py-24 border-b border-neutral-800 bg-neutral-950 overflow-hidden text-center"
+      className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center"
     >
-      {/* Background ambient lighting */}
+      {/* Background green aura lighting */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
         <div className="absolute inset-0 bg-black" />
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90"
           style={{
             backgroundImage: `url('/green-aura-bg.png')`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10 w-full">
         
         {/* Header & Category Badge */}
         <div className="text-center max-w-3xl mx-auto space-y-3">

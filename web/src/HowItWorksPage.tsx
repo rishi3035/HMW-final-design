@@ -32,7 +32,7 @@ import {
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
-import { Velaris } from "@/components/ui/velaris";
+import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
 
 export const HowItWorksPage: React.FC = () => {
   const [copiedStep, setCopiedStep] = useState<string | null>(null);
@@ -72,17 +72,11 @@ export const HowItWorksPage: React.FC = () => {
       <main id="main-content" className="space-y-0 pt-20">
         
         {/* ========================================================================= */}
-        {/* SECTION 01: PAGE HERO WITH LIVING GREEN-BLACK SHADER (VELARIS)             */}
+        {/* SECTION 01: PAGE HERO WITH GREEN AURA THEME (FULL SCREEN)                 */}
         {/* ========================================================================= */}
-        <Velaris
-          bg="#000000"
-          colors={["#10B981", "#34D399", "#059669", "#022C22"]}
-          speed={1.0}
-          grain={0.25}
-          height="auto"
-          className="relative pt-16 pb-16 md:pt-24 md:pb-24 border-b border-neutral-800 overflow-hidden text-center"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
+        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
+          <GreenAuraBackground opacity={100} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10 w-full">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 border border-neutral-800 text-xs font-mono text-emerald-400 backdrop-blur-md shadow-lg">
               <Sparkles className="size-3.5" />
               <span>The Complete Security Engineering Workflow</span>
@@ -139,13 +133,13 @@ export const HowItWorksPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </Velaris>
+        </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 02: THE COMPLETE 8-STAGE WORKFLOW JOURNEY                         */}
+        {/* SECTION 02: THE COMPLETE 8-STAGE WORKFLOW JOURNEY (DEEP BLACK FULL SCREEN)*/}
         {/* ========================================================================= */}
-        <section id="workflow" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="workflow" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
@@ -192,10 +186,11 @@ export const HowItWorksPage: React.FC = () => {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 03: STEP 01: VERIFY                                               */}
+        {/* SECTION 03: STEP 01: VERIFY (GREEN AURA FULL SCREEN)                      */}
         {/* ========================================================================= */}
-        <section id="step-01-verify" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="step-01-verify" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
               
               <div className="lg:col-span-6 space-y-5">
@@ -271,10 +266,10 @@ export const HowItWorksPage: React.FC = () => {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 04: STEP 02: SCAN (MULTI-ENGINE ARCHITECTURE)                     */}
+        {/* SECTION 04: STEP 02: SCAN (DEEP BLACK FULL SCREEN)                         */}
         {/* ========================================================================= */}
-        <section id="step-02-scan" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="step-02-scan" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-sky-400">
@@ -352,10 +347,11 @@ export const HowItWorksPage: React.FC = () => {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 05: STEP 03: UNDERSTAND (EVIDENCE PROOF)                           */}
+        {/* SECTION 05: STEP 03: UNDERSTAND (GREEN AURA FULL SCREEN)                  */}
         {/* ========================================================================= */}
-        <section id="step-03-understand" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="step-03-understand" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
               
               <div className="lg:col-span-6 space-y-5">
@@ -432,10 +428,10 @@ X-Frame-Options: SAMEORIGIN
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 06: STEP 04: PRIORITIZE                                           */}
+        {/* SECTION 06: STEP 04: PRIORITIZE (DEEP BLACK FULL SCREEN)                  */}
         {/* ========================================================================= */}
-        <section id="step-04-prioritize" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="step-04-prioritize" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-orange-400">
                 <TrendingUp className="size-3.5" />
@@ -478,10 +474,11 @@ X-Frame-Options: SAMEORIGIN
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 07: STEP 05: FIX (AI IDE REMEDIATION)                              */}
+        {/* SECTION 07: STEP 05: FIX (GREEN AURA FULL SCREEN)                         */}
         {/* ========================================================================= */}
-        <section id="step-05-fix" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="step-05-fix" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-purple-400">
@@ -567,10 +564,10 @@ async headers() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 08: STEP 06: RETEST (3.2S INSTANT RETEST)                         */}
+        {/* SECTION 08: STEP 06: RETEST (DEEP BLACK FULL SCREEN)                      */}
         {/* ========================================================================= */}
-        <section id="step-06-retest" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="step-06-retest" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
               
               <div className="lg:col-span-6 space-y-5">
@@ -629,10 +626,11 @@ async headers() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 09: STEP 07: CONFIRM (VERIFIED FIXED)                             */}
+        {/* SECTION 09: STEP 07: CONFIRM (GREEN AURA FULL SCREEN)                     */}
         {/* ========================================================================= */}
-        <section id="step-07-confirm" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="step-07-confirm" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
                 <ShieldCheck className="size-3.5" />
@@ -686,10 +684,10 @@ async headers() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 10: STEP 08: TRACK (POSTURE OVER TIME)                            */}
+        {/* SECTION 10: STEP 08: TRACK (DEEP BLACK FULL SCREEN)                       */}
         {/* ========================================================================= */}
-        <section id="step-08-track" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="step-08-track" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
                 <TrendingUp className="size-3.5" />
@@ -738,10 +736,11 @@ async headers() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 11: TARGET PERSONAS                                               */}
+        {/* SECTION 11: TARGET PERSONAS (GREEN AURA FULL SCREEN)                      */}
         {/* ========================================================================= */}
-        <section id="who-it-is-for" className="py-16 md:py-24 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left">
+        <section id="who-it-is-for" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
+          <GreenAuraBackground opacity={90} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
             <div className="max-w-3xl mx-auto text-center space-y-3">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
                 <Users className="size-3.5" />
@@ -790,10 +789,10 @@ async headers() {
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 12: FINAL CTA                                                     */}
+        {/* SECTION 12: FINAL CTA (DEEP BLACK FULL SCREEN)                             */}
         {/* ========================================================================= */}
-        <section className="py-20 border-b border-neutral-800 bg-neutral-950">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10 w-full">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
               <ShieldCheck className="size-3.5" />
               <span>Ready to Verify Your Web Security?</span>

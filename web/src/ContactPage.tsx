@@ -13,7 +13,7 @@ import {
 import { HmwLogo } from "../../design-system/src/HmwLogo";
 import { EnterpriseFooter } from "./components/EnterpriseFooter";
 import { GlobalNavbar } from "./components/GlobalNavbar";
-import { Velaris } from "@/components/ui/velaris";
+import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
 
 export const ContactPage: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -45,33 +45,47 @@ export const ContactPage: React.FC = () => {
       {/* Enterprise Static Global Navbar */}
       <GlobalNavbar />
 
-      {/* Hero with Velaris Shader */}
-      <Velaris
-        bg="#000000"
-        colors={["#10B981", "#34D399", "#059669", "#022C22"]}
-        speed={1.0}
-        grain={0.25}
-        height="auto"
-        className="relative pt-28 pb-16 md:pt-36 md:pb-20 border-b border-neutral-800 overflow-hidden text-center"
-      >
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      {/* SECTION 01: Hero & Direct Support Intro (Full Screen 100vh Green Aura Theme) */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
+        <GreenAuraBackground opacity={100} />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-xs font-mono text-emerald-400">
             <MessageSquare className="size-3.5" />
             <span>Direct Security & Agency Support</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
             Contact Hack My Website
           </h1>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
             Have questions regarding custom scanning quotas, agency white-label reports, or specific framework vulnerability rules? Our engineering team is here to assist.
           </p>
-        </div>
-      </Velaris>
 
-      <main className="py-12 md:py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            {[
+              { icon: Zap, label: "< 4 Hr Average Turnaround" },
+              { icon: ShieldCheck, label: "Sovereign AWS Mumbai (ap-south-1)" },
+              { icon: Building2, label: "Direct Engineering Access" },
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black/60 border border-neutral-800 backdrop-blur-md text-xs font-mono text-neutral-300"
+                >
+                  <Icon className="size-3.5 text-emerald-400" />
+                  <span>{item.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 02: Inquiry Scope & Communication Channels (Full Screen 100vh Deep Black Theme) */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           {/* Contact & Inquiry Grid */}
           <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800 shadow-2xl text-left">
             <div className="grid gap-10 lg:grid-cols-12 items-start">
@@ -273,7 +287,7 @@ export const ContactPage: React.FC = () => {
           </div>
 
         </div>
-      </main>
+      </section>
 
       <EnterpriseFooter />
     </div>
