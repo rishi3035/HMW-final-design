@@ -166,6 +166,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     >
       {items.map((item, idx) => {
         const hasDropdown = Boolean(item.dropdown && item.dropdown.length > 0);
+        const isCurrentActive = activeDropdown === idx;
         const isActive =
           typeof window !== "undefined" &&
           (item.link === "/"

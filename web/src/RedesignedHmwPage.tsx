@@ -13,14 +13,30 @@ import {
   FileText,
 } from "lucide-react";
 import { GlobalNavbar } from "./components/GlobalNavbar";
+import { AuthModal } from "./components/AuthModal";
 
 export const RedesignedHmwPage: React.FC = () => {
   const [scanUrl, setScanUrl] = useState("https://my-startup.com");
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  const handleOpenAuth = () => {
+    setIsAuthModalOpen(true);
+  };
+
+  const handleAuthSuccess = (email: string) => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.setItem("hmw_target_domain", scanUrl);
+      window.sessionStorage.setItem("hmw_user_email", email);
+      window.history.pushState({}, "", "/workspace");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-slate-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans relative">
       {/* Enterprise Static Global Navbar */}
-      <GlobalNavbar initialDomain={scanUrl} />
+      <GlobalNavbar initialDomain={scanUrl} onBookDemo={handleOpenAuth} />
 
       {/* Hero Section with Living WebGL Simplex-Noise Shader (Velaris) - 100vh */}
       <Velaris
@@ -118,6 +134,14 @@ export const RedesignedHmwPage: React.FC = () => {
 
       {/* SECTION 7 — ENTERPRISE FOOTER */}
       <EnterpriseFooter />
+
+      {/* Enterprise Authentication Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={handleAuthSuccess}
+        initialDomain={scanUrl}
+      />
     </div>
   );
 };
