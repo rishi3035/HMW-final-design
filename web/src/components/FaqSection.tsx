@@ -5,6 +5,7 @@ import { HelpCircle, ArrowRight } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { GreenAuraBackground } from "./ui/GreenAuraBackground";
 
 export type FAQItem = {
   question: string;
@@ -63,24 +64,15 @@ export const FaqSection: React.FC = () => {
       aria-label="Frequently Asked Questions"
       className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-slate-100"
     >
-      {/* Green Aura Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
-        <div className="absolute inset-0 bg-black" />
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
-          style={{
-            backgroundImage: `url('/green-aura-bg.png')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
-      </div>
+      {/* User-defined Green Aura Background */}
+      <GreenAuraBackground opacity={100} />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         {/* Section Header */}
         <div className="text-center space-y-4 mb-14 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] font-semibold tracking-wider uppercase shadow-inner">
-            <HelpCircle className="size-3 text-emerald-400" />
-            <span>SECTION 06 // FAQ</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/70 border border-emerald-500/40 text-emerald-400 font-mono text-[11px] font-bold tracking-wider uppercase shadow-inner backdrop-blur-md">
+            <HelpCircle className="size-3.5 text-emerald-400" />
+            <span>Frequently Asked Questions</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-[1.15]">
@@ -104,7 +96,7 @@ export const FaqSection: React.FC = () => {
         </div>
 
         {/* 2-Column Responsive Accordion Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 text-left items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 text-left items-start">
           {[faqsLeft, faqsRight].map((faqColumn, columnIndex) => (
             <Accordion
               key={`faq-col-${columnIndex}`}
@@ -118,17 +110,17 @@ export const FaqSection: React.FC = () => {
                   <AccordionItem
                     key={`item-${columnIndex}-${i}`}
                     value={`item-${columnIndex}-${i}`}
-                    className="border border-neutral-800 rounded-2xl bg-black/95 px-5 sm:px-6 py-1 shadow-lg transition-colors hover:border-neutral-700"
+                    className="border border-neutral-800/90 rounded-2xl bg-black/90 backdrop-blur-md px-5 sm:px-6 py-1 shadow-2xl transition-all hover:border-emerald-500/40"
                   >
                     <AccordionTrigger className="text-sm sm:text-base font-semibold text-white hover:text-emerald-400 hover:no-underline py-4 text-left gap-3">
                       <div className="flex items-center gap-3">
-                        <span className="font-mono text-xs font-bold text-slate-500 shrink-0">
+                        <span className="font-mono text-xs font-bold text-emerald-500/80 shrink-0">
                           {itemNum}
                         </span>
                         <span className="leading-snug">{faq.question}</span>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="text-xs sm:text-sm text-slate-400 leading-relaxed pt-1 pb-4 pl-7">
+                    <AccordionContent className="text-xs sm:text-sm text-slate-300 leading-relaxed pt-1 pb-4 pl-7">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

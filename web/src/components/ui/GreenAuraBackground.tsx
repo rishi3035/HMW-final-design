@@ -19,7 +19,7 @@ export const GreenAuraBackground: React.FC<GreenAuraBackgroundProps> = ({
           opacity: opacity / 100,
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60" />
     </div>
   );
 };

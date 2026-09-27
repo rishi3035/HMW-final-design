@@ -17,6 +17,7 @@ import {
   Code2,
   Sparkles,
 } from "lucide-react";
+import { GreenAuraBackground } from "./ui/GreenAuraBackground";
 
 export const SecurityPipelineSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -109,17 +110,8 @@ await scan.verify();
       aria-label="Section 4 — From Attack Surface to Actionable Security"
       className="relative w-full py-16 sm:py-20 px-4 md:px-8 text-white font-sans antialiased overflow-hidden border-b border-neutral-800"
     >
-      {/* Green Aura Background */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden z-0">
-        <div className="absolute inset-0 bg-black" />
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-100"
-          style={{
-            backgroundImage: `url('/green-aura-bg.png')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/70" />
-      </div>
+      {/* User-defined Green Aura Background */}
+      <GreenAuraBackground opacity={100} />
 
       <div className="relative z-10 max-w-7xl mx-auto flex flex-col gap-6 sm:gap-8">
         
