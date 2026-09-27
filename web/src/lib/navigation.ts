@@ -18,10 +18,6 @@ export const globalNavItems: NavItemConfig[] = [
     link: "/sample-report",
   },
   {
-    name: "Dashboard",
-    link: "/workspace",
-  },
-  {
     name: "Pricing",
     link: "/#pricing",
   },

@@ -58,7 +58,7 @@ interface MobileNavMenuProps {
   onClose: () => void;
 }
 
-import { HmwLogo } from "../../../../design-system/src/HmwLogo";
+import { HmwLogo, HmwLogoIcon } from "../../../../design-system/src/HmwLogo";
 
 export const Navbar = ({ children, className }: NavbarProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -127,10 +127,10 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
           boxShadow: visible
             ? "0 20px 50px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.1)"
             : "0 15px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08)",
-          width: visible ? "94%" : "96%",
-          maxWidth: visible ? "980px" : "1060px",
+          width: visible ? "96%" : "98%",
+          maxWidth: visible ? "1060px" : "1140px",
           height: "58px",
-          paddingLeft: "20px",
+          paddingLeft: "16px",
           paddingRight: "12px",
           y: visible ? 4 : 0,
         }}
@@ -177,7 +177,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
     <div
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "hidden flex-row items-center justify-center space-x-1 text-xs font-semibold text-slate-300 lg:flex relative",
+        "hidden flex-row items-center justify-center space-x-0.5 xl:space-x-1 text-xs font-semibold text-slate-300 lg:flex relative shrink-0",
         className,
       )}
     >
@@ -202,7 +202,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               <button
                 type="button"
                 className={cn(
-                  "relative flex items-center gap-1 px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all cursor-pointer whitespace-nowrap",
+                  "relative flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-xl text-slate-300 hover:text-white transition-all cursor-pointer whitespace-nowrap",
                   isCurrentActive && "text-white"
                 )}
               >
@@ -224,7 +224,7 @@ export const NavItems = ({ items, className, onItemClick }: NavItemsProps) => {
               <a
                 onClick={onItemClick}
                 className={cn(
-                  "relative flex items-center gap-1 px-3 py-1.5 rounded-xl transition-all font-medium whitespace-nowrap cursor-pointer",
+                  "relative flex items-center gap-1 px-2.5 xl:px-3 py-1.5 rounded-xl transition-all font-medium whitespace-nowrap cursor-pointer text-xs",
                   isActive
                     ? "text-emerald-400 font-semibold"
                     : "text-slate-300 hover:text-white"
@@ -378,20 +378,52 @@ export const MobileNavToggle = ({
 };
 
 export const NavbarLogo = ({
+  visible: propVisible,
   href = "/",
   onClick,
+  children,
 }: {
   visible?: boolean;
   href?: string;
   onClick?: (e: React.MouseEvent) => void;
+  children?: React.ReactNode;
 }) => {
+  const context = React.useContext(NavbarContext);
+  const isScrolled = propVisible ?? context.visible;
+
+  if (children) {
+    return (
+      <div className="relative z-20 flex items-center shrink-0">
+        {children}
+      </div>
+    );
+  }
+
   return (
     <a
       href={href}
       onClick={onClick}
-      className="relative z-20 flex items-center gap-2.5 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200 cursor-pointer"
+      className="relative z-20 flex items-center gap-2 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200 cursor-pointer"
     >
-      <HmwLogo size="sm" showText={true} />
+      <div className="text-white shrink-0 drop-shadow-[0_2px_10px_rgba(16,185,129,0.3)]">
+        <HmwLogoIcon className="h-6 w-6" />
+      </div>
+      <AnimatePresence initial={false}>
+        {!isScrolled && (
+          <motion.div
+            initial={{ opacity: 0, width: 0 }}
+            animate={{ opacity: 1, width: "auto" }}
+            exit={{ opacity: 0, width: 0 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="overflow-hidden whitespace-nowrap"
+          >
+            <div className="font-black tracking-tight font-sans text-xs flex items-center gap-1.5 leading-none pl-0.5">
+              <span className="text-white">HACK MY</span>
+              <span className="text-[#10B981]">WEBSITE</span>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </a>
   );
 };

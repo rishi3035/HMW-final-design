@@ -50,22 +50,22 @@ export const RedesignedHmwPage: React.FC = () => {
       {/* Enterprise Resizable Scroll-Morphing Navbar - Sticky/Fixed across page till footer */}
       <Navbar className="top-4">
         {/* Desktop Navigation */}
-        <NavBody className="max-w-5xl">
+        <NavBody>
           {/* LEFT: Brand Logo */}
-          <div className="flex-1 flex items-center justify-start z-20 min-w-0">
+          <div className="shrink-0 flex items-center justify-start z-20">
             <NavbarLogo />
           </div>
 
           {/* CENTER: Perfectly Centered Middle Nav Items */}
-          <div className="flex items-center justify-center shrink-0 z-20">
+          <div className="flex-1 flex items-center justify-center z-20 min-w-0 px-2">
             <NavItems items={globalNavItems} />
           </div>
 
           {/* RIGHT: Professional Enterprise Actions */}
-          <div className="flex-1 flex items-center justify-end gap-2.5 z-20 min-w-0">
+          <div className="shrink-0 flex items-center justify-end gap-2.5 z-20">
             <a
               href="/login"
-              className="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-xl text-slate-300 hover:text-white text-xs font-medium hover:bg-neutral-900 transition-colors cursor-pointer whitespace-nowrap shrink-0"
             >
               Sign In
             </a>
@@ -73,7 +73,7 @@ export const RedesignedHmwPage: React.FC = () => {
             <button
               type="button"
               onClick={handleOpenAuth}
-              className="px-5 py-2.5 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap"
+              className="px-4.5 py-2 rounded-xl bg-black hover:bg-neutral-900 text-white font-semibold text-xs border border-neutral-700 hover:border-neutral-500 transition-all cursor-pointer shadow-sm whitespace-nowrap shrink-0"
             >
               Book Enterprise Demo
             </button>

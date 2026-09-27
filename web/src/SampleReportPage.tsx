@@ -108,33 +108,33 @@ export const SampleReportPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased">
       {/* Resizable Global Navbar */}
-      <Navbar>
+      <Navbar className="top-4">
         <NavBody>
-          <NavbarLogo>
-            <div
-              onClick={() => navigateTo("/")}
-              className="cursor-pointer transition-transform hover:scale-[1.02] flex items-center"
-            >
-              <HmwLogo size="sm" showSubtitle={false} />
-            </div>
-          </NavbarLogo>
+          {/* LEFT: Brand Logo */}
+          <div className="shrink-0 flex items-center justify-start z-20">
+            <NavbarLogo />
+          </div>
 
-          <NavItems items={globalNavItems} />
+          {/* CENTER: Perfectly Centered Middle Nav Items */}
+          <div className="flex-1 flex items-center justify-center z-20 min-w-0 px-2">
+            <NavItems items={globalNavItems} />
+          </div>
 
-          <div className="hidden lg:flex items-center gap-3">
+          {/* RIGHT: Actions */}
+          <div className="shrink-0 flex items-center justify-end gap-2.5 z-20">
             <button
               type="button"
               onClick={() => setIsPdfModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-xs font-mono font-semibold text-emerald-400 border border-emerald-500/30 transition-all cursor-pointer shadow-sm hover:scale-[1.02]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-xs font-mono font-semibold text-emerald-400 border border-emerald-500/30 transition-all cursor-pointer shadow-sm hover:scale-[1.02] whitespace-nowrap shrink-0"
             >
               <Download className="size-3.5 text-emerald-400" />
-              <span>Export Branded PDF</span>
+              <span>Export PDF</span>
             </button>
 
             <button
               type="button"
               onClick={() => navigateTo("/workspace")}
-              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-emerald-500/20 hover:scale-[1.02]"
+              className="px-4.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer shadow-lg shadow-emerald-500/20 hover:scale-[1.02] whitespace-nowrap shrink-0"
             >
               Launch Console
             </button>
@@ -143,9 +143,7 @@ export const SampleReportPage: React.FC = () => {
 
         <MobileNav>
           <MobileNavHeader>
-            <div onClick={() => navigateTo("/")} className="cursor-pointer flex items-center">
-              <HmwLogo size="sm" showSubtitle={false} />
-            </div>
+            <NavbarLogo />
             <MobileNavToggle
               isOpen={isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
