@@ -368,13 +368,13 @@ export const NavbarLogo = ({
       onClick={onClick}
       className="relative z-20 flex items-center gap-2 px-1 text-sm font-bold text-white shrink-0 hover:opacity-90 transition-all duration-200 cursor-pointer"
     >
-      <div className="text-white shrink-0 drop-shadow-[0_2px_10px_rgba(16,185,129,0.3)]">
+      <div className="text-white shrink-0 drop-shadow-[0_2px_10px_rgba(120,156,54,0.35)]">
         <HmwLogoIcon className="h-6 w-6" />
       </div>
       <div className="whitespace-nowrap">
         <div className="font-black tracking-tight font-sans text-xs flex items-center gap-1.5 leading-none pl-0.5">
           <span className="text-white">HACK MY</span>
-          <span className="text-[#10B981]">WEBSITE</span>
+          <span className="text-[#789C36]">WEBSITE</span>
         </div>
       </div>
     </a>

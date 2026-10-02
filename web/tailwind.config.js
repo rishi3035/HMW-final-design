@@ -5,9 +5,35 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["'Google Sans'", 'Poppins', 'sans-serif'],
+        sans: ["'Google Sans'", 'sans-serif'],
         'google-sans': ["'Google Sans'", 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif']
+      },
+      colors: {
+        emerald: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ADE80', // Balanced, crisp cyber-green text highlight (zero glare, perfectly readable)
+          500: '#22C55E', // Solid, vibrant, high-contrast button green
+          600: '#16A34A',
+          700: '#15803D',
+          800: '#166534',
+          900: '#14532D',
+          950: '#052E16',
+        },
+        brand: {
+          primary: '#22C55E',
+          hover: '#4ADE80',
+          glow: 'rgba(34, 197, 94, 0.25)',
+        },
+        rose: {
+          300: '#FDA4AF',
+          400: '#FB7185',
+          500: '#F43F5E',
+          600: '#E11D48',
+          950: '#2A0812',
+        },
       },
       keyframes: {
         'accordion-down': {

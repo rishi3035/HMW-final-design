@@ -10,13 +10,13 @@ const RADIUS = 275;
 
 // Cybernetic Security color palette: Emeralds, Cyans, Teals, and White Star Highlights
 const COLORS = [
-  "#10B981", // Emerald Primary
-  "#34D399", // Emerald Light
+  "#789C36", // Moss Green Primary
+  "#9BC44D", // Moss Green Light
   "#06B6D4", // Cyan
   "#22D3EE", // Bright Cyan
   "#F8FAFC", // White Star
-  "#A7F3D0", // Soft Mint
-  "#059669", // Deep Emerald
+  "#B8D584", // Soft Moss
+  "#5F7F29", // Deep Moss
   "#38BDF8", // Sky Blue
   "#F59E0B", // Amber Warning Accent
 ];

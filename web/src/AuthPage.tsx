@@ -183,7 +183,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({ initialMode = "login" }) => 
       {/* ========================================================================= */}
       <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-between p-12 bg-gradient-to-br from-[#0B0F19]/90 via-[#070A10]/80 to-[#04060A]/95 backdrop-blur-xl border-r border-slate-800/80 overflow-hidden">
         {/* Subtle Cyber Grid Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#789c36_1px,transparent_1px)] [background-size:24px_24px] opacity-15 pointer-events-none" />
 
         {/* Glow Spheres */}
         <div className="absolute top-1/4 left-1/4 size-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />

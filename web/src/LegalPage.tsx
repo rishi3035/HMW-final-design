@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { LockKeyhole, FileText, ShieldCheck, CheckCircle2 } from "lucide-react";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
-import { EnterpriseFooter } from "./components/EnterpriseFooter";
-import { GlobalNavbar } from "./components/GlobalNavbar";
+import { HmwKotaNavbar, HmwKotaFooter, HmwKotaCursor } from "./components/hmw-kota";
 import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
+import { WavesShader } from "@/components/ui/waves-shader";
 
 interface LegalPageProps {
   initialTab?: "privacy" | "terms";
@@ -20,16 +20,22 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
 
   return (
     <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
-      {/* Background ambient depth glow & cybernetic grid */}
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      {/* 1. Fluid Follower Magnetic Cursor */}
+      <HmwKotaCursor />
 
-      {/* Enterprise Static Global Navbar */}
-      <GlobalNavbar />
+      {/* 2. Floating Glass Pill Navigation with Live Telemetry */}
+      <HmwKotaNavbar
+        onStartScan={() => navigateTo("/workspace")}
+        onBookDemo={() => navigateTo("/contact")}
+      />
 
-      {/* SECTION 01: Statutory Header & Interactive Document Switcher (Full Screen 100vh Green Aura Theme) */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
-        <GreenAuraBackground opacity={100} />
+      {/* SECTION 01: Statutory Header & Interactive Document Switcher (Landing Page Waves Shader Theme) */}
+      <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-white/10 overflow-hidden text-center">
+        {/* Animated WebGL Waves Flow Shader Background matching landing page */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+          <WavesShader className="w-full h-full" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px] pointer-events-none" />
+        </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-xs font-mono text-emerald-400">
             <ShieldCheck className="size-3.5" />
@@ -152,7 +158,8 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
         </div>
       </section>
 
-      <EnterpriseFooter />
+      {/* Global Footer */}
+      <HmwKotaFooter onStartScan={() => navigateTo("/workspace")} />
     </div>
   );
 };

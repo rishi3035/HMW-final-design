@@ -205,10 +205,10 @@ export const SecurityScoreSection: React.FC = () => {
     switch (status) {
       case "safe":
         return {
-          color: "#10B981",
-          bg: "rgba(16, 185, 129, 0.12)",
-          border: "rgba(16, 185, 129, 0.4)",
-          gaugeColor: "#10B981",
+          color: "#789C36",
+          bg: "rgba(120, 156, 54, 0.12)",
+          border: "rgba(120, 156, 54, 0.4)",
+          gaugeColor: "#789C36",
           badgeBg: "bg-emerald-950/80 border-emerald-500/40 text-emerald-400",
         };
       case "review":
@@ -264,7 +264,7 @@ export const SecurityScoreSection: React.FC = () => {
         <div className="absolute inset-0 bg-black" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[480px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(16,185,129,0.16),rgba(5,150,105,0.07)_40%,rgba(2,44,34,0.03)_70%,transparent_100%)] blur-2xl" />
         <div className="absolute top-1/4 left-10 w-96 h-96 rounded-full bg-[#022C22]/35 blur-[140px]" />
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#10B981]/12 blur-[140px]" />
+        <div className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-[#789C36]/12 blur-[140px]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
       </div>
 

@@ -8,6 +8,7 @@ import { ContactPage } from "./ContactPage";
 import { LegalPage } from "./LegalPage";
 import { AuthPage } from "./AuthPage";
 import { ScanDetailPage } from "./ScanDetailPage";
+import { KotaStudioPage } from "./KotaStudioPage";
 
 export const App: React.FC = () => {
   const [currentPath, setCurrentPath] = useState<string>(
@@ -104,6 +105,11 @@ export const App: React.FC = () => {
         }}
       />
     );
+  }
+
+  // Kota Studio Design System & Motion Graphics Route
+  if (currentPath === "/kota" || currentPath === "/kota/") {
+    return <KotaStudioPage />;
   }
 
   // Auth routes

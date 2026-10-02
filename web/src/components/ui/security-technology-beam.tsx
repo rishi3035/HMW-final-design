@@ -29,8 +29,8 @@ const PODS: Record<string, PodData> = {
     telemetry: "Simulates threat actors probing live URLs, forms, and API routes. Discovers SQLi, XSS, and broken access controls with zero destructive impact.",
     metric: "240 Probes/Sec",
     badge: "ACTIVE SPIDER",
-    color: "#10B981",
-    accentBg: "rgba(16, 185, 129, 0.15)",
+    color: "#789C36",
+    accentBg: "rgba(120, 156, 54, 0.15)",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" className="size-4 sm:size-5 text-emerald-400" stroke="currentColor" strokeWidth="2">
         <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" />
@@ -502,8 +502,8 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             toRef={div4Ref}
             curvature={-70}
             endYOffset={-10}
-            gradientStartColor="#10B981"
-            gradientStopColor="#34D399"
+            gradientStartColor="#789C36"
+            gradientStopColor="#9BC44D"
             pathColor="#1e293b"
             pathWidth={hoveredPodId === "zap" ? 3 : 1.75}
             pathOpacity={hoveredPodId === "zap" ? 0.95 : 0.4}
@@ -514,7 +514,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             fromRef={div2Ref}
             toRef={div4Ref}
             gradientStartColor="#06B6D4"
-            gradientStopColor="#10B981"
+            gradientStopColor="#789C36"
             pathColor="#1e293b"
             pathWidth={hoveredPodId === "nuclei" ? 3 : 1.75}
             pathOpacity={hoveredPodId === "nuclei" ? 0.95 : 0.4}
@@ -527,7 +527,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             curvature={70}
             endYOffset={10}
             gradientStartColor="#F59E0B"
-            gradientStopColor="#10B981"
+            gradientStopColor="#789C36"
             pathColor="#1e293b"
             pathWidth={hoveredPodId === "semgrep" ? 3 : 1.75}
             pathOpacity={hoveredPodId === "semgrep" ? 0.95 : 0.4}
@@ -542,7 +542,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             endYOffset={-10}
             reverse
             gradientStartColor="#14B8A6"
-            gradientStopColor="#10B981"
+            gradientStopColor="#789C36"
             pathColor="#1e293b"
             pathWidth={hoveredPodId === "playwright" ? 3 : 1.75}
             pathOpacity={hoveredPodId === "playwright" ? 0.95 : 0.4}
@@ -554,7 +554,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             toRef={div4Ref}
             reverse
             gradientStartColor="#38BDF8"
-            gradientStopColor="#10B981"
+            gradientStopColor="#789C36"
             pathColor="#1e293b"
             pathWidth={hoveredPodId === "github" ? 3 : 1.75}
             pathOpacity={hoveredPodId === "github" ? 0.95 : 0.4}
@@ -568,7 +568,7 @@ export const SecurityTechnologyBeam: React.FC<SecurityTechnologyBeamProps> = ({
             endYOffset={10}
             reverse
             gradientStartColor="#A855F7"
-            gradientStopColor="#10B981"
+            gradientStopColor="#789C36"
             pathColor="#1e293b"
             pathWidth={hoveredPodId === "bashcraft" ? 3 : 1.75}
             pathOpacity={hoveredPodId === "bashcraft" ? 0.95 : 0.4}

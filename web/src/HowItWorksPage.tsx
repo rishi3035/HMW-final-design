@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   ArrowRight,
@@ -5,10 +7,8 @@ import {
   LockKeyhole,
   Radar,
   Activity,
-  TerminalSquare,
   RotateCcw,
   ShieldCheck,
-  TrendingUp,
   Sparkles,
   Zap,
   Layers,
@@ -17,42 +17,29 @@ import {
   ChevronRight,
   ShieldAlert,
   ServerCrash,
-  Cpu,
   Globe,
   Terminal,
-  Bot,
   Copy,
   Check,
-  Download,
   Briefcase,
   Users,
   Code2,
   FileText,
+  PackageCheck,
+  Bot,
+  Layout,
+  HelpCircle,
+  Clock,
+  Shield,
 } from "lucide-react";
-import { HmwLogo } from "../../design-system/src/HmwLogo";
-import { EnterpriseFooter } from "./components/EnterpriseFooter";
-import { GlobalNavbar } from "./components/GlobalNavbar";
+import { HmwKotaNavbar, HmwKotaFooter, HmwKotaCursor } from "./components/hmw-kota";
 import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
+import { WavesShader } from "@/components/ui/waves-shader";
 
 export const HowItWorksPage: React.FC = () => {
-  const [copiedStep, setCopiedStep] = useState<string | null>(null);
-
-  const workflowSteps = [
-    { num: "01", name: "VERIFY", subtitle: "Authorization", href: "#step-01-verify", color: "text-emerald-400" },
-    { num: "02", name: "SCAN", subtitle: "Multi-Engine", href: "#step-02-scan", color: "text-sky-400" },
-    { num: "03", name: "UNDERSTAND", subtitle: "Evidence & Risk", href: "#step-03-understand", color: "text-amber-400" },
-    { num: "04", name: "PRIORITIZE", subtitle: "High Leverage", href: "#step-04-prioritize", color: "text-orange-400" },
-    { num: "05", name: "FIX", subtitle: "AI IDE Prompts", href: "#step-05-fix", color: "text-purple-400" },
-    { num: "06", name: "RETEST", subtitle: "3.2s Retest", href: "#step-06-retest", color: "text-rose-400" },
-    { num: "07", name: "CONFIRM", subtitle: "Verified Fixed", href: "#step-07-confirm", color: "text-emerald-400" },
-    { num: "08", name: "TRACK", subtitle: "Posture History", href: "#step-08-track", color: "text-emerald-400" },
-  ];
-
-  const handleCopy = (id: string, text: string) => {
-    navigator.clipboard.writeText(text);
-    setCopiedStep(id);
-    setTimeout(() => setCopiedStep(null), 2000);
-  };
+  const [copiedProof, setCopiedProof] = useState<string | null>(null);
+  const [activeProof, setActiveProof] = useState<"sri" | "csp" | "hsts" | "env">("sri");
+  const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
   const navigateTo = (path: string) => {
     window.history.pushState({}, "", path);
@@ -60,34 +47,288 @@ export const HowItWorksPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleCopy = (id: string, text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedProof(id);
+    setTimeout(() => setCopiedProof(null), 2000);
+  };
+
+  const proofData = {
+    sri: {
+      title: "Missing Subresource Integrity (SRI) on CDN Script",
+      severity: "MEDIUM",
+      severityColor: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+      target: "https://demo-saas-platform.com",
+      engine: "OWASP ZAP Runtime DAST",
+      confidence: "100% Deterministic",
+      curl: `curl -sI https://demo-saas-platform.com | grep -i "script"`,
+      requestSnippet: `GET / HTTP/1.1\nHost: demo-saas-platform.com\nUser-Agent: Mozilla/5.0 (HMW Autonomous Security Crawler)`,
+      responseSnippet: `HTTP/1.1 200 OK\nContent-Type: text/html; charset=utf-8\n\n<!-- Matched Third-Party Asset: -->\n<script src="https://checkout.razorpay.com/v1/checkout.js"></script>\n[!] EVIDENCE: Script tag lacks 'integrity' hash and 'crossorigin' attribute. CDN tampering can compromise checkout execution.`,
+      fix: `Add SHA-384 subresource integrity hash to third-party script tags.`,
+    },
+    csp: {
+      title: "Permissive Content-Security-Policy Directives",
+      severity: "MEDIUM",
+      severityColor: "bg-amber-500/10 text-amber-400 border-amber-500/30",
+      target: "https://demo-saas-platform.com",
+      engine: "HMW Policy & Config Engine",
+      confidence: "Deterministic Header Check",
+      curl: `curl -I https://demo-saas-platform.com | grep -i "content-security-policy"`,
+      requestSnippet: `HEAD / HTTP/1.1\nHost: demo-saas-platform.com`,
+      responseSnippet: `HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Security-Policy: default-src * 'unsafe-inline';\n\n[!] EVIDENCE: Wildcard default-src allows arbitrary script/style execution. Missing object-src and base-uri restrictions.`,
+      fix: `Restrict default-src to 'self' and whitelist explicit CDN domains.`,
+    },
+    hsts: {
+      title: "Missing HTTP Strict Transport Security (HSTS)",
+      severity: "LOW",
+      severityColor: "bg-sky-500/10 text-sky-400 border-sky-500/30",
+      target: "https://demo-saas-platform.com",
+      engine: "Nuclei v3.3 SSL/TLS Engine",
+      confidence: "Deterministic Header Check",
+      curl: `curl -s -D- https://demo-saas-platform.com -o /dev/null | grep -i "strict-transport-security"`,
+      requestSnippet: `GET / HTTP/1.1\nHost: demo-saas-platform.com`,
+      responseSnippet: `HTTP/1.1 200 OK\nServer: Cloudflare\nConnection: keep-alive\n\n[!] EVIDENCE: Strict-Transport-Security header was not returned in HTTPS response. Allows potential SSL stripping attacks on unencrypted initial handshakes.`,
+      fix: `Add 'Strict-Transport-Security: max-age=63072000; includeSubDomains; preload' in web server config.`,
+    },
+    env: {
+      title: "Exposed Production Environment Variables (.env)",
+      severity: "CRITICAL",
+      severityColor: "bg-rose-500/10 text-rose-400 border-rose-500/30",
+      target: "https://demo-saas-platform.com/.env",
+      engine: "Nuclei v3.3 Web Exposure Engine",
+      confidence: "100% Deterministic (200 OK Content Match)",
+      curl: `curl -i -s https://demo-saas-platform.com/.env | head -n 8`,
+      requestSnippet: `GET /.env HTTP/1.1\nHost: demo-saas-platform.com`,
+      responseSnippet: `HTTP/1.1 200 OK\nContent-Type: text/plain\n\nDATABASE_URL=postgres://app_user:secr3t@rds.amazonaws.com/prod\nAWS_SECRET_ACCESS_KEY=AKIAIOSFODNN7EXAMPLE\n[!] EVIDENCE: Publicly readable credential file discovered in webroot.`,
+      fix: `Block dotfile URI patterns in Nginx/Vercel and immediately rotate exposed cloud credentials.`,
+    },
+  };
+
+  const detectionCategories = [
+    {
+      id: "appsec",
+      title: "Application Security",
+      badge: "OWASP Top 10",
+      icon: ShieldAlert,
+      color: "text-rose-400 border-rose-500/30 bg-rose-500/10",
+      description: "SQL Injection, Cross-Site Scripting (XSS), broken session management, and Insecure Direct Object References (IDOR).",
+      examples: ["SQLi & ORM Flaws", "DOM & Stored XSS", "Session Fixation", "IDOR Access Gaps"],
+    },
+    {
+      id: "config",
+      title: "Security Configuration",
+      badge: "HTTP & Headers",
+      icon: Globe,
+      color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+      description: "Strict-Transport-Security (HSTS), Content-Security-Policy (CSP), CORS allowlists, and cookie protection flags.",
+      examples: ["HSTS & TLS Preload", "CSP Frame-Ancestors", "CORS Wildcards", "Secure/HttpOnly Flags"],
+    },
+    {
+      id: "secrets",
+      title: "Secrets & Exposure",
+      badge: "SAST & Leaks",
+      icon: FileCode2,
+      color: "text-amber-400 border-amber-500/30 bg-amber-500/10",
+      description: "Publicly accessible production .env files, database credentials, Stripe/AWS tokens, and client JavaScript sourcemaps.",
+      examples: [".env Credential Leaks", "Cloud API Keys", "Public Sourcemaps", "Backup File Artifacts"],
+    },
+    {
+      id: "api",
+      title: "API & GraphQL Security",
+      badge: "Endpoints",
+      icon: ServerCrash,
+      color: "text-purple-400 border-purple-500/30 bg-purple-500/10",
+      description: "Unauthenticated backend mutations, public GraphQL introspection consoles, and missing rate limit defenses.",
+      examples: ["GraphQL Introspection", "Auth Bypass on APIs", "Missing Rate Limits", "Object Injection"],
+    },
+    {
+      id: "clientside",
+      title: "Client-Side Security",
+      badge: "Integrity",
+      icon: PackageCheck,
+      color: "text-sky-400 border-sky-500/30 bg-sky-500/10",
+      description: "Subresource Integrity (SRI) for CDN scripts, outdated frontend NPM dependencies, and prototype pollution risks.",
+      examples: ["Missing SRI Hashes", "Outdated NPM Packages", "Prototype Pollution", "MIME-Type Sniffing"],
+    },
+    {
+      id: "modernweb",
+      title: "Modern Web & AI App Risks",
+      badge: "Full-Stack SaaS",
+      icon: Bot,
+      color: "text-orange-400 border-orange-500/30 bg-orange-500/10",
+      description: "AI-generated codebase flaws, insecure Supabase/Firebase rules, unauthenticated debug paths, and exposed route handlers.",
+      examples: ["Permissive DB RLS", "Public Debug Routes", "Insecure AI Defaults", "Next.js Route Leaks"],
+    },
+  ];
+
+  const workflowStages = [
+    {
+      num: "01",
+      name: "Domain Ownership Verification",
+      tag: "SAFE HARBOR",
+      icon: LockKeyhole,
+      summary: "Before initiating scans, Hack My Website confirms target authorization via DNS TXT records or well-known token verification. Zero rogue or unauthorized probing.",
+      details: [
+        "Cryptographic token verification (DNS TXT or /.well-known/hackmywebsite.txt)",
+        "Strict adherence to safe-harbor legal authorization standards",
+        "Prevents unauthenticated target scanning and maintains clean security logs",
+      ],
+    },
+    {
+      num: "02",
+      name: "Automated Multi-Engine Scan",
+      tag: "SYNCHRONIZED DAST + SAST",
+      icon: Radar,
+      summary: "Simultaneously launches OWASP ZAP (runtime DAST), Nuclei v3.3 (200+ CVE vulnerability heuristics), and Semgrep (code/secret leaks) across sovereign AWS Mumbai nodes.",
+      details: [
+        "Dynamic runtime crawling of forms, query parameters, and session cookies",
+        "Community & proprietary CVE template matching for known exploits",
+        "100% non-destructive probes that respect production traffic rate limits",
+      ],
+    },
+    {
+      num: "03",
+      name: "Verifiable Technical Evidence",
+      tag: "ZERO HALLUCINATIONS",
+      icon: Terminal,
+      summary: "Every discovered finding includes a reproducible curl command, exact HTTP request/response headers, and matched payloads. Zero vague hand-waving.",
+      details: [
+        "Reproducible terminal commands you can run directly from bash or zsh",
+        "Highlighted response payloads pinpointing the exact vulnerability trigger",
+        "Deterministic verification with 0% false positives guaranteed",
+      ],
+    },
+    {
+      num: "04",
+      name: "Actionable AI IDE Remediation",
+      tag: "CURSOR & CLAUDE READY",
+      icon: Code2,
+      summary: "Generates tailored copy-paste prompts formatted specifically for Cursor AI, Claude 3.7, and GitHub Copilot, plus unified code diffs for Next.js, Node.js, and Python.",
+      details: [
+        "Pre-formatted .cursorrules prompts that enforce defensive coding standards",
+        "Ready-to-merge unified git diffs targeting exact configuration and route files",
+        "Eliminates hours of developer research and security triage overhead",
+      ],
+    },
+    {
+      num: "05",
+      name: "3.2-Second Targeted Retesting",
+      tag: "INSTANT VERIFICATION",
+      icon: RotateCcw,
+      summary: "After applying the code fix, trigger an isolated retest probe targeting that specific vulnerability endpoint in 3.2 seconds without running a full re-scan.",
+      details: [
+        "Microsecond feedback loop directly from your staging or production deploy",
+        "Immediate green verification badge confirming remediation success",
+        "Logs cryptographic proof in your compliance audit trail",
+      ],
+    },
+    {
+      num: "06",
+      name: "Continuous Posture & Compliance",
+      tag: "SOC 2 & DPDP READY",
+      icon: ShieldCheck,
+      summary: "Tracks your Launch Score trajectory over time, generates board-ready PDF security audits with tamper-proof QR verification, and maintains compliance records.",
+      details: [
+        "Historical posture timeline tracking security score progression across sprints",
+        "1-click white-label PDF export ready for enterprise enterprise sales & compliance",
+        "Sovereign AWS Mumbai data residency compliant with DPDP and ISO 27001",
+      ],
+    },
+  ];
+
+  const safetyMetrics = [
+    {
+      num: "01",
+      title: "200+ Automated Probes",
+      label: "Coverage",
+      desc: "Synchronized DAST runtime crawling, Nuclei CVE heuristics, and SAST secret detection.",
+      badge: "Multi-Engine",
+      color: "text-emerald-400 border-emerald-500/30",
+    },
+    {
+      num: "02",
+      title: "3–8 Min Velocity",
+      label: "Speed",
+      desc: "Rapid end-to-end security assessment without interrupting CI/CD pipelines or deployments.",
+      badge: "Rapid Execution",
+      color: "text-sky-400 border-sky-500/30",
+    },
+    {
+      num: "03",
+      title: "100% Non-Destructive",
+      label: "Safety",
+      desc: "Intelligent payload throttling that never corrupts database records or disrupts user traffic.",
+      badge: "Zero Uptime Risk",
+      color: "text-amber-400 border-amber-500/30",
+    },
+    {
+      num: "04",
+      title: "3.2s Instant Retest",
+      label: "Verification",
+      desc: "Isolated single-vulnerability verification probe giving instant confirmation on fixes.",
+      badge: "Micro Feedback Loop",
+      color: "text-emerald-400 border-emerald-500/30",
+    },
+  ];
+
+  const faqs = [
+    {
+      q: "Will scanning slow down or crash my live production website?",
+      a: "No. Hack My Website is 100% non-destructive. Our scanning engine operates with adaptive rate limiting and safe-harbor heuristics that mimic standard browser requests. We do not perform volumetric DDoS attacks or destructive database drop operations.",
+    },
+    {
+      q: "Why do you require domain verification before scanning?",
+      a: "Authorization verification protects both you and our platform. By verifying DNS TXT records or well-known HTML tokens, we ensure that only authorized owners or designated engineers can initiate automated vulnerability assessments, maintaining 100% legal compliance.",
+    },
+    {
+      q: "How does the AI IDE remediation prompt work?",
+      a: "When a vulnerability is verified, our engine packages the exact reproduction payload, file context, and security patch into a prompt tailored for AI coding assistants (Cursor, Claude 3.7, Copilot). Developers can paste this directly into their IDE to generate accurate, context-aware code diffs.",
+    },
+    {
+      q: "What is the 3.2-second retest feature?",
+      a: "Instead of re-running the entire 8-minute multi-engine scan after fixing a vulnerability, the targeted retest sends an isolated verification payload to the specific vulnerable endpoint. You receive confirmation within seconds that the security hole is sealed.",
+    },
+    {
+      q: "Where is scan data hosted and processed?",
+      a: "All scans and telemetry execute on sovereign, ISO-certified AWS Mumbai (ap-south-1) cloud infrastructure. Scan data is strictly isolated per tenant, encrypted at rest via AES-256, and fully compliant with the Indian Digital Personal Data Protection Act 2023 (DPDP) and SOC 2 Type II standards.",
+    },
+  ];
+
+  const currentProof = proofData[activeProof];
+
   return (
     <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
-      {/* Background Cybernetic Grid & Ambient Emerald Aura */}
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      {/* Fluid Follower Magnetic Cursor */}
+      <HmwKotaCursor />
 
-      {/* Enterprise Static Global Navbar */}
-      <GlobalNavbar />
+      {/* Floating Glass Pill Navigation */}
+      <HmwKotaNavbar
+        onStartScan={() => navigateTo("/workspace")}
+        onBookDemo={() => navigateTo("/contact")}
+      />
 
       <main id="main-content" className="space-y-0 pt-20">
-        
         {/* ========================================================================= */}
-        {/* SECTION 01: PAGE HERO WITH GREEN AURA THEME (FULL SCREEN)                 */}
+        {/* 1. HERO SECTION (WAVES SHADER CANVAS)                                     */}
         {/* ========================================================================= */}
-        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
-          <GreenAuraBackground opacity={100} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10 w-full">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 border border-neutral-800 text-xs font-mono text-emerald-400 backdrop-blur-md shadow-lg">
+        <section className="relative w-full min-h-[85vh] flex flex-col justify-center py-20 sm:py-24 border-b border-white/10 overflow-hidden text-center">
+          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+            <WavesShader className="w-full h-full" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px] pointer-events-none" />
+          </div>
+
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 w-full">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/80 border border-white/10 text-xs font-mono text-emerald-400 backdrop-blur-md shadow-lg">
               <Sparkles className="size-3.5" />
-              <span>The Complete Security Engineering Workflow</span>
+              <span>Autonomous Security Engineering Pipeline</span>
             </div>
 
             <div className="space-y-4 max-w-4xl mx-auto">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.1] drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]">
-                From Scan to <span className="text-emerald-400">Verified Fix</span>.
+              <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.15]">
+                From Scan to <span className="text-emerald-400">Verified Fix</span> in Minutes.
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow">
-                Hack My Website doesn't stop at finding vulnerabilities. It proves the evidence, explains the risk, gives your developers an actionable AI fix prompt, and lets you retest the finding in seconds.
+              <p className="text-base sm:text-lg md:text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed font-normal">
+                Traditional penetration testing hands you a 100-page PDF weeks later. Hack My Website continuously verifies permissions, maps your attack surface across 3 synchronized security engines, proves technical evidence with curl scripts, and delivers 1-click AI prompts to remediate before release.
               </p>
             </div>
 
@@ -96,744 +337,394 @@ export const HowItWorksPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigateTo("/workspace")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.02] cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.02] cursor-pointer"
               >
                 <Zap className="size-4 fill-neutral-950" />
-                <span>Scan My Website</span>
+                <span>Start Free Autonomous Scan</span>
                 <ArrowRight className="size-4" />
               </button>
 
               <button
                 type="button"
                 onClick={() => navigateTo("/sample-report")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-black/80 hover:bg-neutral-900 text-slate-200 border border-neutral-700/80 text-sm font-semibold transition-colors cursor-pointer backdrop-blur-md"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-black/80 hover:bg-white/10 text-neutral-200 border border-white/15 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer backdrop-blur-md"
               >
-                <FileText className="size-4 text-slate-400" />
-                <span>View Sample Report</span>
-                <ExternalLink className="size-3.5 text-slate-400" />
+                <FileText className="size-4 text-neutral-400" />
+                <span>Explore Sample Report</span>
+                <ExternalLink className="size-3.5 text-neutral-400" />
               </button>
             </div>
 
-            {/* Compact Visual Workflow Strip */}
-            <div className="pt-8 max-w-5xl mx-auto">
-              <div className="p-4 sm:p-5 rounded-2xl bg-black/80 border border-neutral-800 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs font-mono backdrop-blur-md shadow-2xl">
-                <span className="text-emerald-400 font-bold">01 VERIFY</span>
-                <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
-                <span className="text-sky-400 font-bold">02 SCAN</span>
-                <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
-                <span className="text-amber-400 font-bold">03 UNDERSTAND</span>
-                <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
-                <span className="text-purple-400 font-bold">04 PRIORITIZE</span>
-                <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
-                <span className="text-orange-400 font-bold">05 FIX</span>
-                <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
-                <span className="text-rose-400 font-bold">06 RETEST</span>
-                <ChevronRight className="size-3.5 text-neutral-600 hidden sm:block" />
-                <span className="text-emerald-400 font-bold">07 CONFIRM</span>
-              </div>
+            {/* Fast Stats Row */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 max-w-4xl mx-auto text-left">
+              {[
+                { label: "Scan Velocity", val: "3–8 Minutes", sub: "Autonomous Pipeline" },
+                { label: "Verification Accuracy", val: "100% Deterministic", sub: "0% False Positives" },
+                { label: "Target Retesting", val: "3.2 Seconds", sub: "Targeted Micro-Probe" },
+                { label: "Production Safety", val: "Safe Harbor", sub: "Non-Destructive DAST" },
+              ].map((item, idx) => (
+                <div key={idx} className="p-3.5 rounded-2xl bg-black/60 border border-white/10 backdrop-blur-md">
+                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">{item.label}</span>
+                  <span className="text-sm sm:text-base font-bold text-white block mt-0.5">{item.val}</span>
+                  <span className="text-[11px] text-emerald-400 font-mono block">{item.sub}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 02: THE COMPLETE 8-STAGE WORKFLOW JOURNEY (DEEP BLACK FULL SCREEN)*/}
+        {/* 2. THE 6-STAGE CONNECTED SECURITY WORKFLOW                                 */}
         {/* ========================================================================= */}
-        <section id="workflow" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
-            
+        <section className="relative py-20 sm:py-24 border-b border-white/10 bg-[#07090E] overflow-hidden">
+          <GreenAuraBackground opacity={80} />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-12">
             <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-                <Layers className="size-3.5" />
-                <span>Connected Lifecycle</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                One Security Workflow. From Detection to Proof.
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 block">
+                [ End-to-End Architecture ]
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                How The Scan Operates, Step by Step.
               </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Click any stage in the security journey to jump directly to its technical breakdown.
+              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                A connected lifecycle designed for engineering teams that cannot afford alert fatigue or unverified vulnerability claims.
               </p>
             </div>
 
-            {/* 8-Stage Interactive Connected Timeline */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-              {workflowSteps.map((step) => (
-                <a
-                  key={step.num}
-                  href={step.href}
-                  className="p-4 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:border-neutral-700 hover:bg-neutral-850 transition-all flex flex-col justify-between space-y-3 group cursor-pointer"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-black text-neutral-500 group-hover:text-white">
-                      {step.num}
-                    </span>
-                    <span className={`text-[10px] font-mono font-bold ${step.color}`}>
-                      ●
-                    </span>
-                  </div>
-                  <div>
-                    <div className="text-xs font-bold text-white tracking-tight truncate group-hover:text-emerald-400 transition-colors">
-                      {step.name}
-                    </div>
-                    <div className="text-[10px] text-neutral-400 font-mono mt-0.5 truncate">
-                      {step.subtitle}
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {workflowStages.map((stage) => {
+                const Icon = stage.icon;
+                return (
+                  <div
+                    key={stage.num}
+                    className="p-6 sm:p-7 rounded-3xl bg-black/60 border border-white/10 hover:border-emerald-500/40 transition-all flex flex-col justify-between space-y-5 shadow-xl group"
+                  >
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="size-9 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono font-extrabold text-xs">
+                          {stage.num}
+                        </span>
+                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white/5 text-neutral-300 border border-white/10">
+                          {stage.tag}
+                        </span>
+                      </div>
 
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* SECTION 03: STEP 01: VERIFY (GREEN AURA FULL SCREEN)                      */}
-        {/* ========================================================================= */}
-        <section id="step-01-verify" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
-          <GreenAuraBackground opacity={90} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
-              
-              <div className="lg:col-span-6 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-                  <LockKeyhole className="size-3.5" />
-                  <span>Stage 01 • Authorization</span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Security starts with permission.
-                </h2>
-
-                <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                  Before scanning, Hack My Website strictly verifies that you own or are authorized to test the target. This ensures enterprise safe-harbor compliance, eliminates spoofed target abuse, and keeps our security scans 100% legal.
-                </p>
-
-                <div className="space-y-2.5 text-xs">
-                  <div className="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 flex items-center gap-3">
-                    <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                    <span className="text-slate-200"><strong>DNS TXT Record:</strong> Add a temporary TXT token to your domain root (checked in 30 seconds).</span>
-                  </div>
-                  <div className="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 flex items-center gap-3">
-                    <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
-                    <span className="text-slate-200"><strong>HTML Meta Tag / File:</strong> Upload a verification token to <code className="text-emerald-400 font-mono">/.well-known/hackmywebsite.txt</code>.</span>
-                  </div>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
-                  🛡️ Responsible scanning starts with authorization.
-                </div>
-              </div>
-
-              {/* Visual Domain Verification Mockup */}
-              <div className="lg:col-span-6">
-                <div className="rounded-3xl border border-neutral-800 bg-neutral-900/80 backdrop-blur-md p-6 sm:p-8 shadow-2xl space-y-5">
-                  <div className="flex items-center justify-between pb-4 border-b border-neutral-800">
-                    <div className="flex items-center gap-2.5">
-                      <LockKeyhole className="size-4 text-emerald-400" />
-                      <span className="text-sm font-bold text-white">Domain Ownership Verification</span>
-                    </div>
-                    <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[10px] font-mono font-bold">
-                      REQUIRED
-                    </span>
-                  </div>
-
-                  <div className="space-y-3 text-xs">
-                    <div className="space-y-1">
-                      <label className="text-neutral-400 font-mono text-[11px]">Target Domain</label>
-                      <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 font-mono text-white font-bold">
-                        https://demo-saas-platform.com
+                      <div className="space-y-1.5">
+                        <h3 className="text-base sm:text-lg font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
+                          <Icon className="size-4 text-emerald-400 shrink-0" />
+                          <span>{stage.name}</span>
+                        </h3>
+                        <p className="text-xs text-neutral-300 leading-relaxed font-normal">
+                          {stage.summary}
+                        </p>
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <label className="text-neutral-400 font-mono text-[11px]">Required DNS TXT Record</label>
-                      <pre className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 font-mono text-emerald-400 text-xs overflow-x-auto">
-                        hmw-verify=9f8c2b1e4d3a776c8890
-                      </pre>
+                    <div className="pt-4 border-t border-white/10 space-y-2 text-[11px] text-neutral-400 font-normal">
+                      {stage.details.map((detail, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <CheckCircle2 className="size-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                          <span>{detail}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                  <div className="pt-2 flex items-center justify-between">
-                    <span className="text-[11px] font-mono text-neutral-500">DNS validation response...</span>
-                    <span className="px-3 py-1 rounded-lg bg-emerald-500 text-neutral-950 font-bold text-xs font-mono">
-                      ✓ Target Authorized
-                    </span>
-                  </div>
-                </div>
-              </div>
-
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 04: STEP 02: SCAN (DEEP BLACK FULL SCREEN)                         */}
+        {/* 3. WHAT WE DETECT: FULL SPECTRUM ATTACK SURFACE                           */}
         {/* ========================================================================= */}
-        <section id="step-02-scan" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
-            
+        <section className="relative py-20 sm:py-24 border-b border-white/10 bg-black overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-12">
             <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-sky-400">
-                <Radar className="size-3.5" />
-                <span>Stage 02 • Automated Multi-Engine Scanning</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Scan your website from multiple angles.
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 block">
+                [ Comprehensive Threat Coverage ]
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                What We Detect Across Your Web Surface.
               </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Single-engine tools miss context. Hack My Website runs a synchronized multi-engine pipeline to catch vulnerabilities across runtime, external network, and source code layers.
+              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                We combine active dynamic crawling with static pattern matching to catch security flaws before automated adversaries exploit them.
               </p>
             </div>
 
-            {/* 3 Engines Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              {/* Engine 1 */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-4 shadow-xl">
-                <div className="size-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                  <Zap className="size-6" />
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">Engine 01 • Runtime DAST</span>
-                  <h3 className="text-lg font-bold text-white">OWASP ZAP Core</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Crawls your web app like an attacker. Detects XSS, SQLi, CSRF, insecure headers, and auth bypasses in active sessions without destructive exploits.
-                </p>
-                <div className="pt-2 border-t border-neutral-800 text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
-                  <Activity className="size-3.5 text-emerald-400" />
-                  <span>Dynamic runtime crawling</span>
-                </div>
-              </div>
-
-              {/* Engine 2 */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-4 shadow-xl">
-                <div className="size-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                  <ServerCrash className="size-6" />
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono text-purple-400 font-bold uppercase tracking-wider">Engine 02 • Threat Templates</span>
-                  <h3 className="text-lg font-bold text-white">Nuclei v3.3 Framework</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Tests against 200+ curated CVE templates for known zero-days, exposed panels, misconfigured cloud storage, and leaked secrets.
-                </p>
-                <div className="pt-2 border-t border-neutral-800 text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
-                  <ShieldAlert className="size-3.5 text-purple-400" />
-                  <span>200+ CVE vulnerability probes</span>
-                </div>
-              </div>
-
-              {/* Engine 3 */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-4 shadow-xl">
-                <div className="size-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-                  <FileCode2 className="size-6" />
-                </div>
-                <div className="space-y-1">
-                  <span className="text-[10px] font-mono text-sky-400 font-bold uppercase tracking-wider">Engine 03 • Static Code SAST</span>
-                  <h3 className="text-lg font-bold text-white">Semgrep Engine</h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  Audits your source code repository for leaked API keys, hardcoded credentials, dangerous regexes, and vulnerable package dependencies.
-                </p>
-                <div className="pt-2 border-t border-neutral-800 text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
-                  <Terminal className="size-3.5 text-sky-400" />
-                  <span>Repo-level code pattern auditing</span>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* SECTION 05: STEP 03: UNDERSTAND (GREEN AURA FULL SCREEN)                  */}
-        {/* ========================================================================= */}
-        <section id="step-03-understand" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
-          <GreenAuraBackground opacity={90} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
-              
-              <div className="lg:col-span-6 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-amber-400">
-                  <Activity className="size-3.5" />
-                  <span>Stage 03 • Evidence & Risk</span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Show me the proof, not just the score.
-                </h2>
-
-                <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                  Most scanners produce confusing, noisy alert lists with high false-positive rates. Hack My Website pairs every finding with raw HTTP request/response evidence, exact line numbers, and actionable business impact.
-                </p>
-
-                <div className="space-y-3 text-xs">
-                  <div className="p-4 rounded-xl bg-neutral-900/60 border border-neutral-800 space-y-1.5">
-                    <div className="text-white font-bold flex items-center gap-2">
-                      <span className="size-2 rounded-full bg-emerald-400" />
-                      <span>Zero Bluff Data Guarantee</span>
-                    </div>
-                    <p className="text-neutral-400 leading-relaxed">
-                      Every finding is verified against actual server responses. We never report speculative vulnerabilities that cannot be reproduced.
-                    </p>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-neutral-900/60 border border-neutral-800 space-y-1.5">
-                    <div className="text-white font-bold flex items-center gap-2">
-                      <span className="size-2 rounded-full bg-emerald-400" />
-                      <span>Developer & Executive Dual Views</span>
-                    </div>
-                    <p className="text-neutral-400 leading-relaxed">
-                      Developers get curl commands and code snippets. Executives get business impact summaries, compliance mapping, and risk categorization.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Evidence Inspector Card */}
-              <div className="lg:col-span-6">
-                <div className="rounded-3xl border border-neutral-800 bg-neutral-900/80 p-6 sm:p-8 space-y-4 shadow-2xl">
-                  <div className="flex items-center justify-between pb-3 border-b border-neutral-800">
-                    <div className="flex items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                        MEDIUM SEVERITY
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {detectionCategories.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <div
+                    key={cat.id}
+                    className="p-6 rounded-3xl bg-[#0A0D14] border border-white/10 hover:border-emerald-500/40 transition-all space-y-4 shadow-xl"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="size-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-emerald-400">
+                        <Icon className="size-5 text-emerald-400" />
+                      </div>
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-white/5 text-neutral-300 border border-white/10">
+                        {cat.badge}
                       </span>
-                      <span className="text-xs font-mono text-neutral-400">OWASP A05</span>
                     </div>
-                    <span className="text-xs font-mono text-emerald-400 font-semibold">100% High Confidence</span>
+
+                    <div className="space-y-1.5">
+                      <h3 className="text-base font-bold text-white tracking-tight">
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs text-neutral-400 leading-relaxed">
+                        {cat.description}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 border-t border-white/10 flex flex-wrap gap-1.5">
+                      {cat.examples.map((ex, idx) => (
+                        <span
+                          key={idx}
+                          className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/5 text-neutral-300 border border-white/5"
+                        >
+                          {ex}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-
-                  <h3 className="text-base font-bold text-white">Missing Content Security Policy (CSP)</h3>
-                  
-                  <div className="space-y-1.5 text-xs">
-                    <div className="text-[11px] font-mono text-neutral-400">HTTP Response Evidence:</div>
-                    <pre className="p-3.5 rounded-xl bg-neutral-950 border border-neutral-800 font-mono text-slate-300 text-xs overflow-x-auto leading-relaxed">
-{`HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
-Strict-Transport-Security: max-age=31536000
-X-Frame-Options: SAMEORIGIN
-[!] Content-Security-Policy: <MISSING>`}
-                    </pre>
-                  </div>
-
-                  <p className="text-xs text-neutral-400">
-                    <strong>Business Impact:</strong> Allows execution of arbitrary untrusted JavaScript from compromised third-party script integrations.
-                  </p>
-                </div>
-              </div>
-
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 06: STEP 04: PRIORITIZE (DEEP BLACK FULL SCREEN)                  */}
+        {/* 4. VERIFIABLE TECHNICAL EVIDENCE (SHOW ME THE PROOF)                      */}
         {/* ========================================================================= */}
-        <section id="step-04-prioritize" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
+        <section className="relative py-20 sm:py-24 border-b border-white/10 bg-[#07090E] overflow-hidden">
+          <GreenAuraBackground opacity={70} />
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-10">
             <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-orange-400">
-                <TrendingUp className="size-3.5" />
-                <span>Stage 04 • High Leverage Prioritization</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Fix what matters first. Skip the noise.
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 block">
+                [ Zero Hallucinations ]
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Verifiable Technical Evidence.
               </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                A backlog of 200 security warnings is paralyzing. Hack My Website groups findings by severity, leverage, and exploitability so you can resolve 80% of your risk in under 15 minutes.
+              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                Every vulnerability report includes the exact reproduction curl command, matched HTTP headers, and raw evidence payload.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              <div className="p-6 rounded-2xl bg-neutral-900/80 border border-rose-500/30 space-y-3">
-                <div className="text-xs font-mono text-rose-400 font-bold uppercase tracking-wider">Tier 1 • Immediate Blockers</div>
-                <h3 className="text-lg font-bold text-white">Blockers & Leaked Keys</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Critical SQLi, exposed .env files, leaked Stripe or OpenAI secret keys. Fix immediately before deploying any live code.
-                </p>
+            {/* Interactive Evidence Inspector */}
+            <div className="rounded-3xl border border-white/10 bg-black/80 backdrop-blur-xl p-5 sm:p-8 shadow-2xl space-y-6">
+              {/* Selector Tabs */}
+              <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-white/10">
+                {(["sri", "csp", "hsts", "env"] as const).map((key) => {
+                  const item = proofData[key];
+                  const isActive = activeProof === key;
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => setActiveProof(key)}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer border ${
+                        isActive
+                          ? "bg-white/15 border-emerald-500/50 text-white shadow-sm"
+                          : "bg-black/40 border-white/5 text-neutral-400 hover:text-white"
+                      }`}
+                    >
+                      {item.title.split(":")[0]}
+                    </button>
+                  );
+                })}
               </div>
 
-              <div className="p-6 rounded-2xl bg-neutral-900/80 border border-amber-500/30 space-y-3">
-                <div className="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider">Tier 2 • High Leverage Fixes</div>
-                <h3 className="text-lg font-bold text-white">Headers & Auth Policies</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Missing Clickjacking protection, permissive CORS headers, absent SRI hashes. One single drop-in config file resolves all of them.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="text-xs font-mono text-neutral-400 font-bold uppercase tracking-wider">Tier 3 • Hardening Advisories</div>
-                <h3 className="text-lg font-bold text-white">Informational Hygiene</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Server version banners, sourcemap disclosures, cache headers. Clean them up over time during regular engineering sprints.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* SECTION 07: STEP 05: FIX (GREEN AURA FULL SCREEN)                         */}
-        {/* ========================================================================= */}
-        <section id="step-05-fix" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
-          <GreenAuraBackground opacity={90} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
-            
-            <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-purple-400">
-                <TerminalSquare className="size-3.5" />
-                <span>Stage 05 • AI IDE Remediation</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Fix it with the tools your developers already use.
-              </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Every actionable finding translates into a developer-ready code prompt formatted for Cursor, Claude Code, and Windsurf.
-              </p>
-            </div>
-
-            {/* Before / After Split Demonstration */}
-            <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
-              
-              {/* Left Side: Security Finding */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between pb-3 border-b border-neutral-800">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase">1. Security Finding Detected</span>
-                  <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30">
-                    MEDIUM
+              {/* Inspector Content */}
+              <div className="space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10 text-xs">
+                  <div>
+                    <h3 className="text-base font-bold text-white tracking-tight">
+                      {currentProof.title}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-1 text-[11px] font-mono text-neutral-400">
+                      <span>Engine: {currentProof.engine}</span>
+                      <span>·</span>
+                      <span className="text-emerald-400">{currentProof.confidence}</span>
+                    </div>
+                  </div>
+                  <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border self-start sm:self-auto ${currentProof.severityColor}`}>
+                    {currentProof.severity} SEVERITY
                   </span>
                 </div>
-                <h3 className="text-base font-bold text-white">
-                  Missing X-Content-Type-Options Header
-                </h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Allows browsers to MIME-sniff response content types away from the declared Content-Type, opening risks for script injection via user uploads.
-                </p>
-                <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 text-xs font-mono text-neutral-400">
-                  Target: https://demo-saas-platform.com • OWASP A05: Security Misconfiguration
-                </div>
-              </div>
 
-              {/* Right Side: AI Remediation Code Diff */}
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-emerald-500/30 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between pb-3 border-b border-neutral-800">
-                  <span className="text-xs font-mono text-emerald-400 font-bold uppercase">2. AI IDE Fix Prompt</span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleCopy(
-                        "diff-code",
-                        `// Add to Next.js headers config in next.config.mjs:\nasync headers() {\n  return [{\n    source: '/:path*',\n    headers: [\n      { key: 'X-Content-Type-Options', value: 'nosniff' }\n    ]\n  }];\n}`
-                      )
-                    }
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-slate-300 text-xs font-mono cursor-pointer"
-                  >
-                    {copiedStep === "diff-code" ? (
-                      <>
-                        <Check className="size-3 text-emerald-400" />
-                        <span className="text-emerald-400">Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="size-3" />
-                        <span>Copy Prompt</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-                <pre className="p-4 rounded-xl bg-neutral-950 border border-neutral-800 text-xs font-mono text-emerald-300 leading-relaxed overflow-x-auto whitespace-pre-wrap">
-{`// Add to Next.js headers config:
-async headers() {
-  return [{
-    source: '/:path*',
-    headers: [
-      { key: 'X-Content-Type-Options', value: 'nosniff' }
-    ]
-  }];
-}`}
-                </pre>
-                <p className="text-xs text-slate-300">
-                  Click <strong>Copy Prompt</strong>, paste into your AI IDE, and deploy your code fix in minutes.
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* SECTION 08: STEP 06: RETEST (DEEP BLACK FULL SCREEN)                      */}
-        {/* ========================================================================= */}
-        <section id="step-06-retest" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
-              
-              <div className="lg:col-span-6 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-rose-400">
-                  <RotateCcw className="size-3.5" />
-                  <span>Stage 06 • Instant Targeted Retesting</span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Verify your patch in 3.2 seconds.
-                </h2>
-
-                <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                  Traditional penetration testers take 2 to 3 weeks to respond to a retest ticket. Hack My Website lets you click <strong>Retest Endpoint</strong> right inside the dashboard to execute an isolated check and verify the patch immediately.
-                </p>
-
-                <div className="p-4 rounded-2xl bg-neutral-900/60 border border-neutral-800 space-y-2 text-xs">
-                  <div className="text-white font-bold">Why developers love targeted retesting:</div>
-                  <ul className="space-y-1.5 text-neutral-400 list-disc list-inside">
-                    <li>No need to wait 8 minutes for a full multi-engine re-scan</li>
-                    <li>Instant proof that your code changes resolved the exact vulnerability</li>
-                    <li>Score updates in real-time with verified fix bonuses (+5 points)</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6">
-                <div className="rounded-3xl border border-neutral-800 bg-neutral-900/80 p-6 sm:p-8 space-y-5 shadow-2xl">
-                  <div className="flex items-center justify-between pb-3 border-b border-neutral-800 text-xs font-mono">
-                    <span className="text-neutral-400">Targeted Probe Execution</span>
-                    <span className="text-emerald-400 font-bold">Execution Time: 3.2s</span>
+                {/* Reproduction Curl Command */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-neutral-400">
+                    <span>Reproduction Command (Curl)</span>
+                    <button
+                      onClick={() => handleCopy("curl", currentProof.curl)}
+                      className="flex items-center gap-1 text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
+                    >
+                      {copiedProof === "curl" ? (
+                        <>
+                          <Check className="size-3" />
+                          <span>Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="size-3" />
+                          <span>Copy Bash</span>
+                        </>
+                      )}
+                    </button>
                   </div>
+                  <pre className="p-3 rounded-xl bg-[#0A0D14] border border-white/10 font-mono text-xs text-neutral-200 overflow-x-auto">
+                    <code>{currentProof.curl}</code>
+                  </pre>
+                </div>
 
-                  <div className="space-y-2">
-                    <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-between text-xs">
-                      <span className="text-slate-300">GET /api/checkout (X-Frame-Options)</span>
-                      <span className="text-emerald-400 font-mono font-bold">PASSED (200 OK)</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-between text-xs">
-                      <span className="text-slate-300">GET /assets/main.js (SRI Integrity)</span>
-                      <span className="text-emerald-400 font-mono font-bold">VERIFIED (SHA-384)</span>
-                    </div>
-                  </div>
+                {/* Raw Evidence Payload Snippet */}
+                <div className="space-y-1.5">
+                  <span className="text-[11px] font-mono text-neutral-400">Raw HTTP Verification Payload</span>
+                  <pre className="p-3.5 rounded-xl bg-[#0A0D14] border border-white/10 font-mono text-xs text-emerald-400/90 whitespace-pre-wrap overflow-x-auto leading-relaxed">
+                    {currentProof.responseSnippet}
+                  </pre>
+                </div>
 
-                  <div className="pt-2 flex items-center justify-between border-t border-neutral-800/80">
-                    <span className="text-xs text-neutral-400 font-mono">Status: Patch Confirmed</span>
-                    <span className="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs font-bold font-mono">
-                      ✓ Posture Elevated
-                    </span>
-                  </div>
+                {/* Recommended Patch */}
+                <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 flex items-center gap-2">
+                  <CheckCircle2 className="size-4 text-emerald-400 shrink-0" />
+                  <span><strong>Recommended Remediation:</strong> {currentProof.fix}</span>
                 </div>
               </div>
-
             </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 09: STEP 07: CONFIRM (GREEN AURA FULL SCREEN)                     */}
+        {/* 5. PRODUCTION SAFETY & NON-DESTRUCTIVE GUARANTEE                          */}
         {/* ========================================================================= */}
-        <section id="step-07-confirm" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
-          <GreenAuraBackground opacity={90} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
+        <section className="relative py-20 sm:py-24 border-b border-white/10 bg-black overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-12">
             <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-                <ShieldCheck className="size-3.5" />
-                <span>Stage 07 • Verified Fixed Status</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Proof you can show to clients, investors & auditors.
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 block">
+                [ Production Integrity ]
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Engineered for 100% Production Safety.
               </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Once verified, the finding moves to the Resolved stream. Your executive PDF report automatically updates to display an unblemished, green audit trail.
+              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                Run deep external attack simulations and security audits without risking database records, user traffic, or checkout workflows.
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-4 shadow-xl">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-neutral-800">
-                <div className="flex items-center gap-3">
-                  <div className="size-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                    <CheckCircle2 className="size-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-white">Closed-Loop Verification</h3>
-                    <p className="text-xs text-neutral-400 font-mono">Cryptographically hashed audit entry #VRF-2026-8812</p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => navigateTo("/sample-report")}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-bold text-slate-200 transition-colors cursor-pointer"
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {safetyMetrics.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 rounded-3xl bg-[#0A0D14] border border-white/10 flex flex-col justify-between space-y-4 shadow-xl hover:border-emerald-500/30 transition-all"
                 >
-                  <FileText className="size-3.5 text-emerald-400" />
-                  <span>Inspect Audit Report</span>
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800">
-                  <div className="text-neutral-400">Time to Fix</div>
-                  <div className="text-base font-bold font-mono text-white mt-0.5">14 Minutes</div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="size-8 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 font-bold text-xs font-mono">
+                        {item.num}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-[10px] font-bold border border-emerald-500/20">
+                        {item.label}
+                      </span>
+                    </div>
+                    <div className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                      {item.title}
+                    </div>
+                    <p className="text-xs text-neutral-400 leading-relaxed font-normal">
+                      {item.desc}
+                    </p>
+                  </div>
+                  <div className="pt-3 border-t border-white/10 text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+                    <Shield className="size-3 text-emerald-400" />
+                    <span>{item.badge}</span>
+                  </div>
                 </div>
-                <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800">
-                  <div className="text-neutral-400">Score Improvement</div>
-                  <div className="text-base font-bold font-mono text-emerald-400 mt-0.5">+18 Points</div>
-                </div>
-                <div className="p-3 rounded-xl bg-neutral-950 border border-neutral-800">
-                  <div className="text-neutral-400">Audit Status</div>
-                  <div className="text-base font-bold font-mono text-emerald-400 mt-0.5">LAUNCH READY (92)</div>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 10: STEP 08: TRACK (DEEP BLACK FULL SCREEN)                       */}
+        {/* 6. FREQUENTLY ASKED QUESTIONS (FAQ)                                       */}
         {/* ========================================================================= */}
-        <section id="step-08-track" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
-            <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-                <TrendingUp className="size-3.5" />
-                <span>Stage 08 • Continuous Security History</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Continuous security that never sleeps.
+        <section className="relative py-20 sm:py-24 border-b border-white/10 bg-[#07090E] overflow-hidden">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-10">
+            <div className="text-center space-y-3">
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-emerald-400 block">
+                [ Common Inquiries ]
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                Frequently Asked Questions on Scanning Workflow.
               </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Security is not a one-time event. Schedule weekly scans, track historical trends, and block regressions in GitHub Pull Requests before vulnerable code ever reaches production.
+              <p className="text-sm sm:text-base text-neutral-400 leading-relaxed">
+                Everything you need to know about setting up, verifying, and running autonomous audits.
               </p>
             </div>
 
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 rounded-2xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="size-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                  <Activity className="size-5" />
-                </div>
-                <h3 className="text-base font-bold text-white">Automated Recurring Scans</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Run automated weekly or monthly audits without lifting a finger. Get email alerts whenever your launch score fluctuates.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="size-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-                  <Code2 className="size-5" />
-                </div>
-                <h3 className="text-base font-bold text-white">GitHub PR Safeguard</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Connect your repository to scan PR branches ephemerally. Block PRs with high-risk secrets or open endpoints automatically.
-                </p>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="size-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                  <Briefcase className="size-5" />
-                </div>
-                <h3 className="text-base font-bold text-white">Agency White-Labeling</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  Brand executive PDF reports with your agency logo and custom colors. Present hardened deliverables to high-value enterprise clients.
-                </p>
-              </div>
+            <div className="space-y-3">
+              {faqs.map((faq, idx) => {
+                const isOpen = activeFaq === idx;
+                return (
+                  <div
+                    key={idx}
+                    className="rounded-2xl border border-white/10 bg-black/60 overflow-hidden transition-all"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActiveFaq(isOpen ? null : idx)}
+                      className="w-full p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-white/5 transition-colors"
+                    >
+                      <span className="text-sm sm:text-base font-bold text-white flex items-center gap-2.5">
+                        <HelpCircle className="size-4 text-emerald-400 shrink-0" />
+                        <span>{faq.q}</span>
+                      </span>
+                      <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded transition-transform ${isOpen ? "rotate-90 text-emerald-400" : "text-neutral-400"}`}>
+                        ▶
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-neutral-300 leading-relaxed border-t border-white/5 font-normal">
+                        {faq.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 11: TARGET PERSONAS (GREEN AURA FULL SCREEN)                      */}
+        {/* 7. BOTTOM ENTERPRISE CTA                                                  */}
         {/* ========================================================================= */}
-        <section id="who-it-is-for" className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden">
-          <GreenAuraBackground opacity={90} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 text-left relative z-10 w-full">
-            <div className="max-w-3xl mx-auto text-center space-y-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-                <Users className="size-3.5" />
-                <span>Target Engineering Personas</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Built for Modern Product Teams
-              </h2>
-              <p className="text-sm md:text-base text-slate-300 leading-relaxed">
-                Whether you are launching a startup, shipping daily commits, or delivering client deliverables, Hack My Website fits your workflow.
-              </p>
-            </div>
-
-            <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="size-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                  <Sparkles className="size-5" />
-                </div>
-                <h3 className="text-base font-bold text-white">Founders & Solo Devs</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  "Know whether your website is ready to launch without hiring an expensive penetration tester."
-                </p>
-              </div>
-
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="size-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
-                  <Code2 className="size-5" />
-                </div>
-                <h3 className="text-base font-bold text-white">Engineering Teams</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  "Find the root cause, get instant AI IDE fix prompts for Cursor, and verify the patch with 3.2s targeted retests."
-                </p>
-              </div>
-
-              <div className="p-6 sm:p-8 rounded-3xl bg-neutral-900/80 border border-neutral-800 space-y-3">
-                <div className="size-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                  <Briefcase className="size-5" />
-                </div>
-                <h3 className="text-base font-bold text-white">Digital Agencies</h3>
-                <p className="text-xs text-neutral-400 leading-relaxed">
-                  "Scan client websites and generate white-label PDF security audit deliverables branded with your agency logo."
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* SECTION 12: FINAL CTA (DEEP BLACK FULL SCREEN)                             */}
-        {/* ========================================================================= */}
-        <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10 w-full">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-emerald-400">
-              <ShieldCheck className="size-3.5" />
-              <span>Ready to Verify Your Web Security?</span>
-            </div>
-
-            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-              Find it. Fix it. Prove it's fixed.
+        <section className="relative py-20 sm:py-24 bg-black overflow-hidden text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 relative z-10 w-full">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+              Ready to Audit Your Web Applications?
             </h2>
-
-            <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-              Scan your website, understand the risk, fix vulnerabilities with 1-click AI IDE prompts, and verify the result in seconds.
+            <p className="text-base text-neutral-300 max-w-2xl mx-auto leading-relaxed">
+              Launch a non-destructive multi-engine scan in under 60 seconds. Verify target ownership, uncover runtime vulnerabilities, and get actionable AI fix prompts.
             </p>
-
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="pt-2">
               <button
                 type="button"
                 onClick={() => navigateTo("/workspace")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 hover:scale-[1.02] cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 cursor-pointer"
               >
                 <Zap className="size-4 fill-neutral-950" />
-                <span>Scan My Website</span>
+                <span>Start Free Scan Now</span>
                 <ArrowRight className="size-4" />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => navigateTo("/sample-report")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-slate-200 border border-neutral-700 text-sm font-semibold transition-colors cursor-pointer"
-              >
-                <FileText className="size-4 text-slate-400" />
-                <span>View Sample Report</span>
-                <ExternalLink className="size-3.5 text-slate-400" />
               </button>
             </div>
           </div>
         </section>
-
       </main>
 
       {/* Global Footer */}
-      <EnterpriseFooter />
+      <HmwKotaFooter onStartScan={() => navigateTo("/workspace")} />
     </div>
   );
 };

@@ -11,9 +11,9 @@ import {
   Zap,
 } from "lucide-react";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
-import { EnterpriseFooter } from "./components/EnterpriseFooter";
-import { GlobalNavbar } from "./components/GlobalNavbar";
+import { HmwKotaNavbar, HmwKotaFooter, HmwKotaCursor } from "./components/hmw-kota";
 import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
+import { WavesShader } from "@/components/ui/waves-shader";
 
 export const ContactPage: React.FC = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -38,16 +38,22 @@ export const ContactPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
-      {/* Background ambient depth glow & cybernetic grid */}
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      {/* 1. Fluid Follower Magnetic Cursor */}
+      <HmwKotaCursor />
 
-      {/* Enterprise Static Global Navbar */}
-      <GlobalNavbar />
+      {/* 2. Floating Glass Pill Navigation with Live Telemetry */}
+      <HmwKotaNavbar
+        onStartScan={() => navigateTo("/workspace")}
+        onBookDemo={() => navigateTo("/contact")}
+      />
 
-      {/* SECTION 01: Hero & Direct Support Intro (Full Screen 100vh Green Aura Theme) */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
-        <GreenAuraBackground opacity={100} />
+      {/* SECTION 01: Hero & Direct Support Intro (Smooth Landing Page Waves Shader Theme) */}
+      <section className="relative w-full pt-32 pb-16 sm:pb-20 border-b border-white/10 overflow-hidden text-center">
+        {/* Animated WebGL Waves Flow Shader Background matching landing page */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+          <WavesShader className="w-full h-full" />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px] pointer-events-none" />
+        </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/80 backdrop-blur-md border border-neutral-800 text-xs font-mono text-emerald-400">
             <MessageSquare className="size-3.5" />
@@ -83,8 +89,8 @@ export const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 02: Inquiry Scope & Communication Channels (Full Screen 100vh Deep Black Theme) */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black">
+      {/* SECTION 02: Inquiry Scope & Communication Channels (Deep Black Responsive Theme) */}
+      <section className="relative w-full py-16 sm:py-20 border-b border-white/10 bg-black">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           {/* Contact & Inquiry Grid */}
           <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900/80 backdrop-blur-md border border-neutral-800 shadow-2xl text-left">
@@ -289,7 +295,60 @@ export const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      <EnterpriseFooter />
+      {/* SECTION 03: Enterprise Trust, Safe Harbor & Statutory SLA */}
+      <section className="relative py-20 sm:py-24 border-b border-white/10 bg-[#07090E] overflow-hidden text-left">
+        <GreenAuraBackground opacity={75} />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 relative z-10 w-full">
+          <div className="space-y-2 text-center sm:text-left">
+            <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold block">
+              [ Enterprise Guarantees ]
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              Security Operations &amp; Statutory SLA
+            </h2>
+            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-2xl">
+              Our engineering infrastructure and engagement guidelines operate under strict sovereign compliance standards.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
+              <span className="text-xs font-mono font-bold text-emerald-400 block">01 · Data Residency</span>
+              <div className="text-sm font-bold text-white">AWS Mumbai ap-south-1</div>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                All scans and evidence packets process within sovereign Indian cloud zones with zero foreign routing.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
+              <span className="text-xs font-mono font-bold text-sky-400 block">02 · Code Privacy</span>
+              <div className="text-sm font-bold text-white">0-Day Code Retention</div>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                Code diffs and payload memory buffers are purged from RAM immediately upon verification completion.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
+              <span className="text-xs font-mono font-bold text-purple-400 block">03 · Safe Harbor</span>
+              <div className="text-sm font-bold text-white">Verified Ownership Only</div>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                DNS and HTML cryptographic handshakes guarantee that scans strictly target authorized web assets.
+              </p>
+            </div>
+
+            <div className="p-5 rounded-2xl bg-black/60 border border-white/10 space-y-2">
+              <span className="text-xs font-mono font-bold text-amber-400 block">04 · Support SLA</span>
+              <div className="text-sm font-bold text-white">&lt; 4 Hour Response</div>
+              <p className="text-xs text-neutral-400 leading-relaxed">
+                Direct access to core security engineers via email or dedicated enterprise communication channels.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Global Footer */}
+      <HmwKotaFooter onStartScan={() => navigateTo("/workspace")} />
     </div>
   );
 };

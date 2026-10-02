@@ -260,8 +260,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const handleSelectPalette = (palette: string) => {
     setSelectedPresetPalette(palette);
     if (palette === "emerald") {
-      setPrimaryBrandAccent("#10B981");
-      setSecondaryBrandAccent("#064E3B");
+      setPrimaryBrandAccent("#789C36");
+      setSecondaryBrandAccent("#334615");
     } else if (palette === "cobalt") {
       setPrimaryBrandAccent("#3B82F6");
       setSecondaryBrandAccent("#1E3A8A");

@@ -5,7 +5,7 @@ import Timeline from "@/components/ui/timeline";
 const settings = {
   textColor: "var(--color-foreground, #ffffff)",
   mutedTextColor: "var(--color-muted-foreground, #a1a1aa)",
-  activeColor: "#10b981",
+  activeColor: "#789c36",
   backgroundColor: "var(--color-background, #000000)",
   duration: 1.4,
 };

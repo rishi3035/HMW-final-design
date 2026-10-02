@@ -1,5 +1,8 @@
 import React from "react";
 import { PricingSection, type PricingPlan } from "@/components/ui/pricing";
+import { Component } from "@/components/ui/shader-hero";
+import { ShaderBackground } from "@/components/ui/213";
+import { WavesShader } from "@/components/ui/waves-shader";
 
 // Official HackMyWebsite pricing tiers from hackmywebsite.io
 const hmwPricingPlans: PricingPlan[] = [
@@ -80,5 +83,28 @@ export default function PricingSectionDemo() {
       title="Predictable Pricing for Founders & Agencies"
       description="Choose a plan to run unblurred scans, get AI remediation prompts, and unlock white-label client security deliverables."
     />
+  );
+}
+
+// Shader Hero DemoOne export as requested
+export function DemoOne() {
+  return <Component />;
+}
+
+// 213 ShaderBackground Demo export as requested
+export function ShaderBackgroundDemo() {
+  return (
+    <div className="relative h-screen w-full overflow-hidden">
+      <ShaderBackground className="h-full w-full" />
+    </div>
+  );
+}
+
+// Waves Shader Demo export
+export function WavesShaderDemo() {
+  return (
+    <div className="relative h-screen w-full overflow-hidden">
+      <WavesShader className="h-full w-full" />
+    </div>
   );
 }

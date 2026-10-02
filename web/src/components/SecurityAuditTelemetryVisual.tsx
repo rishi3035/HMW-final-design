@@ -3,17 +3,14 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  IconActivity,
-  IconShieldCheck,
-  IconLock,
-  IconBug,
-  IconCpu,
-  IconCopy,
-  IconCheck,
-  IconSparkles,
-  IconRadar,
-  IconFlame,
-} from "@tabler/icons-react";
+  ShieldCheck,
+  Activity,
+  Copy,
+  Check,
+  Radar,
+  Lock,
+  Zap,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface DataPoint {
@@ -70,11 +67,9 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
   const [copied, setCopied] = useState(false);
   const data = DATA_BY_RANGE[timeRange];
   const [activeIndex, setActiveIndex] = useState<number>(() => {
-    // Default to a notable peak index
     return timeRange === "30days" ? 2 : data.length - 1;
   });
 
-  // Keep active index within bounds if data length changes
   const activeDataPoint = data[Math.min(activeIndex, data.length - 1)] || data[0];
 
   const handleCopy = () => {
@@ -87,12 +82,12 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // SVG Geometry calculations
+  // SVG Geometry for clean, simple sparkline
   const svgWidth = 640;
-  const svgHeight = 170;
-  const paddingX = 40;
-  const paddingYTop = 30;
-  const paddingYBottom = 30;
+  const svgHeight = 150;
+  const paddingX = 35;
+  const paddingYTop = 25;
+  const paddingYBottom = 25;
   const usableWidth = svgWidth - paddingX * 2;
   const usableHeight = svgHeight - paddingYTop - paddingYBottom;
 
@@ -109,7 +104,6 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
     });
   }, [data, maxScans, usableWidth, usableHeight]);
 
-  // Cubic Bezier curve generator for silky smooth motion graphics
   const pathD = useMemo(() => {
     if (points.length === 0) return "";
     let d = `M ${points[0].x} ${points[0].y}`;
@@ -125,46 +119,44 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
     return d;
   }, [points]);
 
-  // Area path for gradient under the curve
   const areaD = useMemo(() => {
     if (points.length === 0) return "";
     const bottomY = svgHeight - paddingYBottom;
     return `${pathD} L ${points[points.length - 1].x} ${bottomY} L ${points[0].x} ${bottomY} Z`;
   }, [pathD, points, svgHeight, paddingYBottom]);
 
-  // Selected point coordinates for tooltip positioning
   const activeCoord = points[Math.min(activeIndex, points.length - 1)] || points[0];
+  const totalScans = useMemo(() => data.reduce((acc, d) => acc + d.scans, 0), [data]);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 mb-6">
       {/* ─────────────────────────────────────────────────────────────
-          CARD 1: DAST Risk Velocity & Telemetry Stream (8 COLS)
+          CARD 1: DAST Risk Velocity (Simplified & Clean) - 8 COLS
          ───────────────────────────────────────────────────────────── */}
-      <div className="lg:col-span-8 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800/90 hover:border-neutral-700 transition-all flex flex-col justify-between relative overflow-hidden shadow-2xl group">
-        {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-0 right-1/4 w-80 h-60 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 w-60 h-40 bg-cyan-500/5 rounded-full blur-[90px] pointer-events-none" />
+      <div className="lg:col-span-8 p-5 sm:p-6 rounded-3xl bg-[#0A0D14] border border-white/10 shadow-2xl flex flex-col justify-between relative overflow-hidden">
+        {/* Subtle Ambient Glow */}
+        <div className="absolute top-0 right-1/4 w-72 h-44 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-        {/* Top Header & Range Controls */}
+        {/* Header & Controls */}
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-            <div className="space-y-1">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+            <div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]" />
-                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                  <span>DAST Risk Velocity</span>
-                  <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                    Continuous Probing
-                  </span>
+                <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                  DAST Risk Velocity
                 </h3>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                  Continuous Probing
+                </span>
               </div>
-              <p className="text-xs text-neutral-400">
-                Non-destructive execution velocity & zero-advisory baseline across fleet
+              <p className="text-xs text-neutral-400 mt-1 font-normal">
+                Non-destructive execution velocity &amp; zero-advisory baseline across fleet
               </p>
             </div>
 
-            {/* Time Range Toggle Pills */}
-            <div className="flex items-center gap-1 bg-black p-1 rounded-full border border-neutral-800 text-xs self-start sm:self-auto shadow-inner">
+            {/* Time Range Pills */}
+            <div className="inline-flex items-center gap-1 bg-black/80 p-1 rounded-full border border-white/10 text-xs self-start sm:self-auto">
               {(["12months", "30days", "1week"] as const).map((range) => {
                 const isSelected = timeRange === range;
                 const labels = {
@@ -176,509 +168,279 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                   <button
                     key={range}
                     type="button"
-                    onClick={() => setTimeRange(range)}
+                    onClick={() => {
+                      setTimeRange(range);
+                      setActiveIndex(0);
+                    }}
                     className={cn(
-                      "px-3 py-1 rounded-full text-xs font-medium transition-all cursor-pointer relative",
+                      "px-3 py-1 rounded-full text-xs font-semibold transition-all cursor-pointer",
                       isSelected
-                        ? "text-emerald-300 font-bold shadow-sm"
+                        ? "bg-emerald-500 text-neutral-950 shadow-sm"
                         : "text-neutral-400 hover:text-white"
                     )}
                   >
-                    {isSelected && (
-                      <motion.div
-                        layoutId="activeRangePill"
-                        className="absolute inset-0 rounded-full bg-emerald-950/80 border border-emerald-500/40"
-                        transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                      />
-                    )}
-                    <span className="relative z-10">{labels[range]}</span>
+                    {labels[range]}
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* Interactive Legend & KPIs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pb-4 pt-1 border-b border-neutral-800/70 text-xs">
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-900/60 border border-neutral-800/80">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981]" />
-              <div>
-                <span className="text-[10px] text-neutral-500 uppercase block font-semibold">Clean Scans</span>
-                <span className="text-xs font-bold text-white font-mono">
-                  {data.reduce((acc, d) => acc + d.scans, 0).toLocaleString()} Passed
-                </span>
-              </div>
+          {/* Simple Clean KPI Summary */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-3 border-y border-white/10 text-xs">
+            <div>
+              <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">Clean Scans</span>
+              <span className="text-base sm:text-lg font-bold text-white font-mono mt-0.5 block">
+                {totalScans.toLocaleString()}
+              </span>
             </div>
-
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-900/60 border border-neutral-800/80">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#06B6D4]" />
-              <div>
-                <span className="text-[10px] text-neutral-500 uppercase block font-semibold">Risk Floor</span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">0 CVEs Found</span>
-              </div>
+            <div>
+              <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">Risk Floor</span>
+              <span className="text-base sm:text-lg font-bold text-emerald-400 font-mono mt-0.5 block">
+                0 CVEs Found
+              </span>
             </div>
-
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-900/60 border border-neutral-800/80">
-              <span className="w-2 h-2 rounded-full bg-teal-400 shadow-[0_0_6px_#14B8A6]" />
-              <div>
-                <span className="text-[10px] text-neutral-500 uppercase block font-semibold">Mean Latency</span>
-                <span className="text-xs font-bold text-slate-200 font-mono">{activeDataPoint.latency}</span>
-              </div>
+            <div>
+              <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">Mean Latency</span>
+              <span className="text-base sm:text-lg font-bold text-neutral-200 font-mono mt-0.5 block">
+                {activeDataPoint.latency}
+              </span>
             </div>
-
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-neutral-900/60 border border-neutral-800/80">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_6px_#10B981]" />
-              <div>
-                <span className="text-[10px] text-neutral-500 uppercase block font-semibold">Safe Harbor</span>
-                <span className="text-xs font-bold text-emerald-400 font-mono">100% Certified</span>
-              </div>
+            <div>
+              <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-wider block">Safe Harbor</span>
+              <span className="text-base sm:text-lg font-bold text-emerald-400 font-mono mt-0.5 block">
+                100% Certified
+              </span>
             </div>
           </div>
 
-          {/* ─────────────────────────────────────────────────────────
-              ENTERPRISE TELEMETRY CHART CANVAS (STATIC & HIGH-PRECISION)
-             ───────────────────────────────────────────────────────── */}
+          {/* Clean Smooth Sparkline Chart */}
           <div className="relative pt-6 pb-2 select-none">
-            {/* Glassmorphic Floating HUD Tooltip */}
+            {/* Minimalist Floating Tooltip */}
             <AnimatePresence mode="wait">
               {activeDataPoint && (
                 <motion.div
                   key={`${timeRange}-${activeIndex}`}
-                  initial={{ opacity: 0, y: -6, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -4, scale: 0.96 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.15 }}
                   style={{
                     left: `${(activeCoord.x / svgWidth) * 100}%`,
                   }}
-                  className="absolute top-0 -translate-x-1/2 px-3.5 py-2 rounded-xl bg-neutral-900/95 border border-emerald-500/50 shadow-2xl backdrop-blur-md text-center pointer-events-none z-30 min-w-[210px]"
+                  className="absolute top-0 -translate-x-1/2 px-3 py-1.5 rounded-xl bg-neutral-900 border border-emerald-500/40 shadow-xl text-center pointer-events-none z-30 whitespace-nowrap"
                 >
-                  <div className="flex items-center justify-between gap-2 border-b border-neutral-800 pb-1 mb-1">
-                    <span className="text-[11px] font-bold text-slate-200">{activeDataPoint.dateFull}</span>
-                    <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono font-bold">
+                  <div className="flex items-center gap-2 text-xs">
+                    <span className="font-bold text-white">{activeDataPoint.dateFull}</span>
+                    <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/20 px-1.5 py-0.2 rounded">
                       CLEAN
                     </span>
                   </div>
-                  <div className="text-xs font-extrabold text-emerald-400 font-mono">
-                    {activeDataPoint.scans.toLocaleString()} Scans Executed (0 CVEs)
-                  </div>
-                  <div className="text-[10px] text-neutral-400 mt-0.5 flex items-center justify-between">
-                    <span>Engine: {activeDataPoint.engines}</span>
-                    <span className="text-slate-300">{activeDataPoint.latency}</span>
+                  <div className="text-[11px] text-neutral-300 font-mono mt-0.5">
+                    {activeDataPoint.scans} Scans Executed · {activeDataPoint.latency}
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* SVG Visualizer with Equalizer Frequency Bars + Neon Spline */}
-            <div className="relative w-full h-48 overflow-hidden rounded-xl bg-black/40 border border-neutral-900">
+            {/* SVG Chart */}
+            <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-36 overflow-visible">
+              <defs>
+                <linearGradient id="simpleVelocityFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#22C55E" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#22C55E" stopOpacity="0.00" />
+                </linearGradient>
+              </defs>
 
-              <svg
-                viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-                className="w-full h-full overflow-visible"
-                preserveAspectRatio="none"
-              >
-                <defs>
-                  {/* Neon Glow Filter */}
-                  <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
+              {/* Minimal horizontal guide lines */}
+              <line x1={paddingX} y1={paddingYTop} x2={svgWidth - paddingX} y2={paddingYTop} stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+              <line x1={paddingX} y1={svgHeight / 2} x2={svgWidth - paddingX} y2={svgHeight / 2} stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
+              <line x1={paddingX} y1={svgHeight - paddingYBottom} x2={svgWidth - paddingX} y2={svgHeight - paddingYBottom} stroke="rgba(255,255,255,0.08)" />
 
-                  {/* Gradient Area Fill */}
-                  <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.28" />
-                    <stop offset="60%" stopColor="#06B6D4" stopOpacity="0.08" />
-                    <stop offset="100%" stopColor="#000000" stopOpacity="0.0" />
-                  </linearGradient>
+              {/* Soft Area fill under curve */}
+              <path d={areaD} fill="url(#simpleVelocityFill)" />
 
-                  {/* Spline Stroke Gradient */}
-                  <linearGradient id="splineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#10B981" />
-                    <stop offset="50%" stopColor="#34D399" />
-                    <stop offset="85%" stopColor="#06B6D4" />
-                    <stop offset="100%" stopColor="#10B981" />
-                  </linearGradient>
+              {/* Clean Smooth Line */}
+              <path d={pathD} fill="none" stroke="#22C55E" strokeWidth="2.5" strokeLinecap="round" />
 
-                  {/* Bar Fill Gradient */}
-                  <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#10B981" stopOpacity="0.02" />
-                  </linearGradient>
-                </defs>
-
-                {/* Subtle Horizontal Guide Grid Lines with Enterprise Scale Indicators */}
-                {[0.2, 0.45, 0.7, 0.95].map((pct, idx) => {
-                  const y = paddingYTop + usableHeight * (1 - pct);
-                  const approxValue = Math.round((maxScans * pct) / 10) * 10;
-                  return (
-                    <g key={idx}>
-                      <line
-                        x1={paddingX}
-                        y1={y}
-                        x2={svgWidth - paddingX}
-                        y2={y}
-                        stroke="#1e2433"
-                        strokeDasharray="4 4"
-                        strokeWidth="1"
-                      />
-                      <text
-                        x={paddingX - 8}
-                        y={y + 3}
-                        textAnchor="end"
-                        fill="#52525b"
-                        fontSize="9"
-                        fontFamily="monospace"
-                      >
-                        {approxValue >= 1000 ? `${(approxValue / 1000).toFixed(1)}k` : approxValue}
-                      </text>
-                    </g>
-                  );
-                })}
-
-                {/* Enterprise Volume Bars for Each Interval */}
-                {points.map((p, idx) => {
-                  const isHovered = activeIndex === idx;
-                  const barWidth = 24;
-                  const bottomY = svgHeight - paddingYBottom;
-                  const barHeight = Math.max(8, bottomY - p.y);
-
-                  return (
-                    <g
-                      key={`bar-${idx}`}
-                      className="cursor-pointer transition-opacity"
-                      onClick={() => setActiveIndex(idx)}
-                      onMouseEnter={() => setActiveIndex(idx)}
-                    >
-                      {/* Bar body */}
-                      <rect
-                        x={p.x - barWidth / 2}
-                        y={p.y}
-                        width={barWidth}
-                        height={barHeight}
-                        rx="4"
-                        fill="url(#barGradient)"
-                        stroke={isHovered ? "#10B981" : "#1f2937"}
-                        strokeWidth={isHovered ? "1.5" : "1"}
-                        className="transition-all duration-300"
-                        opacity={isHovered ? 1 : 0.7}
-                      />
-
-                      {/* Bar glowing neon cap */}
-                      <rect
-                        x={p.x - barWidth / 2}
-                        y={p.y}
-                        width={barWidth}
-                        height="3"
-                        rx="1.5"
-                        fill={isHovered ? "#34D399" : "#10B981"}
-                        filter={isHovered ? "url(#neonGlow)" : undefined}
-                      />
-                    </g>
-                  );
-                })}
-
-                {/* Gradient Area Fill under spline */}
-                <motion.path
-                  d={areaD}
-                  fill="url(#areaGradient)"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6 }}
-                />
-
-                {/* Main Glowing Spline Path */}
-                <motion.path
-                  d={pathD}
-                  fill="none"
-                  stroke="url(#splineGradient)"
-                  strokeWidth="3"
-                  filter="url(#neonGlow)"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                />
-
-                {/* Static Enterprise Active Node Indicator */}
-                <g className="pointer-events-none">
-                  <circle
-                    cx={activeCoord.x}
-                    cy={activeCoord.y}
-                    r="9"
-                    fill="#10B981"
-                    fillOpacity="0.15"
-                    stroke="#10B981"
-                    strokeWidth="1.5"
-                  />
-                  <circle
-                    cx={activeCoord.x}
-                    cy={activeCoord.y}
-                    r="5"
-                    fill="#059669"
-                    stroke="#34D399"
-                    strokeWidth="2"
-                  />
-                  <circle
-                    cx={activeCoord.x}
-                    cy={activeCoord.y}
-                    r="2"
-                    fill="#ffffff"
-                  />
-                </g>
-              </svg>
-            </div>
-
-            {/* X-Axis Interval Labels with Active Glow */}
-            <div className="flex items-center justify-between text-xs text-neutral-400 px-6 pt-2 font-mono">
-              {data.map((d, idx) => {
-                const isSelected = activeIndex === idx;
+              {/* Data Points */}
+              {points.map((p, idx) => {
+                const isActive = idx === activeIndex;
                 return (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveIndex(idx)}
-                    className={cn(
-                      "px-2 py-1 rounded-md transition-all cursor-pointer",
-                      isSelected
-                        ? "text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/30"
-                        : "hover:text-white"
+                  <g key={idx} className="cursor-pointer" onClick={() => setActiveIndex(idx)}>
+                    {/* Hover hotspot */}
+                    <circle cx={p.x} cy={p.y} r="14" fill="transparent" />
+                    {/* Outer ring on active */}
+                    {isActive && (
+                      <circle cx={p.x} cy={p.y} r="7" fill="none" stroke="#22C55E" strokeWidth="2" opacity="0.6" />
                     )}
-                  >
-                    {d.label}
-                  </button>
+                    {/* Core dot */}
+                    <circle
+                      cx={p.x}
+                      cy={p.y}
+                      r={isActive ? "4" : "3"}
+                      fill={isActive ? "#FFFFFF" : "#22C55E"}
+                      stroke="#0A0D14"
+                      strokeWidth="1.5"
+                    />
+                  </g>
                 );
               })}
+            </svg>
+
+            {/* X-Axis Date Labels */}
+            <div className="flex justify-between px-6 pt-1 text-[11px] font-mono text-neutral-400">
+              {data.map((d, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
+                  className={cn(
+                    "transition-colors cursor-pointer",
+                    idx === activeIndex ? "text-emerald-400 font-bold" : "hover:text-white"
+                  )}
+                >
+                  {d.label}
+                </button>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom Cyber Telemetry Ticker Stream */}
-        <div className="pt-3 border-t border-neutral-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-neutral-400">
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981]" />
-            <span className="text-[11px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
+        {/* Live Stream Ticker */}
+        <div className="pt-3 mt-2 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-neutral-400">
+          <div className="flex items-center gap-2">
+            <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] font-mono text-emerald-400 font-bold uppercase">
               LIVE DAST STREAM:
+            </span>
+            <span className="text-[11px] font-mono text-neutral-300">
+              {scannerIp} · TLS 1.3 · 200+ Injections Passed · 0 CVE Matches
             </span>
           </div>
 
-          <div className="overflow-hidden text-[11px] font-mono text-neutral-400 truncate">
-            <span className="text-white font-semibold">{scannerIp}</span>
-            <span className="text-emerald-400 mx-1">➔</span>
-            <span>TLS 1.3 OK</span>
-            <span className="text-emerald-400 mx-1">➔</span>
-            <span>200+ DAST Injections Passed</span>
-            <span className="text-emerald-400 mx-1">➔</span>
-            <span className="text-slate-200">0 CVE Matches</span>
-          </div>
-
-          <span className="text-[11px] text-neutral-500 shrink-0 font-mono hidden md:inline">
+          <span className="text-[11px] font-mono text-neutral-500 hidden md:inline">
             Non-Destructive Guaranteed
           </span>
         </div>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
-          CARD 2: Fleet Defense Telemetry & Orbital Radar (4 COLS)
+          CARD 2: Fleet Telemetry (Simplified & Clean) - 4 COLS
          ───────────────────────────────────────────────────────────── */}
-      <div className="lg:col-span-4 p-5 sm:p-6 rounded-3xl bg-neutral-950 border border-neutral-800/90 hover:border-neutral-700 transition-all relative overflow-hidden flex flex-col justify-between shadow-2xl group">
+      <div className="lg:col-span-4 p-5 sm:p-6 rounded-3xl bg-[#0A0D14] border border-white/10 shadow-2xl relative overflow-hidden flex flex-col justify-between">
         {/* Subtle Ambient Radial Lighting */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-emerald-500/10 rounded-full blur-[90px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none" />
 
         {/* Header */}
-        <div className="flex items-center justify-between mb-2">
-          <div className="space-y-0.5">
-            <div className="flex items-center gap-2">
-              <IconRadar className="w-4 h-4 text-emerald-400" />
-              <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">Fleet Telemetry</h3>
-            </div>
-            <p className="text-xs text-neutral-400">Safe Harbor & quota coverage</p>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
+              <Radar className="size-4 text-emerald-400" />
+              <span>Fleet Telemetry</span>
+            </h3>
+            <p className="text-xs text-neutral-400 mt-0.5">Safe Harbor &amp; quota coverage</p>
           </div>
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981]" />
+          <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold font-mono flex items-center gap-1.5">
+            <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
             100% SECURE
           </span>
         </div>
 
-        {/* ─────────────────────────────────────────────────────────
-            STATIC ENTERPRISE CONCENTRIC TELEMETRY RETICLE
-           ───────────────────────────────────────────────────────── */}
-        <div className="relative flex items-center justify-center py-4 my-auto select-none">
-          {/* Radar Container Frame */}
-          <div className="relative w-48 h-48 sm:w-52 sm:h-52 rounded-full border border-neutral-800 bg-black/60 shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] flex items-center justify-center overflow-hidden">
-            {/* High-Precision Static Radar Reticle Overlay */}
-            <div
-              className="absolute inset-0 rounded-full pointer-events-none opacity-40"
-              style={{
-                background:
-                  "radial-gradient(circle at center, transparent 30%, rgba(16, 185, 129, 0.04) 70%, rgba(16, 185, 129, 0.12) 100%)",
-              }}
-            />
-
-            {/* Radar Crosshairs Reticle */}
-            <div className="absolute inset-x-0 top-1/2 h-[1px] bg-neutral-800/80 pointer-events-none" />
-            <div className="absolute inset-y-0 left-1/2 w-[1px] bg-neutral-800/80 pointer-events-none" />
-
-            {/* SVG Concentric Arc Rings */}
-            <svg className="w-full h-full -rotate-90 pointer-events-none" viewBox="0 0 200 200">
-              <defs>
-                <filter id="radarRingGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="2" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-
-              {/* Ring 1 (Outer - Safe Harbor 100%): R=80, Circ ≈ 502 */}
+        {/* Simplified Clean Circular Health Gauge */}
+        <div className="flex flex-col items-center justify-center py-4 my-auto">
+          <div className="relative size-36 sm:size-40 flex items-center justify-center">
+            {/* Background Track Circle */}
+            <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
               <circle
-                cx="100"
-                cy="100"
-                r="80"
+                cx="60"
+                cy="60"
+                r="50"
                 fill="none"
-                stroke="#1f2937"
-                strokeWidth="4"
+                stroke="rgba(255,255,255,0.08)"
+                strokeWidth="7"
               />
+              {/* Vibrant Emerald Progress Arc (100% Complete) */}
               <circle
-                cx="100"
-                cy="100"
-                r="80"
+                cx="60"
+                cy="60"
+                r="50"
                 fill="none"
-                stroke="#10B981"
-                strokeWidth="4"
+                stroke="#22C55E"
+                strokeWidth="7"
                 strokeLinecap="round"
-                strokeDasharray="502"
+                strokeDasharray="314"
                 strokeDashoffset="0"
-                filter="url(#radarRingGlow)"
-              />
-
-              {/* Ring 2 (Middle - CVE Clearance 100%): R=62, Circ ≈ 390 */}
-              <circle
-                cx="100"
-                cy="100"
-                r="62"
-                fill="none"
-                stroke="#1f2937"
-                strokeWidth="4"
-              />
-              <circle
-                cx="100"
-                cy="100"
-                r="62"
-                fill="none"
-                stroke="#06B6D4"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeDasharray="390"
-                strokeDashoffset="0"
-                filter="url(#radarRingGlow)"
-              />
-
-              {/* Ring 3 (Inner - Quota 75%): R=44, Circ ≈ 276 (75% = 207, offset = 69) */}
-              <circle
-                cx="100"
-                cy="100"
-                r="44"
-                fill="none"
-                stroke="#1f2937"
-                strokeWidth="4"
-              />
-              <circle
-                cx="100"
-                cy="100"
-                r="44"
-                fill="none"
-                stroke="#14B8A6"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeDasharray="276"
-                strokeDashoffset="69"
-                filter="url(#radarRingGlow)"
+                className="transition-all duration-1000"
               />
             </svg>
 
-            {/* Static Telemetry Cardinal Markers */}
-            <div className="absolute top-[14px] left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_#10B981] flex items-center justify-center pointer-events-none">
-              <span className="w-1 h-1 rounded-full bg-white" />
-            </div>
-            <div className="absolute bottom-[14px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_#06B6D4] pointer-events-none" />
-
-            {/* Center Static Cyber Shield Hub */}
-            <div className="absolute w-14 h-14 rounded-2xl bg-neutral-900 border border-emerald-500/40 shadow-xl shadow-emerald-500/20 flex flex-col items-center justify-center z-10 pointer-events-none">
-              <IconShieldCheck className="w-6 h-6 text-emerald-400" />
-              <span className="text-[9px] font-extrabold text-white font-mono mt-0.5">
+            {/* Inner Shield & Text */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+              <ShieldCheck className="size-7 text-emerald-400 mb-1" />
+              <span className="text-xs font-mono font-extrabold text-white tracking-wider">
                 SAFE
+              </span>
+              <span className="text-[9px] font-mono text-neutral-400 uppercase tracking-wider">
+                0 Exploits
               </span>
             </div>
           </div>
         </div>
 
-        {/* ─────────────────────────────────────────────────────────
-            CLEAR SELF-EXPLANATORY BREAKDOWN ROWS
-           ───────────────────────────────────────────────────────── */}
-        <div className="space-y-2 pt-2">
-          {/* Item 1: Safe Harbor */}
-          <div className="p-2.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                <IconLock className="w-3.5 h-3.5" />
-              </div>
-              <span className="text-neutral-300 font-medium">Safe Harbor Protocol</span>
+        {/* 3 Clean Status Rows */}
+        <div className="space-y-2.5 pt-2">
+          {/* Safe Harbor Protocol */}
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-black/60 border border-white/5 text-xs">
+            <div className="flex items-center gap-2 text-neutral-300">
+              <Lock className="size-3.5 text-emerald-400" />
+              <span className="font-medium">Safe Harbor Protocol</span>
             </div>
-            <span className="px-2 py-0.5 rounded-md bg-emerald-950 text-emerald-400 border border-emerald-500/30 font-bold font-mono text-[11px]">
+            <span className="text-[11px] font-mono font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
               100% Active
             </span>
           </div>
 
-          {/* Item 2: Vulnerability Exposure */}
-          <div className="p-2.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
-                <IconBug className="w-3.5 h-3.5" />
-              </div>
-              <span className="text-neutral-300 font-medium">CVE Advisories</span>
+          {/* CVE Advisories */}
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-black/60 border border-white/5 text-xs">
+            <div className="flex items-center gap-2 text-neutral-300">
+              <Activity className="size-3.5 text-emerald-400" />
+              <span className="font-medium">CVE Advisories</span>
             </div>
-            <span className="px-2 py-0.5 rounded-md bg-cyan-950 text-cyan-300 border border-cyan-500/30 font-bold font-mono text-[11px]">
+            <span className="text-[11px] font-mono font-bold text-emerald-400 px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
               0 Detected
             </span>
           </div>
 
-          {/* Item 3: Fleet Scan Quota */}
-          <div className="p-2.5 rounded-xl bg-neutral-900/60 border border-neutral-800/80 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-lg bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400">
-                <IconCpu className="w-3.5 h-3.5" />
+          {/* Monthly Quota */}
+          <div className="p-2.5 rounded-xl bg-black/60 border border-white/5 space-y-1.5 text-xs">
+            <div className="flex items-center justify-between text-neutral-300">
+              <div className="flex items-center gap-2">
+                <Zap className="size-3.5 text-emerald-400" />
+                <span className="font-medium">Monthly Quota</span>
               </div>
-              <div>
-                <span className="text-neutral-300 font-medium block">Monthly Quota</span>
-                <span className="text-[10px] text-neutral-500 font-mono">150 / 200 Scans (75%)</span>
-              </div>
+              <span className="font-mono text-neutral-400 text-[11px]">150 / 200 (75%)</span>
             </div>
-            <div className="w-16 h-1.5 rounded-full bg-neutral-800 overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 w-3/4 rounded-full" />
+            <div className="w-full h-1.5 rounded-full bg-neutral-800 overflow-hidden">
+              <div className="h-full rounded-full bg-emerald-500" style={{ width: "75%" }} />
             </div>
           </div>
         </div>
 
-        {/* Footer Status with Copyable Scanner IP */}
-        <div className="pt-3 mt-2 border-t border-neutral-800/80 flex items-center justify-between text-xs text-neutral-400">
-          <span>Static IP: <code className="text-white font-mono">{scannerIp}</code></span>
+        {/* Footer: Static IP & Copy */}
+        <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400 font-mono">
+          <span className="text-[11px]">Static IP: {scannerIp}</span>
           <button
-            type="button"
             onClick={handleCopy}
             className="flex items-center gap-1 text-[11px] text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer"
           >
             {copied ? (
               <>
-                <IconCheck className="w-3 h-3" />
-                <span>Copied</span>
+                <Check className="size-3" />
+                <span>Copied!</span>
               </>
             ) : (
               <>
-                <IconCopy className="w-3 h-3" />
+                <Copy className="size-3" />
                 <span>Copy IP</span>
               </>
             )}
@@ -688,3 +450,4 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
     </div>
   );
 };
+export default SecurityAuditTelemetryVisual;

@@ -27,9 +27,9 @@ import {
 import { sampleReport, type SampleFinding } from "./lib/sampleReportData";
 import { BrandedPdfModal } from "./components/BrandedPdfModal";
 import { HmwLogo } from "../../design-system/src/HmwLogo";
-import { EnterpriseFooter } from "./components/EnterpriseFooter";
-import { GlobalNavbar } from "./components/GlobalNavbar";
+import { HmwKotaNavbar, HmwKotaFooter, HmwKotaCursor } from "./components/hmw-kota";
 import { GreenAuraBackground } from "./components/ui/GreenAuraBackground";
+import { WavesShader } from "@/components/ui/waves-shader";
 
 export const SampleReportPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<"findings" | "executive" | "ide-prompts">("findings");
@@ -97,20 +97,26 @@ export const SampleReportPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-neutral-100 selection:bg-emerald-500 selection:text-neutral-950 font-sans antialiased relative">
-      {/* Background ambient depth glow & cybernetic grid */}
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(0,0,0,0))]" />
-      <div className="fixed inset-0 pointer-events-none -z-10 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      {/* 1. Fluid Follower Magnetic Cursor */}
+      <HmwKotaCursor />
 
-      {/* Enterprise Static Global Navbar */}
-      <GlobalNavbar />
+      {/* 2. Floating Glass Pill Navigation with Live Telemetry */}
+      <HmwKotaNavbar
+        onStartScan={() => navigateTo("/workspace")}
+        onBookDemo={() => navigateTo("/contact")}
+      />
 
       <main className="space-y-0">
         {/* ========================================================================= */}
-        {/* 1. REPORT HERO & AI LAUNCH SCORE HERO BANNER (GREEN AURA FULL SCREEN)     */}
+        {/* 1. REPORT HERO & AI LAUNCH SCORE HERO BANNER (WAVES SHADER FULL SCREEN)   */}
         {/* ========================================================================= */}
-        <section className="relative w-full min-h-screen flex flex-col justify-center pt-28 pb-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-left">
-        <GreenAuraBackground opacity={100} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <section className="relative w-full pt-32 pb-16 sm:pb-20 border-b border-white/10 overflow-hidden text-left">
+          {/* Animated WebGL Waves Flow Shader Background matching landing page */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+            <WavesShader className="w-full h-full" />
+            <div className="absolute inset-0 bg-black/60 backdrop-blur-[0.5px] pointer-events-none" />
+          </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="rounded-3xl border border-neutral-800 bg-neutral-900/80 backdrop-blur-md p-6 sm:p-8 shadow-2xl space-y-6">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-neutral-800">
               <div className="space-y-2">
@@ -196,7 +202,7 @@ export const SampleReportPage: React.FC = () => {
       {/* ========================================================================= */}
       {/* 2. FINDINGS & TECHNICAL AUDIT (DEEP BLACK FULL SCREEN)                    */}
       {/* ========================================================================= */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 bg-black text-left">
+      <section className="relative w-full py-16 sm:py-20 border-b border-white/10 bg-black text-left">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10 w-full">
 
         {/* ========================================================================= */}
@@ -606,22 +612,100 @@ export const SampleReportPage: React.FC = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. CONVERSION CTA (GREEN AURA FULL SCREEN)                                */}
+      {/* 3. EXECUTIVE DELIVERABLES & WHITE-LABEL PDF SPEC                          */}
       {/* ========================================================================= */}
-      <section className="relative w-full min-h-screen flex flex-col justify-center py-20 sm:py-28 md:py-32 border-b border-neutral-800 overflow-hidden text-center">
-        <GreenAuraBackground opacity={90} />
+      <section className="relative py-20 sm:py-24 border-b border-white/10 bg-[#07090E] overflow-hidden">
+        <GreenAuraBackground opacity={75} />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10 w-full text-left">
+          <div className="space-y-3 text-center sm:text-left">
+            <span className="text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold block">
+              [ Enterprise Artifacts ]
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+              What You Receive From Every Audit
+            </h2>
+            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-3xl">
+              Hack My Website delivers three high-leverage outputs designed to satisfy board oversight, lead security engineers, and developer workflows simultaneously.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="p-6 sm:p-7 rounded-3xl bg-black/60 border border-white/10 space-y-4 shadow-xl">
+              <div className="size-10 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <FileText className="size-5" />
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wider">Artifact 01</span>
+                <h3 className="text-base font-bold text-white">Board-Ready PDF Audit</h3>
+              </div>
+              <p className="text-xs text-neutral-300 leading-relaxed">
+                Clean, tamper-proof executive PDF featuring QR seal verification, OWASP ASVS compliance status, and CVSS 3.1 severity breakdown ready for customer vendor questionnaires.
+              </p>
+              <div className="pt-3 border-t border-white/10">
+                <button
+                  type="button"
+                  onClick={() => setIsPdfModalOpen(true)}
+                  className="text-xs font-mono font-bold text-emerald-400 hover:text-emerald-300 flex items-center gap-1 cursor-pointer"
+                >
+                  <Download className="size-3.5" />
+                  <span>Preview Branded PDF Modal</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-7 rounded-3xl bg-black/60 border border-white/10 space-y-4 shadow-xl">
+              <div className="size-10 rounded-2xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                <Code2 className="size-5" />
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono font-bold text-purple-400 uppercase tracking-wider">Artifact 02</span>
+                <h3 className="text-base font-bold text-white">AI IDE Fix Prompt Studio</h3>
+              </div>
+              <p className="text-xs text-neutral-300 leading-relaxed">
+                Exact prompt payloads formatted for Cursor AI, Claude 3.7, and GitHub Copilot with complete code context, eliminating hours of developer research.
+              </p>
+              <div className="pt-3 border-t border-white/10 text-[11px] font-mono text-purple-400 flex items-center gap-1.5">
+                <Sparkles className="size-3.5" />
+                <span>Zero Dev Triage Required</span>
+              </div>
+            </div>
+
+            <div className="p-6 sm:p-7 rounded-3xl bg-black/60 border border-white/10 space-y-4 shadow-xl">
+              <div className="size-10 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
+                <RotateCcw className="size-5" />
+              </div>
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono font-bold text-sky-400 uppercase tracking-wider">Artifact 03</span>
+                <h3 className="text-base font-bold text-white">3.2s Micro Retesting</h3>
+              </div>
+              <p className="text-xs text-neutral-300 leading-relaxed">
+                Isolated targeted re-probes for each specific finding. Confirm patches in production within seconds and immediately update your compliance health record.
+              </p>
+              <div className="pt-3 border-t border-white/10 text-[11px] font-mono text-sky-400 flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5" />
+                <span>Instant Feedback Loop</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. CONVERSION CTA                                                         */}
+      {/* ========================================================================= */}
+      <section className="relative py-20 sm:py-24 border-b border-white/10 bg-black overflow-hidden text-center">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10 w-full">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Ready to scan your own website?
+            Ready to Scan Your Own Website?
           </h2>
-          <p className="text-sm sm:text-base text-slate-300 max-w-xl mx-auto leading-relaxed">
-            Verify domain ownership in under 60 seconds and receive your full interactive security report with prioritized fixes.
+          <p className="text-base text-neutral-300 max-w-xl mx-auto leading-relaxed">
+            Verify domain ownership in under 60 seconds and receive your full interactive security report with prioritized AI fixes.
           </p>
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               type="button"
               onClick={() => navigateTo("/workspace")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 hover:scale-[1.02] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 cursor-pointer"
             >
               <span>Launch Free Security Scan</span>
               <ArrowRight className="size-4" />
@@ -632,15 +716,15 @@ export const SampleReportPage: React.FC = () => {
       </main>
 
       {/* Global Footer */}
-      <EnterpriseFooter />
+      <HmwKotaFooter onStartScan={() => navigateTo("/workspace")} />
 
       {/* White-Label PDF Export Modal */}
       <BrandedPdfModal
         isOpen={isPdfModalOpen}
         onClose={() => setIsPdfModalOpen(false)}
-        agencyName="Hack My Website Labs"
-        primaryAccent="#10b981"
-        secondaryAccent="#064e3b"
+        agencyName="Hack My Website Enterprise"
+        primaryAccent="#22C55E"
+        secondaryAccent="#4ADE80"
         disclaimer="Confidential Security Assessment Report. Prepared by Hack My Website Autonomous DAST & SAST Intelligence Engine."
         targetDomain={sampleReport.domain}
         score={sampleReport.launchScore}

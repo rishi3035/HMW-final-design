@@ -15,3 +15,5 @@ baseweb
 
 .vercel
 .env*
+.agents
+**/.agents
