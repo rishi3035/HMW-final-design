@@ -85,7 +85,7 @@ export const HmwKotaHero: React.FC<HmwKotaHeroProps> = ({
             type="button"
             onClick={onStartScan}
             data-cursor-text="SCAN"
-            className="w-full sm:w-auto px-7 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-lg shadow-emerald-500/25 transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-7 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-[0_8px_28px_rgba(148,220,34,0.35)] hover:shadow-[0_10px_35px_rgba(148,220,34,0.50)] transition-all cursor-pointer shrink-0 whitespace-nowrap flex items-center justify-center gap-2"
           >
             <span>Start Free Security Scan</span>
             <ArrowRight className="w-4 h-4" />

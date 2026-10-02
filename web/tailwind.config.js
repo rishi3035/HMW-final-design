@@ -10,22 +10,22 @@ module.exports = {
       },
       colors: {
         emerald: {
-          50: '#F5F8EE',
-          100: '#E7F1DC',
-          200: '#D0E4BA',
-          300: '#AFD28E',
-          400: '#557F1B', // User's exact olive green for text highlights & accents
-          500: '#557F1B', // User's exact olive green for buttons & primary accents
-          600: '#466B16', // Slightly deeper olive on hover
-          700: '#557F1B', // Light-background heading accents (matches Pricing Agencies.)
-          800: '#2A410D',
-          900: '#1E2C0A',
-          950: '#0E1604',
+          50: '#F7FDEE',
+          100: '#EEFBD8',
+          200: '#DCF7B0',
+          300: '#C6F17E',
+          400: '#94DC22', // User's vibrant lime green for text highlights & accents
+          500: '#94DC22', // User's exact button lime green
+          600: '#81C31C', // Hover state for buttons
+          700: '#6AA314', // Deeper lime for light backgrounds
+          800: '#517F0D',
+          900: '#395B07',
+          950: '#1F3302',
         },
         brand: {
-          primary: '#557F1B',
-          hover: '#659620',
-          glow: 'rgba(85, 127, 27, 0.35)',
+          primary: '#94DC22',
+          hover: '#81C31C',
+          glow: 'rgba(148, 220, 34, 0.40)',
         },
         rose: {
           300: '#FDA4AF',
