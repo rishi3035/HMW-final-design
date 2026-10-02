@@ -107,7 +107,7 @@ export const HmwKotaFooter: React.FC<HmwKotaFooterProps> = ({ onStartScan }) => 
               100% Non-Destructive Scanning<br />
               Zero Source Code Retention<br />
               AWS Mumbai Sovereign Region<br />
-              <span className="text-emerald-400 font-semibold">SOC 2, ISO & DPDP Ready</span>
+              <span className="text-emerald-400 font-semibold">India DPDP &amp; OWASP Aligned</span>
             </p>
           </div>
 

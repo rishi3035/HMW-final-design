@@ -68,7 +68,7 @@ const hmwPricingPlans: PricingPlan[] = [
       "10 website targets",
       "Unlimited monthly scans",
       "White-label PDF report branding",
-      "Compliance mapping (SOC 2, ISO, HIPAA, DPDP)",
+      "Compliance mapping (India DPDP Act 2023, HIPAA, OWASP)",
       "Dedicated agency support channel",
     ],
   },

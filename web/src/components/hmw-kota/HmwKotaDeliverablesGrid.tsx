@@ -293,7 +293,7 @@ export const HmwKotaDeliverablesGrid: React.FC<HmwKotaDeliverablesGridProps> = (
                   Compliance & Governance
                 </h3>
                 <p className="text-xs sm:text-sm text-neutral-400 mt-2 leading-relaxed font-normal">
-                  Auto-map discovered telemetry to SOC 2 Type II, ISO 27001, HIPAA, and DPDP mandates.
+                  Auto-map discovered telemetry to India DPDP Act 2023, OWASP Top 10, CWE, and HIPAA mandates.
                 </p>
                 <button
                   type="button"
@@ -309,12 +309,12 @@ export const HmwKotaDeliverablesGrid: React.FC<HmwKotaDeliverablesGridProps> = (
               <div className="relative mt-8 pt-2">
                 <div className="grid grid-cols-4 gap-2">
                   <div className="p-2.5 rounded-2xl bg-neutral-900/80 border border-white/10 text-center flex flex-col items-center justify-center">
-                    <span className="text-[10px] text-neutral-400 font-mono">SOC 2</span>
-                    <span className="text-xs font-bold text-emerald-400 mt-0.5">CC6.8</span>
+                    <span className="text-[10px] text-neutral-400 font-mono">OWASP</span>
+                    <span className="text-xs font-bold text-emerald-400 mt-0.5">Top 10</span>
                   </div>
                   <div className="p-2.5 rounded-2xl bg-gradient-to-br from-emerald-950/80 to-[#121C07] border border-emerald-500/40 text-center flex flex-col items-center justify-center shadow-lg shadow-emerald-950/50">
                     <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                    <span className="text-[10px] font-bold text-white mt-0.5">ISO</span>
+                    <span className="text-[10px] font-bold text-white mt-0.5">CWE</span>
                   </div>
                   <div className="p-2.5 rounded-2xl bg-neutral-900/80 border border-white/10 text-center flex flex-col items-center justify-center">
                     <span className="text-[10px] text-neutral-400 font-mono">DPDP</span>

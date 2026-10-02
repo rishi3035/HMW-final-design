@@ -91,7 +91,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
               <>
                 <LegalSection
                   title="1. Scope & Sovereign Data Protection"
-                  body="AIVI Intelligence Private Limited ('Company', 'we', 'our') operates Hack My Website in strict alignment with India's Digital Personal Data Protection (DPDP) Act 2023, EU GDPR guidelines, and ISO/IEC 27001 cybersecurity frameworks. All persistent platform metadata and telemetry reside in sovereign cloud datacenters (AWS Mumbai, ap-south-1)."
+                  body="AIVI Intelligence Private Limited ('Company', 'we', 'our') operates Hack My Website in strict alignment with India's Digital Personal Data Protection (DPDP) Act 2023, EU GDPR guidelines, and OWASP cybersecurity standards. All persistent platform metadata and telemetry reside in sovereign cloud datacenters (AWS Mumbai, ap-south-1)."
                 />
 
                 <LegalSection

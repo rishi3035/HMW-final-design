@@ -116,14 +116,14 @@ export const MethodologyPage: React.FC = () => {
 
   const complianceMappings = [
     {
-      framework: "SOC 2 Type II",
-      clause: "CC6.1, CC6.6, CC7.1",
-      requirement: "Vulnerability scanning, perimeter defense, and continuous change verification.",
+      framework: "OWASP Top 10 (2021/2026)",
+      clause: "A01–A10 Vulnerability Matrix",
+      requirement: "Vulnerability scanning, perimeter defense, and injection attack verification.",
       howHmwComplies: "Deterministic DAST scanning, cryptographic audit trail, and instant 3.2s retest evidence.",
     },
     {
-      framework: "ISO/IEC 27001:2022",
-      clause: "A.8.8 Management of Tech Vulnerabilities",
+      framework: "CWE / SANS Top 25",
+      clause: "CWE-89, CWE-79, CWE-22, CWE-352",
       requirement: "Timely acquisition of information about technical vulnerabilities and exposure mitigation.",
       howHmwComplies: "Automated Nuclei CVE template matching combined with Cursor AI remediation diffs.",
     },

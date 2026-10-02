@@ -262,11 +262,11 @@ export const HmwScanDemoModal: React.FC<HmwScanDemoModalProps> = ({
                   <div className="mt-4 pt-3 border-t border-white/10 text-[11px] text-neutral-400 space-y-1">
                     <div className="flex items-center gap-1.5">
                       <Check className="size-3 text-emerald-400" />
-                      <span>SOC 2 Type II Common Criteria CC6.8</span>
+                      <span>OWASP Top 10 &amp; CWE Automated Matrix</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Check className="size-3 text-emerald-400" />
-                      <span>ISO 27001 &amp; India DPDP Act Sovereign Mapped</span>
+                      <span>India DPDP Act 2023 Sovereign Cloud Mapped</span>
                     </div>
                   </div>
                 </div>

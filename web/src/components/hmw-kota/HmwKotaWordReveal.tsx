@@ -74,7 +74,7 @@ export const HmwKotaWordReveal: React.FC = () => {
                 Enterprise FinTech Partner
               </div>
               <div className="text-xs font-mono text-neutral-500">
-                SOC 2 Type II Certified · 250,000+ Active Users
+                Sovereign AWS Mumbai Region · 250,000+ Active Users
               </div>
             </div>
           </div>

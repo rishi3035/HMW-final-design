@@ -191,7 +191,7 @@ export const EnterpriseFooter: React.FC = () => {
             <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-slate-300">All Systems Operational</span>
             <span className="text-slate-600">|</span>
-            <span className="text-slate-400">SOC 2 Type II</span>
+            <span className="text-slate-400">OWASP Top 10</span>
             <span className="text-slate-600">|</span>
             <span className="text-slate-400">DPDP Sovereign</span>
           </div>

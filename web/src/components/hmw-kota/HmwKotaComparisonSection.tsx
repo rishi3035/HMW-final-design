@@ -113,7 +113,7 @@ const comparisonRows: ComparisonRow[] = [
       barWidth: "45%",
     },
     hmw: {
-      value: "SOC 2, ISO 27001 & DPDP Ready",
+      value: "India DPDP Act & OWASP Aligned",
       highlight: "Tamper-Proof QR",
       barWidth: "100%",
     },

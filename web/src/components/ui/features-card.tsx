@@ -54,7 +54,7 @@ export const Component = () => {
       title: "Enterprise Security",
       desc: "Military-grade encryption",
       icon: Lock,
-      stat: "ISO 27001",
+      stat: "DPDP Ready",
     },
   ];
 

@@ -225,13 +225,13 @@ export const HowItWorksPage: React.FC = () => {
     {
       num: "06",
       name: "Continuous Posture & Compliance",
-      tag: "SOC 2 & DPDP READY",
+      tag: "INDIA DPDP SOVEREIGN READY",
       icon: ShieldCheck,
       summary: "Tracks your Launch Score trajectory over time, generates board-ready PDF security audits with tamper-proof QR verification, and maintains compliance records.",
       details: [
         "Historical posture timeline tracking security score progression across sprints",
-        "1-click white-label PDF export ready for enterprise enterprise sales & compliance",
-        "Sovereign AWS Mumbai data residency compliant with DPDP and ISO 27001",
+        "1-click white-label PDF export ready for enterprise sales & regulatory audits",
+        "Sovereign AWS Mumbai data residency fully compliant with India DPDP Act 2023",
       ],
     },
   ];
@@ -290,7 +290,7 @@ export const HowItWorksPage: React.FC = () => {
     },
     {
       q: "Where is scan data hosted and processed?",
-      a: "All scans and telemetry execute on sovereign, ISO-certified AWS Mumbai (ap-south-1) cloud infrastructure. Scan data is strictly isolated per tenant, encrypted at rest via AES-256, and fully compliant with the Indian Digital Personal Data Protection Act 2023 (DPDP) and SOC 2 Type II standards.",
+      a: "All scans and telemetry execute on sovereign AWS Mumbai (ap-south-1) cloud infrastructure. Scan data is strictly isolated per tenant, encrypted at rest via AES-256, and fully compliant with the Indian Digital Personal Data Protection Act 2023 (DPDP) and OWASP Top 10 standards.",
     },
   ];
 

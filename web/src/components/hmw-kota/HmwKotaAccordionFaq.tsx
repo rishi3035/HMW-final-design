@@ -31,7 +31,7 @@ const faqs: FaqItem[] = [
   {
     question: "What compliance frameworks are mapped in the executive PDF report?",
     answer:
-      "Discovered findings are automatically mapped to SOC 2 Type II (Common Criteria CC6.8), ISO/IEC 27001 (A.12.6.1 Technical Vulnerability Management), HIPAA Security Rule (§ 164.308), and India's Digital Personal Data Protection Act (DPDP Act 2023).",
+      "Discovered findings are automatically mapped to OWASP Top 10, CWE Common Weakness Enumeration, HIPAA Security Rule (§ 164.308), and India's Digital Personal Data Protection Act (DPDP Act 2023).",
   },
   {
     question: "Do you store or retain our proprietary source code or credentials?",

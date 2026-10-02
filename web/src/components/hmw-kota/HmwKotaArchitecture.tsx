@@ -62,7 +62,7 @@ const tiers: ArchitectureTier[] = [
     deliverables: [
       "1-click copy-paste prompts tailored for Cursor AI & Claude Code",
       "Pre-formatted patch diffs with code line references",
-      "Deterministic compliance mapping (SOC 2, ISO 27001, HIPAA, DPDP)",
+      "Deterministic compliance mapping (India DPDP Act 2023, OWASP, HIPAA)",
       "Executive 2-page board-ready PDF security reports",
       "Tamper-proof verifiable digital QR certification seals",
       "White-label PDF branding for dev agencies and client delivery",
