@@ -61,7 +61,7 @@ export const ContactPage: React.FC = () => {
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
-            Contact Hack My Website
+            Contact <span className="text-emerald-400">Hack My Website.</span>
           </h1>
 
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto">
@@ -279,7 +279,7 @@ export const ContactPage: React.FC = () => {
                     <div className="pt-2">
                       <button
                         type="submit"
-                        className="w-full py-3 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:scale-[1.01] cursor-pointer"
+                        className="w-full py-3 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:scale-[1.01] cursor-pointer"
                       >
                         <Send className="size-3.5" />
                         <span>Submit Security Inquiry</span>

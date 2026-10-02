@@ -63,7 +63,7 @@ export const HmwKotaFooter: React.FC<HmwKotaFooterProps> = ({ onStartScan }) => 
             <button
               onClick={onStartScan}
               data-cursor-text="SCAN"
-              className="group relative px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs sm:text-sm tracking-wide uppercase transition-all duration-300 shadow-xl shadow-emerald-500/25 flex items-center gap-2 cursor-pointer"
+              className="group relative px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs sm:text-sm tracking-wide uppercase transition-all duration-300 shadow-xl shadow-emerald-500/25 flex items-center gap-2 cursor-pointer"
             >
               <span>Start Free Security Scan</span>
               <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

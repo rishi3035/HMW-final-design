@@ -223,7 +223,7 @@ export const HmwKotaComparisonSection: React.FC<HmwKotaComparisonSectionProps> =
                   <div className="absolute top-0 right-0 w-32 h-16 bg-emerald-500/20 rounded-full blur-xl pointer-events-none" />
 
                   <div className="flex items-center justify-between mb-3 relative z-10">
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-neutral-950 bg-emerald-400 px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1 font-mono">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-white bg-emerald-500 px-2.5 py-0.5 rounded-full shadow-md flex items-center gap-1 font-mono">
                       <Sparkles className="size-3" />
                       EXCEEDING
                     </span>

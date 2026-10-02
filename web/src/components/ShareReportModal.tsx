@@ -95,7 +95,7 @@ export const ShareReportModal: React.FC<ShareReportModalProps> = ({
             <button
               type="button"
               onClick={handleCopy}
-              className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer shadow-lg shadow-emerald-500/20"
+              className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all cursor-pointer shadow-lg shadow-emerald-500/20"
             >
               {copied ? <IconCheck className="size-4" /> : <IconCopy className="size-4" />}
               <span>{copied ? "Copied" : "Copy"}</span>

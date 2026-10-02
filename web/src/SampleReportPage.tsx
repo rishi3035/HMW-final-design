@@ -499,7 +499,7 @@ export const SampleReportPage: React.FC = () => {
                       onClick={() => setActivePatchFramework("nextjs")}
                       className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
                         activePatchFramework === "nextjs"
-                          ? "bg-emerald-500 text-neutral-950 font-bold"
+                          ? "bg-emerald-500 text-white font-bold"
                           : "text-neutral-400 hover:text-white"
                       }`}
                     >
@@ -510,7 +510,7 @@ export const SampleReportPage: React.FC = () => {
                       onClick={() => setActivePatchFramework("nginx")}
                       className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
                         activePatchFramework === "nginx"
-                          ? "bg-emerald-500 text-neutral-950 font-bold"
+                          ? "bg-emerald-500 text-white font-bold"
                           : "text-neutral-400 hover:text-white"
                       }`}
                     >
@@ -521,7 +521,7 @@ export const SampleReportPage: React.FC = () => {
                       onClick={() => setActivePatchFramework("fastapi")}
                       className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
                         activePatchFramework === "fastapi"
-                          ? "bg-emerald-500 text-neutral-950 font-bold"
+                          ? "bg-emerald-500 text-white font-bold"
                           : "text-neutral-400 hover:text-white"
                       }`}
                     >
@@ -705,7 +705,7 @@ export const SampleReportPage: React.FC = () => {
             <button
               type="button"
               onClick={() => navigateTo("/workspace")}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 cursor-pointer"
             >
               <span>Launch Free Security Scan</span>
               <ArrowRight className="size-4" />

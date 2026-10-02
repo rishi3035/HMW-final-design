@@ -522,7 +522,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <button
               type="button"
               onClick={() => setIsAddDomainOpen(true)}
-              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-lg shadow-emerald-500/20 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow-lg shadow-emerald-500/20 cursor-pointer"
             >
               <IconPlus className="w-4 h-4" />
               <span>Add Target Domain</span>
@@ -774,7 +774,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveTab("domains")}
-                      className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
+                      className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
                     >
                       <span>MANAGE TARGET WEBSITES</span>
                       <IconArrowUpRight className="w-4 h-4 text-neutral-950 stroke-[2.5]" />
@@ -1016,7 +1016,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 </div>
                 <button
                   type="submit"
-                  className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer transition-colors uppercase tracking-wider"
+                  className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer transition-colors uppercase tracking-wider"
                 >
                   ADD DOMAIN
                 </button>
@@ -1125,7 +1125,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                             if (!isVer) setVerifyTarget(d);
                             else setActiveTab("audits");
                           }}
-                          className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5"
+                          className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-1.5"
                         >
                           <span>MANAGE & DEEP DIVE</span>
                           <IconArrowUpRight className="w-4 h-4" />
@@ -1592,7 +1592,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={() => setIsGithubConnected(true)}
-                    className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2"
                   >
                     <IconBrandGithub className="w-4 h-4" />
                     <span>Connect & Test</span>
@@ -1748,7 +1748,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   type="button"
                   onClick={handleRunSastScan}
                   disabled={isSastScanning}
-                  className="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                  className="w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
                 >
                   <IconPlayerPlay className="w-4 h-4" />
                   <span>{isSastScanning ? "RUNNING EPHEMERAL AUDIT..." : "RUN LIVE EPHEMERAL AUDIT"}</span>
@@ -2017,7 +2017,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   <button
                     type="button"
                     onClick={handleSaveBranding}
-                    className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+                    className="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs  uppercase tracking-wider transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
                   >
                     <IconDeviceFloppy className="w-4 h-4" />
                     <span>{isSavedBrandingToast ? "BRANDING SAVED!" : "SAVE AGENCY BRANDING"}</span>
@@ -2204,7 +2204,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                       "w-full py-2.5 rounded-xl  text-xs font-bold transition-colors cursor-pointer",
                       selectedBillingTier === "founder_pro"
                         ? "bg-emerald-950 text-emerald-400 border border-emerald-500/30"
-                        : "bg-emerald-500 hover:bg-emerald-400 text-neutral-950"
+                        : "bg-emerald-500 hover:bg-emerald-600 text-white"
                     )}
                   >
                     {selectedBillingTier === "founder_pro" ? "Active Selection" : "Upgrade Founder"}
@@ -2387,7 +2387,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer"
+                    className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer"
                   >
                     Add & Verify
                   </button>
@@ -2480,7 +2480,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                 <button
                   type="button"
                   onClick={() => handleConfirmVerification(verifyTarget.id)}
-                  className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer flex items-center justify-center gap-1.5"
+                  className="flex-1 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 cursor-pointer flex items-center justify-center gap-1.5"
                 >
                   <IconCheck className="w-4 h-4" />
                   <span>Verify DNS Record</span>

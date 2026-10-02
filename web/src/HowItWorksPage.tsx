@@ -337,9 +337,9 @@ export const HowItWorksPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigateTo("/workspace")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.02] cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-lg shadow-emerald-500/20 hover:scale-[1.02] cursor-pointer"
               >
-                <Zap className="size-4 fill-neutral-950" />
+                <Zap className="size-4 fill-white" />
                 <span>Start Free Autonomous Scan</span>
                 <ArrowRight className="size-4" />
               </button>
@@ -712,9 +712,9 @@ export const HowItWorksPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => navigateTo("/workspace")}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 cursor-pointer"
+                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider transition-all shadow-xl shadow-emerald-500/25 cursor-pointer"
               >
-                <Zap className="size-4 fill-neutral-950" />
+                <Zap className="size-4 fill-white" />
                 <span>Start Free Scan Now</span>
                 <ArrowRight className="size-4" />
               </button>

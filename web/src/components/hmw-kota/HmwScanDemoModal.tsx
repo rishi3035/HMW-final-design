@@ -103,7 +103,7 @@ export const HmwScanDemoModal: React.FC<HmwScanDemoModalProps> = ({
                         onClick={() => setActiveTab("dast")}
                         className={`px-2.5 py-1 rounded-lg transition-all ${
                           activeTab === "dast"
-                            ? "bg-emerald-500 text-neutral-950 font-bold"
+                            ? "bg-emerald-500 text-white font-bold"
                             : "text-neutral-400 hover:text-white"
                         }`}
                       >
@@ -113,7 +113,7 @@ export const HmwScanDemoModal: React.FC<HmwScanDemoModalProps> = ({
                         onClick={() => setActiveTab("sast")}
                         className={`px-2.5 py-1 rounded-lg transition-all ${
                           activeTab === "sast"
-                            ? "bg-emerald-500 text-neutral-950 font-bold"
+                            ? "bg-emerald-500 text-white font-bold"
                             : "text-neutral-400 hover:text-white"
                         }`}
                       >
@@ -123,7 +123,7 @@ export const HmwScanDemoModal: React.FC<HmwScanDemoModalProps> = ({
                         onClick={() => setActiveTab("diff")}
                         className={`px-2.5 py-1 rounded-lg transition-all ${
                           activeTab === "diff"
-                            ? "bg-emerald-500 text-neutral-950 font-bold"
+                            ? "bg-emerald-500 text-white font-bold"
                             : "text-neutral-400 hover:text-white"
                         }`}
                       >
@@ -277,7 +277,7 @@ export const HmwScanDemoModal: React.FC<HmwScanDemoModalProps> = ({
                       onClose();
                       onStartRealScan?.();
                     }}
-                    className="w-full py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+                    className="w-full py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/25 transition-all cursor-pointer flex items-center justify-center gap-2"
                   >
                     <ShieldCheck className="w-4 h-4" />
                     <span>Scan Your Live Domain</span>

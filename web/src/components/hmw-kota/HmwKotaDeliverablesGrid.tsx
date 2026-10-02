@@ -240,7 +240,7 @@ export const HmwKotaDeliverablesGrid: React.FC<HmwKotaDeliverablesGridProps> = (
                   <div className="flex items-center gap-2 text-neutral-400">
                     <X className="w-3.5 h-3.5 hover:text-white cursor-pointer transition-colors" />
                     <Mic className="w-3.5 h-3.5 hover:text-white cursor-pointer transition-colors" />
-                    <div className="size-6 rounded-full bg-emerald-500 text-neutral-950 flex items-center justify-center">
+                    <div className="size-6 rounded-full bg-emerald-500 text-white flex items-center justify-center">
                       <Search className="w-3.5 h-3.5 stroke-[2.5]" />
                     </div>
                   </div>
@@ -447,7 +447,7 @@ export const HmwKotaDeliverablesGrid: React.FC<HmwKotaDeliverablesGridProps> = (
 
                     <div className="pt-2 flex items-center justify-between">
                       <span className="text-[10px] text-neutral-400">SQL Injection Remediation</span>
-                      <span className="px-2.5 py-1 rounded-full bg-emerald-500 text-neutral-950 text-[10px] font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-md">
+                      <span className="px-2.5 py-1 rounded-full bg-emerald-500 text-white text-[10px] font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-md">
                         <Check className="w-3 h-3 stroke-[3]" />
                         Ready
                       </span>

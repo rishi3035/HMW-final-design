@@ -148,7 +148,7 @@ export const HmwKotaPricing: React.FC<HmwKotaPricingProps> = ({ onSelectPlan }) 
                 {/* Popular Badge */}
                 {plan.popular && (
                   <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1 rounded-full bg-emerald-500 text-neutral-950 text-[11px] font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1">
+                    <span className="px-4 py-1 rounded-full bg-emerald-500 text-white text-[11px] font-extrabold uppercase tracking-wider shadow-md flex items-center gap-1">
                       <Sparkles className="w-3 h-3" />
                       Most Practical
                     </span>
@@ -208,7 +208,7 @@ export const HmwKotaPricing: React.FC<HmwKotaPricingProps> = ({ onSelectPlan }) 
                     data-cursor-text={plan.popular ? "UPGRADE" : "CHOOSE"}
                     className={`w-full py-3.5 px-6 rounded-full text-xs font-extrabold uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-2 ${
                       plan.popular
-                        ? "bg-emerald-500 hover:bg-emerald-400 text-neutral-950 shadow-lg shadow-emerald-500/25"
+                        ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/25"
                         : "bg-black hover:bg-neutral-800 text-white"
                     }`}
                   >

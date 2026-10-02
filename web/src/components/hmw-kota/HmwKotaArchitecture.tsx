@@ -93,7 +93,7 @@ export const HmwKotaArchitecture: React.FC<HmwKotaArchitectureProps> = ({
               [ Core Architecture ]
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-neutral-950 mt-2">
-              Three-Tier Security Engine
+              Three-Tier <span className="text-emerald-700">Security Engine.</span>
             </h2>
           </div>
           <p className="max-w-md text-sm sm:text-base text-neutral-600 leading-relaxed font-normal">
@@ -189,7 +189,7 @@ export const HmwKotaArchitecture: React.FC<HmwKotaArchitectureProps> = ({
                   <button
                     onClick={() => onSelectTier?.(currentTier.name)}
                     data-cursor-text="RUN"
-                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 text-xs font-extrabold uppercase tracking-wider transition-colors cursor-pointer shadow-xl shadow-emerald-500/20"
+                    className="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold uppercase tracking-wider transition-colors cursor-pointer shadow-xl shadow-emerald-500/20"
                   >
                     <span>Run Target Scan</span>
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
