@@ -88,8 +88,8 @@ export const RedesignedHmwPage: React.FC = () => {
         isOpen={isPdfModalOpen}
         onClose={() => setIsPdfModalOpen(false)}
         agencyName="Hack My Website Sovereign Security"
-        primaryAccent="#94DC22"
-        secondaryAccent="#94DC22"
+        primaryAccent="#557F1B"
+        secondaryAccent="#557F1B"
         disclaimer="This executive security assessment report is generated via autonomous non-destructive DAST, SAST, and API telemetry on AWS Mumbai sovereign nodes."
         targetDomain={scanUrl || "https://app.production-saas.com"}
         score={94}

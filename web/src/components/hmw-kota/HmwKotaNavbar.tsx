@@ -97,7 +97,7 @@ export const HmwKotaNavbar: React.FC<HmwKotaNavbarProps> = ({
         <button
           onClick={onStartScan || onBookDemo}
           data-cursor-text="SCAN"
-          className="group relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold tracking-wide overflow-hidden shadow-[0_4px_22px_rgba(148,220,34,0.40)] hover:shadow-[0_6px_28px_rgba(148,220,34,0.55)] transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+          className="group relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold tracking-wide overflow-hidden shadow-[0_4px_22px_rgba(85,127,27,0.40)] hover:shadow-[0_6px_28px_rgba(85,127,27,0.55)] transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
         >
           <span>Start Free Scan</span>
           <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
