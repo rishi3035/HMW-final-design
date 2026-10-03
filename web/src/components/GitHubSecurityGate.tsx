@@ -285,7 +285,7 @@ export const GitHubSecurityGate: React.FC = () => {
                     </button>
                     <button
                       type="button"
-                      className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-neutral-950 text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      className="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm"
                     >
                       <Sparkles className="size-3.5" />
                       Fix Guidance

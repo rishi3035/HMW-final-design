@@ -99,7 +99,7 @@ function LaptopScreenContent({ onStartScan }: { onStartScan?: () => void }) {
           <button
             type="button"
             onClick={onStartScan}
-            className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500 hover:bg-emerald-400 text-neutral-950 text-[10px] font-extrabold tracking-wide uppercase transition-colors shrink-0 shadow-md shadow-emerald-500/20"
+            className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-[10px] font-extrabold tracking-wide uppercase transition-colors shrink-0 shadow-md shadow-emerald-500/20"
           >
             <span>Start Scan</span>
             <ArrowUpRight className="w-3 h-3" />

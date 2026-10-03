@@ -14,18 +14,18 @@ module.exports = {
           100: '#E7F1DC',
           200: '#D0E4BA',
           300: '#AFD28E',
-          400: '#557F1B', // User's exact Security Engine color for text highlights & accents
-          500: '#557F1B', // User's exact button color throughout the web app
-          600: '#466B16', // Hover state for buttons
-          700: '#557F1B', // Light-background headings (matches Security Engine / Agencies)
-          800: '#2A410D',
-          900: '#1E2C0A',
-          950: '#0E1604',
+          400: '#1A220F', // User's exact green color for words and highlights
+          500: '#1A220F', // Primary button color (#1A220F)
+          600: '#253317', // Hover state for buttons
+          700: '#151C0C',
+          800: '#11170A',
+          900: '#0D1208',
+          950: '#070A04',
         },
         brand: {
-          primary: '#557F1B',
-          hover: '#659620',
-          glow: 'rgba(85, 127, 27, 0.35)',
+          primary: '#1A220F',
+          hover: '#253317',
+          glow: 'rgba(26, 34, 15, 0.45)',
         },
         rose: {
           300: '#FDA4AF',

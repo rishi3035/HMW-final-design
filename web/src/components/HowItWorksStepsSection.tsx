@@ -136,7 +136,7 @@ export const HowItWorksStepsSection: React.FC = () => {
           </div>
           <a
             href="/how-it-works"
-            className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs transition-all flex items-center gap-2 shrink-0 shadow-md shadow-emerald-500/20 hover:scale-[1.02] cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-all flex items-center gap-2 shrink-0 shadow-md shadow-emerald-500/20 hover:scale-[1.02] cursor-pointer"
           >
             <span>Explore Complete 8-Step Guide</span>
             <ArrowRight className="size-3.5" />

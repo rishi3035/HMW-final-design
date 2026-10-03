@@ -399,7 +399,7 @@ function PricingCard({ plan, index }: { plan: PricingPlan; index: number }) {
           className={cn(
             "w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-xs transition-all shadow-md text-center cursor-pointer",
             plan.isPopular
-              ? "bg-emerald-500 hover:bg-emerald-400 text-neutral-950 shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
+              ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-emerald-500/20 hover:scale-[1.01] active:scale-[0.99]"
               : "bg-black hover:bg-neutral-900 text-slate-200 border border-neutral-700 hover:border-neutral-500"
           )}
         >

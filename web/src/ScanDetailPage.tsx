@@ -259,7 +259,7 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
           <button
             type="button"
             onClick={() => setIsPdfModalOpen(true)}
-            className="h-9 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs font-mono inline-flex items-center gap-2 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
+            className="h-9 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs font-mono inline-flex items-center gap-2 transition-all shadow-md shadow-emerald-500/20 cursor-pointer"
           >
             <IconDownload className="w-3.5 h-3.5" />
             <span>Generate Branded PDF</span>
@@ -434,7 +434,7 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
                     onClick={() => setSeverityFilter(sev)}
                     className={`px-3 py-1 rounded-lg uppercase tracking-wider transition-all cursor-pointer ${
                       severityFilter === sev
-                        ? "bg-emerald-500 text-neutral-950 font-bold"
+                        ? "bg-emerald-500 text-white font-bold"
                         : "bg-slate-950 border border-slate-800 text-slate-400 hover:text-white"
                     }`}
                   >
@@ -527,7 +527,7 @@ export const ScanDetailPage: React.FC<ScanDetailPageProps> = ({
                         onClick={() => handleToggleFixed(activeFinding.id)}
                         className={`h-8 px-3 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                           fixedFindingIds.has(activeFinding.id)
-                            ? "bg-emerald-500 text-neutral-950"
+                            ? "bg-emerald-500 text-white"
                             : "bg-slate-950 border border-slate-700 text-slate-300 hover:text-white"
                         }`}
                       >

@@ -57,7 +57,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
               onClick={() => setActiveTab("privacy")}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
                 activeTab === "privacy"
-                  ? "bg-emerald-500 text-neutral-950 shadow-md"
+                  ? "bg-emerald-500 text-white shadow-md"
                   : "text-neutral-400 hover:text-white"
               }`}
             >
@@ -70,7 +70,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ initialTab = "privacy" }) 
               onClick={() => setActiveTab("terms")}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-mono font-bold transition-all cursor-pointer ${
                 activeTab === "terms"
-                  ? "bg-emerald-500 text-neutral-950 shadow-md"
+                  ? "bg-emerald-500 text-white shadow-md"
                   : "text-neutral-400 hover:text-white"
               }`}
             >

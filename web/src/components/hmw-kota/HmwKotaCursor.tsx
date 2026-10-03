@@ -77,8 +77,8 @@ export const HmwKotaCursor: React.FC = () => {
           animate={{
             width: isHovered ? 44 : 12,
             height: isHovered ? 44 : 12,
-            backgroundColor: isHovered ? "rgba(85, 127, 27, 0.20)" : "#557F1B",
-            border: isHovered ? "1.5px solid rgba(85, 127, 27, 0.85)" : "none",
+            backgroundColor: isHovered ? "rgba(26, 34, 15, 0.20)" : "#1A220F",
+            border: isHovered ? "1.5px solid rgba(26, 34, 15, 0.85)" : "none",
           }}
           transition={{ type: "spring", stiffness: 450, damping: 25 }}
           className="rounded-full backdrop-blur-[2px]"

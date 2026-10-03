@@ -24,7 +24,7 @@
             colors: {
               border: "#1E293B",
               input: "#1E293B",
-              ring: "#94DC22",
+              ring: "#466B16",
               background: "#06080F",
               foreground: "#F8FAFC",
               emerald: {
@@ -32,17 +32,17 @@
                 100: "#e8f3d4",
                 200: "#d4eab0",
                 300: "#bce084",
-                400: "#A3E635",
-                500: "#94DC22",
-                600: "#72A426",
-                700: "#557F1B",
-                800: "#3D5E13",
-                900: "#263D0C",
-                950: "#142205",
+                400: "#557F1B",
+                500: "#466B16",
+                600: "#385511",
+                700: "#2C430D",
+                800: "#1F3009",
+                900: "#142006",
+                950: "#0A1003",
               },
               primary: {
-                DEFAULT: "#94DC22",
-                foreground: "#0B1504",
+                DEFAULT: "#466B16",
+                foreground: "#FFFFFF",
               },
               secondary: {
                 DEFAULT: "#0F172A",
@@ -64,13 +64,13 @@
                 foreground: "#94A3B8",
               },
               accent: {
-                DEFAULT: "#A3E635",
-                foreground: "#0B1504",
+                DEFAULT: "#557F1B",
+                foreground: "#FFFFFF",
               },
               brand: {
-                primary: "#94DC22",
-                hover: "#A3E635",
-                glow: "rgba(148, 220, 34, 0.35)",
+                primary: "#466B16",
+                hover: "#385511",
+                glow: "rgba(70, 107, 22, 0.35)",
               },
             },
             keyframes: {
@@ -130,9 +130,18 @@
         scrollbar-width: thin;
         scrollbar-color: #27272a #09090b;
       }
+
+      /* High-contrast crisp typography for all primary security engine buttons */
+      button.bg-emerald-500,
+      a.bg-emerald-500,
+      button[class*="bg-emerald-500"],
+      a[class*="bg-emerald-500"] {
+        color: #FFFFFF !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+      }
     </style>
   </head>
-  <body class="bg-[#06080F] text-slate-100 antialiased selection:bg-emerald-500 selection:text-neutral-950 min-h-screen font-sans">
+  <body class="bg-[#06080F] text-slate-100 antialiased selection:bg-emerald-500 selection:text-white min-h-screen font-sans">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

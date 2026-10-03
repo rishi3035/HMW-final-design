@@ -436,7 +436,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <button
             type="button"
             onClick={() => setIsAddDomainOpen(true)}
-            className="p-2 rounded-xl bg-emerald-500 text-neutral-950 font-bold text-xs flex items-center gap-1 cursor-pointer"
+            className="p-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs flex items-center gap-1 cursor-pointer"
           >
             <IconPlus className="w-3.5 h-3.5" />
             <span>Target</span>
@@ -1193,7 +1193,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                         className={cn(
                           "px-3 py-1 rounded-full capitalize transition-colors cursor-pointer",
                           isActive
-                            ? "bg-emerald-500 text-neutral-950 font-bold shadow-sm"
+                            ? "bg-emerald-500 text-white font-bold shadow-sm"
                             : "text-neutral-400 hover:text-white"
                         )}
                       >
@@ -1396,7 +1396,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                         className={cn(
                           "px-3 py-1 rounded-full capitalize transition-colors cursor-pointer",
                           isSelected
-                            ? "bg-emerald-500 text-neutral-950 font-bold shadow-sm"
+                            ? "bg-emerald-500 text-white font-bold shadow-sm"
                             : "text-neutral-400 hover:text-white"
                         )}
                       >
@@ -1689,7 +1689,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     className={cn(
                       "px-3 py-1 rounded-full flex items-center gap-1.5 transition-colors cursor-pointer",
                       sastMode === "live"
-                        ? "bg-emerald-500 text-neutral-950 font-bold"
+                        ? "bg-emerald-500 text-white font-bold"
                         : "text-neutral-400 hover:text-white"
                     )}
                   >
@@ -1702,7 +1702,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
                     className={cn(
                       "px-3 py-1 rounded-full flex items-center gap-1.5 transition-colors cursor-pointer",
                       sastMode === "snapshot"
-                        ? "bg-emerald-500 text-neutral-950 font-bold"
+                        ? "bg-emerald-500 text-white font-bold"
                         : "text-neutral-400 hover:text-white"
                     )}
                   >
@@ -2173,7 +2173,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 
                 {/* 3. Founder Pro (Most Popular) */}
                 <div className="p-5 rounded-3xl bg-neutral-950 border border-emerald-500/50 flex flex-col justify-between space-y-5 relative shadow-[0_0_30px_rgba(16,185,129,0.15)]">
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500 text-neutral-950 text-xs  font-bold uppercase tracking-wider">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-emerald-500 text-white text-xs font-bold uppercase tracking-wider shadow-md">
                     MOST POPULAR
                   </span>
                   <div className="space-y-3 ">

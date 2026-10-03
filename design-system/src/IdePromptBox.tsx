@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 
 export type SupportedIde = "cursor" | "claude" | "windsurf" | "aider";
 
@@ -56,7 +56,7 @@ export const IdePromptBox: React.FC<IdePromptBoxProps> = ({
         <button
           type="button"
           onClick={handleCopy}
-          className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs transition-transform active:scale-95 flex items-center gap-1"
+          className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-transform active:scale-95 flex items-center gap-1"
         >
           {copied ? "✓ Copied!" : "📋 Copy Prompt"}
         </button>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, ArrowUpRight, Menu, X } from "lucide-react";
+import { MAIN_NAV_ITEMS, type NavigationItem } from "@/types/routes";
 
 interface HmwKotaNavbarProps {
   onStartScan?: () => void;
@@ -29,17 +30,9 @@ export const HmwKotaNavbar: React.FC<HmwKotaNavbarProps> = ({
     };
   }, []);
 
-  const navItems = [
-    { label: "How It Works", href: "/how-it-works", isRoute: true },
-    { label: "Architecture", href: "/#architecture" },
-    { label: "Comparison", href: "/#comparison" },
-    { label: "Methodology", href: "/methodology", isRoute: true },
-    { label: "Sample Report", href: "/sample-report", isRoute: true },
-    { label: "Pricing", href: "/#pricing" },
-    { label: "Contact", href: "/contact", isRoute: true },
-  ];
+  const navItems = MAIN_NAV_ITEMS;
 
-  const isItemActive = (item: (typeof navItems)[0]) => {
+  const isItemActive = (item: NavigationItem) => {
     if (item.isRoute) {
       return currentPath === item.href || currentPath.startsWith(item.href + "/");
     }
@@ -95,11 +88,11 @@ export const HmwKotaNavbar: React.FC<HmwKotaNavbarProps> = ({
         </a>
 
         <button
-          onClick={onStartScan || onBookDemo}
-          data-cursor-text="SCAN"
-          className="group relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold tracking-wide overflow-hidden shadow-[0_4px_22px_rgba(85,127,27,0.40)] hover:shadow-[0_6px_28px_rgba(85,127,27,0.55)] transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+          onClick={onBookDemo || onStartScan}
+          data-cursor-text="DEMO"
+          className="group relative px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-extrabold tracking-wide overflow-hidden shadow-[0_4px_22px_rgba(26,34,15,0.40)] hover:shadow-[0_6px_28px_rgba(26,34,15,0.55)] transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
         >
-          <span>Start Free Scan</span>
+          <span>Book a Demo</span>
           <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
         </button>
 
@@ -162,11 +155,11 @@ export const HmwKotaNavbar: React.FC<HmwKotaNavbarProps> = ({
               <button
                 onClick={() => {
                   setIsMobileOpen(false);
-                  onStartScan?.();
+                  (onBookDemo || onStartScan)?.();
                 }}
-                className="w-2/3 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-extrabold text-xs uppercase tracking-wider shadow-lg"
+                className="w-2/3 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg"
               >
-                Start Free Scan
+                Book a Demo
               </button>
             </div>
           </motion.div>

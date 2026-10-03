@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 
 export const EngineFlowDiagram: React.FC = () => {
   const [activeEngine, setActiveEngine] = useState<"zap" | "nuclei" | "semgrep">("zap");
@@ -50,7 +50,7 @@ export const EngineFlowDiagram: React.FC = () => {
             type="button"
             onClick={() => setActiveEngine("zap")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-              activeEngine === "zap" ? "bg-emerald-500 text-neutral-950" : "text-slate-400 hover:text-white"
+              activeEngine === "zap" ? "bg-emerald-500 hover:bg-emerald-600 text-white" : "text-slate-400 hover:text-white"
             }`}
           >
             OWASP ZAP

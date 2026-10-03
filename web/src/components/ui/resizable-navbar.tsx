@@ -403,7 +403,7 @@ export const NavbarButton = ({
 
   const variantStyles = {
     primary:
-      "bg-emerald-500 hover:bg-emerald-400 text-neutral-950 shadow-lg shadow-emerald-500/20",
+      "bg-emerald-500 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20",
     secondary: "bg-black hover:bg-neutral-900 border border-neutral-700 text-neutral-200",
     dark: "bg-black text-white border border-neutral-800",
     gradient:

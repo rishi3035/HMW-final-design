@@ -357,9 +357,9 @@ export const AuthPage: React.FC<AuthPageProps> = ({ initialMode = "login" }) => 
               <button
                 type="button"
                 onClick={() => handleModeSwitch(true)}
-                className={`py-2.5 rounded-xl transition-all cursor-pointer ${
+                className={`py-2.5 rounded-xl font-bold transition-all cursor-pointer ${
                   isLogin
-                    ? "bg-emerald-500 text-neutral-950 shadow-md shadow-emerald-500/20"
+                    ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-md shadow-emerald-500/20"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -368,9 +368,9 @@ export const AuthPage: React.FC<AuthPageProps> = ({ initialMode = "login" }) => 
               <button
                 type="button"
                 onClick={() => handleModeSwitch(false)}
-                className={`py-2.5 rounded-xl transition-all cursor-pointer ${
+                className={`py-2.5 rounded-xl font-bold transition-all cursor-pointer ${
                   !isLogin
-                    ? "bg-emerald-500 text-neutral-950 shadow-md shadow-emerald-500/20"
+                    ? "bg-emerald-500 hover:bg-emerald-600 text-white shadow-md shadow-emerald-500/20"
                     : "text-slate-400 hover:text-white"
                 }`}
               >
@@ -521,10 +521,10 @@ export const AuthPage: React.FC<AuthPageProps> = ({ initialMode = "login" }) => 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs uppercase tracking-wider font-mono flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/20 disabled:opacity-50 mt-2"
+              className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider font-mono flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg shadow-emerald-500/20 disabled:opacity-50 mt-2"
             >
               {isLoading ? (
-                <div className="size-4 border-2 border-neutral-950 border-t-transparent rounded-full animate-spin" />
+                <div className="size-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>
                   <span>{isLogin ? "Sign In to Workspace" : "Create Security Account"}</span>

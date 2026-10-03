@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { getScoreTier } from "../../design-system/src/ScoreGauge";
 
 export interface MobileScanCompanionProps {
@@ -92,7 +92,7 @@ export const MobileScanCompanion: React.FC<MobileScanCompanionProps> = ({
         type="button"
         disabled={isScanning}
         onClick={triggerMobileScan}
-        className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs tracking-tight transition-all shadow-lg shadow-emerald-500/20 active:scale-95 disabled:opacity-50"
+        className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs tracking-tight transition-all shadow-lg shadow-emerald-500/20 active:scale-95 disabled:opacity-50"
       >
         {isScanning ? "Scanning in Background..." : "⚡ Trigger Instant Scan"}
       </button>

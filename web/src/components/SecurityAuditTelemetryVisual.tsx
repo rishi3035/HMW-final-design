@@ -247,8 +247,8 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
             <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-36 overflow-visible">
               <defs>
                 <linearGradient id="simpleVelocityFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#557F1B" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#557F1B" stopOpacity="0.00" />
+                  <stop offset="0%" stopColor="#1A220F" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#1A220F" stopOpacity="0.00" />
                 </linearGradient>
               </defs>
 
@@ -261,7 +261,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
               <path d={areaD} fill="url(#simpleVelocityFill)" />
 
               {/* Clean Smooth Line */}
-              <path d={pathD} fill="none" stroke="#557F1B" strokeWidth="2.5" strokeLinecap="round" />
+              <path d={pathD} fill="none" stroke="#1A220F" strokeWidth="2.5" strokeLinecap="round" />
 
               {/* Data Points */}
               {points.map((p, idx) => {
@@ -272,14 +272,14 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                     <circle cx={p.x} cy={p.y} r="14" fill="transparent" />
                     {/* Outer ring on active */}
                     {isActive && (
-                      <circle cx={p.x} cy={p.y} r="7" fill="none" stroke="#557F1B" strokeWidth="2" opacity="0.6" />
+                      <circle cx={p.x} cy={p.y} r="7" fill="none" stroke="#1A220F" strokeWidth="2" opacity="0.6" />
                     )}
                     {/* Core dot */}
                     <circle
                       cx={p.x}
                       cy={p.y}
                       r={isActive ? "4" : "3"}
-                      fill={isActive ? "#FFFFFF" : "#557F1B"}
+                      fill={isActive ? "#FFFFFF" : "#1A220F"}
                       stroke="#0A0D14"
                       strokeWidth="1.5"
                     />
@@ -365,7 +365,7 @@ export const SecurityAuditTelemetryVisual: React.FC<SecurityAuditTelemetryVisual
                 cy="60"
                 r="50"
                 fill="none"
-                stroke="#557F1B"
+                stroke="#1A220F"
                 strokeWidth="7"
                 strokeLinecap="round"
                 strokeDasharray="314"

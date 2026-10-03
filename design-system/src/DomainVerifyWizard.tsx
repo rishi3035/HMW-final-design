@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 
 export type VerificationMethod = "dns" | "file";
 
@@ -114,7 +114,7 @@ export const DomainVerifyWizard: React.FC<DomainVerifyWizardProps> = ({
           type="button"
           disabled={isVerifying}
           onClick={handleVerify}
-          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-neutral-950 font-bold text-xs transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50"
         >
           {isVerifying ? "Verifying DNS..." : "Check Verification & Launch Scan"}
         </button>
